@@ -23,7 +23,7 @@ const Row = ({ student, allStudents, handleClick, activeStudent, crossStudentInd
     <>
       <p 
         className='anchor'
-        onClick={() => handleClick(student, studentIndex)}
+        onClick={() => handleClick(student, null)}
       >{student.first_name}
       </p>
       {allStudents.map((s, i) => (

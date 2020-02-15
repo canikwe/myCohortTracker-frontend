@@ -1,8 +1,8 @@
 import React from 'react'
 
-const Column = ({ student, allStudents }) => {
+const Column = ({ student, allStudents, handleClick }) => {
   return (
-    <p>{student.first_name}</p>
+    <p onClick={() => handleClick(null, allStudents.indexOf(student))}>{student.first_name}</p>
   )
 }
 
