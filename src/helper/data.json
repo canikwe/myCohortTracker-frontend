@@ -1,0 +1,148 @@
+[
+  {
+    "id": 1,
+    "first_name": "Bryon",
+    "last_name": "Hefferan",
+    "email": "bhefferan0@samsung.com",
+    "avatar": "https://robohash.org/eligendisaepetempora.jpg?size=50x50&set=set1",
+    "pairs": [
+      {
+        "id": 1,
+        "first_student_id": 1,
+        "second_student_id": 2,
+        "name": "Hogwarts"
+      },
+      {
+        "id": 3,
+        "first_student_id": 1,
+        "second_student_id": 4,
+        "name": "Mod 2 Project"
+      },
+      {
+        "id": 7,
+        "first_student_id": 1,
+        "second_student_id": 6,
+        "name": "Mod 2 Project"
+      }
+    ]
+  },
+  {
+    "id": 2,
+    "first_name": "Emory",
+    "last_name": "Taylorson",
+    "email": "etaylorson1@rambler.ru",
+    "avatar": "https://robohash.org/quoeoseaque.jpg?size=50x50&set=set1",
+    "pairs": [
+      {
+        "id": 2,
+        "first_student_id": 2,
+        "second_student_id": 1,
+        "name": "Hogwarts"
+      }
+    ]
+  },
+  {
+    "id": 3,
+    "first_name": "Constance",
+    "last_name": "Carette",
+    "email": "ccarette2@bigcartel.com",
+    "avatar": "https://robohash.org/evenietrationeatque.bmp?size=50x50&set=set1",
+    "pairs": []
+  },
+  {
+    "id": 4,
+    "first_name": "Enrika",
+    "last_name": "Eyes",
+    "email": "eeyes3@chronoengine.com",
+    "avatar": "https://robohash.org/iustolaboriosamoccaecati.png?size=50x50&set=set1",
+    "pairs": [
+      {
+        "id": 4,
+        "first_student_id": 4,
+        "second_student_id": 1,
+        "name": "Mod 2 Project"
+      },
+      {
+        "id": 8,
+        "first_student_id": 4,
+        "second_student_id": 6,
+        "name": "Mod 2 Project"
+      }
+    ]
+  },
+  {
+    "id": 5,
+    "first_name": "Raynor",
+    "last_name": "Streeter",
+    "email": "rstreeter4@addthis.com",
+    "avatar": "https://robohash.org/fugareprehenderitsuscipit.jpg?size=50x50&set=set1",
+    "pairs": [
+      {
+        "id": 6,
+        "first_student_id": 5,
+        "second_student_id": 9,
+        "name": "Hogwarts"
+      }
+    ]
+  },
+  {
+    "id": 6,
+    "first_name": "Codie",
+    "last_name": "Stenton",
+    "email": "cstenton5@pen.io",
+    "avatar": "https://robohash.org/quieoset.png?size=50x50&set=set1",
+    "pairs": [
+      {
+        "id": 9,
+        "first_student_id": 6,
+        "second_student_id": 4,
+        "name": "Mod 2 Project"
+      },
+      {
+        "id": 9,
+        "first_student_id": 6,
+        "second_student_id": 1,
+        "name": "Mod 2 Project"
+      }      
+    ]
+  },
+  {
+    "id": 7,
+    "first_name": "Gran",
+    "last_name": "Watterson",
+    "email": "gwatterson6@chronoengine.com",
+    "avatar": "https://robohash.org/acumeum.png?size=50x50&set=set1",
+    "pairs": []
+  },
+  {
+    "id": 8,
+    "first_name": "Tarrah",
+    "last_name": "Trudgeon",
+    "email": "ttrudgeon7@google.com.au",
+    "avatar": "https://robohash.org/dignissimosdelectusoccaecati.jpg?size=50x50&set=set1",
+    "pairs": []
+  },
+  {
+    "id": 9,
+    "first_name": "Wake",
+    "last_name": "Mc Andrew",
+    "email": "wmcandrew8@feedburner.com",
+    "avatar": "https://robohash.org/evenietnoninventore.jpg?size=50x50&set=set1",
+    "pairs": [
+      {
+        "id": 5,
+        "first_student_id": 9,
+        "second_student_id": 5,
+        "name": "Hogwarts"
+      }
+    ]
+  },
+  {
+    "id": 10,
+    "first_name": "Tremayne",
+    "last_name": "Keam",
+    "email": "tkeam9@yelp.com",
+    "avatar": "https://robohash.org/noncommodilabore.png?size=50x50&set=set1",
+    "pairs": []
+  }
+]
