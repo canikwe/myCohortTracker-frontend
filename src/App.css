@@ -2,17 +2,25 @@
   text-align: center;
 }
 
-.pairs-header {
+main.pairs-container {
+  background-color: blueviolet;
+  display: grid;
+  grid-template-columns: 75% 25%;
+}
+
+/* .pairs-header {
   display: grid;
   grid-template-columns: repeat(auto-fill, 75px);
   grid-auto-rows: minmax(50px, 1fr);
-}
+} */
 
-.pairs-row {
+section.pairs-cells {
+  overflow: auto;
   display: grid;
   gap: 2px;
   grid-template-columns: repeat(auto-fill, 75px);
-  grid-template-rows: minmax(50px, 1fr);
+
+  /* grid-template-rows: minmax(50px, 1fr); */
 }
 
 .anchor {
@@ -25,6 +33,11 @@
 
 .cell {
   border: solid black 1px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  overflow: auto;
 }
 
 .active-student {

@@ -27,7 +27,7 @@ const Row = ({ student, allStudents, handleClick, activeStudent, crossStudentInd
   return (
     <>
       <p 
-        className='anchor'
+        className='cell anchor'
         onClick={() => handleClick(student, null)}
       >{student.first_name}
       </p>
@@ -36,6 +36,7 @@ const Row = ({ student, allStudents, handleClick, activeStudent, crossStudentInd
 
         return (
           <Cell
+            key={s.id}
             handleClick={handleClick}
             classNames={generateClassNames}
             student={student}

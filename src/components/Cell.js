@@ -1,17 +1,15 @@
-import React, { PureComponent } from 'react'
+import React from 'react'
 
-class Cell extends PureComponent {
-  render(){
-    const { handleClick, classNames, student, index, pairs } = this.props
+const Cell = ({ handleClick, classNames, student, index, pairs }) => {
+
     return (
       <div
         onClick={() => handleClick(student, index)}
         className={`cell${classNames(student, index)}`}
       >
-        { pairs.map(p => <div>{p.name}</div>) }
+        { pairs.map(p => <div key={p.id}>{p.name}</div>) }
       </div>
     )
-  }
 }
 
 export default Cell

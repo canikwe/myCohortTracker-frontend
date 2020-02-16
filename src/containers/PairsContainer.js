@@ -1,23 +1,36 @@
 import React, { PureComponent } from 'react'
-import students from "../helper/data.json"
+import allStudents from "../helper/data.json"
 import Column from '../components/Column'
 import Row from '../components/Row'
+import Form from '../components/Form.js'
 
 class PairsContainer extends PureComponent {
   state = {
     activeStudent: null,
-    crossStudentIndex: null
+    crossStudentIndex: null,
+    students: allStudents
   }
 
   updateActiveStudent = (activeStudent, crossStudentIndex) => this.setState({ activeStudent, crossStudentIndex })
 
+  updateStudents = data => {
+      const updatedStudents = this.state.students.map(s => {
+        const newPairs = data.filter(p => p.first_student_id === s.id)
+        return {...s, pairs: [...s.pairs, ...newPairs]}
+      })
+
+      this.setState({students: updatedStudents})
+
+    
+  }
+
   render() {
+    const { activeStudent, crossStudentIndex, students } = this.state
+
     console.log(students)
 
-    const { activeStudent, crossStudentIndex } = this.state
-
     return (
-      <>
+      <main className='pairs-container'>
         {/* <header className='pairs-header'>
           <p>//</p>
           {
@@ -25,8 +38,8 @@ class PairsContainer extends PureComponent {
           }
         </header> */}
         
-        <section className='pairs-row'>
-                    <div>//</div>
+        <section className='pairs-cells'>
+          <div>//</div>
           {
             students.map(s => <Column key={s.id} student={s} allStudents={students} handleClick={this.updateActiveStudent}/>)
           }
@@ -42,7 +55,9 @@ class PairsContainer extends PureComponent {
             )
           )}
         </section>
-      </>
+
+        <Form students={students} handleSubmit={this.updateStudents}/>
+      </main>
     )
   }
 }
