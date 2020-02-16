@@ -14,6 +14,17 @@ const Form = ({ students, handleSubmit }) => {
     })
 
     handleSubmit(data)
+    updatePairs([])
+  }
+
+  const handleSelection = e => {
+    const studentId = parseInt(e.target.value)
+    console.log(pairs.includes(studentId))
+    if (pairs.includes(studentId)) {
+      updatePairs(pairs.filter(id => id !== studentId))
+    } else {
+      updatePairs([...pairs, studentId])
+    }
   }
 
   const generatePair = (first_student_id, second_student_id) => {
@@ -27,10 +38,10 @@ const Form = ({ students, handleSubmit }) => {
 
   return (
     <aside>
-      <h3>Manage Pairs</h3>
+      <h3>Create Pairs</h3>
       <form onSubmit={submitForm}>
         <label htmlFor='Students'>Students</label>
-        <select onChange={(e) => updatePairs([...pairs, parseInt(e.target.value)])}>
+        <select multiple onChange={handleSelection}>
           {
             students.map(s => (
               <option key={s.id} value={s.id}>{s.first_name}</option>

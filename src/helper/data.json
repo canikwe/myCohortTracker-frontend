@@ -8,26 +8,26 @@
     "pairs": [
       {
         "id": 1,
-        "first_student_id": 1,
-        "second_student_id": 2,
+        "s1_id": 1,
+        "s2_id": 2,
         "name": "Hogwarts"
       },
       {
         "id": 3,
-        "first_student_id": 1,
-        "second_student_id": 4,
+        "s1_id": 1,
+        "s2_id": 4,
         "name": "Mod 2 Project"
       },
       {
         "id": 7,
-        "first_student_id": 1,
-        "second_student_id": 6,
+        "s1_id": 1,
+        "s2_id": 6,
         "name": "Mod 2 Project"
       },
       {
         "id": 11,
-        "first_student_id": 1,
-        "second_student_id": 2,
+        "s1_id": 1,
+        "s2_id": 2,
         "name": "Toy Tale"
       }
     ]
@@ -41,14 +41,14 @@
     "pairs": [
       {
         "id": 2,
-        "first_student_id": 2,
-        "second_student_id": 1,
+        "s1_id": 2,
+        "s2_id": 1,
         "name": "Hogwarts"
       },
       {
         "id": 10,
-        "first_student_id": 2,
-        "second_student_id": 1,
+        "s1_id": 2,
+        "s2_id": 1,
         "name": "Toy Tale"
       }
     ]
@@ -70,14 +70,14 @@
     "pairs": [
       {
         "id": 4,
-        "first_student_id": 4,
-        "second_student_id": 1,
+        "s1_id": 4,
+        "s2_id": 1,
         "name": "Mod 2 Project"
       },
       {
         "id": 8,
-        "first_student_id": 4,
-        "second_student_id": 6,
+        "s1_id": 4,
+        "s2_id": 6,
         "name": "Mod 2 Project"
       }
     ]
@@ -91,8 +91,8 @@
     "pairs": [
       {
         "id": 6,
-        "first_student_id": 5,
-        "second_student_id": 9,
+        "s1_id": 5,
+        "s2_id": 9,
         "name": "Hogwarts"
       }
     ]
@@ -106,14 +106,14 @@
     "pairs": [
       {
         "id": 9,
-        "first_student_id": 6,
-        "second_student_id": 4,
+        "s1_id": 6,
+        "s2_id": 4,
         "name": "Mod 2 Project"
       },
       {
         "id": 9,
-        "first_student_id": 6,
-        "second_student_id": 1,
+        "s1_id": 6,
+        "s2_id": 1,
         "name": "Mod 2 Project"
       }      
     ]
@@ -143,8 +143,8 @@
     "pairs": [
       {
         "id": 5,
-        "first_student_id": 9,
-        "second_student_id": 5,
+        "s1_id": 9,
+        "s2_id": 5,
         "name": "Hogwarts"
       }
     ]

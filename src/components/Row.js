@@ -20,7 +20,7 @@ const Row = ({ student, allStudents, handleClick, activeStudent, crossStudentInd
   }
 
   const getPairs = s => {
-    return student.pairs.filter(p => p.second_student_id === s.id)
+    return student.pairs.filter(p => p.s2_id === s.id)
   }
   
 

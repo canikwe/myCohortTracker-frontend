@@ -4,6 +4,8 @@ import Column from '../components/Column'
 import Row from '../components/Row'
 import Form from '../components/Form.js'
 
+const BASE_URL = 'http://localhost:3000/'
+
 class PairsContainer extends PureComponent {
   state = {
     activeStudent: null,
@@ -11,23 +13,27 @@ class PairsContainer extends PureComponent {
     students: allStudents
   }
 
+  componentDidMount() {
+    fetch(BASE_URL + 'students')
+    .then(res => res.json())
+    .then(students => this.setState({ students }))
+  }
+
   updateActiveStudent = (activeStudent, crossStudentIndex) => this.setState({ activeStudent, crossStudentIndex })
 
   updateStudents = data => {
-      const updatedStudents = this.state.students.map(s => {
-        const newPairs = data.filter(p => p.first_student_id === s.id)
-        return {...s, pairs: [...s.pairs, ...newPairs]}
-      })
+    const updatedStudents = this.state.students.map(s => {
+      const newPairs = data.filter(p => p.first_student_id === s.id)
+      return {...s, pairs: [...s.pairs, ...newPairs]}
+    })
 
-      this.setState({students: updatedStudents})
-
-    
+    this.setState({students: updatedStudents})
   }
 
   render() {
     const { activeStudent, crossStudentIndex, students } = this.state
 
-    console.log(students)
+    // console.log(students)
 
     return (
       <main className='pairs-container'>
