@@ -2,7 +2,7 @@ import React from 'react'
 
 const Column = ({ student, allStudents, handleClick }) => {
   return (
-    <p onClick={() => handleClick(null, allStudents.indexOf(student))}>{student.first_name}</p>
+    <div className='header' onClick={() => handleClick(null, allStudents.indexOf(student))}>{student.first_name}</div>
   )
 }
 

@@ -1,22 +1,27 @@
 import React from 'react'
+import Cell from './Cell'
 
 const Row = ({ student, allStudents, handleClick, activeStudent, crossStudentIndex }) => {
-  console.log(handleClick)
+  console.log(`updating ${student.first_name}`)
 
   const studentIndex = () => allStudents.indexOf(student)
 
   const generateClassNames = (student, i) => {
     if (student === activeStudent) {
-      return 'active-student'
+      return ' active-student'
     }
     if (i === crossStudentIndex) {
-      return 'active-student'
+      return ' active-student'
     }
     if (studentIndex() === i) {
-      return 'same-student'
+      return ' same-student'
     }
+    return ''
   }
 
+  const getPairs = s => {
+    return student.pairs.filter(p => p.second_student_id === s.id)
+  }
   
 
   return (
@@ -26,22 +31,19 @@ const Row = ({ student, allStudents, handleClick, activeStudent, crossStudentInd
         onClick={() => handleClick(student, null)}
       >{student.first_name}
       </p>
-      {allStudents.map((s, i) => (
-        <p 
-          key={s.id} 
-          onClick={() => handleClick(student, i)}
-          className={generateClassNames(student, i)}
-        >
-          {student.pairs.map(p => {
-            if (p.second_student_id === s.id) {
-              return p.name
-            } else {
-              return ''
-            }
-            })
-          }
-        </p>
+      {allStudents.map((s, i) => {
+        const pairs = getPairs(s, i)
+
+        return (
+          <Cell
+            handleClick={handleClick}
+            classNames={generateClassNames}
+            student={student}
+            index={i}
+            pairs={pairs}
+          />
         )
+      }
       )}
     </>
   )

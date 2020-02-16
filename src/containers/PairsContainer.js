@@ -18,13 +18,18 @@ class PairsContainer extends PureComponent {
 
     return (
       <>
-        <header className='pairs-header'>
+        {/* <header className='pairs-header'>
           <p>//</p>
           {
             students.map(s => <Column key={s.id} student={s} allStudents={students} handleClick={this.updateActiveStudent}/>)
           }
-        </header>
+        </header> */}
+        
         <section className='pairs-row'>
+                    <div>//</div>
+          {
+            students.map(s => <Column key={s.id} student={s} allStudents={students} handleClick={this.updateActiveStudent}/>)
+          }
           { students.map(s => (
             <Row 
               key={s.id} 

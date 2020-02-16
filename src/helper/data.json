@@ -23,6 +23,12 @@
         "first_student_id": 1,
         "second_student_id": 6,
         "name": "Mod 2 Project"
+      },
+      {
+        "id": 11,
+        "first_student_id": 1,
+        "second_student_id": 2,
+        "name": "Toy Tale"
       }
     ]
   },
@@ -38,6 +44,12 @@
         "first_student_id": 2,
         "second_student_id": 1,
         "name": "Hogwarts"
+      },
+      {
+        "id": 10,
+        "first_student_id": 2,
+        "second_student_id": 1,
+        "name": "Toy Tale"
       }
     ]
   },
