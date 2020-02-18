@@ -1,5 +1,5 @@
 import React, { PureComponent } from 'react'
-import allStudents from "../helper/data.json"
+// import allStudents from "../helper/data.json"
 import Column from '../components/Column'
 import Row from '../components/Row'
 import Form from '../components/Form.js'
@@ -10,24 +10,38 @@ class PairsContainer extends PureComponent {
   state = {
     activeStudent: null,
     crossStudentIndex: null,
-    students: allStudents
+    students: []
   }
 
   componentDidMount() {
     fetch(BASE_URL + 'students')
     .then(res => res.json())
-    .then(students => this.setState({ students }))
+    .then(students => {
+      students.sort((a, b) => a.first_name > b.first_name ? 1 : -1)
+      this.setState({ students })
+    })
   }
 
   updateActiveStudent = (activeStudent, crossStudentIndex) => this.setState({ activeStudent, crossStudentIndex })
 
   updateStudents = data => {
-    const updatedStudents = this.state.students.map(s => {
-      const newPairs = data.filter(p => p.first_student_id === s.id)
-      return {...s, pairs: [...s.pairs, ...newPairs]}
+    console.log(data)
+    fetch(BASE_URL + 'pairs', {
+      method: 'POST',
+      headers: {'Content-Type': 'application/json', 'Accepted': 'application/json'},
+      body: JSON.stringify(data)
     })
+    .then(res => res.json())
+    .then(students => {
+      students.sort((a, b) => a.first_name > b.first_name ? 1 : -1)
+      this.setState({ students })
+    })    
+    // const updatedStudents = this.state.students.map(s => {
+    //   const newPairs = data.filter(p => p.first_student_id === s.id)
+    //   return {...s, pairs: [...s.pairs, ...newPairs]}
+    // })
 
-    this.setState({students: updatedStudents})
+    // this.setState({students: updatedStudents})
   }
 
   render() {

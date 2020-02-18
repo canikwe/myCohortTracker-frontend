@@ -1,40 +1,40 @@
 import React, { useState } from 'react'
 
 const Form = ({ students, handleSubmit }) => {
-  const [pairs, updatePairs] = useState([])
+  const [studentIds, updateStudentIds] = useState([])
   const [name, updateName] = useState('')
 
 
   const submitForm = e => {
     e.preventDefault()
-    const data = []
+    const data = { name, student_ids: studentIds }
 
-    pairs.forEach(s1 => {
-      pairs.forEach(s2 => s1 !== s2 ? data.push(generatePair(s1, s2)) : null )
-    })
+    // pairs.forEach(s1 => {
+    //   pairs.forEach(s2 => s1 !== s2 ? data.push(generatePair(s1, s2)) : null )
+    // })
 
     handleSubmit(data)
-    updatePairs([])
+    updateStudentIds([])
   }
 
   const handleSelection = e => {
-    const studentId = parseInt(e.target.value)
-    console.log(pairs.includes(studentId))
-    if (pairs.includes(studentId)) {
-      updatePairs(pairs.filter(id => id !== studentId))
+    const id = parseInt(e.target.value)
+    console.log(studentIds.includes(id))
+    if (studentIds.includes(id)) {
+      updateStudentIds(studentIds.filter(i => i !== id))
     } else {
-      updatePairs([...pairs, studentId])
+      updateStudentIds([...studentIds, id])
     }
   }
 
-  const generatePair = (first_student_id, second_student_id) => {
-    return ({
-        id: Math.floor(Math.random() * 10000),
-        first_student_id, 
-        second_student_id,
-        name
-      })
-  }
+  // const generatePair = (first_student_id, second_student_id) => {
+  //   return ({
+  //       id: Math.floor(Math.random() * 10000),
+  //       first_student_id, 
+  //       second_student_id,
+  //       name
+  //     })
+  // }
 
   return (
     <aside>
