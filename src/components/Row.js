@@ -1,7 +1,7 @@
 import React from 'react'
 import Cell from './Cell'
 
-const Row = ({ student, allStudents, handleClick, activeStudent, crossStudentIndex }) => {
+const Row = ({ student, allStudents, handleClick, activeStudent, crossStudentIndex, groups }) => {
   console.log(`updating ${student.first_name}`)
 
   const studentIndex = () => allStudents.indexOf(student)
@@ -19,8 +19,10 @@ const Row = ({ student, allStudents, handleClick, activeStudent, crossStudentInd
     return ''
   }
 
-  const getPairs = s => {
-    return student.pairs.filter(p => p.s2_id === s.id)
+  const getMatchedGroups = crossStudent => {
+    return groups.filter(g => {
+      return g.student_ids.includes(crossStudent.id) && g.student_ids.includes(student.id)
+    })
   }
   
 
@@ -32,7 +34,8 @@ const Row = ({ student, allStudents, handleClick, activeStudent, crossStudentInd
       >{student.first_name}
       </p>
       {allStudents.map((s, i) => {
-        const pairs = getPairs(s, i)
+        const matchedGroups = getMatchedGroups(s)
+
 
         return (
           <Cell
@@ -41,7 +44,7 @@ const Row = ({ student, allStudents, handleClick, activeStudent, crossStudentInd
             classNames={generateClassNames}
             student={student}
             index={i}
-            pairs={pairs}
+            matchedGroups={matchedGroups}
           />
         )
       }
