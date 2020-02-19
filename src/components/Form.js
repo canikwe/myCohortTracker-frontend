@@ -37,9 +37,7 @@ const Form = ({ students, handleSubmit, activeStudentX, activeStudentY, groups }
   }
 
   return (
-    <aside>
-
-
+    <aside className='sidebar'>
       {
         activeStudentX || activeStudentY ?
         <section>

@@ -1,5 +1,6 @@
 import React from 'react'
 import Cell from './Cell'
+import { getMatchedGroups } from '../helper/functions'
 
 const Row = ({ studentX, allStudents, handleClick, activeStudentX, activeStudentY, studentGroups }) => {
   console.log(`updating ${studentX.first_name}`)
@@ -16,15 +17,6 @@ const Row = ({ studentX, allStudents, handleClick, activeStudentX, activeStudent
     }
     return ''
   }
-
-  const getMatchedGroups = studentY => {
-    return studentGroups.filter(g => {
-      if (g.student_ids.length === 1 && studentY === studentX) {
-        return g.student_ids[0] === studentX.id
-      }
-      return studentY !== studentX && g.student_ids.includes(studentY.id) && g.student_ids.includes(studentX.id) 
-    })
-  }
   
   return (
     <section className='row'>
@@ -35,7 +27,7 @@ const Row = ({ studentX, allStudents, handleClick, activeStudentX, activeStudent
         {studentX.first_name}
       </p>
       {allStudents.map(studentY => {
-        const matchedGroups = getMatchedGroups(studentY)
+        const matchedGroups = getMatchedGroups(studentX, studentY, studentGroups)
         const classNames = generateClassNames(studentX, studentY)
 
         return (

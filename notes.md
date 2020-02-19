@@ -3,7 +3,7 @@
 ✅ group rows by sections
 - on click of cell:
   - select the two students in the form
-  - display all pairings the students have had
+  ✅ display all pairings the students have had
     - if it's a three person pair, put below the pairing "with... so and so"
   - display a dropdown to add another student to the group
   - autocomplete input for the projects/labs/etc.
