@@ -8,6 +8,10 @@ const Form = ({ students, handleSubmit, activeStudentX, activeStudentY, groups }
   useEffect(() => {
     if (activeStudentX && activeStudentY) {
       updateStudentIds([activeStudentX.id, activeStudentY.id])
+    } else if (activeStudentX) {
+      updateStudentIds([activeStudentX.id])
+    } else if (activeStudentY) {
+      updateStudentIds([activeStudentY.id])
     }
   }, [activeStudentX, activeStudentY])
 
@@ -16,7 +20,6 @@ const Form = ({ students, handleSubmit, activeStudentX, activeStudentY, groups }
     const data = { name, student_ids: studentIds }
 
     handleSubmit(data)
-    // updateStudentIds([])
   }
 
   const handleSelection = e => {

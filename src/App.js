@@ -52,14 +52,6 @@ function App() {
       } else {
         return g.activity.category.toLowerCase() === filter
       }
-      // switch (filter) {
-      //   case 'lab':
-      //     return g.activity.category.toLowerCase() === 'lab'
-      //   case 'all'      :
-      //     return true
-      //   default:
-      //     return []
-      // }
     })
   }
 
