@@ -27,7 +27,7 @@ const Row = ({ studentX, allStudents, handleClick, activeStudentX, activeStudent
   }
   
   return (
-    <>
+    <section className='row'>
       <p 
         className='cell anchorX'
         onClick={() => handleClick(studentX, null)}
@@ -49,7 +49,7 @@ const Row = ({ studentX, allStudents, handleClick, activeStudentX, activeStudent
           />
         )}
       )}
-    </>
+    </section>
   )
 }
 

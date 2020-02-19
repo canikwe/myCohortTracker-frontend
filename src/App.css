@@ -10,26 +10,18 @@ section.pairs-container {
   background-color: blueviolet;
 }
 
-/* .pairs-header {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, 75px);
-  grid-auto-rows: minmax(50px, 1fr);
-} */
-
-section.pairs-cells {
+section.row {
   overflow: auto;
   display: grid;
   gap: 2px;
   grid-template-columns: repeat(auto-fill, 75px);
-
-  /* grid-template-rows: minmax(50px, 1fr); */
 }
 
 .anchorX {
   grid-column: 1/2;
 }
 
-.header {
+.anchorY {
   grid-column: span 1;
 }
 
