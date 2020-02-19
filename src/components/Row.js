@@ -22,20 +22,19 @@ const Row = ({ studentX, allStudents, handleClick, activeStudentX, activeStudent
       if (g.student_ids.length === 1 && studentY === studentX) {
         return g.student_ids[0] === studentX.id
       }
-
       return studentY !== studentX && g.student_ids.includes(studentY.id) && g.student_ids.includes(studentX.id) 
     })
   }
   
-
   return (
     <>
       <p 
         className='cell anchorX'
         onClick={() => handleClick(studentX, null)}
-      >{studentX.first_name}
+      >
+        {studentX.first_name}
       </p>
-      {allStudents.map((studentY, i) => {
+      {allStudents.map(studentY => {
         const matchedGroups = getMatchedGroups(studentY)
         const classNames = generateClassNames(studentX, studentY)
 
@@ -48,8 +47,7 @@ const Row = ({ studentX, allStudents, handleClick, activeStudentX, activeStudent
             studentY={studentY}
             matchedGroups={matchedGroups}
           />
-        )
-      }
+        )}
       )}
     </>
   )

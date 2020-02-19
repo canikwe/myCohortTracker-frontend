@@ -2,7 +2,7 @@
   text-align: center;
 }
 
-main.pairs-container {
+section.pairs-container {
   background-color: blueviolet;
   display: grid;
   grid-template-columns: 75% 25%;

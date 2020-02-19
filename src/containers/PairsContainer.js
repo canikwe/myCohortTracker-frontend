@@ -68,7 +68,7 @@ class PairsContainer extends PureComponent {
     // console.log(students)
 
     return (
-      <main className='pairs-container'>
+      <section className='pairs-container'>
         {/* <header className='pairs-header'>
           <p>//</p>
           {
@@ -98,7 +98,7 @@ class PairsContainer extends PureComponent {
         </section>
 
         <Form students={students} handleSubmit={this.createGroup}/>
-      </main>
+      </section>
     )
   }
 }
