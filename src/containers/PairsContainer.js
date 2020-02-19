@@ -10,7 +10,12 @@ const PairsContainer = ({ groups, students, activeStudentX, activeStudentY, upda
     <section className='pairs-container'>
       
       <section className='row'>
-        <div>//</div>
+        <div 
+          className='cell anchorY' 
+          onClick={() => updateActiveStudents(null, null)}
+        >
+          {'//'}
+        </div>
         {
           students.map(studentY => <ColumnHeader key={studentY.id} studentY={studentY} handleClick={updateActiveStudents}/>)
         }

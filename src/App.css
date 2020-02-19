@@ -37,6 +37,7 @@ section.row {
   align-items: center;
   flex-direction: column;
   overflow: auto;
+  cursor: pointer;
 }
 
 .active-student {
