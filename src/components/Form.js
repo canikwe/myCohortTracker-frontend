@@ -60,14 +60,6 @@ const Form = ({ students, handleSubmit, activeStudentX, activeStudentY, groups }
 
       <h3>Create Pairs</h3>
       <form onSubmit={submitForm}>
-        {/* <label htmlFor='Students'>Students</label> */}
-        {/* <select multiple onChange={handleSelection}>
-          {
-            students.map(s => (
-              <option key={s.id} value={s.id}>{s.first_name}</option>
-            ))
-          }
-        </select> */}
         {
           students.map(s => {
             return (
@@ -81,7 +73,7 @@ const Form = ({ students, handleSubmit, activeStudentX, activeStudentY, groups }
                   onChange={handleSelection}
                   />
                 </div>
-            </>
+              </>
             )
           })
         }

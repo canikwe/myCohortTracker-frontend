@@ -6,6 +6,10 @@
   height: 100vh;
 }
 
+.filter {
+  grid-column: span 2;
+}
+
 aside.sidebar {
   background-color: rgb(250, 219, 42);
   height: 100%;

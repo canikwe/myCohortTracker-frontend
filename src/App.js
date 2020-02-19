@@ -1,7 +1,8 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react'
+import Filter from './components/Filter'
 import PairsContainer from './containers/PairsContainer'
-import Form from './components/Form';
-import './App.css';
+import Form from './components/Form'
+import './App.css'
 
 const BASE_URL = 'http://localhost:3000/'
 
@@ -10,6 +11,7 @@ function App() {
   const [groups, updateGroups] = useState([])
   const [activeStudentX, updateActiveStudentX] = useState(null)
   const [activeStudentY, updateActiveStudentY] = useState(null)
+  const [filter, updateFilter] = useState('all')
 
   useEffect(() => {
     fetch(BASE_URL + 'students')
@@ -43,10 +45,29 @@ function App() {
     )
   }
 
+  const filteredGroups = () => {
+    return groups.filter(g => {
+      if (filter === 'all') {
+        return true
+      } else {
+        return g.activity.category.toLowerCase() === filter
+      }
+      // switch (filter) {
+      //   case 'lab':
+      //     return g.activity.category.toLowerCase() === 'lab'
+      //   case 'all'      :
+      //     return true
+      //   default:
+      //     return []
+      // }
+    })
+  }
+
   return (
     <main className="App">
+      <Filter handleChange={updateFilter} filter={filter} />
       <PairsContainer 
-        groups={groups} 
+        groups={filteredGroups()} 
         students={students} 
         activeStudentX={activeStudentX}
         activeStudentY={activeStudentY}
@@ -57,7 +78,7 @@ function App() {
         handleSubmit={createGroup}
         activeStudentX={activeStudentX}
         activeStudentY={activeStudentY}
-        groups={groups}
+        groups={filteredGroups()}
       />
     </main>
   );
