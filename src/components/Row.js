@@ -3,7 +3,6 @@ import Cell from './Cell'
 import { getMatchedGroups } from '../helper/functions'
 
 const Row = ({ studentX, allStudents, handleClick, activeStudentX, activeStudentY, studentGroups }) => {
-  console.log(`updating ${studentX.first_name}`)
 
   const generateClassNames = (studentX, studentY) => {
     if (studentX === activeStudentX) {

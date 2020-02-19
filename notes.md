@@ -1,6 +1,7 @@
 # Todo
 
 ✅ group rows by sections
+
 - on click of cell:
   ✅ select the two students in the form
   ✅ display all pairings the students have had

@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { getStudentGroups, getMatchedGroups } from '../helper/functions'
 
-const Form = ({ students, handleSubmit, activeStudentX, activeStudentY, groups }) => {
+const Form = ({ students, handleSubmit, activeStudentX, activeStudentY, groups, activities }) => {
   const [studentIds, updateStudentIds] = useState([])
   const [name, updateName] = useState('')
 
@@ -24,7 +24,7 @@ const Form = ({ students, handleSubmit, activeStudentX, activeStudentY, groups }
 
   const handleSelection = e => {
     const id = parseInt(e.target.value)
-    console.log(studentIds.includes(id))
+
     if (studentIds.includes(id)) {
       updateStudentIds(studentIds.filter(i => i !== id))
     } else {
@@ -44,7 +44,18 @@ const Form = ({ students, handleSubmit, activeStudentX, activeStudentY, groups }
     }
   }
 
-  console.log(displayedGroups())
+  const displayedActivities = () => {
+    if (name === '') {
+      return []
+    } else {
+      const filterdActivities = activities.filter(a => a.name.toLowerCase().includes(name.toLowerCase()))
+      if (filterdActivities.length) {
+        return filterdActivities
+      } else {
+        return [{id: 1, name: 'Sorry, not suggestions'}]
+      }
+    }
+  }
 
   return (
     <aside className='sidebar'>
@@ -66,7 +77,7 @@ const Form = ({ students, handleSubmit, activeStudentX, activeStudentY, groups }
         {
           students.map(s => {
             return (
-              <>
+              <React.Fragment key={s.id}>
                 <div>
                   <label htmlFor={s.first_name}>{s.first_name}</label>
                 <input 
@@ -76,7 +87,7 @@ const Form = ({ students, handleSubmit, activeStudentX, activeStudentY, groups }
                   onChange={handleSelection}
                   />
                 </div>
-              </>
+              </React.Fragment>
             )
           })
         }
@@ -85,6 +96,9 @@ const Form = ({ students, handleSubmit, activeStudentX, activeStudentY, groups }
         <input type='text' value={name} onChange={e => updateName(e.target.value)} />
         <p />
         <input type='submit' value="Add/Update" />
+        <ul>
+          { displayedActivities().map(a => <li key={a.id} onClick={e => updateName(a.name)}>{a.name}</li>) }
+        </ul>
       </form>
     </aside>
   )

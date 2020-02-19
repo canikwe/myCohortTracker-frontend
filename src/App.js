@@ -12,6 +12,7 @@ function App() {
   const [activeStudentX, updateActiveStudentX] = useState(null)
   const [activeStudentY, updateActiveStudentY] = useState(null)
   const [filter, updateFilter] = useState('all')
+  const [activities, updateActivities] = useState([])
 
   useEffect(() => {
     fetch(BASE_URL + 'students')
@@ -25,16 +26,14 @@ function App() {
     fetch(BASE_URL + 'groups')
       .then(res => res.json())
       .then(groups => updateGroups(groups))
+
+    fetch(BASE_URL + 'activities')
+      .then(res => res.json())
+      .then(activities => updateActivities(activities))
     
   }, [])
 
-  const updateActiveStudents = (activeStudentX, activeStudentY) => {
-    updateActiveStudentX(activeStudentX)
-    updateActiveStudentY(activeStudentY)
-  }
-
   const createGroup = data => {
-
     fetch(BASE_URL + 'groups', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json', 'Accepted': 'application/json' },
@@ -43,6 +42,11 @@ function App() {
     .then(res => res.json())
     .then(group => updateGroups([...groups, group])
     )
+  }
+
+  const updateActiveStudents = (activeStudentX, activeStudentY) => {
+    updateActiveStudentX(activeStudentX)
+    updateActiveStudentY(activeStudentY)
   }
 
   const filteredGroups = () => {
@@ -71,6 +75,7 @@ function App() {
         activeStudentX={activeStudentX}
         activeStudentY={activeStudentY}
         groups={filteredGroups()}
+        activities={activities}
       />
     </main>
   );
