@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import PairsContainer from './containers/PairsContainer'
-import './App.css';
 import Form from './components/Form';
+import './App.css';
 
 const BASE_URL = 'http://localhost:3000/'
 
@@ -27,7 +27,6 @@ function App() {
   }, [])
 
   const updateActiveStudents = (activeStudentX, activeStudentY) => {
-    // this.setState({ activeStudentX, activeStudentY })
     updateActiveStudentX(activeStudentX)
     updateActiveStudentY(activeStudentY)
   }
@@ -55,7 +54,10 @@ function App() {
       />
       <Form 
         students={students} 
-        handleSubmit={createGroup} 
+        handleSubmit={createGroup}
+        activeStudentX={activeStudentX}
+        activeStudentY={activeStudentY}
+        groups={groups}
       />
     </main>
   );
