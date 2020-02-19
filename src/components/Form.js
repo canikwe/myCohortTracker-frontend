@@ -9,10 +9,6 @@ const Form = ({ students, handleSubmit }) => {
     e.preventDefault()
     const data = { name, student_ids: studentIds }
 
-    // pairs.forEach(s1 => {
-    //   pairs.forEach(s2 => s1 !== s2 ? data.push(generatePair(s1, s2)) : null )
-    // })
-
     handleSubmit(data)
     updateStudentIds([])
   }
@@ -26,15 +22,6 @@ const Form = ({ students, handleSubmit }) => {
       updateStudentIds([...studentIds, id])
     }
   }
-
-  // const generatePair = (first_student_id, second_student_id) => {
-  //   return ({
-  //       id: Math.floor(Math.random() * 10000),
-  //       first_student_id, 
-  //       second_student_id,
-  //       name
-  //     })
-  // }
 
   return (
     <aside>

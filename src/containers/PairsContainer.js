@@ -2,70 +2,49 @@ import React, { PureComponent } from 'react'
 // import allStudents from "../helper/data.json"
 import Column from '../components/Column'
 import Row from '../components/Row'
-import Form from '../components/Form.js'
+// import Form from '../components/Form.js'
 
-const BASE_URL = 'http://localhost:3000/'
+// const BASE_URL = 'http://localhost:3000/'
 
 class PairsContainer extends PureComponent {
   state = {
-    activeStudentX: null,
-    activeStudentY: null,
-    students: [],
-    groups: []
+    // activeStudentX: null,
+    // activeStudentY: null,
+    // students: [],
+    // groups: []
   }
 
-  componentDidMount() {
-    fetch(BASE_URL + 'students')
-    .then(res => res.json())
-    .then(students => {
-      students.sort((a, b) => a.first_name > b.first_name ? 1 : -1)
-      this.setState({ students })
-    })
-
-    fetch(BASE_URL + 'groups')
-    .then(res => res.json())
-    .then(groups => this.setState({ groups }))
-  }
-
-  updateActiveStudents = (activeStudentX, activeStudentY) => this.setState({ activeStudentX, activeStudentY })
-
-  // updateStudents = data => {
-  //   console.log(data)
-  //   fetch(BASE_URL + 'pairs', {
-  //     method: 'POST',
-  //     headers: {'Content-Type': 'application/json', 'Accepted': 'application/json'},
-  //     body: JSON.stringify(data)
-  //   })
+  // componentDidMount() {
+  //   fetch(BASE_URL + 'students')
   //   .then(res => res.json())
   //   .then(students => {
   //     students.sort((a, b) => a.first_name > b.first_name ? 1 : -1)
   //     this.setState({ students })
-  //   })    
-  //   // const updatedStudents = this.state.students.map(s => {
-  //   //   const newPairs = data.filter(p => p.first_student_id === s.id)
-  //   //   return {...s, pairs: [...s.pairs, ...newPairs]}
-  //   // })
+  //   })
 
-  //   // this.setState({students: updatedStudents})
+  //   fetch(BASE_URL + 'groups')
+  //   .then(res => res.json())
+  //   .then(groups => this.setState({ groups }))
   // }
 
-  createGroup = data => {
-    console.log(data)
+  // updateActiveStudents = (activeStudentX, activeStudentY) => this.setState({ activeStudentX, activeStudentY })
 
-    fetch(BASE_URL + 'groups', {
-      method: 'POST',
-      headers: {'Content-Type': 'application/json', 'Accepted': 'application/json'},
-      body: JSON.stringify({group: data})
-    })
-    .then(res => res.json())
-    .then(group => this.setState({ groups: [...this.state.groups, group]}))
+  // createGroup = data => {
 
-  }
+  //   fetch(BASE_URL + 'groups', {
+  //     method: 'POST',
+  //     headers: {'Content-Type': 'application/json', 'Accepted': 'application/json'},
+  //     body: JSON.stringify({group: data})
+  //   })
+  //   .then(res => res.json())
+  //   .then(group => this.setState({ groups: [...this.state.groups, group]}))
+
+  // }
 
   render() {
-    const { activeStudentX, activeStudentY, students, groups } = this.state
+    // const { activeStudentX, activeStudentY } = this.state
+    const { groups, students, activeStudentX, activeStudentY, updateActiveStudents } = this.props
 
-    // console.log(students)
 
     return (
       <section className='pairs-container'>
@@ -79,7 +58,7 @@ class PairsContainer extends PureComponent {
         <section className='pairs-cells'>
           <div>//</div>
           {
-            students.map(studentY => <Column key={studentY.id} studentY={studentY} handleClick={this.updateActiveStudents}/>)
+            students.map(studentY => <Column key={studentY.id} studentY={studentY} handleClick={updateActiveStudents}/>)
           }
           { students.map(studentX => {
             const studentGroups = groups.filter(g => g.student_ids.includes(studentX.id))
@@ -91,13 +70,13 @@ class PairsContainer extends PureComponent {
                 studentGroups={studentGroups}
                 activeStudentX={activeStudentX} 
                 activeStudentY={activeStudentY}
-                handleClick={this.updateActiveStudents}
+                handleClick={updateActiveStudents}
               />
             )}
           )}
         </section>
-
-        <Form students={students} handleSubmit={this.createGroup}/>
+{/* 
+        <Form students={students} handleSubmit={this.createGroup}/> */}
       </section>
     )
   }

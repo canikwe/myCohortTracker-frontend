@@ -1,11 +1,13 @@
 .App {
   text-align: center;
+  background-color: seagreen;
+  display: grid;
+  grid-template-columns: 75% 25%;
+  height: 100vh;
 }
 
 section.pairs-container {
   background-color: blueviolet;
-  display: grid;
-  grid-template-columns: 75% 25%;
 }
 
 /* .pairs-header {
