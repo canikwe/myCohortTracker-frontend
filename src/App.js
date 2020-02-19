@@ -37,7 +37,7 @@ function App() {
     fetch(BASE_URL + 'groups', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json', 'Accepted': 'application/json' },
-      body: JSON.stringify({ group: data })
+      body: JSON.stringify(data)
     })
     .then(res => res.json())
     .then(group => updateGroups([...groups, group])

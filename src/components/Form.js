@@ -3,7 +3,9 @@ import { getStudentGroups, getMatchedGroups } from '../helper/functions'
 
 const Form = ({ students, handleSubmit, activeStudentX, activeStudentY, groups, activities }) => {
   const [studentIds, updateStudentIds] = useState([])
-  const [name, updateName] = useState('')
+  const [searchTerm, updateSearchTerm] = useState('')
+  const [activity, updateActivity] = useState({})
+  const [toggle, updateToggle] = useState(false)
 
   useEffect(() => {
     if (activeStudentX && activeStudentY) {
@@ -17,7 +19,8 @@ const Form = ({ students, handleSubmit, activeStudentX, activeStudentY, groups, 
 
   const submitForm = e => {
     e.preventDefault()
-    const data = { name, student_ids: studentIds }
+    debugger
+    const data = { activity, group: {student_ids: studentIds} }
 
     handleSubmit(data)
   }
@@ -30,6 +33,11 @@ const Form = ({ students, handleSubmit, activeStudentX, activeStudentY, groups, 
     } else {
       updateStudentIds([...studentIds, id])
     }
+  }
+
+  const selectActivity = (e, activity) => {
+    updateSearchTerm(activity.name)
+    updateActivity(activity)
   }
 
   const displayedGroups = () => {
@@ -45,16 +53,26 @@ const Form = ({ students, handleSubmit, activeStudentX, activeStudentY, groups, 
   }
 
   const displayedActivities = () => {
-    if (name === '') {
+    if (searchTerm === '') {
       return []
     } else {
-      const filterdActivities = activities.filter(a => a.name.toLowerCase().includes(name.toLowerCase()))
-      if (filterdActivities.length) {
-        return filterdActivities
-      } else {
-        return [{id: 1, name: 'Sorry, not suggestions'}]
-      }
+      return activities.filter(a => a.name.toLowerCase().includes(searchTerm.toLowerCase()))
     }
+  }
+
+  const toggleCreateForm = () => {
+    updateToggle(!toggle)
+    updateActivity({name: searchTerm})
+  }
+
+  const handleActivityChange = e => {
+    // debugger
+    updateActivity({...activity, [e.target.name]: e.target.value})
+  }
+
+  const handleSearchTerm = e => {
+    updateSearchTerm(e.target.value)
+    if (!activity.id) updateActivity({...activity, name: searchTerm})
   }
 
   return (
@@ -92,13 +110,32 @@ const Form = ({ students, handleSubmit, activeStudentX, activeStudentY, groups, 
           })
         }
         <p />
-        <label htmlFor='Name'>Name</label>
-        <input type='text' value={name} onChange={e => updateName(e.target.value)} />
+        <label htmlFor='searchTerm'>Activity Name</label>
+        <input type='text' value={searchTerm} onChange={handleSearchTerm} />
         <p />
-        <input type='submit' value="Add/Update" />
         <ul>
-          { displayedActivities().map(a => <li key={a.id} onClick={e => updateName(a.name)}>{a.name}</li>) }
+          { displayedActivities().map(a => <li key={a.id} onClick={(e) => selectActivity(e, a)}>{a.name}</li>) }
         </ul>
+
+          { searchTerm.length && !displayedActivities().length ? (
+              <h3>
+                No activity found... Create one? 
+                <span onClick={toggleCreateForm}>➕</span>
+              </h3>              
+          ) : null }
+
+          { toggle ? (
+            <>
+              <p>
+                <label htmlFor='category'>Category: </label><input type='text' name='category' onChange={handleActivityChange} />
+              </p>
+              <p>
+                <label htmlFor='mod'>Mod: </label><input type='number' name='mod' onChange={handleActivityChange} min='1' max='5' />
+              </p>
+            </>
+          ) : null}
+
+        <input type='submit' value="Add/Update" />
       </form>
     </aside>
   )
