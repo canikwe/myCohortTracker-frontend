@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
+import { getStudentGroups, getMatchedGroups } from '../helper/functions'
 
-const Form = ({ students, handleSubmit }) => {
+const Form = ({ students, handleSubmit, activeStudentX, activeStudentY, groups }) => {
   const [studentIds, updateStudentIds] = useState([])
   const [name, updateName] = useState('')
 
@@ -23,8 +24,35 @@ const Form = ({ students, handleSubmit }) => {
     }
   }
 
+  const displayedGroups = () => {
+    if (activeStudentX && activeStudentY) {
+      return getMatchedGroups(activeStudentX, activeStudentY, groups)
+    } else if (activeStudentX && !activeStudentY) {
+      return getStudentGroups(groups, activeStudentX)
+    } else if (activeStudentY && !activeStudentX) {
+      return getStudentGroups(groups, activeStudentY)
+    } else {
+      return []
+    }
+  }
+
   return (
     <aside>
+
+
+      {
+        activeStudentX || activeStudentY ?
+        <section>
+          <ul>
+            {
+              displayedGroups().map(g => <li key={g.id}>{g.activity.name}</li>)
+            }
+          </ul>
+        </section>
+        : null
+      }
+
+
       <h3>Create Pairs</h3>
       <form onSubmit={submitForm}>
         <label htmlFor='Students'>Students</label>
