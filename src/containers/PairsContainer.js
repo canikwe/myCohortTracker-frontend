@@ -8,8 +8,8 @@ const BASE_URL = 'http://localhost:3000/'
 
 class PairsContainer extends PureComponent {
   state = {
-    activeStudent: null,
-    crossStudentIndex: null,
+    activeStudentX: null,
+    activeStudentY: null,
     students: [],
     groups: []
   }
@@ -27,7 +27,7 @@ class PairsContainer extends PureComponent {
     .then(groups => this.setState({ groups }))
   }
 
-  updateActiveStudent = (activeStudent, crossStudentIndex) => this.setState({ activeStudent, crossStudentIndex })
+  updateActiveStudents = (activeStudentX, activeStudentY) => this.setState({ activeStudentX, activeStudentY })
 
   // updateStudents = data => {
   //   console.log(data)
@@ -63,7 +63,7 @@ class PairsContainer extends PureComponent {
   }
 
   render() {
-    const { activeStudent, crossStudentIndex, students, groups } = this.state
+    const { activeStudentX, activeStudentY, students, groups } = this.state
 
     // console.log(students)
 
@@ -72,26 +72,28 @@ class PairsContainer extends PureComponent {
         {/* <header className='pairs-header'>
           <p>//</p>
           {
-            students.map(s => <Column key={s.id} student={s} allStudents={students} handleClick={this.updateActiveStudent}/>)
+            students.map(s => <Column key={s.id} student={s} allStudents={students} handleClick={this.updateActiveStudents}/>)
           }
         </header> */}
         
         <section className='pairs-cells'>
           <div>//</div>
           {
-            students.map(s => <Column key={s.id} student={s} allStudents={students} handleClick={this.updateActiveStudent}/>)
+            students.map(studentY => <Column key={studentY.id} studentY={studentY} handleClick={this.updateActiveStudents}/>)
           }
-          { students.map(s => (
-            <Row 
-              key={s.id} 
-              student={s} 
-              allStudents={students} 
-              groups={groups}
-              activeStudent={activeStudent} 
-              crossStudentIndex={crossStudentIndex}
-              handleClick={this.updateActiveStudent}
-            />
-            )
+          { students.map(studentX => {
+            const studentGroups = groups.filter(g => g.student_ids.includes(studentX.id))
+            return (
+              <Row 
+                key={studentX.id} 
+                studentX={studentX} 
+                allStudents={students} 
+                studentGroups={studentGroups}
+                activeStudentX={activeStudentX} 
+                activeStudentY={activeStudentY}
+                handleClick={this.updateActiveStudents}
+              />
+            )}
           )}
         </section>
 

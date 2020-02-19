@@ -23,7 +23,7 @@ section.pairs-cells {
   /* grid-template-rows: minmax(50px, 1fr); */
 }
 
-.anchor {
+.anchorX {
   grid-column: 1/2;
 }
 

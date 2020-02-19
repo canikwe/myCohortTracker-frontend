@@ -1,8 +1,13 @@
 import React from 'react'
 
-const Column = ({ student, allStudents, handleClick }) => {
+const Column = ({ studentY, handleClick }) => {
   return (
-    <div className='cell header' onClick={() => handleClick(null, allStudents.indexOf(student))}>{student.first_name}</div>
+    <div 
+      className='cell header' 
+      onClick={() => handleClick(null, studentY)}
+      >
+        {studentY.first_name}
+      </div>
   )
 }
 

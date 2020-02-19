@@ -1,27 +1,29 @@
 import React from 'react'
 import Cell from './Cell'
 
-const Row = ({ student, allStudents, handleClick, activeStudent, crossStudentIndex, groups }) => {
-  console.log(`updating ${student.first_name}`)
+const Row = ({ studentX, allStudents, handleClick, activeStudentX, activeStudentY, studentGroups }) => {
+  console.log(`updating ${studentX.first_name}`)
 
-  const studentIndex = () => allStudents.indexOf(student)
-
-  const generateClassNames = (student, i) => {
-    if (student === activeStudent) {
+  const generateClassNames = (studentX, studentY) => {
+    if (studentX === activeStudentX) {
       return ' active-student'
     }
-    if (i === crossStudentIndex) {
+    if (studentY === activeStudentY) {
       return ' active-student'
     }
-    if (studentIndex() === i) {
+    if (studentX === studentY) {
       return ' same-student'
     }
     return ''
   }
 
-  const getMatchedGroups = crossStudent => {
-    return groups.filter(g => {
-      return g.student_ids.includes(crossStudent.id) && g.student_ids.includes(student.id)
+  const getMatchedGroups = studentY => {
+    return studentGroups.filter(g => {
+      if (g.student_ids.length === 1 && studentY === studentX) {
+        return g.student_ids[0] === studentX.id
+      }
+
+      return studentY !== studentX && g.student_ids.includes(studentY.id) && g.student_ids.includes(studentX.id) 
     })
   }
   
@@ -29,21 +31,21 @@ const Row = ({ student, allStudents, handleClick, activeStudent, crossStudentInd
   return (
     <>
       <p 
-        className='cell anchor'
-        onClick={() => handleClick(student, null)}
-      >{student.first_name}
+        className='cell anchorX'
+        onClick={() => handleClick(studentX, null)}
+      >{studentX.first_name}
       </p>
-      {allStudents.map((s, i) => {
-        const matchedGroups = getMatchedGroups(s)
-
+      {allStudents.map((studentY, i) => {
+        const matchedGroups = getMatchedGroups(studentY)
+        const classNames = generateClassNames(studentX, studentY)
 
         return (
           <Cell
-            key={s.id}
+            key={studentY.id}
             handleClick={handleClick}
-            classNames={generateClassNames}
-            student={student}
-            index={i}
+            classNames={classNames}
+            studentX={studentX}
+            studentY={studentY}
             matchedGroups={matchedGroups}
           />
         )

@@ -1,11 +1,11 @@
 import React from 'react'
 
-const Cell = ({ handleClick, classNames, student, index, matchedGroups }) => {
+const Cell = ({ handleClick, classNames, studentX, studentY, matchedGroups }) => {
   if (matchedGroups.length) console.log(matchedGroups)
     return (
       <div
-        onClick={() => handleClick(student, index)}
-        className={`cell${classNames(student, index)}`}
+        onClick={() => handleClick(studentX, studentY)}
+        className={`cell${classNames}`}
       >
         { matchedGroups.map(g => <div key={g.id}>{g.activity.name}</div>) }
       </div>
