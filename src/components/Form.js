@@ -19,7 +19,6 @@ const Form = ({ students, handleSubmit, activeStudentX, activeStudentY, groups, 
 
   const submitForm = e => {
     e.preventDefault()
-    debugger
     const data = { activity, group: {student_ids: studentIds} }
 
     handleSubmit(data)
@@ -77,12 +76,14 @@ const Form = ({ students, handleSubmit, activeStudentX, activeStudentY, groups, 
 
   return (
     <aside className='sidebar'>
+      <h3>Pairings</h3>
       {
         activeStudentX || activeStudentY ?
         <section>
           <ul>
-            {
-              displayedGroups().map(g => <li key={g.id}>{g.activity.name}</li>)
+            { displayedGroups().length ? (
+              displayedGroups().sort((a,b) => b.activity.mod - a.activity.mod).map(g => <li key={g.id}>{g.activity.name}</li>)
+              ) : <p>No pairings yet...</p>
             }
           </ul>
         </section>
