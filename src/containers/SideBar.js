@@ -31,12 +31,12 @@ const SideBar = ({ students, handleSubmit, activeStudentX, activeStudentY, group
       {
         formToggle ? 
         <Form 
-        students={students} 
-        activities={activities} 
-        handleSubmit={handleSubmit} 
-        activeStudentX={activeStudentX} 
-        activeStudentY={activeStudentY}
-        updateFormToggle={updateFormToggle}
+          students={students} 
+          activities={activities} 
+          handleSubmit={handleSubmit} 
+          activeStudentX={activeStudentX} 
+          activeStudentY={activeStudentY}
+          updateFormToggle={updateFormToggle}
         />
         :
         <button onClick={() => updateFormToggle(true)}>New Pair</button>

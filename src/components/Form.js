@@ -65,6 +65,7 @@ const Form = ({ students, activities, handleSubmit, activeStudentX, activeStuden
 
   return (
     <>
+      <button onClick={() => updateFormToggle(false)}>Go Back</button>
       <h3>Create Pairs</h3>
       <form onSubmit={submitForm}>
         {
