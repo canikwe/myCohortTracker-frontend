@@ -1,5 +1,5 @@
 import React from 'react'
-import Cell from './Cell'
+import Cell from '../components/Cell'
 import { getMatchedGroups } from '../helper/functions'
 
 const Row = ({ studentX, allStudents, handleClick, activeStudentX, activeStudentY, studentGroups }) => {

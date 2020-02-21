@@ -1,3 +1,5 @@
+# My Awesome Cohort Tracker
+
 ## Todo
 
 - refactor component heirarchy

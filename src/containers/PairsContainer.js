@@ -1,7 +1,7 @@
 import React from 'react'
 // import allStudents from "../helper/data.json"
 import ColumnHeader from '../components/ColumnHeader'
-import Row from '../components/Row'
+import Row from './Row'
 import { getStudentGroups } from '../helper/functions'
 
 const PairsContainer = ({ groups, students, activeStudentX, activeStudentY, updateActiveStudents }) => {

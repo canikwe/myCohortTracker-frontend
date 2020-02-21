@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from 'react'
-import { getStudentGroups, getMatchedGroups } from '../helper/functions'
 
-const Form = ({ students, handleSubmit, activeStudentX, activeStudentY, groups, activities }) => {
+const Form = ({ students, activities, handleSubmit, activeStudentX, activeStudentY, updateFormToggle }) => {
+
   const [studentIds, updateStudentIds] = useState([])
   const [searchTerm, updateSearchTerm] = useState('')
   const [activity, updateActivity] = useState({})
-  const [toggle, updateToggle] = useState(false)
+  const [createFormToggle, updateToggle] = useState(false)
 
   useEffect(() => {
     if (activeStudentX && activeStudentY) {
@@ -19,9 +19,10 @@ const Form = ({ students, handleSubmit, activeStudentX, activeStudentY, groups, 
 
   const submitForm = e => {
     e.preventDefault()
-    const data = { activity, group: {student_ids: studentIds} }
+    const data = { activity, group: { student_ids: studentIds } }
 
     handleSubmit(data)
+    updateFormToggle(false)
   }
 
   const handleSelection = e => {
@@ -39,18 +40,6 @@ const Form = ({ students, handleSubmit, activeStudentX, activeStudentY, groups, 
     updateActivity(activity)
   }
 
-  const displayedGroups = () => {
-    if (activeStudentX && activeStudentY) {
-      return getMatchedGroups(activeStudentX, activeStudentY, groups)
-    } else if (activeStudentX && !activeStudentY) {
-      return getStudentGroups(groups, activeStudentX)
-    } else if (activeStudentY && !activeStudentX) {
-      return getStudentGroups(groups, activeStudentY)
-    } else {
-      return []
-    }
-  }
-
   const displayedActivities = () => {
     if (searchTerm === '') {
       return []
@@ -60,37 +49,22 @@ const Form = ({ students, handleSubmit, activeStudentX, activeStudentY, groups, 
   }
 
   const toggleCreateForm = () => {
-    updateToggle(!toggle)
-    updateActivity({name: searchTerm})
+    updateToggle(!createFormToggle)
+    updateActivity({ name: searchTerm })
   }
 
   const handleActivityChange = e => {
     // debugger
-    updateActivity({...activity, [e.target.name]: e.target.value})
+    updateActivity({ ...activity, [e.target.name]: e.target.value })
   }
 
   const handleSearchTerm = e => {
     updateSearchTerm(e.target.value)
-    if (!activity.id) updateActivity({...activity, name: searchTerm})
+    if (!activity.id) updateActivity({ ...activity, name: searchTerm })
   }
 
   return (
-    <aside className='sidebar'>
-      <h3>Pairings</h3>
-      {
-        activeStudentX || activeStudentY ?
-        <section>
-          <ul>
-            { displayedGroups().length ? (
-              displayedGroups().sort((a,b) => b.activity.mod - a.activity.mod).map(g => <li key={g.id}>{g.activity.name}</li>)
-              ) : <p>No pairings yet...</p>
-            }
-          </ul>
-        </section>
-        : null
-      }
-
-
+    <>
       <h3>Create Pairs</h3>
       <form onSubmit={submitForm}>
         {
@@ -99,11 +73,11 @@ const Form = ({ students, handleSubmit, activeStudentX, activeStudentY, groups, 
               <React.Fragment key={s.id}>
                 <div>
                   <label htmlFor={s.first_name}>{s.first_name}</label>
-                <input 
-                  type='checkbox' 
-                  value={s.id}
-                  checked={studentIds.includes(s.id)}
-                  onChange={handleSelection}
+                  <input
+                    type='checkbox'
+                    value={s.id}
+                    checked={studentIds.includes(s.id)}
+                    onChange={handleSelection}
                   />
                 </div>
               </React.Fragment>
@@ -115,30 +89,32 @@ const Form = ({ students, handleSubmit, activeStudentX, activeStudentY, groups, 
         <input type='text' value={searchTerm} onChange={handleSearchTerm} />
         <p />
         <ul>
-          { displayedActivities().map(a => <li key={a.id} onClick={(e) => selectActivity(e, a)}>{a.name}</li>) }
+          {
+            displayedActivities().map(a => <li key={a.id} onClick={(e) => selectActivity(e, a)}>{a.name}</li>)
+          }
         </ul>
 
-          { searchTerm.length && !displayedActivities().length ? (
-              <h3>
-                No activity found... Create one? 
-                <span onClick={toggleCreateForm}>➕</span>
-              </h3>              
-          ) : null }
+        {searchTerm.length && !displayedActivities().length ? (
+          <h3>
+            No activity found... Create one?
+            <span onClick={toggleCreateForm}>➕</span>
+          </h3>
+        ) : null}
 
-          { toggle ? (
-            <>
-              <p>
-                <label htmlFor='category'>Category: </label><input type='text' name='category' onChange={handleActivityChange} />
-              </p>
-              <p>
-                <label htmlFor='mod'>Mod: </label><input type='number' name='mod' onChange={handleActivityChange} min='1' max='5' />
-              </p>
-            </>
-          ) : null}
+        {createFormToggle ? (
+          <>
+            <p>
+              <label htmlFor='category'>Category: </label><input type='text' name='category' onChange={handleActivityChange} />
+            </p>
+            <p>
+              <label htmlFor='mod'>Mod: </label><input type='number' name='mod' onChange={handleActivityChange} min='1' max='5' />
+            </p>
+          </>
+        ) : null}
 
         <input type='submit' value="Add/Update" />
       </form>
-    </aside>
+    </>
   )
 }
 

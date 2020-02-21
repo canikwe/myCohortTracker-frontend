@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import Filter from './components/Filter'
 import PairsContainer from './containers/PairsContainer'
-import Form from './components/Form'
+import Form from './containers/SideBar'
 import './App.css'
 
 const BASE_URL = 'http://localhost:3000/'
