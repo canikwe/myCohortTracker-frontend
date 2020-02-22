@@ -6,30 +6,39 @@ const Form = ({ students, handleSelection, studentIds, searchTerm, handleSearchT
     <>
       <button onClick={() => updateFormToggle(false)}>Go Back</button>
       <h3>Select Activity</h3>
-      <label htmlFor='searchTerm'>Search: </label>
-      <input type='text' value={searchTerm} placeholder='E.g. Mod 2 Final Project' onChange={handleSearchTerm} />
+      <div>
+        Search Activities <span onClick={() => toggleCreateForm(false)} role='img' aria-label='search'>🔍</span>
+      </div>
+        {!createFormToggle ?
+          <>
+            <label htmlFor='searchTerm'>Search  </label>
+            <input type='text' value={searchTerm} placeholder='E.g. Mod 2 Final Project' onChange={handleSearchTerm} />
+            <ul>
+              {
+                displayedActivities.map(a => <li key={a.id} onClick={(e) => selectActivity(e, a)}>{a.name}</li>)
+              }
+            </ul>
+
+            {searchTerm.length && !displayedActivities.length ? (
+              <h4>No activity found...</h4>
+            ) : null}
+          </>
+          : null
+        }
       <div>
         Create New <span onClick={toggleCreateForm} role='img' aria-label='plus'>➕</span>
       </div>
-      <ul>
-        {
-          displayedActivities.map(a => <li key={a.id} onClick={(e) => selectActivity(e, a)}>{a.name}</li>)
-        }
-      </ul>
 
-      {searchTerm.length && !displayedActivities.length ? (
-        <h4>No activity found...</h4>
-      ) : null}
 
       {createFormToggle ? (
-        <>
+        <form>
           <div>
             <label htmlFor='category'>Category: </label><input type='text' name='category' onChange={handleActivityChange} />
           </div>
           <div>
             <label htmlFor='mod'>Mod: </label><input type='number' name='mod' onChange={handleActivityChange} min='1' max='5' />
           </div>
-        </>
+        </form>
       ) : null}
 
       <form onSubmit={submitForm}>
