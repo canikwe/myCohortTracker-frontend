@@ -24,7 +24,7 @@ const SideBar = ({ students, handleSubmit, activeStudentX, activeStudentY, group
 
   const submitForm = e => {
     e.preventDefault()
-    const data = { activity, group, student_group: { student_ids: studentIds } }
+    const data = { activity, group: {...group, student_ids: studentIds}, student_group: { student_ids: studentIds } }
 
     handleSubmit(data)
     updateGroup({ notes: '', avoid: false })
@@ -87,6 +87,7 @@ const SideBar = ({ students, handleSubmit, activeStudentX, activeStudentY, group
         activeStudentX || activeStudentY ?
         <Groups 
           groups={displayedGroups()}
+          updateGroup={updateGroup}
         />
         : null
       }

@@ -33,6 +33,10 @@ function App() {
     
   }, [])
 
+  const handleSubmit = data => {
+    data.group.id ? updateGroup(data) : createGroup(data)
+  }
+
   const createGroup = data => {
     fetch(BASE_URL + 'groups', {
       method: 'POST',
@@ -40,8 +44,17 @@ function App() {
       body: JSON.stringify(data)
     })
     .then(res => res.json())
-    .then(group => updateGroups([...groups, group])
-    )
+    .then(group => updateGroups([...groups, group]))
+  }
+
+  const updateGroup = data => {
+    fetch(BASE_URL + 'groups/' + data.group.id, {
+      method: 'PATCH',
+      headers: { 'Content-Type': 'application/json', 'Accepted': 'application/json' },
+      body: JSON.stringify(data)
+    })
+    .then(res => res.json())
+    .then(group => updateGroups(groups.map(g => g.id === group.id ? group : g)))
   }
 
   const updateActiveStudents = (activeStudentX, activeStudentY) => {
@@ -71,7 +84,7 @@ function App() {
       />
       <Form 
         students={students} 
-        handleSubmit={createGroup}
+        handleSubmit={handleSubmit}
         activeStudentX={activeStudentX}
         activeStudentY={activeStudentY}
         groups={filteredGroups()}

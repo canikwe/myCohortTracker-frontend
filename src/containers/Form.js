@@ -114,7 +114,11 @@ const Form = ({ students, handleSelection, studentIds, searchTerm, handleSearchT
         </div>
         
         <div>
-          <h4>Group Details</h4>
+          {
+            group.id ? 
+            <h4>{group.activity.name} Group Details</h4> :
+            <h4>Group Details</h4>
+          }
           <div>
             <label htmlFor='avoid'>Bad Pairing?</label>
             <input type='checkbox' name='avoid' checked={group.avoid} onChange={() => updateGroup({...group, avoid: !group.avoid})}/>
@@ -126,7 +130,7 @@ const Form = ({ students, handleSelection, studentIds, searchTerm, handleSearchT
         </div>
 
         <div>
-          <input type='submit' value="Add/Update" />
+          <input type='submit' value={group.id ? "Update" : "Add"} />
         </div>
       </form>
     </>
