@@ -1,7 +1,14 @@
 import React from 'react'
 
-const Filters = ({ handleChange, filters }) => {
-  console.log(filters)
+const Filters = ({ updateFilters, filters }) => {
+  const handleFilters = e => {
+    if (e.target.name === 'mod' && e.target.value !== 'all') {
+      updateFilters({...filters, mod: parseInt(e.target.value)})
+    } else {
+      updateFilters({...filters, [e.target.name]: e.target.value})
+    }
+  }
+
   return (
     <section className='filter'>
       <label htmlFor='project'>Display Project</label>
@@ -10,7 +17,7 @@ const Filters = ({ handleChange, filters }) => {
         checked={filters.category === 'project'}
         name='category'
         value='project'
-        onChange={e => handleChange({...filters, category: e.target.value})}
+        onChange={handleFilters}
       />
 
       <label htmlFor='labs'>Display Labs</label>
@@ -19,15 +26,16 @@ const Filters = ({ handleChange, filters }) => {
         checked={filters.category === 'lab'}
         name='category' 
         value='lab' 
-        onChange={e => handleChange({ ...filters, category: e.target.value })}
+        onChange={handleFilters}
       />
 
       <label htmlFor='mod'>Filter by Mod</label>
       <select 
-        value='mod'
         name='mod'
-        onChange={e => handleChange({...filters, mod: parseInt(e.target.value)})} 
+        value={filters.mod}
+        onChange={handleFilters} 
       >
+        <option value='all'>Show All Mods</option>
         {[1, 2, 3, 4, 5].map(mod => <option key={mod} value={mod}>Mod - {mod}</option>)}
       </select>
 
@@ -37,7 +45,7 @@ const Filters = ({ handleChange, filters }) => {
         checked={filters.category === 'all'} 
         name='category'
         value='all' 
-        onChange={e => handleChange({ ...filters, category: e.target.value })}
+        onChange={handleFilters}
       />
 
       <label htmlFor='all'>Display All</label>
@@ -45,7 +53,7 @@ const Filters = ({ handleChange, filters }) => {
         type='text'
         name='term'
         value={filters.term} 
-        onChange={e => handleChange({ ...filters, term: e.target.value })}
+        onChange={handleFilters}
       />
     </section>
   )

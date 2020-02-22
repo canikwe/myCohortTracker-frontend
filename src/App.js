@@ -83,7 +83,7 @@ function App() {
 
   return (
     <main className="App">
-      <Filters filters={filterOptions} handleChange={updateFilterOptions}/>
+      <Filters filters={filterOptions} updateFilters={updateFilterOptions}/>
       <PairsContainer 
         groups={filteredGroups()} 
         students={students} 
