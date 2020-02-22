@@ -1,67 +1,67 @@
 import React, { useState, useEffect } from 'react'
 
-const Form = ({ students, activities, handleSubmit, activeStudentX, activeStudentY, updateFormToggle }) => {
+const Form = ({ students, handleSelection, studentIds, searchTerm, handleSearchTerm, displayedActivities, selectActivity, handleActivityChange, group, updateGroup, submitForm, updateFormToggle, createFormToggle, toggleCreateForm }) => {
 
-  const [studentIds, updateStudentIds] = useState([])
-  const [searchTerm, updateSearchTerm] = useState('')
-  const [activity, updateActivity] = useState({})
-  const [group, updateGroup] = useState({notes: '', avoid: false})
-  const [createFormToggle, updateToggle] = useState(false)
+  // const [studentIds, updateStudentIds] = useState([])
+  // const [searchTerm, updateSearchTerm] = useState('')
+  // const [activity, updateActivity] = useState({})
+  // const [group, updateGroup] = useState({notes: '', avoid: false})
+  // const [createFormToggle, updateToggle] = useState(false)
 
-  useEffect(() => {
-    if (activeStudentX && activeStudentY) {
-      updateStudentIds([activeStudentX.id, activeStudentY.id])
-    } else if (activeStudentX) {
-      updateStudentIds([activeStudentX.id])
-    } else if (activeStudentY) {
-      updateStudentIds([activeStudentY.id])
-    }
-  }, [activeStudentX, activeStudentY])
+  // useEffect(() => {
+  //   if (activeStudentX && activeStudentY) {
+  //     updateStudentIds([activeStudentX.id, activeStudentY.id])
+  //   } else if (activeStudentX) {
+  //     updateStudentIds([activeStudentX.id])
+  //   } else if (activeStudentY) {
+  //     updateStudentIds([activeStudentY.id])
+  //   }
+  // }, [activeStudentX, activeStudentY])
 
-  const submitForm = e => {
-    e.preventDefault()
-    const data = { activity, group, student_group: { student_ids: studentIds } }
+  // const submitForm = e => {
+  //   e.preventDefault()
+  //   const data = { activity, group, student_group: { student_ids: studentIds } }
 
-    handleSubmit(data)
-  }
+  //   handleSubmit(data)
+  // }
 
-  const handleSelection = e => {
-    const id = parseInt(e.target.value)
+  // const handleSelection = e => {
+  //   const id = parseInt(e.target.value)
 
-    if (studentIds.includes(id)) {
-      updateStudentIds(studentIds.filter(i => i !== id))
-    } else {
-      updateStudentIds([...studentIds, id])
-    }
-  }
+  //   if (studentIds.includes(id)) {
+  //     updateStudentIds(studentIds.filter(i => i !== id))
+  //   } else {
+  //     updateStudentIds([...studentIds, id])
+  //   }
+  // }
 
-  const selectActivity = (e, activity) => {
-    updateSearchTerm(activity.name)
-    updateActivity(activity)
-  }
+  // const selectActivity = (e, activity) => {
+  //   updateSearchTerm(activity.name)
+  //   updateActivity(activity)
+  // }
 
-  const displayedActivities = () => {
-    if (searchTerm === '') {
-      return []
-    } else {
-      return activities.filter(a => a.name.toLowerCase().includes(searchTerm.toLowerCase()))
-    }
-  }
+  // const displayedActivities = () => {
+  //   if (searchTerm === '') {
+  //     return []
+  //   } else {
+  //     return activities.filter(a => a.name.toLowerCase().includes(searchTerm.toLowerCase()))
+  //   }
+  // }
 
-  const toggleCreateForm = () => {
-    updateToggle(!createFormToggle)
-    updateActivity({ name: searchTerm })
-  }
+  // const toggleCreateForm = () => {
+  //   updateToggle(!createFormToggle)
+  //   updateActivity({ name: searchTerm })
+  // }
 
-  const handleActivityChange = e => {
-    // debugger
-    updateActivity({ ...activity, [e.target.name]: e.target.value })
-  }
+  // const handleActivityChange = e => {
+  //   // debugger
+  //   updateActivity({ ...activity, [e.target.name]: e.target.value })
+  // }
 
-  const handleSearchTerm = e => {
-    updateSearchTerm(e.target.value)
-    if (!activity.id) updateActivity({ ...activity, name: searchTerm })
-  }
+  // const handleSearchTerm = e => {
+  //   updateSearchTerm(e.target.value)
+  //   if (!activity.id) updateActivity({ ...activity, name: searchTerm })
+  // }
 
   return (
     <>
@@ -74,11 +74,11 @@ const Form = ({ students, activities, handleSubmit, activeStudentX, activeStuden
       </div>
       <ul>
         {
-          displayedActivities().map(a => <li key={a.id} onClick={(e) => selectActivity(e, a)}>{a.name}</li>)
+          displayedActivities.map(a => <li key={a.id} onClick={(e) => selectActivity(e, a)}>{a.name}</li>)
         }
       </ul>
 
-      {searchTerm.length && !displayedActivities().length ? (
+      {searchTerm.length && !displayedActivities.length ? (
         <h4>No activity found...</h4>
       ) : null}
 
@@ -117,7 +117,7 @@ const Form = ({ students, activities, handleSubmit, activeStudentX, activeStuden
           <h4>Group Details</h4>
           <div>
             <label htmlFor='avoid'>Bad Pairing?</label>
-            <input type='checkbox' name='avoid' value={group.avoid} onChange={() => updateGroup({...group, avoid: !group.avoid})}/>
+            <input type='checkbox' name='avoid' checked={group.avoid} onChange={() => updateGroup({...group, avoid: !group.avoid})}/>
           </div>
           <div>
             <label htmlFor='notes'>Notes:</label>
