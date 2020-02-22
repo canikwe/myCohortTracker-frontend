@@ -2,21 +2,19 @@
 
 ## Todo
 
-- refactor component heirarchy
-- plan out wireframes
-- create roster from CSV
-- add group attributes to new group form
-- update a group
-- delete a group
+- add search to filters
+- add filter by mod
+- add filter by most recent pairing
+- update create/update user workflow
 
 ## Backlog
 
 - on click of cell:
-    - if it's a three person pair, put below the pairing "with... so and so"
+  - if it's a three person pair, put below the pairing "with... so and so"
   - autocomplete input for the projects/labs/etc.
 - update cohort (page)
 - update student (page?)
-  - add hide student attribute on table
+- add hide attribute on students table
 - styling
   - convert css to scss
   - add gradient to the pairings based on frequency
@@ -24,10 +22,16 @@
 - add test suite
 - refactor to Node/Express backend?
 - add login/auth
+- create roster from CSV
   <!-- - display a dropdown to add another student to the group? -->
 
 ## DONE
 
+✅ refactor component heirarchy
+✅ plan out main view wireframes]
+✅ add group attributes to new group form
+✅ update a group
+✅ delete a group
 ✅ group rows by sections
 ✅ select the two students in the form
 ✅ display all pairings the students have had

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import Filter from './components/Filter'
+import Filters from './components/Filters'
 import PairsContainer from './containers/PairsContainer'
 import Form from './containers/SideBar'
 import './App.css'
@@ -11,7 +11,8 @@ function App() {
   const [groups, updateGroups] = useState([])
   const [activeStudentX, updateActiveStudentX] = useState(null)
   const [activeStudentY, updateActiveStudentY] = useState(null)
-  const [filter, updateFilter] = useState('all')
+  // const [filter, updateFilter] = useState('all')
+  const [filterOptions, updateFilterOptions] = useState({category: 'all', term: '', mod: 'all'})
   const [activities, updateActivities] = useState([])
 
   useEffect(() => {
@@ -72,17 +73,17 @@ function App() {
 
   const filteredGroups = () => {
     return groups.filter(g => {
-      if (filter === 'all') {
-        return true
+      if (filterOptions.category === 'all') {
+        return g.activity.name.toLowerCase().includes(filterOptions.term.toLowerCase())
       } else {
-        return g.activity.category.toLowerCase() === filter
+        return g.activity.category.toLowerCase() === filterOptions.category && g.activity.name.toLowerCase().includes(filterOptions.term.toLowerCase())
       }
-    })
+    }).filter(g => filterOptions.mod !== 'all' ? g.activity.mod === filterOptions.mod : true)
   }
 
   return (
     <main className="App">
-      <Filter handleChange={updateFilter} filter={filter} />
+      <Filters filters={filterOptions} handleChange={updateFilterOptions}/>
       <PairsContainer 
         groups={filteredGroups()} 
         students={students} 
