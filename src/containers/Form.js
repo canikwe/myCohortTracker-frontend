@@ -1,67 +1,6 @@
-import React, { useState, useEffect } from 'react'
+import React from 'react'
 
 const Form = ({ students, handleSelection, studentIds, searchTerm, handleSearchTerm, displayedActivities, selectActivity, handleActivityChange, group, updateGroup, submitForm, updateFormToggle, createFormToggle, toggleCreateForm }) => {
-
-  // const [studentIds, updateStudentIds] = useState([])
-  // const [searchTerm, updateSearchTerm] = useState('')
-  // const [activity, updateActivity] = useState({})
-  // const [group, updateGroup] = useState({notes: '', avoid: false})
-  // const [createFormToggle, updateToggle] = useState(false)
-
-  // useEffect(() => {
-  //   if (activeStudentX && activeStudentY) {
-  //     updateStudentIds([activeStudentX.id, activeStudentY.id])
-  //   } else if (activeStudentX) {
-  //     updateStudentIds([activeStudentX.id])
-  //   } else if (activeStudentY) {
-  //     updateStudentIds([activeStudentY.id])
-  //   }
-  // }, [activeStudentX, activeStudentY])
-
-  // const submitForm = e => {
-  //   e.preventDefault()
-  //   const data = { activity, group, student_group: { student_ids: studentIds } }
-
-  //   handleSubmit(data)
-  // }
-
-  // const handleSelection = e => {
-  //   const id = parseInt(e.target.value)
-
-  //   if (studentIds.includes(id)) {
-  //     updateStudentIds(studentIds.filter(i => i !== id))
-  //   } else {
-  //     updateStudentIds([...studentIds, id])
-  //   }
-  // }
-
-  // const selectActivity = (e, activity) => {
-  //   updateSearchTerm(activity.name)
-  //   updateActivity(activity)
-  // }
-
-  // const displayedActivities = () => {
-  //   if (searchTerm === '') {
-  //     return []
-  //   } else {
-  //     return activities.filter(a => a.name.toLowerCase().includes(searchTerm.toLowerCase()))
-  //   }
-  // }
-
-  // const toggleCreateForm = () => {
-  //   updateToggle(!createFormToggle)
-  //   updateActivity({ name: searchTerm })
-  // }
-
-  // const handleActivityChange = e => {
-  //   // debugger
-  //   updateActivity({ ...activity, [e.target.name]: e.target.value })
-  // }
-
-  // const handleSearchTerm = e => {
-  //   updateSearchTerm(e.target.value)
-  //   if (!activity.id) updateActivity({ ...activity, name: searchTerm })
-  // }
 
   return (
     <>
@@ -70,7 +9,7 @@ const Form = ({ students, handleSelection, studentIds, searchTerm, handleSearchT
       <label htmlFor='searchTerm'>Search: </label>
       <input type='text' value={searchTerm} placeholder='E.g. Mod 2 Final Project' onChange={handleSearchTerm} />
       <div>
-        Create New <span onClick={toggleCreateForm}>➕</span>
+        Create New <span onClick={toggleCreateForm} role='img' aria-label='plus'>➕</span>
       </div>
       <ul>
         {

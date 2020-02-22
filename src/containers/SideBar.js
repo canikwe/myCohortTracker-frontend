@@ -3,7 +3,7 @@ import Groups from '../components/Groups'
 import Form from './Form'
 import { getStudentGroups, getMatchedGroups } from '../helper/functions'
 
-const SideBar = ({ students, handleSubmit, activeStudentX, activeStudentY, groups, activities }) => {
+const SideBar = ({ students, handleSubmit, activeStudentX, activeStudentY, groups, activities, deleteGroup }) => {
   const [formToggle, updateFormToggle] = useState(false)
   const [studentIds, updateStudentIds] = useState([])
   const [searchTerm, updateSearchTerm] = useState('')
@@ -24,10 +24,14 @@ const SideBar = ({ students, handleSubmit, activeStudentX, activeStudentY, group
 
   const submitForm = e => {
     e.preventDefault()
-    const data = { activity, group: {...group, student_ids: studentIds}, student_group: { student_ids: studentIds } }
-
-    handleSubmit(data)
-    updateGroup({ notes: '', avoid: false })
+    if (activity.name) {
+      const data = { activity, group: {...group, student_ids: studentIds} }
+  
+      handleSubmit(data)
+      updateGroup({ notes: '', avoid: false })
+    } else {
+      alert('Please choose or create a new activity')
+    }
   }
 
   const handleSelection = e => {
@@ -59,7 +63,6 @@ const SideBar = ({ students, handleSubmit, activeStudentX, activeStudentY, group
   }
 
   const handleActivityChange = e => {
-    // debugger
     updateActivity({ ...activity, [e.target.name]: e.target.value })
   }
 
@@ -88,6 +91,8 @@ const SideBar = ({ students, handleSubmit, activeStudentX, activeStudentY, group
         <Groups 
           groups={displayedGroups()}
           updateGroup={updateGroup}
+          updateActivity={updateActivity}
+          deleteGroup={deleteGroup}
         />
         : null
       }
@@ -96,15 +101,9 @@ const SideBar = ({ students, handleSubmit, activeStudentX, activeStudentY, group
         <Form 
           students={students} 
           handleSelection={handleSelection}
-          // activities={activities} 
-          // handleSubmit={handleSubmit} 
-          // activeStudentX={activeStudentX} 
-          // activeStudentY={activeStudentY}
           studentIds={studentIds}
-          // updateStudentIds={updateStudentIds}
           searchTerm={searchTerm}
           handleSearchTerm={handleSearchTerm}
-          // activity={activity}
           displayedActivities={displayedActivities()}
           selectActivity={selectActivity}
           handleActivityChange={handleActivityChange}

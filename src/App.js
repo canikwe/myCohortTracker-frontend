@@ -57,6 +57,14 @@ function App() {
     .then(group => updateGroups(groups.map(g => g.id === group.id ? group : g)))
   }
 
+  const deleteGroup = group => {
+    fetch(BASE_URL + 'groups/' + group.id, {
+      method: 'DELETE'
+    })
+    .then(res => res.json())
+    .then(group => updateGroups(groups.filter(g => g.id !== group.id)))
+  }
+
   const updateActiveStudents = (activeStudentX, activeStudentY) => {
     updateActiveStudentX(activeStudentX)
     updateActiveStudentY(activeStudentY)
@@ -81,13 +89,14 @@ function App() {
         activeStudentX={activeStudentX}
         activeStudentY={activeStudentY}
         updateActiveStudents={updateActiveStudents}
-      />
+        />
       <Form 
         students={students} 
         handleSubmit={handleSubmit}
         activeStudentX={activeStudentX}
         activeStudentY={activeStudentY}
         groups={filteredGroups()}
+        deleteGroup={deleteGroup}
         activities={activities}
       />
     </main>
