@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import Groups from '../components/Groups'
-import Form from '../components/Form'
+import Form from './Form'
 import { getStudentGroups, getMatchedGroups } from '../helper/functions'
 
 const SideBar = ({ students, handleSubmit, activeStudentX, activeStudentY, groups, activities }) => {
