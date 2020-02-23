@@ -1,8 +1,9 @@
 import React from 'react'
 
-const Groups = ({ groups, updateGroup, updateActivity, deleteGroup }) => {
+const Groups = ({ groups, updateGroup, updateActivity, updateStudentIds, deleteGroup }) => {
   const handleEdit = (group, activity) => {
     updateGroup(group)
+    updateStudentIds(group.student_ids)
     updateActivity(activity)
   }
 

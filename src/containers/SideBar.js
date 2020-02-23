@@ -92,6 +92,7 @@ const SideBar = ({ students, handleSubmit, activeStudentX, activeStudentY, group
           groups={displayedGroups()}
           updateGroup={updateGroup}
           updateActivity={updateActivity}
+          updateStudentIds={updateStudentIds}
           deleteGroup={deleteGroup}
         />
         : null
