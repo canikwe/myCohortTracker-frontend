@@ -51,7 +51,7 @@ const Filters = ({ updateFilters, filters }) => {
       <label htmlFor='search'>Search</label>
       <input 
         type='text'
-        name='search'
+        name='term'
         value={filters.term} 
         onChange={handleFilters}
       />
