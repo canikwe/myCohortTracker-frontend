@@ -1,16 +1,11 @@
 import React from 'react'
 
-const Groups = ({ groups, updateGroup, updateActivity, updateStudentIds, deleteGroup }) => {
+const Groups = ({ groups, updateGroup, updateActivity, handleDelete }) => {
   const handleEdit = (group, activity) => {
     updateGroup(group)
-    updateStudentIds(group.student_ids)
     updateActivity(activity)
   }
 
-  const handleDelete = group => {
-    deleteGroup(group)
-    updateGroup({avoid: false, notes: ''})
-  }
   return (
     <section>
       <ul>

@@ -1,6 +1,6 @@
 import React from 'react'
 
-const Form = ({ students, handleSelection, studentIds, searchTerm, handleSearchTerm, displayedActivities, selectActivity, handleActivityChange, group, updateGroup, submitForm, updateFormToggle, createFormToggle, toggleCreateForm }) => {
+const Form = ({ students, handleSelection, searchTerm, handleSearchTerm, displayedActivities, selectActivity, handleActivityChange, group, updateGroup, submitForm, updateFormToggle, createFormToggle, toggleCreateForm }) => {
 
   return (
     <>
@@ -52,7 +52,8 @@ const Form = ({ students, handleSelection, studentIds, searchTerm, handleSearchT
                     <input
                       type='checkbox'
                       value={s.id}
-                      checked={studentIds.includes(s.id)}
+                      // checked={studentIds.includes(s.id)}
+                      checked={group.student_ids.includes(s.id)}
                       onChange={handleSelection}
                     />
                   </div>

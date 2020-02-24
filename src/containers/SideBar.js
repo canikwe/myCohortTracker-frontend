@@ -5,30 +5,34 @@ import { getStudentGroups, getMatchedGroups } from '../helper/functions'
 
 const SideBar = ({ students, handleSubmit, activeStudentX, activeStudentY, groups, activities, deleteGroup }) => {
   const [formToggle, updateFormToggle] = useState(false)
-  const [studentIds, updateStudentIds] = useState([])
   const [searchTerm, updateSearchTerm] = useState('')
   const [activity, updateActivity] = useState({})
-  const [group, updateGroup] = useState({ notes: '', avoid: false })
+  const [group, updateGroup] = useState(resetGroupState())
   const [createFormToggle, updateToggle] = useState(false)
 
+  function resetGroupState(){
+    return ({ notes: '', avoid: false, student_ids: [] })
+  } 
 
   useEffect(() => {
-    if (activeStudentX && activeStudentY) {
-      updateStudentIds([activeStudentX.id, activeStudentY.id])
+    if (activeStudentX && activeStudentX === activeStudentY) {
+      updateGroup(g => ({ ...g, student_ids: [activeStudentX.id] }))
+    } else if (activeStudentX && activeStudentY) {
+      updateGroup(g => ({ ...g, student_ids: [activeStudentX.id, activeStudentY.id] }))
     } else if (activeStudentX) {
-      updateStudentIds([activeStudentX.id])
+      updateGroup(g => ({ ...g, student_ids: [activeStudentX.id] }))
     } else if (activeStudentY) {
-      updateStudentIds([activeStudentY.id])
+      updateGroup(g => ({ ...g, student_ids: [activeStudentY.id] }))
     }
   }, [activeStudentX, activeStudentY])
 
   const submitForm = e => {
     e.preventDefault()
     if (activity.name) {
-      const data = { activity, group: {...group, student_ids: studentIds} }
-  
+      const data = { activity, group }
+
       handleSubmit(data)
-      updateGroup({ notes: '', avoid: false })
+      updateGroup(resetGroupState())
     } else {
       alert('Please choose or create a new activity')
     }
@@ -37,11 +41,18 @@ const SideBar = ({ students, handleSubmit, activeStudentX, activeStudentY, group
   const handleSelection = e => {
     const id = parseInt(e.target.value)
 
-    if (studentIds.includes(id)) {
-      updateStudentIds(studentIds.filter(i => i !== id))
+    if (group.student_ids.includes(id)) {
+      const student_ids = group.student_ids.filter(i => i !== id)
+      updateGroup({ ...group, student_ids })
     } else {
-      updateStudentIds([...studentIds, id])
+      const student_ids = [...group.student_ids, id]
+      updateGroup({ ...group, student_ids })
     }
+  }
+
+  const handleDelete = group => {
+    deleteGroup(group)
+    updateGroup(resetGroupState())
   }
 
   const selectActivity = (e, activity) => {
@@ -92,8 +103,7 @@ const SideBar = ({ students, handleSubmit, activeStudentX, activeStudentY, group
           groups={displayedGroups()}
           updateGroup={updateGroup}
           updateActivity={updateActivity}
-          updateStudentIds={updateStudentIds}
-          deleteGroup={deleteGroup}
+          handleDelete={handleDelete}
         />
         : null
       }
@@ -102,7 +112,6 @@ const SideBar = ({ students, handleSubmit, activeStudentX, activeStudentY, group
         <Form 
           students={students} 
           handleSelection={handleSelection}
-          studentIds={studentIds}
           searchTerm={searchTerm}
           handleSearchTerm={handleSearchTerm}
           displayedActivities={displayedActivities()}
