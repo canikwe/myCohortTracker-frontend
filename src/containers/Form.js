@@ -1,36 +1,42 @@
 import React from 'react'
 
-const Form = ({ students, handleSelection, searchTerm, handleSearchTerm, displayedActivities, selectActivity, handleActivityChange, group, updateGroup, submitForm, updateFormToggle, createFormToggle, toggleCreateForm }) => {
+const Form = ({ students, handleSelection, searchTerm, handleSearchTerm, displayedActivities, selectActivity, handleActivityChange, group, updateGroup, submitForm, updateFormToggle, createFormToggle, toggleCreateForm, updateActivity}) => {
 
   return (
     <>
-      <button onClick={() => updateFormToggle(false)}>Go Back</button>
-      <h3>Select Activity</h3>
-      <div>
+      <button onClick={() => {
+        updateFormToggle(false)
+        toggleCreateForm(false)
+        updateActivity({})
+        }}>Go Back</button>
+      {/* <h3>Selected Activity</h3> */}
+      {/* <div>
         Search Activities <span onClick={() => toggleCreateForm(false)} role='img' aria-label='search'>🔍</span>
-      </div>
-        {!createFormToggle ?
-          <>
-            <label htmlFor='searchTerm'>Search  </label>
-            <input type='text' value={searchTerm} placeholder='E.g. Mod 2 Final Project' onChange={handleSearchTerm} />
+      </div> */}
+        {/* {!createFormToggle ? */}
+        {/* <>
+          <label htmlFor='searchTerm'>Search  </label>
+          <input type='text' value={searchTerm} placeholder='E.g. Mod 2 Final Project' onChange={handleSearchTerm} />
+    
+
+          {searchTerm.length && !displayedActivities.length ? (
+            <h4>No activity found...</h4>
+          ) : (
             <ul>
               {
                 displayedActivities.map(a => <li key={a.id} onClick={(e) => selectActivity(e, a)}>{a.name}</li>)
               }
             </ul>
-
-            {searchTerm.length && !displayedActivities.length ? (
-              <h4>No activity found...</h4>
-            ) : null}
-          </>
-          : null
-        }
-      <div>
+          )}
+        </> */}
+          {/* : null
+        } */}
+      {/* <div>
         Create New <span onClick={toggleCreateForm} role='img' aria-label='plus'>➕</span>
-      </div>
+      </div> */}
 
 
-      {createFormToggle ? (
+      {/* {createFormToggle ? (
         <form>
           <div>
             <label htmlFor='category'>Category: </label><input type='text' name='category' onChange={handleActivityChange} />
@@ -39,7 +45,7 @@ const Form = ({ students, handleSelection, searchTerm, handleSearchTerm, display
             <label htmlFor='mod'>Mod: </label><input type='number' name='mod' onChange={handleActivityChange} min='1' max='5' />
           </div>
         </form>
-      ) : null}
+      ) : null} */}
 
       <form onSubmit={submitForm}>
         <div>

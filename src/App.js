@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import Filters from './components/Filters'
 import PairsContainer from './containers/PairsContainer'
-import Form from './containers/SideBar'
+import SideBar from './containers/SideBar'
 import './App.css'
 
 const BASE_URL = 'http://localhost:3000/'
@@ -66,6 +66,8 @@ function App() {
     .then(group => updateGroups(groups.filter(g => g.id !== group.id)))
   }
 
+
+
   const updateActiveStudents = (activeStudentX, activeStudentY) => {
     updateActiveStudentX(activeStudentX)
     updateActiveStudentY(activeStudentY)
@@ -91,13 +93,16 @@ function App() {
         activeStudentY={activeStudentY}
         updateActiveStudents={updateActiveStudents}
         />
-      <Form 
+      <SideBar 
         students={students} 
         handleSubmit={handleSubmit}
         activeStudentX={activeStudentX}
         activeStudentY={activeStudentY}
         groups={filteredGroups()}
         deleteGroup={deleteGroup}
+        BASE_URL={BASE_URL}
+        updateActivities={updateActivities}
+        // createActivity={createActivity}
         activities={activities}
       />
     </main>

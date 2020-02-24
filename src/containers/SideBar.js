@@ -2,8 +2,10 @@ import React, { useState, useEffect } from 'react'
 import Groups from '../components/Groups'
 import Form from './Form'
 import { getStudentGroups, getMatchedGroups } from '../helper/functions'
+import ActivityForm from './ActivityForm'
+import SelectActivityForm from '../components/SelectActivityForm'
 
-const SideBar = ({ students, handleSubmit, activeStudentX, activeStudentY, groups, activities, deleteGroup }) => {
+const SideBar = ({ students, handleSubmit, activeStudentX, activeStudentY, groups, activities, deleteGroup, updateActivities, BASE_URL }) => {
   const [formToggle, updateFormToggle] = useState(false)
   const [searchTerm, updateSearchTerm] = useState('')
   const [activity, updateActivity] = useState({})
@@ -28,8 +30,9 @@ const SideBar = ({ students, handleSubmit, activeStudentX, activeStudentY, group
 
   const submitForm = e => {
     e.preventDefault()
-    if (activity.name) {
-      const data = { activity, group }
+    if (activity.id) {
+
+      const data = { group: {...group, activity_id: activity.id} }
 
       handleSubmit(data)
       updateGroup(resetGroupState())
@@ -70,7 +73,7 @@ const SideBar = ({ students, handleSubmit, activeStudentX, activeStudentY, group
 
   const toggleCreateForm = () => {
     updateToggle(!createFormToggle)
-    updateActivity({ name: searchTerm })
+    updateActivity({ name: searchTerm, mod: 1, category: '' })
   }
 
   const handleActivityChange = e => {
@@ -94,6 +97,29 @@ const SideBar = ({ students, handleSubmit, activeStudentX, activeStudentY, group
     }
   }
 
+  const createActivity = data => {
+    console.log(data)
+    fetch(BASE_URL + 'activities', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json', 'Accepted': 'application/json'
+      },
+      body: JSON.stringify(data)
+    })
+    .then(res => res.json())
+    .then(activity => {
+      updateActivities(activities => [...activities, activity])
+      updateActivity(activity)
+    })
+  }
+
+  const handleCreateActivity = e => {
+    e.preventDefault()
+    // console.log(activity)
+    toggleCreateForm()
+    createActivity({ activity })
+  }
+
   return (
     <aside className='sidebar'>
       <h3>Pairings</h3>
@@ -107,22 +133,50 @@ const SideBar = ({ students, handleSubmit, activeStudentX, activeStudentY, group
         />
         : null
       }
+
+      {
+        createFormToggle ? (
+        <ActivityForm 
+          handleActivityChange={handleActivityChange} 
+          activity={activity} 
+          handleCreateActivity={handleCreateActivity}
+          toggleCreateForm={toggleCreateForm}
+          updateToggle={updateToggle}
+          createFormToggle={createFormToggle}
+        />) : null
+      }
+
+      {
+        formToggle && !createFormToggle ? (
+        <SelectActivityForm 
+          searchTerm={searchTerm}
+          handleSearchTerm={handleSearchTerm}
+          displayedActivities={displayedActivities()}
+          selectActivity={selectActivity}
+          activity={activity}
+          updateActivity={updateActivity}
+          toggleCreateForm={toggleCreateForm}
+
+        />) : null
+      }
+
       {
         formToggle ? 
         <Form 
           students={students} 
           handleSelection={handleSelection}
-          searchTerm={searchTerm}
-          handleSearchTerm={handleSearchTerm}
-          displayedActivities={displayedActivities()}
-          selectActivity={selectActivity}
+          // searchTerm={searchTerm}
+          // handleSearchTerm={handleSearchTerm}
+          // displayedActivities={displayedActivities()}
+          // selectActivity={selectActivity}
           handleActivityChange={handleActivityChange}
           group={group}
           updateGroup={updateGroup}
           submitForm={submitForm}
           updateFormToggle={updateFormToggle}
           createFormToggle={createFormToggle}
-          toggleCreateForm={toggleCreateForm}
+          toggleCreateForm={updateToggle}
+          updateActivity={updateActivity}
         />
         :
         <button onClick={() => updateFormToggle(true)}>New Pair</button>
