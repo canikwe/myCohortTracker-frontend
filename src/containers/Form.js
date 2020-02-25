@@ -8,6 +8,7 @@ const Form = ({ students, handleSelection, searchTerm, handleSearchTerm, display
         updateFormToggle(false)
         toggleCreateForm(false)
         updateActivity({})
+        updateGroup({ notes: '', avoid: false, student_ids: [] })
         }}>Go Back</button>
       {/* <h3>Selected Activity</h3> */}
       {/* <div>

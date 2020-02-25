@@ -130,6 +130,7 @@ const SideBar = ({ students, handleSubmit, activeStudentX, activeStudentY, group
           updateGroup={updateGroup}
           updateActivity={updateActivity}
           handleDelete={handleDelete}
+          updateFormToggle={updateFormToggle}
         />
         : null
       }

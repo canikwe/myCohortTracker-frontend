@@ -1,9 +1,10 @@
 import React from 'react'
 
-const Groups = ({ groups, updateGroup, updateActivity, handleDelete }) => {
+const Groups = ({ groups, updateGroup, updateActivity, handleDelete, updateFormToggle }) => {
   const handleEdit = (group, activity) => {
     updateGroup(group)
     updateActivity(activity)
+    updateFormToggle(true)
   }
 
   return (
