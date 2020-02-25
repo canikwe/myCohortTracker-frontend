@@ -2,8 +2,11 @@
 
 ## Todo
 
-- separate create activity from create group
-- add sort by most recent pairing
+- refactor to Redux
+- reset all onClick outside of cells
+- reset all onClick of Flatiron logo //
+- toggle Search Activities and Create New. When searching, Create New should display. When creating, Search Activities should display, but not at the same time.
+- Add Update for activity(?)
 - on click of cell:
   - if it's a three person pair, put below the pairing "with... so and so"
   - autocomplete input for the projects/labs/etc.
@@ -17,6 +20,7 @@
 - ceate cohort (page)
 - create roster from CSV
 - add hide attribute on students table
+- add sort by most recent pairing
 - update cohort page
 - update student (page?)
 - add test suite
@@ -26,6 +30,7 @@
 
 ## DONE
 
+✅ separate create activity from create group
 ✅ add search to filters
 ✅ add filter by mod
 ✅ update create/update user workflow
