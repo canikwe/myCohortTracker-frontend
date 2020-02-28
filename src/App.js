@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react'
 import Filters from './components/Filters'
 import PairsContainer from './containers/PairsContainer'
 import SideBar from './containers/SideBar'
-import './App.css'
+import './App.scss'
 
 const BASE_URL = 'http://localhost:3000/'
 
