@@ -115,7 +115,6 @@ const SideBar = ({ students, handleSubmit, activeStudentX, activeStudentY, group
 
   const handleCreateActivity = e => {
     e.preventDefault()
-    // console.log(activity)
     toggleCreateForm()
     createActivity({ activity })
   }

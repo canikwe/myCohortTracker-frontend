@@ -68,9 +68,19 @@ function App() {
 
 
 
-  const updateActiveStudents = (activeStudentX, activeStudentY) => {
-    updateActiveStudentX(activeStudentX)
-    updateActiveStudentY(activeStudentY)
+  const updateActiveStudents = (studentX, studentY) => {
+    updateActiveStudentX(studentX)
+    updateActiveStudentY(studentY)
+    if (studentX === activeStudentX && !studentY) {
+      updateActiveStudentX(null)
+    }
+    if (studentY === activeStudentY && !studentX)  {
+      updateActiveStudentY(null)
+    }
+    if (studentX === activeStudentX && studentY === activeStudentY) {
+      updateActiveStudentX(null)
+      updateActiveStudentY(null)
+    }
   }
 
   const filteredGroups = () => {

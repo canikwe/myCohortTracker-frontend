@@ -85,14 +85,14 @@ aside.sidebar {
   background-color: hsla(var(--cell-color), 90%, 25%, 1);
 }
 
+.same-student {
+  background-color: $main;
+}
+
 .project {
   background-color: hsla(var(--cell-color), 90%, 15%, 1);
 }
 
 .active-student {
   background-color: $accent1;
-}
-
-.same-student {
-  background-color: $main;
 }
