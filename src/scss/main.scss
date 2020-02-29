@@ -1,0 +1,98 @@
+
+// color scheme generated with https://coolors.co/65c3ff-0b5563-5e5c6c-a2bce0-beb8eb
+$accent1: #65c3ff;
+$accent2: #beb8eb;
+$base-dark: #0b5563;
+$base-light: #a2bce0;
+$num: 10;
+$base-cell-color: 100;
+$main: hsla(245, 90, 10%, 1);
+
+:root {
+  --cell-color: 100;
+}
+
+.App {
+  text-align: center;
+  background-color: $base-light;
+  display: grid;
+  grid-template-columns: 75% 25%;
+  grid-template-rows: 30px 1fr ;
+  height: 100vh;
+  color: $main;
+}
+
+.filters {
+  grid-column: span 2;
+  background-color: $base-dark;
+}
+
+aside.sidebar {
+  background-color: $base-dark;
+  height: 100%;
+}
+
+.pairs-container {
+  background-color: $base-light;
+  padding: 20px 0 0 20px
+}
+
+.row {
+  overflow: auto;
+  display: grid;
+  gap: 2px;
+  grid-template-columns: repeat(auto-fill, 75px);
+}
+
+.anchorX {
+  grid-column: 1/2;
+}
+
+.anchorY {
+  grid-column: span 1;
+}
+
+.cell {
+  border: solid $main 1px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  overflow: auto;
+  cursor: pointer;
+  width: 100%;
+}
+
+.pair-1 {
+  background-color: hsla(var(--cell-color), 90%, 85%, 1);
+}
+
+.pair-2 {
+  background-color: hsla(var(--cell-color), 90%, 70%, 1);
+
+}
+
+.pair-3 {
+  background-color: hsla(var(--cell-color), 90%, 55%, 1);
+}
+
+.pair-4 {
+  background-color: hsla(var(--cell-color), 90%, 40%, 1);
+
+}
+
+.pair-5 {
+  background-color: hsla(var(--cell-color), 90%, 25%, 1);
+}
+
+.project {
+  background-color: hsla(var(--cell-color), 90%, 15%, 1);
+}
+
+.active-student {
+  background-color: $accent1;
+}
+
+.same-student {
+  background-color: $main;
+}

@@ -10,7 +10,7 @@ const Filters = ({ updateFilters, filters }) => {
   }
 
   return (
-    <section className='filter'>
+    <section className='filters'>
       <label htmlFor='project'>Display Project</label>
       <input
         type='radio'

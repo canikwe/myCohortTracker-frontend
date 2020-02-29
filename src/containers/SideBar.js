@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import Groups from '../components/Groups'
 import Form from './Form'
-import { getStudentGroups, getMatchedGroups } from '../helper/functions'
+import { getStudentGroups, getMatchedGroups, hexToHSL } from '../helper/functions'
 import ActivityForm from './ActivityForm'
 import SelectActivityForm from '../components/SelectActivityForm'
 
@@ -120,6 +120,12 @@ const SideBar = ({ students, handleSubmit, activeStudentX, activeStudentY, group
     createActivity({ activity })
   }
 
+  const updateBaseColor = e => {
+    const h = (hexToHSL(e.target.value))
+    const root = document.querySelector(':root')
+    root.style.setProperty('--cell-color', h)
+  }
+
   return (
     <aside className='sidebar'>
       <h3>Pairings</h3>
@@ -183,6 +189,11 @@ const SideBar = ({ students, handleSubmit, activeStudentX, activeStudentY, group
         <button onClick={() => updateFormToggle(true)}>New Pair</button>
       }
 
+      <div>
+        <label htmlFor='color-selector'>Set Color</label>
+        <input type="color" name="color-selector" onInput={updateBaseColor}/>
+
+      </div>
     </aside>
   )
 }

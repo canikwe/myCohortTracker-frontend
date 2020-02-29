@@ -2,18 +2,19 @@
 
 ## Todo
 
-- separate create activity from create group
 - add sort by most recent pairing
 - on click of cell:
   - if it's a three person pair, put below the pairing "with... so and so"
   - autocomplete input for the projects/labs/etc.
+- add dates to activities (pairs?)
 
 ## Backlog
 
 - styling
-  - convert css to scss
-  - add gradient to the pairings based on frequency
-  - add color wheel to allow users to choose their own colors?
+  - finalize color scheme
+  - update grid styles
+  - style sidebar
+  - style filters
 - ceate cohort (page)
 - create roster from CSV
 - add hide attribute on students table
@@ -26,6 +27,10 @@
 
 ## DONE
 
+✅ convert css to scss
+✅ add gradient to the pairings based on frequency
+✅ add color wheel to allow users to choose their own colors
+✅ separate create activity from create group
 ✅ add search to filters
 ✅ add filter by mod
 ✅ update create/update user workflow
