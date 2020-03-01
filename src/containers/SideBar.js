@@ -53,7 +53,7 @@ const SideBar = ({ students, handleSubmit, activeStudentX, activeStudentY, group
   }
 
   const handleSelection = e => {
-    const id = parseInt(e.target.value)
+    const id = parseInt(e.target.id)
 
     if (group.student_ids.includes(id)) {
       const student_ids = group.student_ids.filter(i => i !== id)

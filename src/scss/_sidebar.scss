@@ -10,6 +10,16 @@
 
   input {
     margin: 10px 0;
+    
+    &.stdnt {
+      border-radius: 5px;
+      padding: 3px;
+      margin: 5px;
+    }
+
+    &.selected {
+      background-color: rgb(48, 48, 48);
+    }
   }
 
   svg {
@@ -34,10 +44,6 @@
     
     margin-right: 5px;
     font-size: .75em;
-
-    // &[type='submit'] {
-
-    // }
   }
 }
 

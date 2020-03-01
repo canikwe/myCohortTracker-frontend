@@ -28,18 +28,19 @@ button, input[type='submit'] {
   padding: 7px;
   font-size: .75em;
 
-  &.primary {
-    background-color: #00000070;
-  }
+}
 
-  &.secondary {
-    background-color: $base-light;
-  }
+.primary {
+  background-color: #00000070;
+}
 
-  &.cancel {
-    background-color: #88888885;
-    color: white;
-  }
+.secondary {
+  background-color: $base-light;
+}
+
+.cancel {
+  background-color: #88888885;
+  color: white;
 }
 
 .pairs-container {
@@ -131,3 +132,11 @@ button, input[type='submit'] {
   padding: 10px;
   margin: 10px;
 }
+
+
+// .stdnt-selections {
+//   display: grid;
+//   grid-template-columns: auto;
+//   grid-template-rows: auto;
+//   grid-gap: 5px;
+// }

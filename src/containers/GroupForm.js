@@ -9,15 +9,14 @@ const GroupForm = ({ students, handleSelection, group, updateGroup, submitForm }
         {
           students.map(s => {
             return (
-              <div key={s.id}>
-                <label htmlFor={s.first_name}>{s.first_name}</label>
-                <input
-                  type='checkbox'
-                  value={s.id}
-                  checked={group.student_ids.includes(s.id)}
-                  onChange={handleSelection}
-                />
-              </div>
+              <input
+                key={s.id}
+                type='button'
+                value={s.first_name}
+                id={s.id}
+                className={`stdnt ${group.student_ids.includes(s.id) ? 'selected' : ''}`}
+                onClick={handleSelection}
+              />
             )
           })
         }
