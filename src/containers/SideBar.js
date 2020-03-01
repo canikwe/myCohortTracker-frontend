@@ -5,6 +5,8 @@ import { getStudentGroups, getMatchedGroups } from '../helper/functions'
 import ActivityForm from './ActivityForm'
 import SelectActivityForm from '../components/SelectActivityForm'
 import { CirclePicker } from 'react-color'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faArrowLeft } from '@fortawesome/free-solid-svg-icons'
 
 const SideBar = ({ students, handleSubmit, activeStudentX, activeStudentY, groups, activities, deleteGroup, updateActivities, BASE_URL }) => {
   const [formToggle, updateFormToggle] = useState(false)
@@ -133,9 +135,24 @@ const SideBar = ({ students, handleSubmit, activeStudentX, activeStudentY, group
     localStorage.setItem('hue', color.hsl.h)
   }
 
+  const closeForm = () => {
+    updateFormToggle(false)
+    updateToggle(false)
+    updateActivity({})
+    updateGroup({ notes: '', avoid: false, student_ids: [] })
+  }
+
   return (
     <aside className='sidebar'>
-      <h3>Pairings</h3>
+      <h3>
+        { formToggle ? <span>
+          <FontAwesomeIcon 
+            icon={faArrowLeft}
+            onClick={closeForm}
+          />
+        </span> : null }
+        Groups
+      </h3>
       {
         activeStudentX || activeStudentY ?
         <Groups 
@@ -182,9 +199,9 @@ const SideBar = ({ students, handleSubmit, activeStudentX, activeStudentY, group
           group={group}
           updateGroup={updateGroup}
           submitForm={submitForm}
-          updateFormToggle={updateFormToggle}
-          toggleCreateForm={updateToggle}
-          updateActivity={updateActivity}
+          // updateFormToggle={updateFormToggle}
+          // toggleCreateForm={updateToggle}
+          // updateActivity={updateActivity}
         />
         :
         <button className='secondary' onClick={() => updateFormToggle(true)}>New Pair</button>
