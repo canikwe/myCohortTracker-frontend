@@ -47,3 +47,21 @@
 ✅ create form to create a new activity with activity attributes
 ✅ Filter by category
 ✅ Filter by mod
+
+### Redux Refactor
+
+- Actions
+  - Async
+    - GET_STUDENTS
+    - GET_GROUPS
+    - GET_ACTIVITIES
+    - CREATE_GROUP
+    - UPDATE_GROUP
+    - DELETE_GROUP
+  - CLICK_CELL
+  - SUBMIT_FORM (?)
+  - SELECT_ACTIVITY (?)
+  - SELECT_GROUP (?)
+  - TOGGLE_ACTIVITY_FORM
+  - TOGGLE_GROUP_FORM
+  - UPDATE_SEARCHTERM (?)
