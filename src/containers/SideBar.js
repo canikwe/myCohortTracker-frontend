@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import Groups from '../components/Groups'
+import GroupsContainer from './GroupsContainer'
 import GroupForm from './GroupForm'
 import { getStudentGroups, getMatchedGroups } from '../helper/functions'
 import ActivityForm from './ActivityForm'
@@ -155,7 +155,7 @@ const SideBar = ({ students, handleSubmit, activeStudentX, activeStudentY, group
       </h3>
       {
         activeStudentX || activeStudentY ?
-        <Groups 
+        <GroupsContainer
           groups={displayedGroups()}
           updateGroup={updateGroup}
           updateActivity={updateActivity}
@@ -199,9 +199,6 @@ const SideBar = ({ students, handleSubmit, activeStudentX, activeStudentY, group
           group={group}
           updateGroup={updateGroup}
           submitForm={submitForm}
-          // updateFormToggle={updateFormToggle}
-          // toggleCreateForm={updateToggle}
-          // updateActivity={updateActivity}
         />
         :
         <button className='secondary' onClick={() => updateFormToggle(true)}>New Pair</button>
