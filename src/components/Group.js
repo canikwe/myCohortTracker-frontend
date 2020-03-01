@@ -1,4 +1,6 @@
 import React from 'react'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faPencilAlt, faTrashAlt } from '@fortawesome/free-solid-svg-icons'
 
 const Group = ({ group, handleEdit, handleDelete, matchedStudents }) => {
   const formatMatchedStudents = () => {
@@ -15,19 +17,10 @@ const Group = ({ group, handleEdit, handleDelete, matchedStudents }) => {
   return (
     <div className='group'>
       {group.activity.name}
-      <span
-        onClick={() => handleEdit(group, group.activity)}
-        role='img'
-        aria-label='writing hand'
-      >
-        ✍🏾
-      </span>
-      <span onClick={() => handleDelete(group)}
-        role='img'
-        aria-label='cross mark'
-      >
-        ❌
-      </span>
+
+      <FontAwesomeIcon icon={faPencilAlt} onClick={() => handleEdit(group, group.activity)} />
+
+      <FontAwesomeIcon icon={faTrashAlt} onClick={() => handleDelete(group)} />
       <p className='group-students'>
         {formatMatchedStudents()}
       </p>
