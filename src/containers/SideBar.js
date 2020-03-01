@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import Groups from '../components/Groups'
-import Form from './Form'
+import GroupForm from './GroupForm'
 import { getStudentGroups, getMatchedGroups } from '../helper/functions'
 import ActivityForm from './ActivityForm'
 import SelectActivityForm from '../components/SelectActivityForm'
@@ -176,28 +176,22 @@ const SideBar = ({ students, handleSubmit, activeStudentX, activeStudentY, group
 
       {
         formToggle ? 
-        <Form 
+        <GroupForm 
           students={students} 
           handleSelection={handleSelection}
-          // searchTerm={searchTerm}
-          // handleSearchTerm={handleSearchTerm}
-          // displayedActivities={displayedActivities()}
-          // selectActivity={selectActivity}
-          handleActivityChange={handleActivityChange}
           group={group}
           updateGroup={updateGroup}
           submitForm={submitForm}
           updateFormToggle={updateFormToggle}
-          createFormToggle={createFormToggle}
           toggleCreateForm={updateToggle}
           updateActivity={updateActivity}
         />
         :
-        <button onClick={() => updateFormToggle(true)}>New Pair</button>
+        <button className='secondary' onClick={() => updateFormToggle(true)}>New Pair</button>
       }
 
       <div className='color-selector'>
-        <label htmlFor='color-selector'>Set Color</label>
+        <label htmlFor='color-selector'>Set Theme</label>
         <CirclePicker onChangeComplete={handleChangeConplete}/>
       </div>
     </aside>

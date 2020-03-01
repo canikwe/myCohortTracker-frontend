@@ -11,35 +11,13 @@ const Filters = ({ updateFilters, filters }) => {
 
   return (
     <section className='filters'>
-      {/* <label htmlFor='project'>Display Project</label>
-      <input
-        type='radio'
-        checked={filters.category === 'project'}
-        name='category'
-        value='project'
-        onChange={handleFilters}
-      />
-
-      <label htmlFor='labs'>Display Labs</label>
-      <input 
-        type='radio'
-        checked={filters.category === 'lab'}
-        name='category' 
-        value='lab' 
-        onChange={handleFilters}
-      />
-
-      <label htmlFor='all'>Display All</label>
-      <input 
-        type='radio'
-        checked={filters.category === 'all'} 
-        name='category'
-        value='all' 
-        onChange={handleFilters}
-      /> */}
 
       <label htmlFor='mod'>Filter by Category</label>
-      <select name='category' onChange={handleFilters} value={filters.category}>
+      <select 
+        name='category' 
+        onChange={handleFilters} 
+        value={filters.category}
+      >
         <option value='all'>Show All Categories</option>
         <option value='lab'>Labs</option>
         <option value='project'>Project</option>
@@ -55,13 +33,13 @@ const Filters = ({ updateFilters, filters }) => {
         {[1, 2, 3, 4, 5].map(mod => <option key={mod} value={mod}>Mod - {mod}</option>)}
       </select>
 
-
-      <label htmlFor='search'>Search</label>
+      {/* <label htmlFor='search'>Search: </label> */}
       <input 
         type='text'
         name='term'
         value={filters.term} 
         onChange={handleFilters}
+        placeholder='Search Activities'
       />
     </section>
   )
