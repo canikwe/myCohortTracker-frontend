@@ -146,7 +146,7 @@ const SideBar = ({ students, handleSubmit, activeStudentX, activeStudentY, group
 
   return (
     <aside className='sidebar'>
-      <h3>
+      <h3 className='header'>
         { formToggle ? <span>
           <FontAwesomeIcon 
             icon={faArrowLeft}

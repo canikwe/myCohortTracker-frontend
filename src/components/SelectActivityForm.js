@@ -1,22 +1,39 @@
 import React from 'react'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faSearch, faPlus } from '@fortawesome/free-solid-svg-icons'
 
 const SelectActivityForm = ({ searchTerm, handleSearchTerm, displayedActivities, selectActivity, activity, updateActivity, toggleCreateForm, searchToggle, updateSearchToggle }) => {
 
   const handleSearchToggle = () => updateSearchToggle(!searchToggle)
+
+  const showSearch = () => {
+    updateActivity({})
+    handleSearchToggle()
+  }
+
   return (
     <>
     { !searchToggle ?
-     <>
-        <span>
-          Search <span onClick={() => {
-            updateActivity({})
-            handleSearchToggle()
-            }} role='img' aria-label='search'>🔍</span>
-        </span>
-        <span>
-          Create New <span onClick={toggleCreateForm} role='img' aria-label='plus'>➕</span>
-        </span> 
-      </>
+     <div className='search-container'>
+       <div>
+          <FontAwesomeIcon icon={faSearch} onClick={showSearch} size="2x" color='grey'/>
+          {/* <div>
+            Search 
+          </div> */}
+       </div>
+        <div class="wrapper">
+          <div class="line"></div>
+          <div class="wordwrapper">
+            <div class="word">or</div>
+          </div>
+        </div>
+        <div>
+          {/* <span>
+            Create New 
+          </span>  */}
+          <FontAwesomeIcon icon={faPlus} onClick={toggleCreateForm} size="2x" color='yellowgreen' />
+        </div>
+      </div>
       : null}
 
       {activity.id ? <h3>{activity.name}</h3> : null}
