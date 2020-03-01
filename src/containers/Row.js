@@ -39,12 +39,12 @@ const Row = ({ studentX, allStudents, handleClick, activeStudentX, activeStudent
   
   return (
     <section className='row'>
-      <p 
+      <div 
         className='cell anchorX'
         onClick={() => handleClick(studentX, null)}
       >
         {studentX.first_name}
-      </p>
+      </div>
       {allStudents.map(studentY => {
         const matchedGroups = getMatchedGroups(studentX, studentY, studentGroups)
         const classNames = generateClassNames(studentX, studentY, matchedGroups)
