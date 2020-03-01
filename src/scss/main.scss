@@ -5,11 +5,11 @@ $accent2: #beb8eb;
 $base-dark: #0b5563;
 $base-light: #a2bce0;
 $num: 10;
-$base-cell-color: 100;
+$base-hue: 100;
 $main: hsla(245, 90, 10%, 1);
 
 :root {
-  --cell-color: 100;
+  --hue: 100;
 }
 
 .App {
@@ -64,26 +64,26 @@ aside.sidebar {
 }
 
 .pair-1 {
-  background-color: hsla(var(--cell-color), 90%, 85%, 1);
+  background-color: hsla(var(--hue), 90%, 85%, 1);
 }
 
 .pair-2 {
-  background-color: hsla(var(--cell-color), 90%, 70%, 1);
+  background-color: hsla(var(--hue), 90%, 70%, 1);
 
 }
 
 .pair-3 {
-  background-color: hsla(var(--cell-color), 90%, 55%, 1);
+  background-color: hsla(var(--hue), 90%, 55%, 1);
 }
 
 .pair-4 {
-  background-color: hsla(var(--cell-color), 90%, 40%, 1);
+  background-color: hsla(var(--hue), 90%, 40%, 1);
   color: white;
 
 }
 
 .pair-5 {
-  background-color: hsla(var(--cell-color), 90%, 25%, 1);
+  background-color: hsla(var(--hue), 90%, 25%, 1);
   color: white;
 }
 
@@ -92,10 +92,15 @@ aside.sidebar {
 }
 
 .project {
-  background-color: hsla(var(--cell-color), 90%, 15%, 1);
+  background-color: hsla(var(--hue), 90%, 15%, 1);
   color: white;
 }
 
 .active-student {
   background-color: $accent1;
+}
+
+.color-selector {
+  padding: 10px;
+  margin: 10px;
 }

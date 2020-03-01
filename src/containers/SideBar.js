@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from 'react'
 import Groups from '../components/Groups'
 import Form from './Form'
-import { getStudentGroups, getMatchedGroups, hexToHSL } from '../helper/functions'
+import { getStudentGroups, getMatchedGroups } from '../helper/functions'
 import ActivityForm from './ActivityForm'
 import SelectActivityForm from '../components/SelectActivityForm'
+import { CirclePicker } from 'react-color'
 
 const SideBar = ({ students, handleSubmit, activeStudentX, activeStudentY, groups, activities, deleteGroup, updateActivities, BASE_URL }) => {
   const [formToggle, updateFormToggle] = useState(false)
@@ -27,6 +28,13 @@ const SideBar = ({ students, handleSubmit, activeStudentX, activeStudentY, group
       updateGroup(g => ({ ...g, student_ids: [activeStudentY.id] }))
     }
   }, [activeStudentX, activeStudentY])
+
+  useEffect(() => {
+    if (localStorage.hue) {
+      const root = document.querySelector(':root')
+      root.style.setProperty('--hue', localStorage.hue)
+    }
+  }, [])
 
   const submitForm = e => {
     e.preventDefault()
@@ -119,10 +127,10 @@ const SideBar = ({ students, handleSubmit, activeStudentX, activeStudentY, group
     createActivity({ activity })
   }
 
-  const updateBaseColor = e => {
-    const h = (hexToHSL(e.target.value))
+  const handleChangeConplete = (color) => {
     const root = document.querySelector(':root')
-    root.style.setProperty('--cell-color', h)
+    root.style.setProperty('--hue', color.hsl.h)
+    localStorage.setItem('hue', color.hsl.h)
   }
 
   return (
@@ -188,10 +196,9 @@ const SideBar = ({ students, handleSubmit, activeStudentX, activeStudentY, group
         <button onClick={() => updateFormToggle(true)}>New Pair</button>
       }
 
-      <div>
+      <div className='color-selector'>
         <label htmlFor='color-selector'>Set Color</label>
-        <input type="color" name="color-selector" onInput={updateBaseColor}/>
-
+        <CirclePicker onChangeComplete={handleChangeConplete}/>
       </div>
     </aside>
   )
