@@ -14,6 +14,7 @@ const SideBar = ({ students, handleSubmit, activeStudentX, activeStudentY, group
   const [activity, updateActivity] = useState({})
   const [group, updateGroup] = useState(resetGroupState())
   const [createFormToggle, updateToggle] = useState(false)
+  const [searchToggle, updateSearchToggle] = useState(false)
 
   function resetGroupState(){
     return ({ notes: '', avoid: false, student_ids: [] })
@@ -83,6 +84,7 @@ const SideBar = ({ students, handleSubmit, activeStudentX, activeStudentY, group
 
   const toggleCreateForm = () => {
     updateToggle(!createFormToggle)
+    updateSearchToggle(false)
     updateActivity({ name: searchTerm, mod: 1, category: '' })
   }
 
@@ -187,6 +189,8 @@ const SideBar = ({ students, handleSubmit, activeStudentX, activeStudentY, group
           activity={activity}
           updateActivity={updateActivity}
           toggleCreateForm={toggleCreateForm}
+          searchToggle={searchToggle}
+          updateSearchToggle={updateSearchToggle}
 
         />) : null
       }

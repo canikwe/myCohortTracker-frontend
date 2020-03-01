@@ -3,7 +3,7 @@ import React from 'react'
 const ActivityForm = ({ handleActivityChange, activity, handleCreateActivity, toggleCreateForm }) => {
   return (
     <>
-      <h3>Create Form</h3>
+      <h3>Create Activity</h3>
       <form onSubmit={handleCreateActivity}>
         <div>
           <label htmlFor='name'>Name: </label>

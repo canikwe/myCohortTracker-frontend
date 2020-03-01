@@ -1,9 +1,27 @@
 import React from 'react'
 
-const SelectActivityForm = ({ searchTerm, handleSearchTerm, displayedActivities, selectActivity, activity, updateActivity, toggleCreateForm }) => {
+const SelectActivityForm = ({ searchTerm, handleSearchTerm, displayedActivities, selectActivity, activity, updateActivity, toggleCreateForm, searchToggle, updateSearchToggle }) => {
+
+  const handleSearchToggle = () => updateSearchToggle(!searchToggle)
   return (
     <>
-      {activity.id ? <h3>{activity.name}</h3> : 
+    { !searchToggle ?
+     <>
+        <span>
+          Search <span onClick={() => {
+            updateActivity({})
+            handleSearchToggle()
+            }} role='img' aria-label='search'>🔍</span>
+        </span>
+        <span>
+          Create New <span onClick={toggleCreateForm} role='img' aria-label='plus'>➕</span>
+        </span> 
+      </>
+      : null}
+
+      {activity.id ? <h3>{activity.name}</h3> : null}
+
+       { searchToggle && !activity.id ?
       <>
         <h3>Select Activity</h3>
         <label htmlFor='searchTerm'>Search  </label>
@@ -14,18 +32,18 @@ const SelectActivityForm = ({ searchTerm, handleSearchTerm, displayedActivities,
         ) : (
             <ul>
               {
-                displayedActivities.map(a => <li key={a.id} onClick={(e) => selectActivity(e, a)}>{a.name}</li>)
+                displayedActivities.map(a => <li key={a.id} onClick={(e) => {
+                  selectActivity(e, a)
+                  handleSearchToggle()
+                }}>{a.name}</li>)
               }
             </ul>
           )}
-      </>
+        <button onClick={handleSearchToggle}>Cancel</button>
+
+      </> : null
       }
-      <div>
-        Search Activities <span onClick={() => updateActivity({})} role='img' aria-label='search'>🔍</span>
-      </div>
-      <div>
-        Create New <span onClick={toggleCreateForm} role='img' aria-label='plus'>➕</span>
-      </div>
+
     </>
   )
 }
