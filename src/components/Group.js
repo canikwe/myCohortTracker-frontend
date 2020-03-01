@@ -1,6 +1,6 @@
 import React from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faPencilAlt, faTrashAlt } from '@fortawesome/free-solid-svg-icons'
+import { faTrashAlt, faEdit } from '@fortawesome/free-regular-svg-icons'
 
 const Group = ({ group, handleEdit, handleDelete, matchedStudents }) => {
   const formatMatchedStudents = () => {
@@ -18,7 +18,7 @@ const Group = ({ group, handleEdit, handleDelete, matchedStudents }) => {
     <div className='group'>
       {group.activity.name}
 
-      <FontAwesomeIcon icon={faPencilAlt} onClick={() => handleEdit(group, group.activity)} />
+      <FontAwesomeIcon icon={faEdit} onClick={() => handleEdit(group, group.activity)} />
 
       <FontAwesomeIcon icon={faTrashAlt} onClick={() => handleDelete(group)} />
       <p className='group-students'>
