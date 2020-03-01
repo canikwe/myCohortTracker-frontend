@@ -9,7 +9,7 @@ const GroupsContainer = ({ groups, updateGroup, updateActivity, handleDelete, up
   }
 
   return (
-    <section>
+    <section className='group-container'>
       { groups.length ? (
         groups.sort((a,b) => b.activity.mod - a.activity.mod).map(g => (
           <Group

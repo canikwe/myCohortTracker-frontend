@@ -149,9 +149,9 @@ const SideBar = ({ students, handleSubmit, activeStudentX, activeStudentY, group
           <FontAwesomeIcon 
             icon={faArrowLeft}
             onClick={closeForm}
-          />
+          /> 
         </span> : null }
-        Groups
+         Groups
       </h3>
       {
         activeStudentX || activeStudentY ?
