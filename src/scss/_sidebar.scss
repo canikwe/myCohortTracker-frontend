@@ -63,6 +63,11 @@
   p {
     margin: 0;
     font-style: italic;
+
+    &.group-students {
+      font-size: .75em;
+      color: $base-light;
+    }
   }
 
 }

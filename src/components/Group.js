@@ -1,9 +1,20 @@
 import React from 'react'
 
-const Group = ({ group, handleEdit, handleDelete }) => {
+const Group = ({ group, handleEdit, handleDelete, matchedStudents }) => {
+  const formatMatchedStudents = () => {
+    switch (matchedStudents.length) {
+      case 1:
+        return 'Solo'
+      case 2:
+        return matchedStudents.join(' & ')
+      default:
+        const last = matchedStudents.pop()
+        return `${matchedStudents.join(', ')}, & ${last}`
+    }
+  }
   return (
     <div className='group'>
-      {group.activity.name} ---
+      {group.activity.name}
       <span
         onClick={() => handleEdit(group, group.activity)}
         role='img'
@@ -17,6 +28,9 @@ const Group = ({ group, handleEdit, handleDelete }) => {
       >
         ❌
       </span>
+      <p className='group-students'>
+        {formatMatchedStudents()}
+      </p>
     </div>
   )
 }

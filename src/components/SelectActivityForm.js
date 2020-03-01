@@ -21,10 +21,10 @@ const SelectActivityForm = ({ searchTerm, handleSearchTerm, displayedActivities,
             Search 
           </div> */}
        </div>
-        <div class="wrapper">
-          <div class="line"></div>
-          <div class="wordwrapper">
-            <div class="word">or</div>
+        <div className="wrapper">
+          <div className="line"></div>
+          <div className="wordwrapper">
+            <div className="word">or</div>
           </div>
         </div>
         <div>

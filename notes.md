@@ -4,7 +4,6 @@
 
 - add sort by most recent pairing
 - on click of cell:
-  - if it's a three person pair, put below the pairing "with... so and so"
   - autocomplete input for the projects/labs/etc.
 - add dates to activities (pairs?)
 
@@ -27,6 +26,7 @@
 
 ## DONE
 
+✅ if it's a three person pair, put below the pairing "with... so and so"
 ✅ convert css to scss
 ✅ add gradient to the pairings based on frequency
 ✅ add color wheel to allow users to choose their own colors
