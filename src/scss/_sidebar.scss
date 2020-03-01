@@ -5,7 +5,6 @@
   height: 100%;
   display: flex;
   flex-direction: column;
-  // align-items: center;
   padding: 0 10px;
   text-align: start;
 
@@ -20,7 +19,26 @@
   h3, h4 {
     margin: 0 0 15px;
   }
+}
 
+.activity-form {
+  
+  div {
+    display: grid;
+    grid-template-columns: 30% 1fr;
+    align-items: center;
+    grid-gap: 5px;
+  }
+  
+  input {
+    
+    margin-right: 5px;
+    font-size: .75em;
+
+    // &[type='submit'] {
+
+    // }
+  }
 }
 
 .search-container {
@@ -85,3 +103,4 @@
     font: bold 12px arial,sans-serif;
     background: $accent1;
 }
+

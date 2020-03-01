@@ -56,7 +56,7 @@ const SelectActivityForm = ({ searchTerm, handleSearchTerm, displayedActivities,
               }
             </ul>
           )}
-        <button onClick={handleSearchToggle}>Cancel</button>
+        <button className='cancel' onClick={handleSearchToggle}>Cancel</button>
 
       </> : null
       }

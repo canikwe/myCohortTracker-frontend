@@ -4,7 +4,7 @@ const ActivityForm = ({ handleActivityChange, activity, handleCreateActivity, to
   return (
     <>
       <h3>Create Activity</h3>
-      <form onSubmit={handleCreateActivity}>
+      <form className='activity-form' onSubmit={handleCreateActivity}>
         <div>
           <label htmlFor='name'>Name: </label>
           <input type='text' name='name' value={activity.name} onChange={handleActivityChange} />
@@ -18,8 +18,8 @@ const ActivityForm = ({ handleActivityChange, activity, handleCreateActivity, to
           <input type='number' name='mod' value={activity.mod} onChange={handleActivityChange} min='1' max='5' />
         </div>
         <div>
-          <button onClick={toggleCreateForm}>Cancel</button>
-          <input type='submit' value='Create Activity' />
+          <button className='cancel' onClick={toggleCreateForm}>Cancel</button>
+          <input className='primary' type='submit' value='Create Activity' />
         </div>
       </form>
     </>
