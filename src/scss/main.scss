@@ -17,11 +17,11 @@ $base-dark: #34435e;
   grid-template-columns: 75% 25%;
   grid-template-rows: 30px 1fr ;
   min-height: 100vh;
-  color: $base-dark;
+  // color: $base-dark;
 }
 
 .filters {
-  grid-column: span 2;
+  grid-column: span 1;
   background-color: $accent1;
 }
 
@@ -31,6 +31,7 @@ $base-dark: #34435e;
 }
 
 .pairs-container {
+  grid-column: 1/2;
   background-color: $base-light;
   padding: 20px 0 0 20px;
   border-top-right-radius: 10px;
@@ -68,7 +69,7 @@ $base-dark: #34435e;
   border-radius: 5px;
   box-shadow: 0px 0px 2px #888;
   display: flex;
-  justify-content: start;
+  justify-content: flex-start;
   align-items: center;
   flex-direction: column;
   overflow: auto;
