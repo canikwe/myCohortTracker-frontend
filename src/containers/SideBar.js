@@ -21,7 +21,7 @@ const SideBar = ({ students, handleSubmit, activeStudentX, activeStudentY, group
   }
 
   function initialGroupState(){
-    return ({ notes: '', avoid: false, student_ids: [], activity_date: new Date() })
+    return ({ notes: '', avoid: false, student_ids: [], activity_date: new Date().toISOString().slice(0, 10) })
   }
 
   useEffect(() => {
@@ -135,7 +135,7 @@ const SideBar = ({ students, handleSubmit, activeStudentX, activeStudentY, group
     createActivity({ activity })
   }
 
-  const handleChangeConplete = (color) => {
+  const handleChangeComplete = (color) => {
     const root = document.querySelector(':root')
     root.style.setProperty('--hue', color.hsl.h)
     localStorage.setItem('hue', color.hsl.h)
@@ -215,7 +215,7 @@ const SideBar = ({ students, handleSubmit, activeStudentX, activeStudentY, group
 
       <div className='color-selector'>
         <label htmlFor='color-selector'>Set Theme</label>
-        <CirclePicker onChangeComplete={handleChangeConplete}/>
+        <CirclePicker onChangeComplete={handleChangeComplete}/>
       </div>
     </aside>
   )

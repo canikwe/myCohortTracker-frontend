@@ -5,13 +5,13 @@
 - update typography
   - choose font schema
   - update cell font-sizes
-  - establish global weights
+  - establish global weights 
 - add login/splash page
 - add header
 - add sort by most recent pairing
 - on click of cell:
   - autocomplete input for the projects/labs/etc.
-- add dates to activities (pairs?)
+✅ add dates to activities (pairs?)
 
 ## Backlog
 
