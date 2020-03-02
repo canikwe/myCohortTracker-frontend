@@ -12,13 +12,17 @@ const SideBar = ({ students, handleSubmit, activeStudentX, activeStudentY, group
   const [formToggle, updateFormToggle] = useState(false)
   const [searchTerm, updateSearchTerm] = useState('')
   const [activity, updateActivity] = useState({})
-  const [group, updateGroup] = useState(resetGroupState())
+  const [group, updateGroup] = useState(initialGroupState())
   const [createFormToggle, updateToggle] = useState(false)
   const [searchToggle, updateSearchToggle] = useState(false)
 
   function resetGroupState(){
-    return ({ notes: '', avoid: false, student_ids: [] })
-  } 
+    return ({ ...group, notes: '', avoid: false, student_ids: [] })
+  }
+
+  function initialGroupState(){
+    return ({ notes: '', avoid: false, student_ids: [], activity_date: new Date() })
+  }
 
   useEffect(() => {
     if (activeStudentX && activeStudentX === activeStudentY) {
@@ -141,7 +145,7 @@ const SideBar = ({ students, handleSubmit, activeStudentX, activeStudentY, group
     updateFormToggle(false)
     updateToggle(false)
     updateActivity({})
-    updateGroup({ notes: '', avoid: false, student_ids: [] })
+    updateGroup(initialGroupState())
   }
 
   return (

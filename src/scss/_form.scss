@@ -17,6 +17,11 @@ input {
   font-size: 1em;
   font-weight: bold;
   color: white;
+
+  &::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
+    color: white;
+    opacity: 1; /* Firefox */
+  }
 }
 
 select, textarea {

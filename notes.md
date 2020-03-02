@@ -2,6 +2,12 @@
 
 ## Todo
 
+- update typography
+  - choose font schema
+  - update cell font-sizes
+  - establish global weights
+- add login/splash page
+- add header
 - add sort by most recent pairing
 - on click of cell:
   - autocomplete input for the projects/labs/etc.
@@ -12,20 +18,22 @@
 - styling
   - finalize color scheme
   - update grid styles
-  - style sidebar
-  - style filters
 - ceate cohort (page)
 - create roster from CSV
 - add hide attribute on students table
-- update cohort page
-- update student (page?)
+- update cohort modal
+- create student modal
+- update student (modal)
+- create student modal
 - add test suite
 - refactor to Node/Express backend?
-- add login/auth
+- add auth
   <!-- - display a dropdown to add another student to the group? -->
 
 ## DONE
 
+✅ style sidebar
+✅ style filters
 ✅ if it's a three person pair, put below the pairing "with... so and so"
 ✅ convert css to scss
 ✅ add gradient to the pairings based on frequency

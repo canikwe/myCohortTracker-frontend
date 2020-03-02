@@ -20,6 +20,10 @@
     &.selected {
       background-color: rgb(48, 48, 48);
     }
+    
+    &[type='button']:hover, &[type='submit']:hover {
+      background-color: rgba(92, 92, 92, 0.616);
+    }
   }
 
   svg {

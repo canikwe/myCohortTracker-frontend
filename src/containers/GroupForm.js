@@ -5,7 +5,17 @@ const GroupForm = ({ students, handleSelection, group, updateGroup, submitForm }
   return (
     <form onSubmit={submitForm}>
       <div>
-        <h4>Students</h4>
+        <label htmlFor='activity_date'>Date: </label>
+        <input 
+          type='date' 
+          name='activity_date' 
+          onChange={e => updateGroup({ ...group, activity_date: e.target.value })}
+          value={group.activity_date}
+        />
+      </div>
+
+      <div>
+        <p>Students: </p>
         {
           students.map(s => {
             return (
@@ -28,10 +38,12 @@ const GroupForm = ({ students, handleSelection, group, updateGroup, submitForm }
           <h4>{group.activity.name} Group Details</h4> :
           <h4>Group Details</h4>
         }
+
         <div>
           <label htmlFor='avoid'>Bad Pairing?</label>
           <input type='checkbox' name='avoid' checked={group.avoid} onChange={() => updateGroup({...group, avoid: !group.avoid})}/>
         </div>
+
         <div>
           <label htmlFor='notes'>Notes:</label>
           <textarea name='notes' value={group.notes} onChange={e => updateGroup({...group, notes: e.target.value})} />
