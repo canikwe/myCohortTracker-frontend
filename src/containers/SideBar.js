@@ -17,7 +17,7 @@ const SideBar = ({ students, handleSubmit, activeStudentX, activeStudentY, group
   const [searchToggle, updateSearchToggle] = useState(false)
 
   function resetGroupState(){
-    return ({ ...group, notes: '', avoid: false, student_ids: [] })
+    return ({ ...initialGroupState(), activity_date: group.activity_date, student_ids: [] })
   }
 
   function initialGroupState(){
@@ -25,23 +25,25 @@ const SideBar = ({ students, handleSubmit, activeStudentX, activeStudentY, group
   }
 
   useEffect(() => {
-    if (activeStudentX && activeStudentX === activeStudentY) {
-      updateGroup(g => ({ ...g, student_ids: [activeStudentX.id] }))
-    } else if (activeStudentX && activeStudentY) {
-      updateGroup(g => ({ ...g, student_ids: [activeStudentX.id, activeStudentY.id] }))
-    } else if (activeStudentX) {
-      updateGroup(g => ({ ...g, student_ids: [activeStudentX.id] }))
-    } else if (activeStudentY) {
-      updateGroup(g => ({ ...g, student_ids: [activeStudentY.id] }))
-    }
-  }, [activeStudentX, activeStudentY])
-
-  useEffect(() => {
     if (localStorage.hue) {
       const root = document.querySelector(':root')
       root.style.setProperty('--hue', localStorage.hue)
     }
   }, [])
+
+  useEffect(() => {
+    if (activeStudentX && activeStudentX === activeStudentY) {
+      updateGroup(g => ({ ...initialGroupState(), activity_date: g.activity_date, student_ids: [activeStudentX.id] }))
+    } else if (activeStudentX && activeStudentY) {
+      updateGroup(g => ({ ...initialGroupState(), activity_date: g.activity_date, student_ids: [activeStudentX.id, activeStudentY.id] }))
+    } else if (activeStudentX) {
+      updateGroup(g => ({ ...initialGroupState(), activity_date: g.activity_date, student_ids: [activeStudentX.id] }))
+    } else if (activeStudentY) {
+      updateGroup(g => ({ ...initialGroupState(), activity_date: g.activity_date, student_ids: [activeStudentY.id] }))
+    } else {
+      updateGroup(g => ({ ...initialGroupState(), activity_date: g.activity_date, student_ids: [] }))
+    }
+  }, [activeStudentX, activeStudentY])
 
   const submitForm = e => {
     e.preventDefault()

@@ -51,6 +51,7 @@ const GroupForm = ({ students, handleSelection, group, updateGroup, submitForm }
       </div>
 
       <div>
+        {/* <input type='button' className='cancel' value='Cancel' onClick={() => updateGroup({notes: '', avoid: false, student_ids: group.student_ids, activity_date: group.activity_date})} /> */}
         <input type='submit' value={group.id ? "Update" : "Add"} />
       </div>
     </form>
