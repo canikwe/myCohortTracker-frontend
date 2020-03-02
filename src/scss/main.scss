@@ -120,8 +120,9 @@ button, input[type='submit'] {
 }
 
 .project {
-  background-color: hsla(var(--hue), 90%, 15%, 1);
-  color: white;
+  background-color: hsla(var(--hue), 90%, 70%, 1);
+  color: black;
+  filter: invert(1);
 }
 
 .active-student {

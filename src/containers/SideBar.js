@@ -2,18 +2,19 @@ import React, { useState, useEffect } from 'react'
 import GroupsContainer from './GroupsContainer'
 import GroupForm from './GroupForm'
 import { getStudentGroups, getMatchedGroups } from '../helper/functions'
-import ActivityForm from './ActivityForm'
+import CreateActivityForm from '../components/CreateActivityForm'
 import SelectActivityForm from '../components/SelectActivityForm'
 import { CirclePicker } from 'react-color'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faArrowLeft } from '@fortawesome/free-solid-svg-icons'
+import ActivityOptions from '../components/ActivityOptions'
 
 const SideBar = ({ students, handleSubmit, activeStudentX, activeStudentY, groups, activities, deleteGroup, updateActivities, BASE_URL }) => {
-  const [formToggle, updateFormToggle] = useState(false)
+  const [groupFormToggle, updateGroupFormToggle] = useState(false)
   const [searchTerm, updateSearchTerm] = useState('')
   const [activity, updateActivity] = useState({})
   const [group, updateGroup] = useState(initialGroupState())
-  const [createFormToggle, updateToggle] = useState(false)
+  const [createFormToggle, updateCreateFormToggle] = useState(false)
   const [searchToggle, updateSearchToggle] = useState(false)
 
   function resetGroupState(){
@@ -89,7 +90,7 @@ const SideBar = ({ students, handleSubmit, activeStudentX, activeStudentY, group
   }
 
   const toggleCreateForm = () => {
-    updateToggle(!createFormToggle)
+    updateCreateFormToggle(!createFormToggle)
     updateSearchToggle(false)
     updateActivity({ name: searchTerm, mod: 1, category: '' })
   }
@@ -144,23 +145,32 @@ const SideBar = ({ students, handleSubmit, activeStudentX, activeStudentY, group
   }
 
   const closeForm = () => {
-    updateFormToggle(false)
-    updateToggle(false)
+    updateGroupFormToggle(false)
+    updateCreateFormToggle(false)
     updateActivity({})
     updateGroup(initialGroupState())
   }
 
   return (
     <aside className='sidebar'>
-      <h3 className='header'>
-        { formToggle ? <span>
+      {groupFormToggle ? <div className='header'>
+        <span>
           <FontAwesomeIcon 
             icon={faArrowLeft}
             onClick={closeForm}
           /> 
-        </span> : null }
-         Groups
-      </h3>
+          Go back
+        </span> 
+      </div> : null }
+         
+      {!createFormToggle && groupFormToggle && !searchToggle ? 
+        <ActivityOptions
+          updateActivity={updateActivity}
+          toggleCreateForm={toggleCreateForm}
+          updateSearchToggle={updateSearchToggle}
+          searchToggle={searchToggle}
+        /> : null}
+
       {
         activeStudentX || activeStudentY ?
         <GroupsContainer
@@ -168,34 +178,31 @@ const SideBar = ({ students, handleSubmit, activeStudentX, activeStudentY, group
           updateGroup={updateGroup}
           updateActivity={updateActivity}
           handleDelete={handleDelete}
-          updateFormToggle={updateFormToggle}
+          updateGroupFormToggle={updateGroupFormToggle}
           students={students}
         />
-        : null
+        : <h3 className='header'>Choose a Group</h3>
       }
 
       {
         createFormToggle ? (
-        <ActivityForm 
+          <CreateActivityForm 
           handleActivityChange={handleActivityChange} 
           activity={activity} 
           handleCreateActivity={handleCreateActivity}
           toggleCreateForm={toggleCreateForm}
-          updateToggle={updateToggle}
           createFormToggle={createFormToggle}
         />) : null
       }
 
       {
-        formToggle && !createFormToggle ? (
+        groupFormToggle && searchToggle && !createFormToggle ? (
         <SelectActivityForm 
           searchTerm={searchTerm}
           handleSearchTerm={handleSearchTerm}
           displayedActivities={displayedActivities()}
           selectActivity={selectActivity}
           activity={activity}
-          updateActivity={updateActivity}
-          toggleCreateForm={toggleCreateForm}
           searchToggle={searchToggle}
           updateSearchToggle={updateSearchToggle}
 
@@ -203,7 +210,7 @@ const SideBar = ({ students, handleSubmit, activeStudentX, activeStudentY, group
       }
 
       {
-        formToggle ? 
+        groupFormToggle ? 
         <GroupForm 
           students={students} 
           handleSelection={handleSelection}
@@ -212,7 +219,7 @@ const SideBar = ({ students, handleSubmit, activeStudentX, activeStudentY, group
           submitForm={submitForm}
         />
         :
-        <button className='secondary' onClick={() => updateFormToggle(true)}>New Pair</button>
+        <button className='secondary' onClick={() => updateGroupFormToggle(true)}>New Pair</button>
       }
 
       <div className='color-selector'>
