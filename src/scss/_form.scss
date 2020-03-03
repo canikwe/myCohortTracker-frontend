@@ -1,0 +1,31 @@
+$bg-color: hsla(100, 100, 100, .5);
+$bd-radius: 5px;
+$padding: 5px;
+
+@mixin defaults {
+  background-color: $bg-color;
+  border-radius: $bd-radius;
+  padding: $padding;
+  border: none;
+}
+
+input {
+  @include defaults;
+  border-radius: 20px;
+  padding: 10px;
+  margin: 0 10px;
+  font-size: 1em;
+  font-weight: bold;
+  color: white;
+
+  &::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
+    color: white;
+    opacity: 1; /* Firefox */
+  }
+}
+
+select, textarea {
+  @include defaults;
+}
+
+

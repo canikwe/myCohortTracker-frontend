@@ -1,0 +1,160 @@
+@import 'constants';
+@import 'form';
+@import 'sidebar';
+
+:root {
+  --hue: 230.84745762711864;
+}
+
+.App {
+  text-align: center;
+  background-color: $accent1;
+  display: grid;
+  grid-template-columns: 75% 25%;
+  grid-template-rows: auto 1fr ;
+  min-height: 100vh;
+  // color: $base-dark;
+}
+
+.main-header {
+  grid-column: span 2;
+  text-align: left;
+  padding: 5px 5px 0 5px;
+  // background-color: $base-dark;
+
+  h1 {
+    margin: 0;
+    color: $base-light;
+  }
+}
+
+.filters {
+  grid-column: span 1;
+  background-color: $accent1;
+  margin: .5em;
+}
+
+button, input[type='submit'] {
+  @include defaults;
+  box-shadow: 1px 1px 3px $base-dark;
+  padding: 7px;
+  font-size: .75em;
+
+}
+
+.primary {
+  background-color: #00000070;
+}
+
+.secondary {
+  background-color: $base-light;
+}
+
+.cancel {
+  background-color: #88888885;
+  color: white;
+}
+
+.pairs-container {
+  grid-column: 1/2;
+  background-color: $base-light;
+  padding: 20px 0 0 20px;
+  border-top-right-radius: 10px;
+}
+
+.row {
+  overflow: auto;
+  display: grid;
+  gap: 5px;
+  grid-template-columns: repeat(auto-fill, 75px);
+  grid-template-rows: minmax(auto, 75px);
+  margin-bottom: 5px;
+
+  &.header {
+    grid-template-rows: auto;
+    position: -webkit-sticky; /* Safari */
+    position: sticky;
+    top: 0;
+    background-color: $base-light;
+  }
+}
+
+.anchorX {
+  grid-column: 1/2;
+  align-self: center;
+}
+
+.anchorY {
+  grid-column: span 1;
+  align-self: center;
+}
+
+.cell {
+  // border: solid $base-dark 1px;
+  border-radius: 5px;
+  box-shadow: 0px 0px 2px #888;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  flex-direction: column;
+  overflow: auto;
+  cursor: pointer;
+  // width: 100%;
+  margin: 1px
+}
+
+.pair-1 {
+  background-color: hsla(var(--hue), 90%, 85%, 1);
+}
+
+.pair-2 {
+  background-color: hsla(var(--hue), 90%, 70%, 1);
+  
+}
+
+.pair-3 {
+  background-color: hsla(var(--hue), 90%, 55%, 1);
+}
+
+.pair-4 {
+  background-color: hsla(var(--hue), 90%, 40%, 1);
+  color: white;
+  
+}
+
+.pair-5 {
+  background-color: hsla(var(--hue), 90%, 25%, 1);
+  color: white;
+}
+
+.same-student {
+  background-color: $base-dark;
+  color: white;
+}
+
+.project {
+  background-color: hsla(var(--hue), 90%, 70%, 1);
+  color: black;
+  filter: invert(1);
+
+  &.active-student {
+    filter: invert(0);
+  }
+}
+
+.active-student {
+  background-color: $accent2;
+}
+
+.color-selector {
+  padding: 10px;
+  margin: 10px;
+}
+
+
+// .stdnt-selections {
+//   display: grid;
+//   grid-template-columns: auto;
+//   grid-template-rows: auto;
+//   grid-gap: 5px;
+// }

@@ -1,30 +1,48 @@
 import React, { useState, useEffect } from 'react'
-import Groups from '../components/Groups'
-import Form from './Form'
+import GroupsContainer from './GroupsContainer'
+import GroupForm from './GroupForm'
 import { getStudentGroups, getMatchedGroups } from '../helper/functions'
-import ActivityForm from './ActivityForm'
+import CreateActivityForm from '../components/CreateActivityForm'
 import SelectActivityForm from '../components/SelectActivityForm'
+import { CirclePicker } from 'react-color'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faArrowLeft } from '@fortawesome/free-solid-svg-icons'
+import ActivityOptions from '../components/ActivityOptions'
 
 const SideBar = ({ students, handleSubmit, activeStudentX, activeStudentY, groups, activities, deleteGroup, updateActivities, BASE_URL }) => {
-  const [formToggle, updateFormToggle] = useState(false)
+  const [groupFormToggle, updateGroupFormToggle] = useState(false)
   const [searchTerm, updateSearchTerm] = useState('')
   const [activity, updateActivity] = useState({})
-  const [group, updateGroup] = useState(resetGroupState())
-  const [createFormToggle, updateToggle] = useState(false)
+  const [group, updateGroup] = useState(initialGroupState())
+  const [createFormToggle, updateCreateFormToggle] = useState(false)
+  const [searchToggle, updateSearchToggle] = useState(false)
 
   function resetGroupState(){
-    return ({ notes: '', avoid: false, student_ids: [] })
-  } 
+    return ({ ...initialGroupState(), activity_date: group.activity_date, student_ids: [] })
+  }
+
+  function initialGroupState(){
+    return ({ notes: '', avoid: false, student_ids: [], activity_date: new Date().toISOString().slice(0, 10) })
+  }
+
+  useEffect(() => {
+    if (localStorage.hue) {
+      const root = document.querySelector(':root')
+      root.style.setProperty('--hue', localStorage.hue)
+    }
+  }, [])
 
   useEffect(() => {
     if (activeStudentX && activeStudentX === activeStudentY) {
-      updateGroup(g => ({ ...g, student_ids: [activeStudentX.id] }))
+      updateGroup(g => ({ ...initialGroupState(), activity_date: g.activity_date, student_ids: [activeStudentX.id] }))
     } else if (activeStudentX && activeStudentY) {
-      updateGroup(g => ({ ...g, student_ids: [activeStudentX.id, activeStudentY.id] }))
+      updateGroup(g => ({ ...initialGroupState(), activity_date: g.activity_date, student_ids: [activeStudentX.id, activeStudentY.id] }))
     } else if (activeStudentX) {
-      updateGroup(g => ({ ...g, student_ids: [activeStudentX.id] }))
+      updateGroup(g => ({ ...initialGroupState(), activity_date: g.activity_date, student_ids: [activeStudentX.id] }))
     } else if (activeStudentY) {
-      updateGroup(g => ({ ...g, student_ids: [activeStudentY.id] }))
+      updateGroup(g => ({ ...initialGroupState(), activity_date: g.activity_date, student_ids: [activeStudentY.id] }))
+    } else {
+      updateGroup(g => ({ ...initialGroupState(), activity_date: g.activity_date, student_ids: [] }))
     }
   }, [activeStudentX, activeStudentY])
 
@@ -42,7 +60,7 @@ const SideBar = ({ students, handleSubmit, activeStudentX, activeStudentY, group
   }
 
   const handleSelection = e => {
-    const id = parseInt(e.target.value)
+    const id = parseInt(e.target.id)
 
     if (group.student_ids.includes(id)) {
       const student_ids = group.student_ids.filter(i => i !== id)
@@ -72,7 +90,8 @@ const SideBar = ({ students, handleSubmit, activeStudentX, activeStudentY, group
   }
 
   const toggleCreateForm = () => {
-    updateToggle(!createFormToggle)
+    updateCreateFormToggle(!createFormToggle)
+    updateSearchToggle(false)
     updateActivity({ name: searchTerm, mod: 1, category: '' })
   }
 
@@ -115,74 +134,100 @@ const SideBar = ({ students, handleSubmit, activeStudentX, activeStudentY, group
 
   const handleCreateActivity = e => {
     e.preventDefault()
-    // console.log(activity)
     toggleCreateForm()
     createActivity({ activity })
   }
 
+  const handleChangeComplete = (color) => {
+    const root = document.querySelector(':root')
+    root.style.setProperty('--hue', color.hsl.h)
+    localStorage.setItem('hue', color.hsl.h)
+  }
+
+  const closeForm = () => {
+    updateGroupFormToggle(false)
+    updateCreateFormToggle(false)
+    updateActivity({})
+    updateGroup(initialGroupState())
+  }
+
   return (
     <aside className='sidebar'>
-      <h3>Pairings</h3>
+      {groupFormToggle ? <div className='header'>
+        <span>
+          <FontAwesomeIcon 
+            icon={faArrowLeft}
+            onClick={closeForm}
+          /> 
+          Go back
+        </span> 
+      </div> : null }
+         
       {
         activeStudentX || activeStudentY ?
-        <Groups 
+        <GroupsContainer
           groups={displayedGroups()}
           updateGroup={updateGroup}
           updateActivity={updateActivity}
           handleDelete={handleDelete}
-          updateFormToggle={updateFormToggle}
+          updateGroupFormToggle={updateGroupFormToggle}
+          students={students}
         />
-        : null
+        : <h3 className='header'>Choose a Group</h3>
       }
+      
+      {!createFormToggle && groupFormToggle && !searchToggle ? 
+        <ActivityOptions
+          updateActivity={updateActivity}
+          toggleCreateForm={toggleCreateForm}
+          updateSearchToggle={updateSearchToggle}
+          searchToggle={searchToggle}
+          activity={activity}
+        /> : null}
+
 
       {
         createFormToggle ? (
-        <ActivityForm 
+          <CreateActivityForm 
           handleActivityChange={handleActivityChange} 
           activity={activity} 
           handleCreateActivity={handleCreateActivity}
           toggleCreateForm={toggleCreateForm}
-          updateToggle={updateToggle}
           createFormToggle={createFormToggle}
         />) : null
       }
 
       {
-        formToggle && !createFormToggle ? (
+        groupFormToggle && searchToggle && !createFormToggle ? (
         <SelectActivityForm 
           searchTerm={searchTerm}
           handleSearchTerm={handleSearchTerm}
           displayedActivities={displayedActivities()}
           selectActivity={selectActivity}
           activity={activity}
-          updateActivity={updateActivity}
-          toggleCreateForm={toggleCreateForm}
+          searchToggle={searchToggle}
+          updateSearchToggle={updateSearchToggle}
 
         />) : null
       }
 
       {
-        formToggle ? 
-        <Form 
+        groupFormToggle ? 
+        <GroupForm 
           students={students} 
           handleSelection={handleSelection}
-          // searchTerm={searchTerm}
-          // handleSearchTerm={handleSearchTerm}
-          // displayedActivities={displayedActivities()}
-          // selectActivity={selectActivity}
-          handleActivityChange={handleActivityChange}
           group={group}
           updateGroup={updateGroup}
           submitForm={submitForm}
-          updateFormToggle={updateFormToggle}
-          createFormToggle={createFormToggle}
-          toggleCreateForm={updateToggle}
-          updateActivity={updateActivity}
         />
         :
-        <button onClick={() => updateFormToggle(true)}>New Pair</button>
+        <button className='secondary' onClick={() => updateGroupFormToggle(true)}>New Pair</button>
       }
 
+      <div className='color-selector'>
+        <label htmlFor='color-selector'>Set Theme</label>
+        <CirclePicker onChangeComplete={handleChangeComplete}/>
+      </div>
     </aside>
   )
 }

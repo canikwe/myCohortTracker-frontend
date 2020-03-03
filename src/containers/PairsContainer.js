@@ -9,7 +9,7 @@ const PairsContainer = ({ groups, students, activeStudentX, activeStudentY, upda
   return (
     <section className='pairs-container'>
       
-      <section className='row'>
+      <section className='row header'>
         <div 
           className='cell anchorY' 
           onClick={() => updateActiveStudents(null, null)}

@@ -1,0 +1,148 @@
+@import 'constants';
+
+.sidebar {
+  background-color: $accent1;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  padding: 0 10px;
+  text-align: start;
+
+  input {
+    margin: 10px 0;
+    
+    &.stdnt {
+      border-radius: 5px;
+      padding: 3px;
+      margin: 5px;
+    }
+
+    &.selected {
+      background-color: rgb(48, 48, 48);
+    }
+    
+    &[type='button']:hover, &[type='submit']:hover {
+      background-color: rgba(92, 92, 92, 0.616);
+    }
+  }
+
+  svg {
+    margin: 0 5px 0 0;
+  }
+
+  h3, h4 {
+    margin: 0 0 15px;
+  }
+}
+
+.activity-form {
+  
+  div {
+    display: grid;
+    grid-template-columns: 30% 1fr;
+    align-items: center;
+    grid-gap: 5px;
+  }
+  
+  input {
+    
+    margin-right: 5px;
+    font-size: .75em;
+  }
+}
+
+.search-container {
+  margin: 10px 0;
+  display: flex;
+  align-items: center;
+  align-self: center;
+
+  p {
+    display: block;
+  }
+}
+
+.group-container {
+  margin: 10px 0;
+
+  .group {
+    display: grid;
+    grid-template-columns: 80% auto auto;
+    position: relative;
+    cursor: pointer;
+
+    .group-details {
+      display: none;
+    }
+    
+    &:hover .group-details {
+      display: block;
+      position: absolute;
+      top: 5%;
+      right: 105%;
+      width: 300px;
+      background-color: $neutral;
+      box-shadow: 2px 2px 5px $base-dark;
+      border-radius: 10px;
+      padding: 10px;
+      color: $base-dark;
+    }
+  }
+  
+
+  
+  p {
+    margin: 0;
+    font-style: italic;
+
+    &.group-students {
+      font-size: .75em;
+      color: $base-light;
+    }
+  }
+
+}
+
+
+.hr-line {
+  border-bottom: solid 1px $base-dark;
+  margin: 15px 0;
+}
+
+.wrapper {
+    position: relative;
+    width: 50px;
+    height: 50px;
+    margin: 0 5px;
+}
+
+.line {
+    position: absolute;
+    left: 49%;
+    top: 0;
+    bottom: 0;
+    width: 1px;
+    background: #ccc;
+    z-index: 1;
+}
+
+.wordwrapper {
+    text-align: center;
+    height: 12px;
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 50%;
+    margin-top: -10px;
+    z-index: 2;
+}
+
+.word {
+    color: #ccc;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    padding: 3px;
+    font: bold 12px arial,sans-serif;
+    background: $accent1;
+}
+

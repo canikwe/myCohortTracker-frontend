@@ -4,7 +4,14 @@ import { getMatchedGroups } from '../helper/functions'
 
 const Row = ({ studentX, allStudents, handleClick, activeStudentX, activeStudentY, studentGroups }) => {
 
-  const generateClassNames = (studentX, studentY) => {
+  const generateClassNames = (studentX, studentY, matchedGroups) => {
+    const activeStudent = assignActiveStudent(studentX, studentY)
+    const pairs = assignPair(matchedGroups)
+
+    return activeStudent + pairs
+  }
+  
+  const assignActiveStudent = (studentX, studentY) => {
     if (studentX === activeStudentX) {
       return ' active-student'
     }
@@ -16,18 +23,31 @@ const Row = ({ studentX, allStudents, handleClick, activeStudentX, activeStudent
     }
     return ''
   }
+
+  const assignPair = groups => {
+    if (!groups.length) {
+      return ''
+    } else {
+      const projectGroup = groups.find(g => g.activity.category.toLowerCase() === 'project')
+
+      if (projectGroup) {
+        return ' project'
+      }
+      return ` pair-${groups.length}`
+    }
+  }
   
   return (
     <section className='row'>
-      <p 
+      <div 
         className='cell anchorX'
         onClick={() => handleClick(studentX, null)}
       >
         {studentX.first_name}
-      </p>
+      </div>
       {allStudents.map(studentY => {
         const matchedGroups = getMatchedGroups(studentX, studentY, studentGroups)
-        const classNames = generateClassNames(studentX, studentY)
+        const classNames = generateClassNames(studentX, studentY, matchedGroups)
 
         return (
           <Cell
