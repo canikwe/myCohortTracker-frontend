@@ -26,7 +26,7 @@ const SelectActivityForm = ({ searchTerm, handleSearchTerm, displayedActivities,
                 displayedActivities.map(a => <li key={a.id} onClick={(e) => {
                   selectActivity(e, a)
                   handleSearchToggle()
-                }}>{a.name}</li>)
+                }}>{`${a.name} (${a.mod})`}</li>)
               }
             </ul>
           )}
