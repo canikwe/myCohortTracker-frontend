@@ -1,7 +1,15 @@
 import React from 'react'
 import Group from '../components/Group'
 
-const GroupsContainer = ({ groups, updateGroup, updateActivity, handleDelete, updateGroupFormToggle, students}) => {
+import { useSelector, shallowEqual } from 'react-redux'
+
+
+const GroupsContainer = ({ groups, updateGroup, updateActivity, handleDelete, updateGroupFormToggle}) => {
+
+  const { students } = useSelector(state => ({
+    students: state.students
+  }), shallowEqual)
+
   const handleEdit = (group, activity) => {
     updateGroup(group)
     updateActivity(activity)

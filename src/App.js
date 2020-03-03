@@ -31,8 +31,6 @@ function App() {
     groups: state.groups
   }), shallowEqual)
 
-  const updateGroups = console.log
-
   useEffect(() => {
 
     dispatch(fetchingCohort())
@@ -80,13 +78,11 @@ function App() {
       <Filters filters={filterOptions} updateFilters={updateFilterOptions}/>
       <PairsContainer 
         groups={filteredGroups()} 
-        students={students} 
         activeStudentX={activeStudentX}
         activeStudentY={activeStudentY}
         updateActiveStudents={updateActiveStudents}
         />
       <SideBar 
-        students={students} 
         handleSubmit={handleSubmit}
         activeStudentX={activeStudentX}
         activeStudentY={activeStudentY}

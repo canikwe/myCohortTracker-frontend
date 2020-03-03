@@ -4,7 +4,13 @@ import ColumnHeader from '../components/ColumnHeader'
 import Row from './Row'
 import { getStudentGroups } from '../helper/functions'
 
-const PairsContainer = ({ groups, students, activeStudentX, activeStudentY, updateActiveStudents }) => {
+import { useSelector, shallowEqual } from 'react-redux'
+
+const PairsContainer = ({ groups, activeStudentX, activeStudentY, updateActiveStudents }) => {
+
+  const { students } = useSelector(state => ({
+    students: state.students
+  }), shallowEqual)
 
   return (
     <section className='pairs-container'>

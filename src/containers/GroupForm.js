@@ -1,6 +1,11 @@
 import React from 'react'
+import { useSelector, shallowEqual } from 'react-redux'
 
-const GroupForm = ({ students, handleSelection, group, updateGroup, submitForm }) => {
+const GroupForm = ({ handleSelection, group, updateGroup, submitForm }) => {
+  
+  const { students } = useSelector(state => ({
+    students: state.students
+  }), shallowEqual)
 
   return (
     <form onSubmit={submitForm}>

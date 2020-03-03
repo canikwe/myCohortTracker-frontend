@@ -9,7 +9,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faArrowLeft } from '@fortawesome/free-solid-svg-icons'
 import ActivityOptions from '../components/ActivityOptions'
 
-const SideBar = ({ students, handleSubmit, activeStudentX, activeStudentY, groups, activities, deleteGroup, updateActivities, BASE_URL }) => {
+const SideBar = ({ handleSubmit, activeStudentX, activeStudentY, groups, activities, deleteGroup, updateActivities, BASE_URL }) => {
   const [groupFormToggle, updateGroupFormToggle] = useState(false)
   const [searchTerm, updateSearchTerm] = useState('')
   const [activity, updateActivity] = useState({})
@@ -170,7 +170,6 @@ const SideBar = ({ students, handleSubmit, activeStudentX, activeStudentY, group
           updateGroup={updateGroup}
           updateActivity={updateActivity}
           updateGroupFormToggle={updateGroupFormToggle}
-          students={students}
         />
         : <h3 className='header'>Choose a Group</h3>
       }
@@ -213,7 +212,6 @@ const SideBar = ({ students, handleSubmit, activeStudentX, activeStudentY, group
       {
         groupFormToggle ? 
         <GroupForm 
-          students={students} 
           handleSelection={handleSelection}
           group={group}
           updateGroup={updateGroup}
