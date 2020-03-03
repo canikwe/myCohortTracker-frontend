@@ -8,7 +8,8 @@ import './scss/main.scss'
 
 // redux
 // import { connect } from 'react-redux'
-import { fetchingStudents, fetchingCohort, fetchingGroups, creatingGroup } from './redux/actions/async'
+import { fetchingStudents, fetchingCohort } from './redux/actions/async'
+import { fetchingGroups, creatingGroup, updatingGroup } from './redux/actions/group'
 
 const BASE_URL = 'http://localhost:3000/'
 
@@ -45,18 +46,18 @@ function App() {
   }, [dispatch])
 
   const handleSubmit = data => {
-    data.group.id ? updateGroup(data) : dispatch(creatingGroup(data))
+    data.group.id ? dispatch(updatingGroup(data)) : dispatch(creatingGroup(data))
   }
 
-  const updateGroup = data => {
-    fetch(BASE_URL + 'groups/' + data.group.id, {
-      method: 'PATCH',
-      headers: { 'Content-Type': 'application/json', 'Accepted': 'application/json' },
-      body: JSON.stringify(data)
-    })
-    .then(res => res.json())
-    .then(group => updateGroups(groups.map(g => g.id === group.id ? group : g)))
-  }
+  // const updateGroup = data => {
+  //   fetch(BASE_URL + 'groups/' + data.group.id, {
+  //     method: 'PATCH',
+  //     headers: { 'Content-Type': 'application/json', 'Accepted': 'application/json' },
+  //     body: JSON.stringify(data)
+  //   })
+  //   .then(res => res.json())
+  //   .then(group => updateGroups(groups.map(g => g.id === group.id ? group : g)))
+  // }
 
   const deleteGroup = group => {
     fetch(BASE_URL + 'groups/' + group.id, {
