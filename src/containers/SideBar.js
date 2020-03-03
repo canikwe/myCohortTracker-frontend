@@ -169,6 +169,7 @@ const SideBar = ({ students, handleSubmit, activeStudentX, activeStudentY, group
           toggleCreateForm={toggleCreateForm}
           updateSearchToggle={updateSearchToggle}
           searchToggle={searchToggle}
+          activity={activity}
         /> : null}
 
       {

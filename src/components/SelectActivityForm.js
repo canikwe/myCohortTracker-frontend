@@ -8,7 +8,7 @@ const SelectActivityForm = ({ searchTerm, handleSearchTerm, displayedActivities,
 
   return (
     <>
-      {activity.id ? <h3>{activity.name}</h3> : null}
+      {/* {activity.id ? <h3>{activity.name}</h3> : null} */}
         <h3>Select Activity</h3>
         <label htmlFor='searchTerm'>Search  </label>
         <input 
