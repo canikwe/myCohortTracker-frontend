@@ -8,14 +8,14 @@ import './scss/main.scss'
 
 // redux
 // import { connect } from 'react-redux'
-import { fetchingStudents, fetchingCohort } from './redux/actions/async'
+import { fetchingStudents, fetchingCohort, fetchingGroups, creatingGroup } from './redux/actions/async'
 
 const BASE_URL = 'http://localhost:3000/'
 
 function App() {
   // const [cohort, updateCohort] = useState({})
   // const [students, updateStudents] = useState([])
-  const [groups, updateGroups] = useState([])
+  // const [groups, updateGroups] = useState([])
   const [activeStudentX, updateActiveStudentX] = useState(null)
   const [activeStudentY, updateActiveStudentY] = useState(null)
   // const [filter, updateFilter] = useState('all')
@@ -24,21 +24,19 @@ function App() {
 
   //redux
   const dispatch = useDispatch()
-  const { students, cohort } = useSelector(state => ({
+  const { students, cohort, groups } = useSelector(state => ({
     students: state.students,
-    cohort: state.cohort
+    cohort: state.cohort,
+    groups: state.groups
   }), shallowEqual)
 
+  const updateGroups = console.log
 
   useEffect(() => {
 
     dispatch(fetchingCohort())
     dispatch(fetchingStudents())
-    
-
-    fetch(BASE_URL + 'groups')
-    .then(res => res.json())
-    .then(groups => updateGroups(groups))
+    dispatch(fetchingGroups())
 
     fetch(BASE_URL + 'activities')
     .then(res => res.json())
@@ -47,17 +45,7 @@ function App() {
   }, [dispatch])
 
   const handleSubmit = data => {
-    data.group.id ? updateGroup(data) : createGroup(data)
-  }
-
-  const createGroup = data => {
-    fetch(BASE_URL + 'groups', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json', 'Accepted': 'application/json' },
-      body: JSON.stringify(data)
-    })
-    .then(res => res.json())
-    .then(group => updateGroups([...groups, group]))
+    data.group.id ? updateGroup(data) : dispatch(creatingGroup(data))
   }
 
   const updateGroup = data => {
