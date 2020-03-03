@@ -97,7 +97,7 @@ button, input[type='submit'] {
 
 .pair-2 {
   background-color: hsla(var(--hue), 90%, 70%, 1);
-
+  
 }
 
 .pair-3 {
@@ -107,7 +107,7 @@ button, input[type='submit'] {
 .pair-4 {
   background-color: hsla(var(--hue), 90%, 40%, 1);
   color: white;
-
+  
 }
 
 .pair-5 {
@@ -117,12 +117,17 @@ button, input[type='submit'] {
 
 .same-student {
   background-color: $base-dark;
+  color: white;
 }
 
 .project {
   background-color: hsla(var(--hue), 90%, 70%, 1);
   color: black;
   filter: invert(1);
+
+  &.active-student {
+    filter: invert(0);
+  }
 }
 
 .active-student {

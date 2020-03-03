@@ -163,15 +163,6 @@ const SideBar = ({ students, handleSubmit, activeStudentX, activeStudentY, group
         </span> 
       </div> : null }
          
-      {!createFormToggle && groupFormToggle && !searchToggle ? 
-        <ActivityOptions
-          updateActivity={updateActivity}
-          toggleCreateForm={toggleCreateForm}
-          updateSearchToggle={updateSearchToggle}
-          searchToggle={searchToggle}
-          activity={activity}
-        /> : null}
-
       {
         activeStudentX || activeStudentY ?
         <GroupsContainer
@@ -184,6 +175,16 @@ const SideBar = ({ students, handleSubmit, activeStudentX, activeStudentY, group
         />
         : <h3 className='header'>Choose a Group</h3>
       }
+      
+      {!createFormToggle && groupFormToggle && !searchToggle ? 
+        <ActivityOptions
+          updateActivity={updateActivity}
+          toggleCreateForm={toggleCreateForm}
+          updateSearchToggle={updateSearchToggle}
+          searchToggle={searchToggle}
+          activity={activity}
+        /> : null}
+
 
       {
         createFormToggle ? (
