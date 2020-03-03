@@ -7,7 +7,6 @@ import SideBar from './containers/SideBar'
 import './scss/main.scss'
 
 // redux
-// import { connect } from 'react-redux'
 import { fetchingStudents, fetchingCohort } from './redux/actions/async'
 import { fetchingGroups, creatingGroup, updatingGroup } from './redux/actions/group'
 
@@ -25,9 +24,7 @@ function App() {
 
   //redux
   const dispatch = useDispatch()
-  const { students, cohort, groups } = useSelector(state => ({
-    students: state.students,
-    cohort: state.cohort,
+  const { groups } = useSelector(state => ({
     groups: state.groups
   }), shallowEqual)
 
@@ -74,12 +71,12 @@ function App() {
 
   return (
     <main className="App">
-      <Header cohort={cohort} />
+      <Header />
       <Filters filters={filterOptions} updateFilters={updateFilterOptions}/>
       <PairsContainer 
         groups={filteredGroups()} 
-        activeStudentX={activeStudentX}
-        activeStudentY={activeStudentY}
+        // activeStudentX={activeStudentX}
+        // activeStudentY={activeStudentY}
         updateActiveStudents={updateActiveStudents}
         />
       <SideBar 

@@ -4,9 +4,11 @@ import ColumnHeader from '../components/ColumnHeader'
 import Row from './Row'
 import { getStudentGroups } from '../helper/functions'
 
-import { useSelector, shallowEqual } from 'react-redux'
+import { useSelector, shallowEqual, useDispatch } from 'react-redux'
+import { updateActiveStudentX, updateActiveStudentY } from '../redux/actions/index'
 
 const PairsContainer = ({ groups, activeStudentX, activeStudentY, updateActiveStudents }) => {
+  const dispatch = useDispatch()
 
   const { students } = useSelector(state => ({
     students: state.students
@@ -18,7 +20,10 @@ const PairsContainer = ({ groups, activeStudentX, activeStudentY, updateActiveSt
       <section className='row header'>
         <div 
           className='cell anchorY' 
-          onClick={() => updateActiveStudents(null, null)}
+          onClick={() => {
+            dispatch(updateActiveStudentX(null))
+            dispatch(updateActiveStudentY(null))
+          }}
         >
           {'//'}
         </div>
@@ -34,8 +39,8 @@ const PairsContainer = ({ groups, activeStudentX, activeStudentY, updateActiveSt
             studentX={studentX} 
             allStudents={students} 
             studentGroups={getStudentGroups(groups, studentX)}
-            activeStudentX={activeStudentX} 
-            activeStudentY={activeStudentY}
+            // activeStudentX={activeStudentX} 
+            // activeStudentY={activeStudentY}
             handleClick={updateActiveStudents}
           />
         )}

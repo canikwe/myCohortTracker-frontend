@@ -71,6 +71,7 @@ const SideBar = ({ handleSubmit, activeStudentX, activeStudentY, groups, activit
     }
   }
 
+// ❗️❗️❗️❗️❗️ This needs to update two pieces of state
   const handleDelete = group => {
     deleteGroup(group)
     updateGroup(resetGroupState())

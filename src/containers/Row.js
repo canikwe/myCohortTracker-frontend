@@ -1,8 +1,14 @@
 import React from 'react'
 import Cell from '../components/Cell'
 import { getMatchedGroups } from '../helper/functions'
+import { useSelector, shallowEqual } from 'react-redux'
 
-const Row = ({ studentX, allStudents, handleClick, activeStudentX, activeStudentY, studentGroups }) => {
+const Row = ({ studentX, allStudents, handleClick, studentGroups }) => {
+
+  const { activeStudentX, activeStudentY } = useSelector(state => ({
+    activeStudentX: state.activeStudentX,
+    activeStudentY: state.activeStudentY
+  }), shallowEqual)
 
   const generateClassNames = (studentX, studentY, matchedGroups) => {
     const activeStudent = assignActiveStudent(studentX, studentY)
