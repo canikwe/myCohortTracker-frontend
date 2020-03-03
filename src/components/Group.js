@@ -2,7 +2,7 @@ import React from 'react'
 import GroupDetails from './GroupDetails'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faTrashAlt, faEdit } from '@fortawesome/free-regular-svg-icons'
-// import { faExclamationTriangle } from '@fortawesome/free-solid-svg-icons'
+import { faExclamationTriangle } from '@fortawesome/free-solid-svg-icons'
 
 
 const Group = ({ group, handleEdit, handleDelete, matchedStudents }) => {
@@ -21,7 +21,10 @@ const Group = ({ group, handleEdit, handleDelete, matchedStudents }) => {
   return (
     <>
       <div className='group'>
-        {group.activity.name}
+        <span>
+          {group.avoid ? <FontAwesomeIcon icon={faExclamationTriangle} /> : null}
+          {group.activity.name}
+        </span>
 
         <FontAwesomeIcon icon={faEdit} onClick={() => handleEdit(group, group.activity)} />
 

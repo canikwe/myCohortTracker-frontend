@@ -15,7 +15,7 @@
 - clear filters when a new group is selected (?)
 ✅ onHover of group, popup to the left for a mini Group Show display
   ✅ show date, notes, students, bad pairing --> currently this info is only visible in the group edit view
-- show icon of bad pairs in both the cell and group list
+✅ show icon of bad pairs in both the cell and group list
 ✅ search/create activity header in the sidebar component
 - dividers for the sidebar
 - Header component with the cohort's info (name, date)
