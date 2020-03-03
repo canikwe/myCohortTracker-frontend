@@ -17,7 +17,7 @@
   ✅ show date, notes, students, bad pairing --> currently this info is only visible in the group edit view
 ✅ show icon of bad pairs in both the cell and group list
 ✅ search/create activity header in the sidebar component
-- dividers for the sidebar
+✅ dividers for the sidebar
 ✅ Header component with the cohort's info (name, batch)
 ✅ search results for activities may want to include what module the activity is for as well as the name
 
@@ -29,8 +29,8 @@
   - update cell font-sizes
   - establish global weights
 - add login/splash page
-- add header
-- add sort by most recent pairing
+✅ add header
+❌ add sort by most recent pairing
 - on click of cell:
   - autocomplete input for the projects/labs/etc.
 ✅ add dates to activities (pairs?)
