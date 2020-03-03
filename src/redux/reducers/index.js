@@ -1,5 +1,5 @@
 import { combineReducers } from 'redux'
-import { FETCH_STUDENTS, FETCH_COHORT, FETCH_GROUPS, CREATE_GROUP, UPDATE_GROUP } from '../actions/constants'
+import { FETCH_STUDENTS, FETCH_COHORT, FETCH_GROUPS, CREATE_GROUP, UPDATE_GROUP, DELETE_GROUP } from '../actions/constants'
 
 const testReducer = (state=[], action) => {
   return state
@@ -32,8 +32,9 @@ const groupsReducer = (state=[], action) => {
     case CREATE_GROUP:
       return [...state, action.payload]
     case UPDATE_GROUP:
-      const group = action.payload
-      return state.map(g => g.id === group.id ? group : g)
+      return state.map(g => g.id === action.payload.id ? action.payload : g)
+    case DELETE_GROUP:
+      return state.filter(g => g.id !== action.payload.id)
     default:
       return state
   }

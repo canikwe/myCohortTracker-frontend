@@ -49,26 +49,6 @@ function App() {
     data.group.id ? dispatch(updatingGroup(data)) : dispatch(creatingGroup(data))
   }
 
-  // const updateGroup = data => {
-  //   fetch(BASE_URL + 'groups/' + data.group.id, {
-  //     method: 'PATCH',
-  //     headers: { 'Content-Type': 'application/json', 'Accepted': 'application/json' },
-  //     body: JSON.stringify(data)
-  //   })
-  //   .then(res => res.json())
-  //   .then(group => updateGroups(groups.map(g => g.id === group.id ? group : g)))
-  // }
-
-  const deleteGroup = group => {
-    fetch(BASE_URL + 'groups/' + group.id, {
-      method: 'DELETE'
-    })
-    .then(res => res.json())
-    .then(group => updateGroups(groups.filter(g => g.id !== group.id)))
-  }
-
-
-
   const updateActiveStudents = (studentX, studentY) => {
     updateActiveStudentX(studentX)
     updateActiveStudentY(studentY)
@@ -111,7 +91,6 @@ function App() {
         activeStudentX={activeStudentX}
         activeStudentY={activeStudentY}
         groups={filteredGroups()}
-        deleteGroup={deleteGroup}
         BASE_URL={BASE_URL}
         updateActivities={updateActivities}
         // createActivity={createActivity}

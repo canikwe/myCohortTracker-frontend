@@ -22,7 +22,6 @@ const GroupsContainer = ({ groups, updateGroup, updateActivity, handleDelete, up
               key={g.id}
               group={g} 
               handleEdit={handleEdit} 
-              handleDelete={handleDelete}
               matchedStudents={matchedStudents}
             />
           )})
