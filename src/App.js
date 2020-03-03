@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react'
+import Header from './components/Header'
 import Filters from './components/Filters'
 import PairsContainer from './containers/PairsContainer'
 import SideBar from './containers/SideBar'
@@ -103,6 +104,7 @@ function App() {
 
   return (
     <main className="App">
+      <Header cohort={cohort} />
       <Filters filters={filterOptions} updateFilters={updateFilterOptions}/>
       <PairsContainer 
         groups={filteredGroups()} 
