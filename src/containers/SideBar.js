@@ -8,14 +8,20 @@ import { CirclePicker } from 'react-color'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faArrowLeft } from '@fortawesome/free-solid-svg-icons'
 import ActivityOptions from '../components/ActivityOptions'
+import { shallowEqual, useSelector } from 'react-redux'
 
-const SideBar = ({ handleSubmit, activeStudentX, activeStudentY, groups, activities, deleteGroup, updateActivities, BASE_URL }) => {
+const SideBar = ({ handleSubmit, groups, activities, deleteGroup, updateActivities, BASE_URL }) => {
   const [groupFormToggle, updateGroupFormToggle] = useState(false)
   const [searchTerm, updateSearchTerm] = useState('')
   const [activity, updateActivity] = useState({})
   const [group, updateGroup] = useState(initialGroupState())
   const [createFormToggle, updateCreateFormToggle] = useState(false)
   const [searchToggle, updateSearchToggle] = useState(false)
+
+  const { activeStudentX, activeStudentY } = useSelector(state => ({
+    activeStudentX: state.activeStudentX,
+    activeStudentY: state.activeStudentY
+  }), shallowEqual)
 
   function resetGroupState(){
     return ({ ...initialGroupState(), activity_date: group.activity_date, student_ids: [] })

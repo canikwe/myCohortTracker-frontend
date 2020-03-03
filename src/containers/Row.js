@@ -1,9 +1,11 @@
 import React from 'react'
 import Cell from '../components/Cell'
 import { getMatchedGroups } from '../helper/functions'
-import { useSelector, shallowEqual } from 'react-redux'
+import { useSelector, shallowEqual, useDispatch } from 'react-redux'
+import { updateActiveStudentX, updateActiveStudentY } from '../redux/actions/index'
 
 const Row = ({ studentX, allStudents, handleClick, studentGroups }) => {
+  const dispatch = useDispatch()
 
   const { activeStudentX, activeStudentY } = useSelector(state => ({
     activeStudentX: state.activeStudentX,
@@ -47,7 +49,10 @@ const Row = ({ studentX, allStudents, handleClick, studentGroups }) => {
     <section className='row'>
       <div 
         className='cell anchorX'
-        onClick={() => handleClick(studentX, null)}
+        onClick={() => {
+          dispatch(updateActiveStudentX(studentX))
+          dispatch(updateActiveStudentY(null))
+        }}
       >
         {studentX.first_name}
       </div>

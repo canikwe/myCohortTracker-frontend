@@ -28,7 +28,7 @@ const PairsContainer = ({ groups, activeStudentX, activeStudentY, updateActiveSt
           {'//'}
         </div>
         {
-          students.map(studentY => <ColumnHeader key={studentY.id} studentY={studentY} handleClick={updateActiveStudents}/>)
+          students.map(studentY => <ColumnHeader key={studentY.id} studentY={studentY} />)
         }
       </section>
       { students.map(studentX => {
