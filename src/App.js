@@ -8,12 +8,12 @@ import './scss/main.scss'
 
 // redux
 // import { connect } from 'react-redux'
-import { fetchingStudents } from './redux/actions/async'
+import { fetchingStudents, fetchingCohort } from './redux/actions/async'
 
 const BASE_URL = 'http://localhost:3000/'
 
 function App() {
-  const [cohort, updateCohort] = useState({})
+  // const [cohort, updateCohort] = useState({})
   // const [students, updateStudents] = useState([])
   const [groups, updateGroups] = useState([])
   const [activeStudentX, updateActiveStudentX] = useState(null)
@@ -24,20 +24,17 @@ function App() {
 
   //redux
   const dispatch = useDispatch()
-  const { students } = useSelector(state => ({
+  const { students, cohort } = useSelector(state => ({
     students: state.students,
+    cohort: state.cohort
   }), shallowEqual)
 
 
   useEffect(() => {
-    fetch(BASE_URL + 'cohorts')
-    .then(res => res.json())
-    .then(cohort => {
 
-      updateCohort(cohort)
-    })
-
+    dispatch(fetchingCohort())
     dispatch(fetchingStudents())
+    
 
     fetch(BASE_URL + 'groups')
     .then(res => res.json())

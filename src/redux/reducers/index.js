@@ -1,8 +1,17 @@
 import { combineReducers } from 'redux'
-import { FETCH_STUDENTS } from '../actions/constants'
+import { FETCH_STUDENTS, FETCH_COHORT } from '../actions/constants'
 
 const testReducer = (state=[], action) => {
   return state
+}
+
+const cohortReducer = (state = {}, action) => {
+  switch (action.type) {
+    case FETCH_COHORT:
+      return action.payload
+    default:
+      return state
+  }
 }
 
 const studentsReducer = (state=[], action) => {
@@ -16,7 +25,8 @@ const studentsReducer = (state=[], action) => {
 
 const rootReducer = combineReducers({
   test: testReducer,
-  students: studentsReducer 
+  cohort: cohortReducer,
+  students: studentsReducer
 })
 
 export default rootReducer
