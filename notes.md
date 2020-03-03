@@ -13,8 +13,8 @@
 
 ✅ category for activity create form should be a dropdown
 - clear filters when a new group is selected (?)
-- onHover of group, popup to the left for a mini Group Show display
-  - show date, notes, students, bad pairing --> currently this info is only visible in the group edit view
+✅ onHover of group, popup to the left for a mini Group Show display
+  ✅ show date, notes, students, bad pairing --> currently this info is only visible in the group edit view
 - show icon of bad pairs in both the cell and group list
 ✅ search/create activity header in the sidebar component
 - dividers for the sidebar
