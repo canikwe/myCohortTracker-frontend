@@ -19,7 +19,7 @@
 ✅ search/create activity header in the sidebar component
 - dividers for the sidebar
 ✅ Header component with the cohort's info (name, batch)
-- search results for activities may want to include what module the activity is for as well as the name
+✅ search results for activities may want to include what module the activity is for as well as the name
 
 ## Todo
 

@@ -29,6 +29,7 @@ const GroupsContainer = ({ groups, updateGroup, updateActivity, handleDelete, up
           ) : <p>No groups yet...</p>
         }
       </section>
+      <div className='hr-line'></div>
     </>
   )
 }
