@@ -68,25 +68,27 @@
   .group {
     display: grid;
     grid-template-columns: 80% auto auto;
+    position: relative;
     cursor: pointer;
+
+    .group-details {
+      display: none;
+    }
+    
+    &:hover .group-details {
+      display: block;
+      position: absolute;
+      top: 5%;
+      right: 105%;
+      width: 300px;
+      background-color: $neutral;
+      box-shadow: 2px 2px 5px $base-dark;
+      border-radius: 10px;
+      padding: 10px;
+      color: $base-dark;
+    }
   }
   
-  .group-details {
-    display: none;
-  }
-  
-  .group:hover + .group-details {
-    display: block;
-    position: absolute;
-    top: 10%;
-    right: 25%;
-    width: 300px;
-    background-color: $neutral;
-    box-shadow: 2px 2px 5px $base-dark;
-    border-radius: 10px;
-    padding: 10px;
-    color: $base-dark;
-  }
 
   
   p {

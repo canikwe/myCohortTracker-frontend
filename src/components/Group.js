@@ -33,9 +33,12 @@ const Group = ({ group, handleEdit, handleDelete, matchedStudents }) => {
         <p className='group-students'>
           {formatMatchedStudents()}
         </p>
+        <GroupDetails
+          group={group}
+          students={formatMatchedStudents()} 
+        />  
       </div>
 
-      <GroupDetails group={group} students={formatMatchedStudents()} />  
 
     </>
   )
