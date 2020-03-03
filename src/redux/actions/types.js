@@ -1,1 +1,0 @@
-export default CLICK_CELL = 'CLICK_CELL'

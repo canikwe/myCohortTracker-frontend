@@ -1,21 +1,33 @@
 import React, { useState, useEffect } from 'react'
+import { useDispatch, shallowEqual, useSelector } from 'react-redux'
 import Header from './components/Header'
 import Filters from './components/Filters'
 import PairsContainer from './containers/PairsContainer'
 import SideBar from './containers/SideBar'
 import './scss/main.scss'
 
+// redux
+// import { connect } from 'react-redux'
+import { fetchingStudents } from './redux/actions/async'
+
 const BASE_URL = 'http://localhost:3000/'
 
 function App() {
   const [cohort, updateCohort] = useState({})
-  const [students, updateStudents] = useState([])
+  // const [students, updateStudents] = useState([])
   const [groups, updateGroups] = useState([])
   const [activeStudentX, updateActiveStudentX] = useState(null)
   const [activeStudentY, updateActiveStudentY] = useState(null)
   // const [filter, updateFilter] = useState('all')
   const [filterOptions, updateFilterOptions] = useState({category: 'all', term: '', mod: 'all'})
   const [activities, updateActivities] = useState([])
+
+  //redux
+  const dispatch = useDispatch()
+  const { students } = useSelector(state => ({
+    students: state.students,
+  }), shallowEqual)
+
 
   useEffect(() => {
     fetch(BASE_URL + 'cohorts')
@@ -25,13 +37,7 @@ function App() {
       updateCohort(cohort)
     })
 
-    fetch(BASE_URL + 'students')
-    .then(res => res.json())
-    .then(students => {
-      students.sort((a, b) => a.first_name > b.first_name ? 1 : -1)
-
-      updateStudents(students)
-    })
+    dispatch(fetchingStudents())
 
     fetch(BASE_URL + 'groups')
     .then(res => res.json())
@@ -41,7 +47,7 @@ function App() {
     .then(res => res.json())
     .then(activities => updateActivities(activities))
     
-  }, [])
+  }, [dispatch])
 
   const handleSubmit = data => {
     data.group.id ? updateGroup(data) : createGroup(data)
