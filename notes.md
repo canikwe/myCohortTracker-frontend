@@ -1,11 +1,33 @@
 # My Awesome Cohort Tracker
 
+## QA Testing Feedback
+
+### Round 1
+
+✅ highlighted students when there is no active student bug
+✅ actiive group only clears when update or back button is clicked, but will not reset when there are new active students.
+✅ add label next to activities icons
+✅ project cell colors should be invers to the selected theme so it stands out
+
+### Round 2
+
+✅ category for activity create form should be a dropdown
+- clear filters when a new group is selected (?)
+- onHover of group, popup to the left for a mini Group Show display
+  - show date, notes, students, bad pairing --> currently this info is only visible in the group edit view
+- show icon of bad pairs in both the cell and group list
+✅ search/create activity header in the sidebar component
+- dividers for the sidebar
+- Header component with the cohort's info (name, date)
+- search results for activities may want to include what module the activity is for as well as the name
+
 ## Todo
 
+- refactor component heirarchy
 - update typography
   - choose font schema
   - update cell font-sizes
-  - establish global weights 
+  - establish global weights
 - add login/splash page
 - add header
 - add sort by most recent pairing
