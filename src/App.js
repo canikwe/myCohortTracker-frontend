@@ -7,6 +7,7 @@ import './scss/main.scss'
 const BASE_URL = 'http://localhost:3000/'
 
 function App() {
+  const [cohort, updateCohort] = useState({})
   const [students, updateStudents] = useState([])
   const [groups, updateGroups] = useState([])
   const [activeStudentX, updateActiveStudentX] = useState(null)
@@ -16,21 +17,28 @@ function App() {
   const [activities, updateActivities] = useState([])
 
   useEffect(() => {
-    fetch(BASE_URL + 'students')
-      .then(res => res.json())
-      .then(students => {
-        students.sort((a, b) => a.first_name > b.first_name ? 1 : -1)
+    fetch(BASE_URL + 'cohorts')
+    .then(res => res.json())
+    .then(cohort => {
 
-        updateStudents(students)
-      })
+      updateCohort(cohort)
+    })
+
+    fetch(BASE_URL + 'students')
+    .then(res => res.json())
+    .then(students => {
+      students.sort((a, b) => a.first_name > b.first_name ? 1 : -1)
+
+      updateStudents(students)
+    })
 
     fetch(BASE_URL + 'groups')
-      .then(res => res.json())
-      .then(groups => updateGroups(groups))
+    .then(res => res.json())
+    .then(groups => updateGroups(groups))
 
     fetch(BASE_URL + 'activities')
-      .then(res => res.json())
-      .then(activities => updateActivities(activities))
+    .then(res => res.json())
+    .then(activities => updateActivities(activities))
     
   }, [])
 
