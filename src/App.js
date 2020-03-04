@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useEffect } from 'react'
 import { useDispatch } from 'react-redux'
 import Header from './components/Header'
 import Filters from './components/Filters'
@@ -10,8 +10,6 @@ import './scss/main.scss'
 import { fetchingStudents, fetchingCohort } from './redux/actions/async'
 import { fetchingGroups, creatingGroup, updatingGroup } from './redux/actions/group'
 import { fetchingActivities } from './redux/actions/activities'
-
-// const BASE_URL = 'http://localhost:3000/'
 
 function App() {
 
@@ -27,10 +25,6 @@ function App() {
     dispatch(fetchingStudents())
     dispatch(fetchingGroups())
     dispatch(fetchingActivities())
-
-    // fetch(BASE_URL + 'activities')
-    // .then(res => res.json())
-    // .then(activities => updateActivities(activities))
     
   }, [dispatch])
 
@@ -45,10 +39,7 @@ function App() {
       <PairsContainer />
       <SideBar 
         handleSubmit={handleSubmit}
-        // BASE_URL={BASE_URL}
         updateActivities={updateActivities}
-        // createActivity={createActivity}
-        // activities={activities}
       />
     </main>
   );
