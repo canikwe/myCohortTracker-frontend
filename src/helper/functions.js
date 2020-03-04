@@ -10,3 +10,15 @@ export const getMatchedGroups = (student1, student2, groups) => {
     return student1 !== student2 && g.student_ids.includes(student1.id) && g.student_ids.includes(student2.id)
   })
 }
+
+export const filteredGroups = state => {
+  let groups = state.groups
+
+  if (state.filters.category !== 'all') {
+    groups = groups.filter(g => g.activity.category.toLowerCase() === state.filters.category.toLowerCase())
+  }
+  if (state.filters.mod !== 'all') {
+    groups = groups.filter(g => g.activity.mod === state.filters.mod)
+  }
+  return groups.filter(g => g.activity.name.includes(state.filters.term))
+}

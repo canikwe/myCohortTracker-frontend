@@ -35,6 +35,8 @@ const groupsReducer = (state=[], action) => {
       return state.map(g => g.id === action.payload.id ? action.payload : g)
     case DELETE_GROUP:
       return state.filter(g => g.id !== action.payload.id)
+    // case UPDATE_FILTERS:
+    //   if (action.payload !== 'all')
     default:
       return state
   }
@@ -63,7 +65,10 @@ const filtersReducer = (state = { category: 'all', term: '', mod: 'all' }, actio
     case UPDATE_FILTERS:
       return {...state, [action.payload.target.name]: action.payload.target.value}
       case UPDATE_MOD_FILTERS:
-        return {...state, mod: parseInt(action.payload.target.value)}
+        if (action.payload.target.value !== 'all') {
+          return {...state, mod: parseInt(action.payload.target.value)}
+        }
+        return {...state, mod: 'all'}
     default:
       return state
   }

@@ -53,9 +53,7 @@ function App() {
     <main className="App">
       <Header />
       <Filters filters={filterOptions} updateFilters={updateFilterOptions}/>
-      <PairsContainer 
-        groups={filteredGroups()} 
-      />
+      <PairsContainer />
       <SideBar 
         handleSubmit={handleSubmit}
         groups={filteredGroups()}

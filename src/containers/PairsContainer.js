@@ -2,16 +2,15 @@ import React from 'react'
 // import allStudents from "../helper/data.json"
 import ColumnHeader from '../components/ColumnHeader'
 import Row from './Row'
-import { getStudentGroups } from '../helper/functions'
 
 import { useSelector, shallowEqual, useDispatch } from 'react-redux'
 import { updateActiveStudentX, updateActiveStudentY } from '../redux/actions/index'
 
-const PairsContainer = ({ groups }) => {
+const PairsContainer = () => {
   const dispatch = useDispatch()
 
   const { students } = useSelector(state => ({
-    students: state.students
+    students: state.students,
   }), shallowEqual)
 
   return (
@@ -38,7 +37,6 @@ const PairsContainer = ({ groups }) => {
             key={studentX.id} 
             studentX={studentX} 
             allStudents={students} 
-            studentGroups={getStudentGroups(groups, studentX)}
           />
         )}
       )}
