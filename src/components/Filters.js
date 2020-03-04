@@ -1,13 +1,16 @@
 import React from 'react'
+import { useDispatch, useSelector, shallowEqual } from 'react-redux'
+import { updateFilters, updateModFilters } from '../redux/actions/index'
 
-const Filters = ({ updateFilters, filters }) => {
-  const handleFilters = e => {
-    if (e.target.name === 'mod' && e.target.value !== 'all') {
-      updateFilters({...filters, mod: parseInt(e.target.value)})
-    } else {
-      updateFilters({...filters, [e.target.name]: e.target.value})
-    }
-  }
+const Filters = () => {
+
+  const dispatch = useDispatch()
+
+  const { filters } = useSelector(state => ({
+    filters: state.filters
+  }), shallowEqual)
+
+  const mainHandler = event => dispatch(updateFilters(event))
 
   return (
     <section className='filters'>
@@ -15,7 +18,7 @@ const Filters = ({ updateFilters, filters }) => {
       <label htmlFor='mod'>Filter by Category</label>
       <select 
         name='category' 
-        onChange={handleFilters} 
+        onChange={mainHandler} 
         value={filters.category}
       >
         <option value='all'>Show All Categories</option>
@@ -27,18 +30,17 @@ const Filters = ({ updateFilters, filters }) => {
       <select 
         name='mod'
         value={filters.mod}
-        onChange={handleFilters} 
+        onChange={event => dispatch(updateModFilters(event))} 
       >
         <option value='all'>Show All Mods</option>
         {[1, 2, 3, 4, 5].map(mod => <option key={mod} value={mod}>Mod - {mod}</option>)}
       </select>
 
-      {/* <label htmlFor='search'>Search: </label> */}
       <input 
         type='text'
         name='term'
         value={filters.term} 
-        onChange={handleFilters}
+        onChange={mainHandler}
         placeholder='Search Activities'
       />
     </section>

@@ -23,13 +23,11 @@
 
 ## Todo
 
-<<<<<<< HEAD
 - refactor to Redux
 - reset all onClick outside of cells
 - reset all onClick of Flatiron logo //
 - toggle Search Activities and Create New. When searching, Create New should display. When creating, Search Activities should display, but not at the same time.
 - Add Update for activity(?)
-=======
 - refactor component heirarchy
 - update typography
   - choose font schema
@@ -38,7 +36,6 @@
 - add login/splash page
 ✅ add header
 ❌ add sort by most recent pairing
->>>>>>> 4ac4ef14a7cf0433ba064f97b313c624a8a20bc3
 - on click of cell:
   - autocomplete input for the projects/labs/etc.
 ✅ add dates to activities (pairs?)
@@ -51,16 +48,13 @@
 - ceate cohort (page)
 - create roster from CSV
 - add hide attribute on students table
-<<<<<<< HEAD
 - add sort by most recent pairing
 - update cohort page
 - update student (page?)
-=======
 - update cohort modal
 - create student modal
 - update student (modal)
 - create student modal
->>>>>>> 4ac4ef14a7cf0433ba064f97b313c624a8a20bc3
 - add test suite
 - refactor to Node/Express backend?
 - add auth
@@ -68,15 +62,12 @@
 
 ## DONE
 
-<<<<<<< HEAD
-=======
 ✅ style sidebar
 ✅ style filters
 ✅ if it's a three person pair, put below the pairing "with... so and so"
 ✅ convert css to scss
 ✅ add gradient to the pairings based on frequency
 ✅ add color wheel to allow users to choose their own colors
->>>>>>> 4ac4ef14a7cf0433ba064f97b313c624a8a20bc3
 ✅ separate create activity from create group
 ✅ add search to filters
 ✅ add filter by mod
