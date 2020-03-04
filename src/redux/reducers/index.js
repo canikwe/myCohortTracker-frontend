@@ -1,5 +1,5 @@
 import { combineReducers } from 'redux'
-import { FETCH_STUDENTS, FETCH_COHORT, FETCH_GROUPS, CREATE_GROUP, UPDATE_GROUP, DELETE_GROUP, UPDATE_ACTIVE_STUDENT_X, UPDATE_ACTIVE_STUDENT_Y, UPDATE_FILTERS, UPDATE_MOD_FILTERS } from '../actions/constants'
+import { FETCH_STUDENTS, FETCH_COHORT, FETCH_GROUPS, CREATE_GROUP, UPDATE_GROUP, DELETE_GROUP, UPDATE_ACTIVE_STUDENT_X, UPDATE_ACTIVE_STUDENT_Y, UPDATE_FILTERS, UPDATE_MOD_FILTERS, FETCH_ACTIVITIES } from '../actions/constants'
 
 const testReducer = (state=[], action) => {
   return state
@@ -74,6 +74,15 @@ const filtersReducer = (state = { category: 'all', term: '', mod: 'all' }, actio
   }
 }
 
+const activitiesReducer = (state=[], action) => {
+  switch (action.type) {
+    case FETCH_ACTIVITIES:
+      return action.payload  
+    default:
+      return state
+  }
+}
+
 const rootReducer = combineReducers({
   test: testReducer,
   cohort: cohortReducer,
@@ -81,7 +90,8 @@ const rootReducer = combineReducers({
   groups: groupsReducer,
   activeStudentX: activeStudentXReducer,
   activeStudentY: activeStudentYReducer,
-  filters: filtersReducer
+  filters: filtersReducer,
+  activities: activitiesReducer
 })
 
 export default rootReducer

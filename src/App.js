@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { useDispatch, shallowEqual, useSelector } from 'react-redux'
+import { useDispatch } from 'react-redux'
 import Header from './components/Header'
 import Filters from './components/Filters'
 import PairsContainer from './containers/PairsContainer'
@@ -9,12 +9,14 @@ import './scss/main.scss'
 // redux
 import { fetchingStudents, fetchingCohort } from './redux/actions/async'
 import { fetchingGroups, creatingGroup, updatingGroup } from './redux/actions/group'
+import { fetchingActivities } from './redux/actions/activities'
 
-const BASE_URL = 'http://localhost:3000/'
+// const BASE_URL = 'http://localhost:3000/'
 
 function App() {
 
-  const [activities, updateActivities] = useState([])
+  // const [activities, updateActivities] = useState([])
+  const updateActivities = console.log
 
   //redux
   const dispatch = useDispatch()
@@ -24,10 +26,11 @@ function App() {
     dispatch(fetchingCohort())
     dispatch(fetchingStudents())
     dispatch(fetchingGroups())
+    dispatch(fetchingActivities())
 
-    fetch(BASE_URL + 'activities')
-    .then(res => res.json())
-    .then(activities => updateActivities(activities))
+    // fetch(BASE_URL + 'activities')
+    // .then(res => res.json())
+    // .then(activities => updateActivities(activities))
     
   }, [dispatch])
 
@@ -42,10 +45,10 @@ function App() {
       <PairsContainer />
       <SideBar 
         handleSubmit={handleSubmit}
-        BASE_URL={BASE_URL}
+        // BASE_URL={BASE_URL}
         updateActivities={updateActivities}
         // createActivity={createActivity}
-        activities={activities}
+        // activities={activities}
       />
     </main>
   );
