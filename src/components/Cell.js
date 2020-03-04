@@ -3,6 +3,7 @@ import { useDispatch, shallowEqual, useSelector } from 'react-redux'
 import { updateActiveStudentX, updateActiveStudentY } from '../redux/actions/index'
 
 const Cell = ({ classNames, studentX, studentY, matchedGroups }) => {
+  
   const dispatch = useDispatch()
   const { activeStudentX, activeStudentY } = useSelector(state => ({
     activeStudentX: state.activeStudentX,

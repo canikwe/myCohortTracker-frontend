@@ -13,12 +13,7 @@ import { fetchingGroups, creatingGroup, updatingGroup } from './redux/actions/gr
 const BASE_URL = 'http://localhost:3000/'
 
 function App() {
-  // const [cohort, updateCohort] = useState({})
-  // const [students, updateStudents] = useState([])
-  // const [groups, updateGroups] = useState([])
-  const [activeStudentX, updateActiveStudentX] = useState(null)
-  const [activeStudentY, updateActiveStudentY] = useState(null)
-  // const [filter, updateFilter] = useState('all')
+
   const [filterOptions, updateFilterOptions] = useState({category: 'all', term: '', mod: 'all'})
   const [activities, updateActivities] = useState([])
 
@@ -44,21 +39,6 @@ function App() {
     data.group.id ? dispatch(updatingGroup(data)) : dispatch(creatingGroup(data))
   }
 
-  const updateActiveStudents = (studentX, studentY) => {
-    updateActiveStudentX(studentX)
-    updateActiveStudentY(studentY)
-    if (studentX === activeStudentX && !studentY) {
-      updateActiveStudentX(null)
-    }
-    if (studentY === activeStudentY && !studentX)  {
-      updateActiveStudentY(null)
-    }
-    if (studentX === activeStudentX && studentY === activeStudentY) {
-      updateActiveStudentX(null)
-      updateActiveStudentY(null)
-    }
-  }
-
   const filteredGroups = () => {
     return groups.filter(g => {
       if (filterOptions.category === 'all') {
@@ -75,14 +55,9 @@ function App() {
       <Filters filters={filterOptions} updateFilters={updateFilterOptions}/>
       <PairsContainer 
         groups={filteredGroups()} 
-        // activeStudentX={activeStudentX}
-        // activeStudentY={activeStudentY}
-        updateActiveStudents={updateActiveStudents}
-        />
+      />
       <SideBar 
         handleSubmit={handleSubmit}
-        activeStudentX={activeStudentX}
-        activeStudentY={activeStudentY}
         groups={filteredGroups()}
         BASE_URL={BASE_URL}
         updateActivities={updateActivities}

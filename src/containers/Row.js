@@ -4,7 +4,7 @@ import { getMatchedGroups } from '../helper/functions'
 import { useSelector, shallowEqual, useDispatch } from 'react-redux'
 import { updateActiveStudentX, updateActiveStudentY } from '../redux/actions/index'
 
-const Row = ({ studentX, allStudents, handleClick, studentGroups }) => {
+const Row = ({ studentX, allStudents, studentGroups }) => {
   const dispatch = useDispatch()
 
   const { activeStudentX, activeStudentY } = useSelector(state => ({
@@ -63,7 +63,6 @@ const Row = ({ studentX, allStudents, handleClick, studentGroups }) => {
         return (
           <Cell
             key={studentY.id}
-            handleClick={handleClick}
             classNames={classNames}
             studentX={studentX}
             studentY={studentY}

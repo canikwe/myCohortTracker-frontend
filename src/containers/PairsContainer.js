@@ -7,7 +7,7 @@ import { getStudentGroups } from '../helper/functions'
 import { useSelector, shallowEqual, useDispatch } from 'react-redux'
 import { updateActiveStudentX, updateActiveStudentY } from '../redux/actions/index'
 
-const PairsContainer = ({ groups, activeStudentX, activeStudentY, updateActiveStudents }) => {
+const PairsContainer = ({ groups }) => {
   const dispatch = useDispatch()
 
   const { students } = useSelector(state => ({
@@ -39,9 +39,6 @@ const PairsContainer = ({ groups, activeStudentX, activeStudentY, updateActiveSt
             studentX={studentX} 
             allStudents={students} 
             studentGroups={getStudentGroups(groups, studentX)}
-            // activeStudentX={activeStudentX} 
-            // activeStudentY={activeStudentY}
-            handleClick={updateActiveStudents}
           />
         )}
       )}
