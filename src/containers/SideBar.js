@@ -12,12 +12,12 @@ import SelectActivityForm from '../components/SelectActivityForm'
 import ActivityOptions from '../components/ActivityOptions'
 
 const SideBar = ({ handleSubmit, deleteGroup, updateActivities }) => {
-  const [groupFormToggle, updateGroupFormToggle] = useState(false)
-  const [searchTerm, updateSearchTerm] = useState('')
-  const [activity, updateActivity] = useState({})
-  const [group, updateGroup] = useState(initialGroupState())
-  const [createFormToggle, updateCreateFormToggle] = useState(false)
-  const [searchToggle, updateSearchToggle] = useState(false)
+  const [groupFormToggle, updateGroupFormToggle] = useState(false) // create group form toggle
+  const [searchTerm, updateSearchTerm] = useState('') //activity searchterm
+  const [activity, updateActivity] = useState({}) //selected activity
+  const [group, updateGroup] = useState(initialGroupState()) //selected group
+  const [createFormToggle, updateCreateFormToggle] = useState(false) //create activity toggle
+  const [searchToggle, updateSearchToggle] = useState(false) //search activity toggle
 
   const { activeStudentX, activeStudentY, groups, activities } = useSelector(state => ({
     activeStudentX: state.activeStudentX,
