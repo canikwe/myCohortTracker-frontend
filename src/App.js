@@ -14,14 +14,10 @@ const BASE_URL = 'http://localhost:3000/'
 
 function App() {
 
-  const [filterOptions, updateFilterOptions] = useState({category: 'all', term: '', mod: 'all'})
   const [activities, updateActivities] = useState([])
 
   //redux
   const dispatch = useDispatch()
-  const { groups } = useSelector(state => ({
-    groups: state.groups
-  }), shallowEqual)
 
   useEffect(() => {
 
@@ -39,24 +35,13 @@ function App() {
     data.group.id ? dispatch(updatingGroup(data)) : dispatch(creatingGroup(data))
   }
 
-  const filteredGroups = () => {
-    return groups.filter(g => {
-      if (filterOptions.category === 'all') {
-        return g.activity.name.toLowerCase().includes(filterOptions.term.toLowerCase())
-      } else {
-        return g.activity.category.toLowerCase() === filterOptions.category && g.activity.name.toLowerCase().includes(filterOptions.term.toLowerCase())
-      }
-    }).filter(g => filterOptions.mod !== 'all' ? g.activity.mod === filterOptions.mod : true)
-  }
-
   return (
     <main className="App">
       <Header />
-      <Filters filters={filterOptions} updateFilters={updateFilterOptions}/>
+      <Filters />
       <PairsContainer />
       <SideBar 
         handleSubmit={handleSubmit}
-        groups={filteredGroups()}
         BASE_URL={BASE_URL}
         updateActivities={updateActivities}
         // createActivity={createActivity}

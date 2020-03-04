@@ -1,16 +1,17 @@
 import React, { useState, useEffect } from 'react'
-import GroupsContainer from './GroupsContainer'
-import GroupForm from './GroupForm'
-import { getStudentGroups, getMatchedGroups } from '../helper/functions'
-import CreateActivityForm from '../components/CreateActivityForm'
-import SelectActivityForm from '../components/SelectActivityForm'
-import { CirclePicker } from 'react-color'
+import { shallowEqual, useSelector } from 'react-redux'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faArrowLeft } from '@fortawesome/free-solid-svg-icons'
+import { CirclePicker } from 'react-color'
+import { getStudentGroups, getMatchedGroups, filteredGroups } from '../helper/functions'
+import { BASE_URL } from '../redux/actions/constants'
+import GroupsContainer from './GroupsContainer'
+import GroupForm from './GroupForm'
+import CreateActivityForm from '../components/CreateActivityForm'
+import SelectActivityForm from '../components/SelectActivityForm'
 import ActivityOptions from '../components/ActivityOptions'
-import { shallowEqual, useSelector } from 'react-redux'
 
-const SideBar = ({ handleSubmit, groups, activities, deleteGroup, updateActivities, BASE_URL }) => {
+const SideBar = ({ handleSubmit, activities, deleteGroup, updateActivities }) => {
   const [groupFormToggle, updateGroupFormToggle] = useState(false)
   const [searchTerm, updateSearchTerm] = useState('')
   const [activity, updateActivity] = useState({})
@@ -18,9 +19,10 @@ const SideBar = ({ handleSubmit, groups, activities, deleteGroup, updateActiviti
   const [createFormToggle, updateCreateFormToggle] = useState(false)
   const [searchToggle, updateSearchToggle] = useState(false)
 
-  const { activeStudentX, activeStudentY } = useSelector(state => ({
+  const { activeStudentX, activeStudentY, groups } = useSelector(state => ({
     activeStudentX: state.activeStudentX,
-    activeStudentY: state.activeStudentY
+    activeStudentY: state.activeStudentY,
+    groups: filteredGroups(state)
   }), shallowEqual)
 
   function resetGroupState(){
