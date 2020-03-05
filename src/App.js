@@ -5,11 +5,9 @@ import { fetchingStudents, fetchingCohort } from './redux/actions/async'
 import { fetchingGroups } from './redux/actions/group'
 import { fetchingActivities } from './redux/actions/activities'
 
-import Header from './components/Header'
-import Filters from './components/Filters'
-import PairsContainer from './containers/PairsContainer'
-import SideBar from './containers/SideBar'
 import './scss/main.scss'
+import { Switch, Route } from 'react-router-dom'
+import PairsView from './pages/PairsView'
 
 
 function App() {
@@ -25,12 +23,12 @@ function App() {
   }, [dispatch])
 
   return (
-    <main className="App">
-      <Header />
-      <Filters />
-      <PairsContainer />
-      <SideBar />
-    </main>
+
+    <Switch>
+      <Route exact path='/hello'>
+        <PairsView />
+      </Route>
+    </Switch>
   );
 }
 

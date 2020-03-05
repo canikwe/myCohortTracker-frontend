@@ -1,59 +1,40 @@
 # My Awesome Cohort Tracker
 
-## QA Testing Feedback
-
-### Round 1
-
-✅ highlighted students when there is no active student bug
-✅ actiive group only clears when update or back button is clicked, but will not reset when there are new active students.
-✅ add label next to activities icons
-✅ project cell colors should be invers to the selected theme so it stands out
-
-### Round 2
-
-✅ category for activity create form should be a dropdown
 - clear filters when a new group is selected (?)
-✅ onHover of group, popup to the left for a mini Group Show display
-  ✅ show date, notes, students, bad pairing --> currently this info is only visible in the group edit view
-✅ show icon of bad pairs in both the cell and group list
-✅ search/create activity header in the sidebar component
-✅ dividers for the sidebar
-✅ Header component with the cohort's info (name, batch)
-✅ search results for activities may want to include what module the activity is for as well as the name
 
 ## Todo
 
-- refactor to Redux
-- reset all onClick outside of cells
-- reset all onClick of Flatiron logo //
-- toggle Search Activities and Create New. When searching, Create New should display. When creating, Search Activities should display, but not at the same time.
-- Add Update for activity(?)
-- refactor component heirarchy
-- update typography
-  - choose font schema
-  - update cell font-sizes
-  - establish global weights
+- routes
+- main page showing all cohorts
+  - cohort create/edit modal
 - add login/splash page
-✅ add header
-❌ add sort by most recent pairing
-- on click of cell:
-  - autocomplete input for the projects/labs/etc.
-✅ add dates to activities (pairs?)
+- finish sidebar styles
+- finish cell styles
+- finish filters styles
 
 ## Backlog
 
+- on click of cell:
+  - autocomplete input for the projects/labs/etc.
 - styling
   - finalize color scheme
   - update grid styles
+  - update typography
+    - choose font schema
+    - update cell font-sizes
+    - establish global weights
 - ceate cohort (page)
 - create roster from CSV
 - add hide attribute on students table
 - add sort by most recent pairing
 - update cohort page
 - update student (page?)
+- Add Update for activity(?)
 - update cohort modal
 - create student modal
 - update student (modal)
+- reset all onClick outside of cells
+- reset all onClick of Flatiron logo //
 - create student modal
 - add test suite
 - refactor to Node/Express backend?
@@ -62,6 +43,12 @@
 
 ## DONE
 
+✅ refactor to Redux
+✅ toggle Search Activities and Create New. When searching, Create New should display. When creating, Search Activities should display, but not at the same time.
+✅ refactor component heirarchy
+✅ add header
+✅ add dates to activities (pairs?)
+❌ add sort by most recent pairing
 ✅ style sidebar
 ✅ style filters
 ✅ if it's a three person pair, put below the pairing "with... so and so"
@@ -85,6 +72,26 @@
 ✅ create form to create a new activity with activity attributes
 ✅ Filter by category
 ✅ Filter by mod
+
+## QA Testing Feedback
+
+### Round 1
+
+✅ highlighted students when there is no active student bug
+✅ actiive group only clears when update or back button is clicked, but will not reset when there are new active students.
+✅ add label next to activities icons
+✅ project cell colors should be invers to the selected theme so it stands out
+
+### Round 2
+
+✅ category for activity create form should be a dropdown
+✅ onHover of group, popup to the left for a mini Group Show display
+  ✅ show date, notes, students, bad pairing --> currently this info is only visible in the group edit view
+✅ show icon of bad pairs in both the cell and group list
+✅ search/create activity header in the sidebar component
+✅ dividers for the sidebar
+✅ Header component with the cohort's info (name, batch)
+✅ search results for activities may want to include what module the activity is for as well as the name
 
 ### Redux Refactor
 
