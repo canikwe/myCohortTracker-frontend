@@ -2,7 +2,7 @@ import React from 'react'
 import { useSelector, shallowEqual, useDispatch } from 'react-redux'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faSearch, faPlus, faArrowLeft } from '@fortawesome/free-solid-svg-icons'
-import { showActivitySearch, showActivityCreate, resetSelectedActivity } from '../redux/actions'
+import { showActivitySearch, showActivityCreate, resetSelectedActivity } from '../redux/actions/activities'
 
 const ActivityOptions = () => {
 

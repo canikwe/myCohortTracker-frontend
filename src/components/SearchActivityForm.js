@@ -1,6 +1,6 @@
 import React from 'react'
 import { useSelector, shallowEqual, useDispatch } from 'react-redux'
-import { searchActivity, selectActivity, cancelActivitySearch } from '../redux/actions'
+import { searchActivity, selectActivity, cancelActivitySearch } from '../redux/actions/activities'
 // import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 // import { faSearch, faPlus } from '@fortawesome/free-solid-svg-icons'
 

@@ -1,10 +1,25 @@
 import React from 'react'
+import { useSelector, shallowEqual, useDispatch } from 'react-redux'
+import { changeActivityForm, closeActivityCreateForm, creatingActivity } from '../redux/actions/activities'
 
-const ActivityForm = ({ handleActivityChange, activity, handleCreateActivity, toggleCreateForm }) => {
+const ActivityForm = ({ handleCreateActivity, toggleCreateForm }) => {
+
+  const { activity } = useSelector(state => ({
+    activity: state.selectedActivity
+  }), shallowEqual)
+
+  const dispatch = useDispatch()
+
+  const handleActivityChange = e => dispatch(changeActivityForm(e))
+  const handleActivityCreate = e => {
+    e.preventDefault()
+    dispatch(creatingActivity(activity))
+  }
+
   return (
     <>
       <h3>Create Activity</h3>
-      <form className='activity-form' onSubmit={handleCreateActivity}>
+      <form className='activity-form' onSubmit={handleActivityCreate}>
         <div>
           <label htmlFor='name'>Name: </label>
           <input type='text' name='name' value={activity.name} onChange={handleActivityChange} />
@@ -28,7 +43,7 @@ const ActivityForm = ({ handleActivityChange, activity, handleCreateActivity, to
         </div>
         
         <div>
-          <button className='cancel' onClick={toggleCreateForm}>Cancel</button>
+          <button className='cancel' onClick={() => dispatch(closeActivityCreateForm())}>Cancel</button>
           <input className='primary' type='submit' value='Create Activity' />
         </div>
       </form>

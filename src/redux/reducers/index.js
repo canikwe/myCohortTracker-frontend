@@ -1,5 +1,5 @@
 import { combineReducers } from 'redux'
-import { FETCH_STUDENTS, FETCH_COHORT, FETCH_GROUPS, CREATE_GROUP, UPDATE_GROUP, DELETE_GROUP, UPDATE_ACTIVE_STUDENT_X, UPDATE_ACTIVE_STUDENT_Y, UPDATE_FILTERS, UPDATE_MOD_FILTERS, FETCH_ACTIVITIES, OPEN_GROUP_FORM, SHOW_ACTIVITY_SEARCH, SHOW_ACTIVITY_CREATE, RESET_SELECTED_ACTIVITY, SELECT_ACTIVITY, SEARCH_ACTIVITY, CANCEL_ACTIVITY_SEARCH } from '../actions/constants'
+import { FETCH_STUDENTS, FETCH_COHORT, FETCH_GROUPS, CREATE_GROUP, UPDATE_GROUP, DELETE_GROUP, UPDATE_ACTIVE_STUDENT_X, UPDATE_ACTIVE_STUDENT_Y, UPDATE_FILTERS, UPDATE_MOD_FILTERS, FETCH_ACTIVITIES, OPEN_GROUP_FORM, SHOW_ACTIVITY_SEARCH, SHOW_ACTIVITY_CREATE, RESET_SELECTED_ACTIVITY, SELECT_ACTIVITY, SEARCH_ACTIVITY, CANCEL_ACTIVITY_SEARCH, CHANGE_ACTIVITY_FORM, CLOSE_CREATE_ACTIVITY_FORM, CREATE_ACTIVITY } from '../actions/constants'
 
 const testReducer = (state=[], action) => {
   return state
@@ -77,7 +77,9 @@ const filtersReducer = (state = { category: 'all', term: '', mod: 'all' }, actio
 const activitiesReducer = (state=[], action) => {
   switch (action.type) {
     case FETCH_ACTIVITIES:
-      return action.payload  
+      return action.payload
+    case CREATE_ACTIVITY:
+      return [...state, action.payload]
     default:
       return state
   }
@@ -108,11 +110,16 @@ const selectedActivityReducer = (state = {}, action) => {
     case SHOW_ACTIVITY_SEARCH:
       return {}
     case SHOW_ACTIVITY_CREATE:
-      return { name: action.payload, mod: 1, category: '' }
+      return { name: action.payload, mod: 1, category: 'lab' }
     case SELECT_ACTIVITY:
       return action.payload
     case RESET_SELECTED_ACTIVITY:
       return {}
+    case CHANGE_ACTIVITY_FORM:
+      const event = action.payload
+      return {...state, [event.target.name]: event.target.value}
+    case CREATE_ACTIVITY:
+      return action.payload
     default:
       return state
   }
@@ -141,6 +148,10 @@ const activityOptionsReducer = (state = 1, action) => {
     case SELECT_ACTIVITY:
       return 1
     case CANCEL_ACTIVITY_SEARCH:
+      return 1
+    case CLOSE_CREATE_ACTIVITY_FORM:
+      return 1
+    case CREATE_ACTIVITY:
       return 1
     default:
       return state
