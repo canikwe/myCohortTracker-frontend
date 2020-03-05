@@ -1,5 +1,5 @@
 import { combineReducers } from 'redux'
-import { FETCH_STUDENTS, FETCH_COHORT, FETCH_GROUPS, CREATE_GROUP, UPDATE_GROUP, DELETE_GROUP, UPDATE_ACTIVE_STUDENT_X, UPDATE_ACTIVE_STUDENT_Y, UPDATE_FILTERS, UPDATE_MOD_FILTERS, FETCH_ACTIVITIES, OPEN_GROUP_FORM, SHOW_ACTIVITY_SEARCH, SHOW_ACTIVITY_CREATE } from '../actions/constants'
+import { FETCH_STUDENTS, FETCH_COHORT, FETCH_GROUPS, CREATE_GROUP, UPDATE_GROUP, DELETE_GROUP, UPDATE_ACTIVE_STUDENT_X, UPDATE_ACTIVE_STUDENT_Y, UPDATE_FILTERS, UPDATE_MOD_FILTERS, FETCH_ACTIVITIES, OPEN_GROUP_FORM, SHOW_ACTIVITY_SEARCH, SHOW_ACTIVITY_CREATE, RESET_SELECTED_ACTIVITY, SELECT_ACTIVITY, SEARCH_ACTIVITY, CANCEL_ACTIVITY_SEARCH } from '../actions/constants'
 
 const testReducer = (state=[], action) => {
   return state
@@ -94,10 +94,10 @@ const createGroupToggleReducer = (state=false, action) => {
 
 const activitySearchTermReducer = (state='', action) => {
   switch (action.type) {
-    // case value:
-      
-    //   break;
-  
+    case SEARCH_ACTIVITY:
+      return action.payload
+    case SELECT_ACTIVITY:
+      return action.payload.name
     default:
       return state
   }
@@ -109,6 +109,10 @@ const selectedActivityReducer = (state = {}, action) => {
       return {}
     case SHOW_ACTIVITY_CREATE:
       return { name: action.payload, mod: 1, category: '' }
+    case SELECT_ACTIVITY:
+      return action.payload
+    case RESET_SELECTED_ACTIVITY:
+      return {}
     default:
       return state
   }
@@ -128,11 +132,16 @@ const selectedGroupReducer = (state = initialGroupState(), action) => {
 }
 
 const activityOptionsReducer = (state = 1, action) => {
+  // key { 1: activityOptions, 2: createActivityForm, 3: searchActivityForm }
   switch (action.type) {
     case SHOW_ACTIVITY_SEARCH:
       return 2
     case SHOW_ACTIVITY_CREATE:
       return 3
+    case SELECT_ACTIVITY:
+      return 1
+    case CANCEL_ACTIVITY_SEARCH:
+      return 1
     default:
       return state
   }

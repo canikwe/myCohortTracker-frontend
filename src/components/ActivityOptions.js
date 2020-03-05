@@ -2,31 +2,30 @@ import React from 'react'
 import { useSelector, shallowEqual, useDispatch } from 'react-redux'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faSearch, faPlus, faArrowLeft } from '@fortawesome/free-solid-svg-icons'
-import { showActivitySearch, showActivityCreate } from '../redux/actions'
+import { showActivitySearch, showActivityCreate, resetSelectedActivity } from '../redux/actions'
 
-const ActivityOptions = ({ updateActivity, toggleCreateForm, updateSearchToggle, searchToggle }) => {
+const ActivityOptions = () => {
 
   const { selectedActivity, activitySearchTerm } = useSelector(state => ({
     selectedActivity: state.selectedActivity,
     activitySearchTerm: state.activitySearchTerm
-
   }), shallowEqual)
 
   const dispatch = useDispatch()
 
-  const handleSearchToggle = () => updateSearchToggle(!searchToggle)
+  // const handleSearchToggle = () => updateSearchToggle(!searchToggle)
 
-  const showSearch = () => {
-    updateActivity({})
-    handleSearchToggle()
-  }
+  // const showSearch = () => {
+  //   updateActivity({})
+  //   handleSearchToggle()
+  // }
 
   return (
     <>
       {selectedActivity.id ? 
         <h3>
           <span>
-            <FontAwesomeIcon icon={faArrowLeft} onClick={() => updateActivity({})} />
+            <FontAwesomeIcon icon={faArrowLeft} onClick={() => dispatch(resetSelectedActivity())} />
           </span>
           {selectedActivity.name}
         </h3>
