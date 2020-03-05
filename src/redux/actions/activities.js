@@ -36,5 +36,4 @@ export const selectActivity = activity => ({ type: SELECT_ACTIVITY, payload: act
 export const resetSelectedActivity = () => ({ type: RESET_SELECTED_ACTIVITY })
 
 // activity create actions
-export const changeActivityForm = event => ({ type: CHANGE_ACTIVITY_FORM, payload: event })
 export const closeActivityCreateForm = () => ({type: CLOSE_CREATE_ACTIVITY_FORM})

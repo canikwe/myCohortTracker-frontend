@@ -1,16 +1,18 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { useSelector, shallowEqual, useDispatch } from 'react-redux'
-import { changeActivityForm, closeActivityCreateForm, creatingActivity } from '../redux/actions/activities'
+import { closeActivityCreateForm, creatingActivity } from '../redux/actions/activities'
 
-const ActivityForm = ({ handleCreateActivity, toggleCreateForm }) => {
+const ActivityForm = () => {
 
-  const { activity } = useSelector(state => ({
-    activity: state.selectedActivity
+  
+  const { activitySearchTerm } = useSelector(state => ({
+    activitySearchTerm: state.activitySearchTerm
   }), shallowEqual)
-
+  
+  const [activity, updateActivity] = useState({ name: activitySearchTerm, mod: 1, category: 'lab' })
   const dispatch = useDispatch()
 
-  const handleActivityChange = e => dispatch(changeActivityForm(e))
+  const handleActivityChange = e => updateActivity({...activity, [e.target.name]: e.target.value})
   const handleActivityCreate = e => {
     e.preventDefault()
     dispatch(creatingActivity(activity))
