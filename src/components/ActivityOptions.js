@@ -1,8 +1,18 @@
 import React from 'react'
+import { useSelector, shallowEqual, useDispatch } from 'react-redux'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faSearch, faPlus, faArrowLeft } from '@fortawesome/free-solid-svg-icons'
+import { showActivitySearch, showActivityCreate } from '../redux/actions'
 
-const ActivityOptions = ({ updateActivity, toggleCreateForm, updateSearchToggle, searchToggle, activity }) => {
+const ActivityOptions = ({ updateActivity, toggleCreateForm, updateSearchToggle, searchToggle }) => {
+
+  const { selectedActivity, activitySearchTerm } = useSelector(state => ({
+    selectedActivity: state.selectedActivity,
+    activitySearchTerm: state.activitySearchTerm
+
+  }), shallowEqual)
+
+  const dispatch = useDispatch()
 
   const handleSearchToggle = () => updateSearchToggle(!searchToggle)
 
@@ -13,12 +23,12 @@ const ActivityOptions = ({ updateActivity, toggleCreateForm, updateSearchToggle,
 
   return (
     <>
-      {activity.id ? 
+      {selectedActivity.id ? 
         <h3>
           <span>
             <FontAwesomeIcon icon={faArrowLeft} onClick={() => updateActivity({})} />
           </span>
-          {activity.name}
+          {selectedActivity.name}
         </h3>
        : 
       <>
@@ -26,7 +36,7 @@ const ActivityOptions = ({ updateActivity, toggleCreateForm, updateSearchToggle,
         <div className='search-container'>
           <div>
             <div>Search</div>
-            <FontAwesomeIcon icon={faSearch} onClick={showSearch} size="2x" color='grey' />
+            <FontAwesomeIcon icon={faSearch} onClick={() => dispatch(showActivitySearch())} size="2x" color='grey' />
             {/* <div>
                 Search 
               </div> */}
@@ -39,7 +49,7 @@ const ActivityOptions = ({ updateActivity, toggleCreateForm, updateSearchToggle,
           </div>
           <div>
             <div>Create New</div>
-            <FontAwesomeIcon icon={faPlus} onClick={toggleCreateForm} size="2x" color='yellowgreen' />
+            <FontAwesomeIcon icon={faPlus} onClick={() => dispatch(showActivityCreate(activitySearchTerm))} size="2x" color='yellowgreen' />
           </div>
         </div> 
       </>}

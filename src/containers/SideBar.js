@@ -1,15 +1,17 @@
 import React, { useState, useEffect } from 'react'
-import { shallowEqual, useSelector } from 'react-redux'
+import { shallowEqual, useSelector, useDispatch } from 'react-redux'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faArrowLeft } from '@fortawesome/free-solid-svg-icons'
 import { CirclePicker } from 'react-color'
 import { getStudentGroups, getMatchedGroups, filteredGroups } from '../helper/functions'
 import { BASE_URL } from '../redux/actions/constants'
-import GroupsContainer from './GroupsContainer'
+import GroupsList from './GroupsList'
 import GroupForm from './GroupForm'
 import CreateActivityForm from '../components/CreateActivityForm'
 import SelectActivityForm from '../components/SelectActivityForm'
 import ActivityOptions from '../components/ActivityOptions'
+import CreateGroupContainer from './CreateGroupContainer'
+import { openGroupForm } from '../redux/actions'
 
 const SideBar = ({ handleSubmit, deleteGroup, updateActivities }) => {
   const [groupFormToggle, updateGroupFormToggle] = useState(false) // create group form toggle
@@ -19,12 +21,21 @@ const SideBar = ({ handleSubmit, deleteGroup, updateActivities }) => {
   const [createFormToggle, updateCreateFormToggle] = useState(false) //create activity toggle
   const [searchToggle, updateSearchToggle] = useState(false) //search activity toggle
 
-  const { activeStudentX, activeStudentY, groups, activities } = useSelector(state => ({
+  const { 
+    activeStudentX, 
+    activeStudentY, 
+    groups, 
+    activities, 
+    createGroupToggle
+   } = useSelector(state => ({
     activeStudentX: state.activeStudentX,
     activeStudentY: state.activeStudentY,
     groups: filteredGroups(state),
-    activities: state.activities
+    activities: state.activities,
+    createGroupToggle: state.createGroupToggle
   }), shallowEqual)
+
+  const dispatch = useDispatch()
 
   function resetGroupState(){
     return ({ ...initialGroupState(), activity_date: group.activity_date, student_ids: [] })
@@ -163,7 +174,7 @@ const SideBar = ({ handleSubmit, deleteGroup, updateActivities }) => {
 
   return (
     <aside className='sidebar'>
-      {groupFormToggle ? <div className='header'>
+      {createGroupToggle ? <div className='header'>
         <span>
           <FontAwesomeIcon 
             icon={faArrowLeft}
@@ -175,7 +186,7 @@ const SideBar = ({ handleSubmit, deleteGroup, updateActivities }) => {
          
       {
         activeStudentX || activeStudentY ?
-        <GroupsContainer
+        <GroupsList
           groups={displayedGroups()}
           updateGroup={updateGroup}
           updateActivity={updateActivity}
@@ -183,7 +194,18 @@ const SideBar = ({ handleSubmit, deleteGroup, updateActivities }) => {
         />
         : <h3 className='header'>Choose a Group</h3>
       }
+
+      { createGroupToggle 
+        ? <CreateGroupContainer /> 
+        : 
+        <button 
+          className='secondary' 
+          onClick={() => dispatch(openGroupForm(true))}
+        >
+          New Pair
+        </button> }
       
+{/*       
       {!createFormToggle && groupFormToggle && !searchToggle ? 
         <ActivityOptions
           updateActivity={updateActivity}
@@ -227,9 +249,9 @@ const SideBar = ({ handleSubmit, deleteGroup, updateActivities }) => {
           updateGroup={updateGroup}
           submitForm={submitForm}
         />
-        :
-        <button className='secondary' onClick={() => updateGroupFormToggle(true)}>New Pair</button>
-      }
+        : */}
+
+      {/* } */}
 
       <div className='color-selector'>
         <label htmlFor='color-selector'>Set Theme</label>

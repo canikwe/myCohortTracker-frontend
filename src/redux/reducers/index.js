@@ -1,5 +1,5 @@
 import { combineReducers } from 'redux'
-import { FETCH_STUDENTS, FETCH_COHORT, FETCH_GROUPS, CREATE_GROUP, UPDATE_GROUP, DELETE_GROUP, UPDATE_ACTIVE_STUDENT_X, UPDATE_ACTIVE_STUDENT_Y, UPDATE_FILTERS, UPDATE_MOD_FILTERS, FETCH_ACTIVITIES } from '../actions/constants'
+import { FETCH_STUDENTS, FETCH_COHORT, FETCH_GROUPS, CREATE_GROUP, UPDATE_GROUP, DELETE_GROUP, UPDATE_ACTIVE_STUDENT_X, UPDATE_ACTIVE_STUDENT_Y, UPDATE_FILTERS, UPDATE_MOD_FILTERS, FETCH_ACTIVITIES, OPEN_GROUP_FORM, SHOW_ACTIVITY_SEARCH, SHOW_ACTIVITY_CREATE } from '../actions/constants'
 
 const testReducer = (state=[], action) => {
   return state
@@ -83,6 +83,63 @@ const activitiesReducer = (state=[], action) => {
   }
 }
 
+const createGroupToggleReducer = (state=false, action) => {
+  switch (action.type) {
+    case OPEN_GROUP_FORM:
+      return action.payload
+    default:
+      return state
+  }
+}
+
+const activitySearchTermReducer = (state='', action) => {
+  switch (action.type) {
+    // case value:
+      
+    //   break;
+  
+    default:
+      return state
+  }
+}
+
+const selectedActivityReducer = (state = {}, action) => {
+  switch (action.type) {
+    case SHOW_ACTIVITY_SEARCH:
+      return {}
+    case SHOW_ACTIVITY_CREATE:
+      return { name: action.payload, mod: 1, category: '' }
+    default:
+      return state
+  }
+}
+
+const initialGroupState = () => ({ notes: '', avoid: false, student_ids: [], activity_date: new Date().toISOString().slice(0, 10) })
+
+const selectedGroupReducer = (state = initialGroupState(), action) => {
+  switch (action.payload) {
+    // case value:
+
+    //   break;
+
+    default:
+      return state
+  }
+}
+
+const activityOptionsReducer = (state = 1, action) => {
+  switch (action.type) {
+    case SHOW_ACTIVITY_SEARCH:
+      return 2
+    case SHOW_ACTIVITY_CREATE:
+      return 3
+    default:
+      return state
+  }
+}
+
+
+
 const rootReducer = combineReducers({
   test: testReducer,
   cohort: cohortReducer,
@@ -91,7 +148,12 @@ const rootReducer = combineReducers({
   activeStudentX: activeStudentXReducer,
   activeStudentY: activeStudentYReducer,
   filters: filtersReducer,
-  activities: activitiesReducer
+  activities: activitiesReducer,
+  createGroupToggle: createGroupToggleReducer,
+  activitySearchTerm: activitySearchTermReducer,
+  selectedActivity: selectedActivityReducer,
+  selectedGroup: selectedGroupReducer,
+  activityOptions: activityOptionsReducer
 })
 
 export default rootReducer
