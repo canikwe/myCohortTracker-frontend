@@ -2,6 +2,7 @@ import React from 'react'
 import { useSelector, shallowEqual } from 'react-redux'
 import ActivityOptions from '../components/ActivityOptions'
 import SearchActivityForm from '../components/SearchActivityForm'
+import CreateActivityForm from '../components/CreateActivityForm'
 
 const ActivityContainer = () => {
   const {activityOptions} = useSelector(state => ({
@@ -12,7 +13,7 @@ const ActivityContainer = () => {
     case 2:
       return <SearchActivityForm />
     case 3:
-      return <h1>Activity Create!</h1>
+      return <CreateActivityForm />
     default:
       return <ActivityOptions />
   }
