@@ -5,9 +5,12 @@ import { getStudentGroups, getMatchedGroups, filteredGroups } from '../helper/fu
 import { useSelector, shallowEqual } from 'react-redux'
 
 
-const GroupsContainer = ({ updateGroup, updateActivity, updateGroupFormToggle}) => {
+const GroupsContainer = () => {
 
-  const { students, groups } = useSelector(({activeStudentX, activeStudentY, students, groups}) => {
+  const { students, groups } = useSelector(state => {
+    const { activeStudentX, activeStudentY, students } = state
+    const groups = filteredGroups(state)
+
     const displayedGroups = () => {
       if (activeStudentX && activeStudentY) {
         return getMatchedGroups(activeStudentX, activeStudentY, groups)
@@ -26,12 +29,6 @@ const GroupsContainer = ({ updateGroup, updateActivity, updateGroupFormToggle}) 
     })
   }, shallowEqual)
 
-  const handleEdit = (group, activity) => {
-    updateGroup(group)
-    updateActivity(activity)
-    updateGroupFormToggle(true)
-  }
-
   return (
     <>
       <h3 className='header'>
@@ -45,7 +42,7 @@ const GroupsContainer = ({ updateGroup, updateActivity, updateGroupFormToggle}) 
             return (<Group
               key={g.id}
               group={g} 
-              handleEdit={handleEdit} 
+              // handleEdit={handleEdit} 
               matchedStudents={matchedStudents}
             />
           )})
