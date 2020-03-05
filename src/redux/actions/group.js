@@ -1,5 +1,6 @@
-import { BASE_URL, FETCH_GROUPS, CREATE_GROUP, HEADERS, UPDATE_GROUP, DELETE_GROUP } from './constants'
+import { BASE_URL, FETCH_GROUPS, CREATE_GROUP, HEADERS, UPDATE_GROUP, DELETE_GROUP, SELECT_GROUP } from './constants'
 
+// async actions
 const fetchGroups = groups => ({type: FETCH_GROUPS, payload: groups})
 
 export const fetchingGroups = () => {
@@ -49,3 +50,5 @@ export const deletingGroup = group => {
   .then(group => dispatch(deleteGroup(group)))
   }
 }
+
+export const selectGroup = group => ({type: SELECT_GROUP, payload: group})

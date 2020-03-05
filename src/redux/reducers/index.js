@@ -1,5 +1,5 @@
 import { combineReducers } from 'redux'
-import { FETCH_STUDENTS, FETCH_COHORT, FETCH_GROUPS, CREATE_GROUP, UPDATE_GROUP, DELETE_GROUP, UPDATE_ACTIVE_STUDENT_X, UPDATE_ACTIVE_STUDENT_Y, UPDATE_FILTERS, UPDATE_MOD_FILTERS, FETCH_ACTIVITIES, OPEN_GROUP_FORM, SHOW_ACTIVITY_SEARCH, SHOW_ACTIVITY_CREATE, RESET_SELECTED_ACTIVITY, SELECT_ACTIVITY, SEARCH_ACTIVITY, CANCEL_ACTIVITY_SEARCH, CLOSE_CREATE_ACTIVITY_FORM, CREATE_ACTIVITY } from '../actions/constants'
+import { FETCH_STUDENTS, FETCH_COHORT, FETCH_GROUPS, CREATE_GROUP, UPDATE_GROUP, DELETE_GROUP, UPDATE_ACTIVE_STUDENT_X, UPDATE_ACTIVE_STUDENT_Y, UPDATE_FILTERS, UPDATE_MOD_FILTERS, FETCH_ACTIVITIES, OPEN_GROUP_FORM, SHOW_ACTIVITY_SEARCH, SHOW_ACTIVITY_CREATE, RESET_SELECTED_ACTIVITY, SELECT_ACTIVITY, SEARCH_ACTIVITY, CANCEL_ACTIVITY_SEARCH, CLOSE_CREATE_ACTIVITY_FORM, CREATE_ACTIVITY, SELECT_GROUP } from '../actions/constants'
 
 const testReducer = (state=[], action) => {
   return state
@@ -88,7 +88,9 @@ const activitiesReducer = (state=[], action) => {
 const createGroupToggleReducer = (state=false, action) => {
   switch (action.type) {
     case OPEN_GROUP_FORM:
-      return action.payload
+      return true
+    case SELECT_GROUP:
+      return true
     default:
       return state
   }
@@ -115,6 +117,8 @@ const selectedActivityReducer = (state = {}, action) => {
       return {}
     case CREATE_ACTIVITY:
       return action.payload
+    case SELECT_GROUP:
+      return action.payload.activity
     default:
       return state
   }
@@ -123,11 +127,15 @@ const selectedActivityReducer = (state = {}, action) => {
 const initialGroupState = () => ({ notes: '', avoid: false, student_ids: [], activity_date: new Date().toISOString().slice(0, 10) })
 
 const selectedGroupReducer = (state = initialGroupState(), action) => {
-  switch (action.payload) {
-    // case value:
-
-    //   break;
-
+  switch (action.type) {
+    case SELECT_GROUP:
+      return action.payload
+    case UPDATE_ACTIVE_STUDENT_X:
+      return {...initialGroupState(), activity_date: state.activity_date}
+    case UPDATE_ACTIVE_STUDENT_Y:
+      return { ...initialGroupState(), activity_date: state.activity_date }
+    case DELETE_GROUP:
+      return { ...initialGroupState(), activity_date: state.activity_date }
     default:
       return state
   }

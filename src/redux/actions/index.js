@@ -9,6 +9,6 @@ export const updateFilters = event => ({type: UPDATE_FILTERS, payload: event})
 export const updateModFilters = event => ({type: UPDATE_MOD_FILTERS, payload: event})
 
 // group actions
-export const openGroupForm = bool => ({type: OPEN_GROUP_FORM, payload: bool})
+export const openGroupForm = () => ({type: OPEN_GROUP_FORM})
 
 export { creatingGroup, fetchingGroups }

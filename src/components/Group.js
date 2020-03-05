@@ -5,7 +5,7 @@ import { faTrashAlt, faEdit } from '@fortawesome/free-regular-svg-icons'
 import { faExclamationTriangle } from '@fortawesome/free-solid-svg-icons'
 
 import { useDispatch } from 'react-redux'
-import { deletingGroup } from '../redux/actions/group'
+import { deletingGroup, selectGroup } from '../redux/actions/group'
 
 
 const Group = ({ group, handleEdit, matchedStudents }) => {
@@ -31,7 +31,7 @@ const Group = ({ group, handleEdit, matchedStudents }) => {
           {group.activity.name}
         </span>
 
-        <FontAwesomeIcon icon={faEdit} onClick={() => handleEdit(group, group.activity)} />
+        <FontAwesomeIcon icon={faEdit} onClick={() => dispatch(selectGroup(group))} />
 
         <FontAwesomeIcon icon={faTrashAlt} onClick={() => dispatch(deletingGroup(group))} />
 

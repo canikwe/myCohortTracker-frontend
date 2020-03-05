@@ -200,7 +200,7 @@ const SideBar = ({ handleSubmit, deleteGroup, updateActivities }) => {
         : 
         <button 
           className='secondary' 
-          onClick={() => dispatch(openGroupForm(true))}
+          onClick={() => dispatch(openGroupForm())}
         >
           New Pair
         </button> }

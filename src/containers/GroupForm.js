@@ -1,12 +1,50 @@
-import React from 'react'
-import { useSelector, shallowEqual } from 'react-redux'
+import React, { useState, useEffect } from 'react'
+import { useSelector, shallowEqual, useDispatch } from 'react-redux'
+import { creatingGroup, updatingGroup } from '../redux/actions/group'
 
-const GroupForm = ({ handleSelection, group, updateGroup, submitForm }) => {
+const GroupForm = ({ handleSelection }) => {
   
-  const { students } = useSelector(state => ({
-    students: state.students
+  const { students, activity, selectedGroup, activeStudentX, activeStudentY } = useSelector(state => ({
+    students: state.students,
+    activity: state.selectedActivity,
+    selectedGroup: state.selectedGroup,
+    activeStudentX: state.activeStudentX,
+    activeStudentY: state.activeStudentY
   }), shallowEqual)
 
+  const [group, updateGroup] = useState(selectedGroup)
+
+  useEffect(() => {
+    updateGroup(selectedGroup)
+  }, [selectedGroup])
+
+  useEffect(() => {
+    if (activeStudentX && activeStudentX === activeStudentY) {
+      updateGroup(g => ({ ...g, activity_date: g.activity_date, student_ids: [activeStudentX.id] }))
+    } else if (activeStudentX && activeStudentY) {
+      updateGroup(g => ({ ...g, activity_date: g.activity_date, student_ids: [activeStudentX.id, activeStudentY.id] }))
+    } else if (activeStudentX) {
+      updateGroup(g => ({ ...g, activity_date: g.activity_date, student_ids: [activeStudentX.id] }))
+    } else if (activeStudentY) {
+      updateGroup(g => ({ ...g, activity_date: g.activity_date, student_ids: [activeStudentY.id] }))
+    } else {
+      updateGroup(g => ({ ...g, activity_date: g.activity_date, student_ids: [] }))
+    }
+  }, [activeStudentX, activeStudentY, selectedGroup])
+
+  const dispatch = useDispatch()
+
+  const submitForm = e => {
+    e.preventDefault()
+    if (activity.id) {
+      const data = { group: { ...group, activity_id: activity.id } }
+
+      group.id ? dispatch(updatingGroup(data)) : dispatch(creatingGroup(data)) 
+    } else {
+      alert('Please choose or create a new activity')
+    }
+
+  }
   return (
     <form onSubmit={submitForm}>
       <div>
