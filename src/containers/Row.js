@@ -1,7 +1,9 @@
 import React from 'react'
-import Cell from '../components/Cell'
+
 import { useDispatch } from 'react-redux'
 import { updateActiveStudentX, updateActiveStudentY } from '../redux/actions/index'
+
+import Cell from '../components/Cell'
 
 const Row = ({ studentX, allStudents }) => {
   const dispatch = useDispatch()

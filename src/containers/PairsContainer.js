@@ -1,10 +1,10 @@
 import React from 'react'
-// import allStudents from "../helper/data.json"
-import ColumnHeader from '../components/ColumnHeader'
-import Row from './Row'
 
 import { useSelector, shallowEqual, useDispatch } from 'react-redux'
 import { updateActiveStudentX, updateActiveStudentY } from '../redux/actions/index'
+
+import ColumnHeader from '../components/ColumnHeader'
+import Row from './Row'
 
 const PairsContainer = () => {
   const dispatch = useDispatch()

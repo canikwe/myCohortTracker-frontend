@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from 'react'
 import { useSelector, shallowEqual, useDispatch } from 'react-redux'
 import { creatingGroup, updatingGroup } from '../redux/actions/group'
+import { closeGroupForm } from '../redux/actions'
 
-const GroupForm = ({ handleSelection }) => {
+const GroupForm = () => {
   
   const { students, activity, selectedGroup, activeStudentX, activeStudentY } = useSelector(state => ({
     students: state.students,
@@ -43,8 +44,20 @@ const GroupForm = ({ handleSelection }) => {
     } else {
       alert('Please choose or create a new activity')
     }
-
   }
+
+  const handleStudentSelect = event => {
+    let student_ids = []
+    const studentId = parseInt(event.target.id)
+
+    if (group.student_ids.includes(studentId)) {
+      student_ids = group.student_ids.filter(i => i !== studentId)
+    } else {
+      student_ids = [...group.student_ids, studentId]
+    }
+    updateGroup({ ...group, student_ids })
+  }
+
   return (
     <form onSubmit={submitForm}>
       <div>
@@ -68,7 +81,7 @@ const GroupForm = ({ handleSelection }) => {
                 value={s.first_name}
                 id={s.id}
                 className={`stdnt ${group.student_ids.includes(s.id) ? 'selected' : ''}`}
-                onClick={handleSelection}
+                onClick={(handleStudentSelect)}
               />
             )
           })
@@ -94,7 +107,7 @@ const GroupForm = ({ handleSelection }) => {
       </div>
 
       <div>
-        {/* <input type='button' className='cancel' value='Cancel' onClick={() => updateGroup({notes: '', avoid: false, student_ids: group.student_ids, activity_date: group.activity_date})} /> */}
+        <input type='button' className='cancel' value='Cancel' onClick={() => dispatch(closeGroupForm())} />
         <input type='submit' value={group.id ? "Update" : "Add"} />
       </div>
     </form>

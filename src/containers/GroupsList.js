@@ -1,9 +1,7 @@
 import React from 'react'
-import Group from '../components/Group'
-import { getStudentGroups, getMatchedGroups, filteredGroups } from '../helper/functions'
-
 import { useSelector, shallowEqual } from 'react-redux'
-
+import { getStudentGroups, getMatchedGroups, filteredGroups } from '../helper/functions'
+import Group from '../components/Group'
 
 const GroupsContainer = () => {
 
@@ -42,7 +40,6 @@ const GroupsContainer = () => {
             return (<Group
               key={g.id}
               group={g} 
-              // handleEdit={handleEdit} 
               matchedStudents={matchedStudents}
             />
           )})

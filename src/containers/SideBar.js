@@ -1,11 +1,14 @@
 import React, { useEffect } from 'react'
+
 import { shallowEqual, useSelector, useDispatch } from 'react-redux'
+import { openGroupForm, closeGroupForm } from '../redux/actions'
+
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faArrowLeft } from '@fortawesome/free-solid-svg-icons'
 import { CirclePicker } from 'react-color'
+
 import GroupsList from './GroupsList'
 import CreateGroupContainer from './CreateGroupContainer'
-import { openGroupForm, closeGroupForm } from '../redux/actions'
 
 const SideBar = () => {
 

@@ -13,13 +13,6 @@ const ActivityOptions = () => {
 
   const dispatch = useDispatch()
 
-  // const handleSearchToggle = () => updateSearchToggle(!searchToggle)
-
-  // const showSearch = () => {
-  //   updateActivity({})
-  //   handleSearchToggle()
-  // }
-
   return (
     <>
       {selectedActivity.id ? 
@@ -36,9 +29,6 @@ const ActivityOptions = () => {
           <div>
             <div>Search</div>
             <FontAwesomeIcon icon={faSearch} onClick={() => dispatch(showActivitySearch())} size="2x" color='grey' />
-            {/* <div>
-                Search 
-              </div> */}
           </div>
           <div className="wrapper">
             <div className="line"></div>
