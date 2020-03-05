@@ -11,7 +11,7 @@ import GroupsList from './GroupsList'
 // import SearchActivityForm from '../components/SearchActivityForm'
 // import ActivityOptions from '../components/ActivityOptions'
 import CreateGroupContainer from './CreateGroupContainer'
-import { openGroupForm } from '../redux/actions'
+import { openGroupForm, closeGroupForm } from '../redux/actions'
 
 const SideBar = ({ handleSubmit, deleteGroup, updateActivities }) => {
   const [groupFormToggle, updateGroupFormToggle] = useState(false) // create group form toggle
@@ -52,112 +52,112 @@ const SideBar = ({ handleSubmit, deleteGroup, updateActivities }) => {
     }
   }, [])
 
-  useEffect(() => {
-    if (activeStudentX && activeStudentX === activeStudentY) {
-      updateGroup(g => ({ ...initialGroupState(), activity_date: g.activity_date, student_ids: [activeStudentX.id] }))
-    } else if (activeStudentX && activeStudentY) {
-      updateGroup(g => ({ ...initialGroupState(), activity_date: g.activity_date, student_ids: [activeStudentX.id, activeStudentY.id] }))
-    } else if (activeStudentX) {
-      updateGroup(g => ({ ...initialGroupState(), activity_date: g.activity_date, student_ids: [activeStudentX.id] }))
-    } else if (activeStudentY) {
-      updateGroup(g => ({ ...initialGroupState(), activity_date: g.activity_date, student_ids: [activeStudentY.id] }))
-    } else {
-      updateGroup(g => ({ ...initialGroupState(), activity_date: g.activity_date, student_ids: [] }))
-    }
-  }, [activeStudentX, activeStudentY])
+  // useEffect(() => {
+  //   if (activeStudentX && activeStudentX === activeStudentY) {
+  //     updateGroup(g => ({ ...initialGroupState(), activity_date: g.activity_date, student_ids: [activeStudentX.id] }))
+  //   } else if (activeStudentX && activeStudentY) {
+  //     updateGroup(g => ({ ...initialGroupState(), activity_date: g.activity_date, student_ids: [activeStudentX.id, activeStudentY.id] }))
+  //   } else if (activeStudentX) {
+  //     updateGroup(g => ({ ...initialGroupState(), activity_date: g.activity_date, student_ids: [activeStudentX.id] }))
+  //   } else if (activeStudentY) {
+  //     updateGroup(g => ({ ...initialGroupState(), activity_date: g.activity_date, student_ids: [activeStudentY.id] }))
+  //   } else {
+  //     updateGroup(g => ({ ...initialGroupState(), activity_date: g.activity_date, student_ids: [] }))
+  //   }
+  // }, [activeStudentX, activeStudentY])
 
-  const submitForm = e => {
-    e.preventDefault()
-    if (activity.id) {
+  // const submitForm = e => {
+  //   e.preventDefault()
+  //   if (activity.id) {
 
-      const data = { group: {...group, activity_id: activity.id} }
+  //     const data = { group: {...group, activity_id: activity.id} }
 
-      handleSubmit(data)
-      updateGroup(resetGroupState())
-    } else {
-      alert('Please choose or create a new activity')
-    }
-  }
+  //     // handleSubmit(data)
+  //     updateGroup(resetGroupState())
+  //   } else {
+  //     alert('Please choose or create a new activity')
+  //   }
+  // }
 
-  const handleSelection = e => {
-    const id = parseInt(e.target.id)
+  // const handleSelection = e => {
+  //   const id = parseInt(e.target.id)
 
-    if (group.student_ids.includes(id)) {
-      const student_ids = group.student_ids.filter(i => i !== id)
-      updateGroup({ ...group, student_ids })
-    } else {
-      const student_ids = [...group.student_ids, id]
-      updateGroup({ ...group, student_ids })
-    }
-  }
+  //   if (group.student_ids.includes(id)) {
+  //     const student_ids = group.student_ids.filter(i => i !== id)
+  //     updateGroup({ ...group, student_ids })
+  //   } else {
+  //     const student_ids = [...group.student_ids, id]
+  //     updateGroup({ ...group, student_ids })
+  //   }
+  // }
 
 // ❗️❗️❗️❗️❗️ This needs to update two pieces of state
-  const handleDelete = group => {
-    deleteGroup(group)
-    updateGroup(resetGroupState())
-  }
+  // const handleDelete = group => {
+  //   deleteGroup(group)
+  //   updateGroup(resetGroupState())
+  // }
 
-  const selectActivity = (e, activity) => {
-    updateSearchTerm(activity.name)
-    updateActivity(activity)
-  }
+  // const selectActivity = (e, activity) => {
+  //   updateSearchTerm(activity.name)
+  //   updateActivity(activity)
+  // }
 
-  const displayedActivities = () => {
-    if (searchTerm === '') {
-      return []
-    } else {
-      return activities.filter(a => a.name.toLowerCase().includes(searchTerm.toLowerCase()))
-    }
-  }
+  // const displayedActivities = () => {
+  //   if (searchTerm === '') {
+  //     return []
+  //   } else {
+  //     return activities.filter(a => a.name.toLowerCase().includes(searchTerm.toLowerCase()))
+  //   }
+  // }
 
-  const toggleCreateForm = () => {
-    updateCreateFormToggle(!createFormToggle)
-    updateSearchToggle(false)
-    updateActivity({ name: searchTerm, mod: 1, category: '' })
-  }
+  // const toggleCreateForm = () => {
+  //   updateCreateFormToggle(!createFormToggle)
+  //   updateSearchToggle(false)
+  //   updateActivity({ name: searchTerm, mod: 1, category: '' })
+  // }
 
-  const handleActivityChange = e => {
-    updateActivity({ ...activity, [e.target.name]: e.target.value })
-  }
+  // const handleActivityChange = e => {
+  //   updateActivity({ ...activity, [e.target.name]: e.target.value })
+  // }
 
-  const handleSearchTerm = e => {
-    updateSearchTerm(e.target.value)
-    if (!activity.id) updateActivity({ ...activity, name: searchTerm })
-  }
+  // const handleSearchTerm = e => {
+  //   updateSearchTerm(e.target.value)
+  //   if (!activity.id) updateActivity({ ...activity, name: searchTerm })
+  // }
 
-  const displayedGroups = () => {
-    if (activeStudentX && activeStudentY) {
-      return getMatchedGroups(activeStudentX, activeStudentY, groups)
-    } else if (activeStudentX && !activeStudentY) {
-      return getStudentGroups(groups, activeStudentX)
-    } else if (activeStudentY && !activeStudentX) {
-      return getStudentGroups(groups, activeStudentY)
-    } else {
-      return []
-    }
-  }
+  // const displayedGroups = () => {
+  //   if (activeStudentX && activeStudentY) {
+  //     return getMatchedGroups(activeStudentX, activeStudentY, groups)
+  //   } else if (activeStudentX && !activeStudentY) {
+  //     return getStudentGroups(groups, activeStudentX)
+  //   } else if (activeStudentY && !activeStudentX) {
+  //     return getStudentGroups(groups, activeStudentY)
+  //   } else {
+  //     return []
+  //   }
+  // }
 
-  const createActivity = data => {
-    console.log(data)
-    fetch(BASE_URL + 'activities', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json', 'Accepted': 'application/json'
-      },
-      body: JSON.stringify(data)
-    })
-    .then(res => res.json())
-    .then(activity => {
-      updateActivities(activities => [...activities, activity])
-      updateActivity(activity)
-    })
-  }
+  // const createActivity = data => {
+  //   console.log(data)
+  //   fetch(BASE_URL + 'activities', {
+  //     method: 'POST',
+  //     headers: {
+  //       'Content-Type': 'application/json', 'Accepted': 'application/json'
+  //     },
+  //     body: JSON.stringify(data)
+  //   })
+  //   .then(res => res.json())
+  //   .then(activity => {
+  //     updateActivities(activities => [...activities, activity])
+  //     updateActivity(activity)
+  //   })
+  // }
 
-  const handleCreateActivity = e => {
-    e.preventDefault()
-    toggleCreateForm()
-    createActivity({ activity })
-  }
+  // const handleCreateActivity = e => {
+  //   e.preventDefault()
+  //   toggleCreateForm()
+  //   createActivity({ activity })
+  // }
 
   const handleChangeComplete = (color) => {
     const root = document.querySelector(':root')
@@ -178,7 +178,7 @@ const SideBar = ({ handleSubmit, deleteGroup, updateActivities }) => {
         <span>
           <FontAwesomeIcon 
             icon={faArrowLeft}
-            onClick={closeForm}
+            onClick={() => dispatch(closeGroupForm())}
           /> 
           Go back
         </span> 
@@ -186,12 +186,7 @@ const SideBar = ({ handleSubmit, deleteGroup, updateActivities }) => {
          
       {
         activeStudentX || activeStudentY ?
-        <GroupsList
-          groups={displayedGroups()}
-          updateGroup={updateGroup}
-          updateActivity={updateActivity}
-          updateGroupFormToggle={updateGroupFormToggle}
-        />
+        <GroupsList />
         : <h3 className='header'>Choose a Group</h3>
       }
 

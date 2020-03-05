@@ -8,7 +8,7 @@ import { useDispatch } from 'react-redux'
 import { deletingGroup, selectGroup } from '../redux/actions/group'
 
 
-const Group = ({ group, handleEdit, matchedStudents }) => {
+const Group = ({ group, matchedStudents }) => {
   const dispatch = useDispatch()
 
   const formatMatchedStudents = () => {

@@ -1,5 +1,5 @@
 import { combineReducers } from 'redux'
-import { FETCH_STUDENTS, FETCH_COHORT, FETCH_GROUPS, CREATE_GROUP, UPDATE_GROUP, DELETE_GROUP, UPDATE_ACTIVE_STUDENT_X, UPDATE_ACTIVE_STUDENT_Y, UPDATE_FILTERS, UPDATE_MOD_FILTERS, FETCH_ACTIVITIES, OPEN_GROUP_FORM, SHOW_ACTIVITY_SEARCH, SHOW_ACTIVITY_CREATE, RESET_SELECTED_ACTIVITY, SELECT_ACTIVITY, SEARCH_ACTIVITY, CANCEL_ACTIVITY_SEARCH, CLOSE_CREATE_ACTIVITY_FORM, CREATE_ACTIVITY, SELECT_GROUP } from '../actions/constants'
+import { FETCH_STUDENTS, FETCH_COHORT, FETCH_GROUPS, CREATE_GROUP, UPDATE_GROUP, DELETE_GROUP, UPDATE_ACTIVE_STUDENT_X, UPDATE_ACTIVE_STUDENT_Y, UPDATE_FILTERS, UPDATE_MOD_FILTERS, FETCH_ACTIVITIES, OPEN_GROUP_FORM, SHOW_ACTIVITY_SEARCH, SHOW_ACTIVITY_CREATE, RESET_SELECTED_ACTIVITY, SELECT_ACTIVITY, SEARCH_ACTIVITY, CANCEL_ACTIVITY_SEARCH, CLOSE_CREATE_ACTIVITY_FORM, CREATE_ACTIVITY, SELECT_GROUP, CLOSE_GROUP_FORM } from '../actions/constants'
 
 const testReducer = (state=[], action) => {
   return state
@@ -89,6 +89,8 @@ const createGroupToggleReducer = (state=false, action) => {
   switch (action.type) {
     case OPEN_GROUP_FORM:
       return true
+    case CLOSE_GROUP_FORM:
+      return false
     case SELECT_GROUP:
       return true
     default:
@@ -119,6 +121,8 @@ const selectedActivityReducer = (state = {}, action) => {
       return action.payload
     case SELECT_GROUP:
       return action.payload.activity
+    case CLOSE_GROUP_FORM:
+      return {}
     default:
       return state
   }
@@ -136,6 +140,8 @@ const selectedGroupReducer = (state = initialGroupState(), action) => {
       return { ...initialGroupState(), activity_date: state.activity_date }
     case DELETE_GROUP:
       return { ...initialGroupState(), activity_date: state.activity_date }
+    case CLOSE_GROUP_FORM:
+      return initialGroupState()
     default:
       return state
   }
@@ -155,6 +161,8 @@ const activityOptionsReducer = (state = 1, action) => {
     case CLOSE_CREATE_ACTIVITY_FORM:
       return 1
     case CREATE_ACTIVITY:
+      return 1
+    case CLOSE_GROUP_FORM:
       return 1
     default:
       return state

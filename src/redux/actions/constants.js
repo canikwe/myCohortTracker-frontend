@@ -19,6 +19,7 @@ export const FETCH_ACTIVITIES = 'FETCH_ACTIVITIES'
 
 // sidebar
 export const OPEN_GROUP_FORM = 'OPEN_GROUP_FORM'
+export const CLOSE_GROUP_FORM = 'CLOSE_GROUP_FORM'
 
   // activity actions
 export const SHOW_ACTIVITY_SEARCH = 'SHOW_ACTIVITY_SEARCH'

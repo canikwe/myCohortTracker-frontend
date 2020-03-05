@@ -1,14 +1,30 @@
 import React from 'react'
 import Group from '../components/Group'
+import { getStudentGroups, getMatchedGroups, filteredGroups } from '../helper/functions'
 
 import { useSelector, shallowEqual } from 'react-redux'
 
 
-const GroupsContainer = ({ groups, updateGroup, updateActivity, handleDelete, updateGroupFormToggle}) => {
+const GroupsContainer = ({ updateGroup, updateActivity, updateGroupFormToggle}) => {
 
-  const { students } = useSelector(state => ({
-    students: state.students
-  }), shallowEqual)
+  const { students, groups } = useSelector(({activeStudentX, activeStudentY, students, groups}) => {
+    const displayedGroups = () => {
+      if (activeStudentX && activeStudentY) {
+        return getMatchedGroups(activeStudentX, activeStudentY, groups)
+      } else if (activeStudentX && !activeStudentY) {
+        return getStudentGroups(groups, activeStudentX)
+      } else if (activeStudentY && !activeStudentX) {
+        return getStudentGroups(groups, activeStudentY)
+      } else {
+        return []
+      }
+    }
+    
+    return ({
+      students: students,
+      groups: displayedGroups(),
+    })
+  }, shallowEqual)
 
   const handleEdit = (group, activity) => {
     updateGroup(group)
