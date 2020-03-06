@@ -2,8 +2,6 @@ import React, { useEffect } from 'react'
 
 import { useDispatch } from 'react-redux'
 import { Switch, Route } from 'react-router-dom'
-import { fetchingStudents, fetchingCohort } from './redux/actions/async'
-import { fetchingGroups } from './redux/actions/group'
 import { fetchingActivities } from './redux/actions/activities'
 
 import Header from './components/Header'
@@ -19,9 +17,6 @@ function App() {
   const dispatch = useDispatch()
 
   useEffect(() => {
-    // dispatch(fetchingCohort())
-    // dispatch(fetchingStudents())
-    // dispatch(fetchingGroups())
     dispatch(fetchingActivities())
     dispatch(fetchingCohorts())
     

@@ -18,6 +18,11 @@ const HomeView = () => {
           </li>
         ))}
       </ul>
+
+      <div>
+        <h2>Create Cohort</h2>
+        <Link to='/cohorts/new'>Create Cohort</Link>
+      </div>
       
     </section>
 

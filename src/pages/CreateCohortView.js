@@ -28,7 +28,7 @@ const CreateCohortView = () => {
       <h1>Create Cohort</h1>
       <form onSubmit={e => {
           e.preventDefault()
-          dispatch(creatingCohort({...cohort, students}))
+          dispatch(creatingCohort({...cohort, students, csv: e.target.csv.value}))
         }}>
         <div>
           <label htmlFor='batch'>Batch</label>
@@ -55,6 +55,12 @@ const CreateCohortView = () => {
             </div>
           )}
         )}
+
+        <p />
+        <p />
+        <p />
+        <p />
+        <input type='file' name='csv' />
         <input type='submit' value='Create Cohort' />
       </form>
       <button onClick={() => updateStudents([...students, newStudent()])}>Add New Student</button>

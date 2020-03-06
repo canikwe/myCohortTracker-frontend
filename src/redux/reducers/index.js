@@ -1,5 +1,5 @@
 import { combineReducers } from 'redux'
-import { FETCH_STUDENTS, FETCH_COHORT, FETCH_GROUPS, CREATE_GROUP, UPDATE_GROUP, DELETE_GROUP, UPDATE_ACTIVE_STUDENT_X, UPDATE_ACTIVE_STUDENT_Y, UPDATE_FILTERS, UPDATE_MOD_FILTERS, FETCH_ACTIVITIES, OPEN_GROUP_FORM, SHOW_ACTIVITY_SEARCH, SHOW_ACTIVITY_CREATE, RESET_SELECTED_ACTIVITY, SELECT_ACTIVITY, SEARCH_ACTIVITY, CANCEL_ACTIVITY_SEARCH, CLOSE_CREATE_ACTIVITY_FORM, CREATE_ACTIVITY, SELECT_GROUP, CLOSE_GROUP_FORM, FETCH_COHORTS, CREATE_COHORT } from '../actions/constants'
+import { FETCH_STUDENTS, FETCH_COHORT, CREATE_GROUP, UPDATE_GROUP, DELETE_GROUP, UPDATE_ACTIVE_STUDENT_X, UPDATE_ACTIVE_STUDENT_Y, UPDATE_FILTERS, UPDATE_MOD_FILTERS, FETCH_ACTIVITIES, OPEN_GROUP_FORM, SHOW_ACTIVITY_SEARCH, SHOW_ACTIVITY_CREATE, RESET_SELECTED_ACTIVITY, SELECT_ACTIVITY, SEARCH_ACTIVITY, CANCEL_ACTIVITY_SEARCH, CLOSE_CREATE_ACTIVITY_FORM, CREATE_ACTIVITY, SELECT_GROUP, CLOSE_GROUP_FORM, FETCH_COHORTS, CREATE_COHORT } from '../actions/constants'
 
 const testReducer = (state=[], action) => {
   return state
@@ -44,24 +44,20 @@ const studentsReducer = (state=[], action) => {
 
 const groupsReducer = (state=[], action) => {
   switch (action.type) {
-    case FETCH_GROUPS:
-      return action.payload
+    case FETCH_COHORT:
+      return action.payload.groups
     case CREATE_GROUP:
       return [...state, action.payload]
     case UPDATE_GROUP:
       return state.map(g => g.id === action.payload.id ? action.payload : g)
     case DELETE_GROUP:
       return state.filter(g => g.id !== action.payload.id)
-    case FETCH_COHORT:
-      return action.payload.groups
-    // case UPDATE_FILTERS:
-    //   if (action.payload !== 'all')
     default:
       return state
   }
 }
 
-const activeStudentXReducer = (state={}, action) => {
+const activeStudentXReducer = (state=null, action) => {
   switch (action.type) {
     case UPDATE_ACTIVE_STUDENT_X:
       return action.payload
@@ -70,7 +66,7 @@ const activeStudentXReducer = (state={}, action) => {
   }
 }
 
-const activeStudentYReducer = (state={}, action) => {
+const activeStudentYReducer = (state=null, action) => {
   switch (action.type) {
     case UPDATE_ACTIVE_STUDENT_Y:
       return action.payload

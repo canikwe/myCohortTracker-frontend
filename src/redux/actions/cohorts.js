@@ -24,11 +24,14 @@ export const fetchingCohort = batch_id => {
 const createCohort = cohort => ({type: CREATE_COHORT, payload: cohort})
 
 export const creatingCohort = data => {
+  let formData = new FormData()
+  formData.append('cohort', data.csv)
+  debugger
   return dispatch => {
     fetch(BASE_URL + 'cohorts', {
       method: 'POST',
-      headers: HEADERS,
-      body: JSON.stringify({cohort: data})
+      // headers: HEADERS,
+      body: formData
     })
     .then(res => res.json())
     .then(cohort => dispatch(createCohort(cohort)))
