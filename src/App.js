@@ -35,7 +35,7 @@ function App() {
         <Route exact path='/home'>
           <HomeView />
         </Route>
-        <Route exact path='/pairs'>
+        <Route exact path='/:batch_id/pairs'>
           <PairsView />
         </Route>
         <Route exact path='/cohorts/new'>

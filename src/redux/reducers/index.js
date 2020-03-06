@@ -7,6 +7,8 @@ const testReducer = (state=[], action) => {
 
 const cohortReducer = (state = {}, action) => {
   switch (action.type) {
+    // case FETCH_COHORTS:
+    //   return action.payload[0]
     case FETCH_COHORT:
       return action.payload
     case CREATE_COHORT:
