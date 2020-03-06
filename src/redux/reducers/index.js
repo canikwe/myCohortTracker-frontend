@@ -154,13 +154,15 @@ const selectedGroupReducer = (state = initialGroupState(), action) => {
     case SELECT_GROUP:
       return action.payload
     case UPDATE_ACTIVE_STUDENT_X:
-      return {...initialGroupState(), activity_date: state.activity_date}
+      return {...initialGroupState(), cohort_id: state.cohort_id, activity_date: state.activity_date}
     case UPDATE_ACTIVE_STUDENT_Y:
-      return { ...initialGroupState(), activity_date: state.activity_date }
+      return { ...initialGroupState(), cohort_id: state.cohort_id, activity_date: state.activity_date }
     case DELETE_GROUP:
-      return { ...initialGroupState(), activity_date: state.activity_date }
+      return { ...initialGroupState(), cohort_id: state.cohort_id, activity_date: state.activity_date }
     case CLOSE_GROUP_FORM:
-      return initialGroupState()
+      return {...initialGroupState(), cohort_id: state.cohort_id }
+    case FETCH_COHORT:
+      return {...state, cohort_id: action.payload.cohort.id}
     default:
       return state
   }
