@@ -1,5 +1,5 @@
 import { combineReducers } from 'redux'
-import { FETCH_STUDENTS, FETCH_COHORT, FETCH_GROUPS, CREATE_GROUP, UPDATE_GROUP, DELETE_GROUP, UPDATE_ACTIVE_STUDENT_X, UPDATE_ACTIVE_STUDENT_Y, UPDATE_FILTERS, UPDATE_MOD_FILTERS, FETCH_ACTIVITIES, OPEN_GROUP_FORM, SHOW_ACTIVITY_SEARCH, SHOW_ACTIVITY_CREATE, RESET_SELECTED_ACTIVITY, SELECT_ACTIVITY, SEARCH_ACTIVITY, CANCEL_ACTIVITY_SEARCH, CLOSE_CREATE_ACTIVITY_FORM, CREATE_ACTIVITY, SELECT_GROUP, CLOSE_GROUP_FORM, FETCH_COHORTS } from '../actions/constants'
+import { FETCH_STUDENTS, FETCH_COHORT, FETCH_GROUPS, CREATE_GROUP, UPDATE_GROUP, DELETE_GROUP, UPDATE_ACTIVE_STUDENT_X, UPDATE_ACTIVE_STUDENT_Y, UPDATE_FILTERS, UPDATE_MOD_FILTERS, FETCH_ACTIVITIES, OPEN_GROUP_FORM, SHOW_ACTIVITY_SEARCH, SHOW_ACTIVITY_CREATE, RESET_SELECTED_ACTIVITY, SELECT_ACTIVITY, SEARCH_ACTIVITY, CANCEL_ACTIVITY_SEARCH, CLOSE_CREATE_ACTIVITY_FORM, CREATE_ACTIVITY, SELECT_GROUP, CLOSE_GROUP_FORM, FETCH_COHORTS, CREATE_COHORT } from '../actions/constants'
 
 const testReducer = (state=[], action) => {
   return state
@@ -8,6 +8,8 @@ const testReducer = (state=[], action) => {
 const cohortReducer = (state = {}, action) => {
   switch (action.type) {
     case FETCH_COHORT:
+      return action.payload
+    case CREATE_COHORT:
       return action.payload
     default:
       return state
@@ -18,6 +20,8 @@ const cohortsReducer = (state = [], action) => {
   switch (action.type) {
     case FETCH_COHORTS:
       return action.payload
+    case CREATE_COHORT:
+      return [...state, action.payload]
     default:
       return state
   }
@@ -26,9 +30,9 @@ const cohortsReducer = (state = [], action) => {
 const studentsReducer = (state=[], action) => {
   switch (action.type) {
     case FETCH_STUDENTS:
-      const students = action.payload.sort((a, b) => a.first_name > b.first_name ? 1 : -1)
-      
-      return students
+      return action.payload.sort((a, b) => a.first_name > b.first_name ? 1 : -1)
+    case CREATE_COHORT:
+      return action.payload.students.sort((a, b) => a.first_name > b.first_name ? 1 : -1)
     default:
       return state
   }

@@ -11,6 +11,7 @@ import PairsView from './pages/PairsView'
 import HomeView from './pages/HomeView'
 import './scss/main.scss'
 import { fetchingCohorts } from './redux/actions/cohorts'
+import CreateCohortView from './pages/CreateCohortView'
 
 
 function App() {
@@ -36,6 +37,9 @@ function App() {
         </Route>
         <Route exact path='/pairs'>
           <PairsView />
+        </Route>
+        <Route exact path='/cohorts/new'>
+          <CreateCohortView />
         </Route>
       </Switch>
     </main>
