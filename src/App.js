@@ -20,8 +20,8 @@ function App() {
 
   useEffect(() => {
     // dispatch(fetchingCohort())
-    dispatch(fetchingStudents())
-    dispatch(fetchingGroups())
+    // dispatch(fetchingStudents())
+    // dispatch(fetchingGroups())
     dispatch(fetchingActivities())
     dispatch(fetchingCohorts())
     

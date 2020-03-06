@@ -10,9 +10,9 @@ const cohortReducer = (state = {}, action) => {
     // case FETCH_COHORTS:
     //   return action.payload[0]
     case FETCH_COHORT:
-      return action.payload
-    case CREATE_COHORT:
-      return action.payload
+      return action.payload.cohort
+    // case CREATE_COHORT:
+    //   return action.payload
     default:
       return state
   }
@@ -23,7 +23,7 @@ const cohortsReducer = (state = [], action) => {
     case FETCH_COHORTS:
       return action.payload
     case CREATE_COHORT:
-      return [...state, action.payload]
+      return [...state, action.payload.cohort]
     default:
       return state
   }
@@ -34,6 +34,8 @@ const studentsReducer = (state=[], action) => {
     case FETCH_STUDENTS:
       return action.payload.sort((a, b) => a.first_name > b.first_name ? 1 : -1)
     case CREATE_COHORT:
+      return action.payload.students.sort((a, b) => a.first_name > b.first_name ? 1 : -1)
+    case FETCH_COHORT:
       return action.payload.students.sort((a, b) => a.first_name > b.first_name ? 1 : -1)
     default:
       return state
@@ -50,6 +52,8 @@ const groupsReducer = (state=[], action) => {
       return state.map(g => g.id === action.payload.id ? action.payload : g)
     case DELETE_GROUP:
       return state.filter(g => g.id !== action.payload.id)
+    case FETCH_COHORT:
+      return action.payload.groups
     // case UPDATE_FILTERS:
     //   if (action.payload !== 'all')
     default:

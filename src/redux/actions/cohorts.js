@@ -11,13 +11,13 @@ export const fetchingCohorts = () => {
   }
 }
 
-const fetchCohort = cohort => ({ type: FETCH_COHORT, payload: cohort })
+const fetchCohort = cohortData => ({ type: FETCH_COHORT, payload: cohortData })
 
 export const fetchingCohort = batch_id => {
   return dispatch => {
     fetch(BASE_URL + 'cohorts/' + batch_id)
     .then(res => res.json())
-    .then(cohort => dispatch(fetchCohort(cohort)))
+    .then(cohortData => dispatch(fetchCohort(cohortData)))
   }
 }
 
