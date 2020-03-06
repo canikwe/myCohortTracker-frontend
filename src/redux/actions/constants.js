@@ -3,6 +3,7 @@ export const HEADERS = { 'Content-Type': 'application/json', 'Accepted': 'applic
 
 // cohort
 export const FETCH_COHORT = 'FETCH_COHORT'
+export const FETCH_COHORTS = 'FETCH_COHORTS'
 
 // students
 export const FETCH_STUDENTS = 'FETCH_STUDENTS'

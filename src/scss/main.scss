@@ -7,8 +7,12 @@
 }
 
 .App {
-  text-align: center;
   background-color: $accent1;
+  min-height: 100vh;
+}
+
+.pairs-view {
+  text-align: center;
   display: grid;
   grid-template-columns: 75% 25%;
   grid-template-rows: auto 1fr ;
