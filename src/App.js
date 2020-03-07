@@ -10,6 +10,7 @@ import HomeView from './pages/HomeView'
 import './scss/main.scss'
 import { fetchingCohorts } from './redux/actions/cohorts'
 import CreateCohortView from './pages/CreateCohortView'
+import EditCohortView from './pages/EditCohortView'
 
 
 function App() {
@@ -32,6 +33,9 @@ function App() {
         </Route>
         <Route exact path='/:batch_id/pairs'>
           <PairsView />
+        </Route>
+        <Route exact path='/:batch_id/edit'>
+          <EditCohortView />
         </Route>
         <Route exact path='/cohorts/new'>
           <CreateCohortView />

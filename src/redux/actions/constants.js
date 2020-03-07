@@ -6,6 +6,7 @@ export const FETCH_COHORT = 'FETCH_COHORT'
 export const FETCH_COHORTS = 'FETCH_COHORTS'
 export const CREATE_COHORT = 'CREATE_COHORT'
 export const UPLOAD_CSV = 'UPLOAD_CSV'
+export const UPDATE_COHORT = 'UPDATE_COHORT'
 
 // students
 export const FETCH_STUDENTS = 'FETCH_STUDENTS'

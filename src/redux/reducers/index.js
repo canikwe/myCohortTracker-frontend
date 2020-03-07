@@ -1,5 +1,5 @@
 import { combineReducers } from 'redux'
-import { FETCH_STUDENTS, FETCH_COHORT, CREATE_GROUP, UPDATE_GROUP, DELETE_GROUP, UPDATE_ACTIVE_STUDENT_X, UPDATE_ACTIVE_STUDENT_Y, UPDATE_FILTERS, UPDATE_MOD_FILTERS, FETCH_ACTIVITIES, OPEN_GROUP_FORM, SHOW_ACTIVITY_SEARCH, SHOW_ACTIVITY_CREATE, RESET_SELECTED_ACTIVITY, SELECT_ACTIVITY, SEARCH_ACTIVITY, CANCEL_ACTIVITY_SEARCH, CLOSE_CREATE_ACTIVITY_FORM, CREATE_ACTIVITY, SELECT_GROUP, CLOSE_GROUP_FORM, FETCH_COHORTS, CREATE_COHORT } from '../actions/constants'
+import { FETCH_STUDENTS, FETCH_COHORT, CREATE_GROUP, UPDATE_GROUP, DELETE_GROUP, UPDATE_ACTIVE_STUDENT_X, UPDATE_ACTIVE_STUDENT_Y, UPDATE_FILTERS, UPDATE_MOD_FILTERS, FETCH_ACTIVITIES, OPEN_GROUP_FORM, SHOW_ACTIVITY_SEARCH, SHOW_ACTIVITY_CREATE, RESET_SELECTED_ACTIVITY, SELECT_ACTIVITY, SEARCH_ACTIVITY, CANCEL_ACTIVITY_SEARCH, CLOSE_CREATE_ACTIVITY_FORM, CREATE_ACTIVITY, SELECT_GROUP, CLOSE_GROUP_FORM, FETCH_COHORTS, CREATE_COHORT, UPDATE_COHORT } from '../actions/constants'
 
 const testReducer = (state=[], action) => {
   return state
@@ -7,12 +7,10 @@ const testReducer = (state=[], action) => {
 
 const cohortReducer = (state = {}, action) => {
   switch (action.type) {
-    // case FETCH_COHORTS:
-    //   return action.payload[0]
     case FETCH_COHORT:
       return action.payload.cohort
-    // case CREATE_COHORT:
-    //   return action.payload
+    case UPDATE_COHORT:
+      return action.payload.cohort
     default:
       return state
   }
@@ -24,6 +22,8 @@ const cohortsReducer = (state = [], action) => {
       return action.payload
     case CREATE_COHORT:
       return [...state, action.payload.cohort]
+    case UPDATE_COHORT:
+      return state.filter(c => c.id === action.payload.cohort.id ? action.payload.cohort : c)
     default:
       return state
   }
@@ -37,6 +37,8 @@ const studentsReducer = (state=[], action) => {
       return action.payload.students.sort((a, b) => a.first_name > b.first_name ? 1 : -1)
     case FETCH_COHORT:
       return action.payload.students.sort((a, b) => a.first_name > b.first_name ? 1 : -1)
+    case UPDATE_COHORT:
+      return action.payload.students.sort((a, b) => a.first_name > b.first_name ? 1 : -1)
     default:
       return state
   }
@@ -45,6 +47,10 @@ const studentsReducer = (state=[], action) => {
 const groupsReducer = (state=[], action) => {
   switch (action.type) {
     case FETCH_COHORT:
+      return action.payload.groups
+    case CREATE_COHORT:
+      return []
+    case UPDATE_COHORT:
       return action.payload.groups
     case CREATE_GROUP:
       return [...state, action.payload]

@@ -1,4 +1,4 @@
-import { FETCH_COHORTS, BASE_URL, CREATE_COHORT, HEADERS, FETCH_COHORT } from "./constants";
+import { FETCH_COHORTS, BASE_URL, CREATE_COHORT, HEADERS, FETCH_COHORT, UPDATE_COHORT } from "./constants";
 
 
 const fetchCohorts = cohorts => ({ type: FETCH_COHORTS, payload: cohorts })
@@ -49,5 +49,20 @@ export const uploadingCsv = data => {
     })
     .then(res => res.json())
     .then(cohort => dispatch(createCohort(cohort)))
+  }
+}
+
+const updateCohort = data => ({type: UPDATE_COHORT, payload: data})
+
+export const updatingCohort = data => {
+  return dispatch => {
+    fetch(BASE_URL + 'cohorts/' + data.id, {
+      method: 'PATCH',
+      headers: HEADERS,
+      body: JSON.stringify({ cohort: data })
+    })
+    .then(res => res.json())
+    .then(data => dispatch(updateCohort(data)))
+
   }
 }

@@ -14,7 +14,7 @@ const PairsView = () => {
   const { cohort } = useSelector(({cohort}) => ({ cohort }))
 
   useEffect(() => {
-    if (cohort.batch_id !== batch_id) {
+    if (cohort.batch_id !== parseInt(batch_id)) {
       dispatch(fetchingCohort(batch_id))
     }
   }, [dispatch, batch_id])

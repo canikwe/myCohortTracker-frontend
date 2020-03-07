@@ -11,8 +11,8 @@ const HomeView = () => {
       <h1>Cohorts</h1>
       <ul>
         { cohorts.map(c => (
-          <li>
-            <Link key={c.id} to={`/${c.batch_id}/pairs`}>
+          <li key= { c.id }>
+            <Link to={`/${c.batch_id}/pairs`}>
               {c.name} - {c.batch}
             </Link>
           </li>
