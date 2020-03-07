@@ -45,7 +45,6 @@ export const uploadingCsv = data => {
   return dispatch => {
     fetch(BASE_URL + 'cohorts/csv_upload', {
       method: 'POST',
-      // headers: HEADERS,
       body: formData
     })
     .then(res => res.json())

@@ -1,11 +1,10 @@
 # My Awesome Cohort Tracker
 
-- clear filters when a new group is selected (?)
 
 ## Todo
 
-- routes
-- main page showing all cohorts
+✅ routes
+✅ main page showing all cohorts
   - cohort create/edit modal
 - add login/splash page
 - finish sidebar styles
@@ -23,23 +22,21 @@
     - choose font schema
     - update cell font-sizes
     - establish global weights
-- ceate cohort (page)
-- create roster from CSV
+✅ ceate cohort (page)
+✅ create roster from CSV
 - add hide attribute on students table
-- add sort by most recent pairing
+❌ add sort by most recent pairing
 - update cohort page
 - update student (page?)
 - Add Update for activity(?)
 - update cohort modal
-- create student modal
-- update student (modal)
+  - create student modal
+  - update student (modal)
 - reset all onClick outside of cells
 - reset all onClick of Flatiron logo //
-- create student modal
 - add test suite
 - refactor to Node/Express backend?
 - add auth
-  <!-- - display a dropdown to add another student to the group? -->
 
 ## DONE
 
@@ -84,6 +81,7 @@
 
 ### Round 2
 
+- clear filters when a new group is selected (?)
 ✅ category for activity create form should be a dropdown
 ✅ onHover of group, popup to the left for a mini Group Show display
   ✅ show date, notes, students, bad pairing --> currently this info is only visible in the group edit view
