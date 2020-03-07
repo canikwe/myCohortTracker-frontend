@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { useDispatch } from 'react-redux'
-import { creatingCohort } from '../redux/actions/cohorts'
+import { creatingCohort, uploadingCsv } from '../redux/actions/cohorts'
 
 const CreateCohortView = () => {
   const newCohort = () => ({batch: '', name: '', batch_id: null})
@@ -28,7 +28,11 @@ const CreateCohortView = () => {
       <h1>Create Cohort</h1>
       <form onSubmit={e => {
           e.preventDefault()
-          dispatch(creatingCohort({...cohort, students, csv: e.target.csv.value}))
+          if (e.target.csv.files.length) {
+            dispatch(uploadingCsv({ ...cohort, csv: e.target.csv.files[0]}))
+          } else {
+            dispatch(creatingCohort({...cohort, students}))
+          }
         }}>
         <div>
           <label htmlFor='batch'>Batch</label>
