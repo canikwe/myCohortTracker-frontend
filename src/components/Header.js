@@ -20,7 +20,12 @@ const Header = () => {
   return (
     <section className='main-header'>
       {/* <h1>{cohorts[0].batch} - {cohorts[0].name}</h1> */}
-      <Link to='/dashboard'>{'//'}</Link>
+      <h2>
+        <Link to='/dashboard'>{'//'}</Link>
+      </h2>
+      <h1>
+        my awesome cohort tracker
+      </h1>
       {loggedIn ?
         <FontAwesomeIcon 
           icon={faSignOutAlt} 

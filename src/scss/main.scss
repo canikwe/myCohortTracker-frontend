@@ -29,15 +29,34 @@
   text-align: left;
   padding: 5px 5px 0 5px;
   display: grid;
-  grid-template-columns: 50% 50%;
+  grid-template-columns: repeat(3, 1fr);
 
-  h1 {
+  h2 {
     margin: 0;
     color: $base-light;
   }
 
+  h1 {
+    margin: 0;
+    color: $base-light;
+    justify-self: center;
+  }
+
+  a {
+    text-decoration: none;
+
+    &:visited {
+      color: $base-dark;
+    }
+
+    &:hover {
+      color: $base-light;
+    }
+  }
+
   .logout {
     justify-self: right;
+    cursor: pointer;
   }
 }
 
