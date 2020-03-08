@@ -14,11 +14,11 @@ const PairsContainer = () => {
   }), shallowEqual)
 
   return (
-    <section className='pairs-container'>
+    <section className='pairs-container' dir='ltr'>
       
       <section className='row header'>
         <div 
-          className='cell anchorY' 
+          className='cell anchorY anchorX' 
           onClick={() => {
             dispatch(updateActiveStudentX(null))
             dispatch(updateActiveStudentY(null))

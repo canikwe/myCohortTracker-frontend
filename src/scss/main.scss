@@ -73,6 +73,8 @@ button, input[type='submit'] {
   // padding: 20px 0 0 20px;
   border-top-right-radius: 10px;
   overflow: auto;
+  scroll-snap-align: start end;
+  scroll-snap-type: y proximity;
 
   @media only screen and (max-width: 600px) {
     border-top-right-radius: 0;
@@ -82,35 +84,22 @@ button, input[type='submit'] {
 .row {
   // overflow: auto;
   display: grid;
-  gap: 5px;
+  // gap: 5px;
   grid-auto-flow: column;
   // grid-template-columns: repeat(auto-fill, 75px);
-  grid-template-rows: minmax(auto, 75px);
-  margin-bottom: 5px;
+  // grid-template-rows: minmax(auto, 75px);
+  // margin-bottom: 5px;
   justify-content: start;
+  scroll-snap-align: center;
+  scroll-snap-type: y proximity;
 
   &.header {
     grid-template-rows: auto;
-    position: -webkit-sticky; /* Safari */
+    // position: -webkit-sticky; /* Safari */
     position: sticky;
     top: 0;
     z-index: 2;
   }
-}
-
-.anchorX {
-  position: sticky;
-  left: 0;
-  background-color: $neutral;
-  grid-column: 1/2;
-  align-self: center;
-  z-index: 1;
-}
-
-.anchorY {
-  grid-column: span 1;
-  align-self: center;
-  background-color: $neutral;
 }
 
 .cell {
@@ -124,8 +113,28 @@ button, input[type='submit'] {
   overflow: auto;
   cursor: pointer;
   width: 65px;
-  margin: 1px;
-  height: 100%;
+  margin: 5px;
+  height: 65px;
+
+
+  &.anchorX {
+    position: sticky;
+    left: 0;
+    background-color: $neutral;
+    grid-column: 1/2;
+    align-self: center;
+    z-index: 1;
+    margin-left: 0;
+  }
+
+  &.anchorY {
+    grid-column: span 1;
+    align-self: center;
+    background-color: $neutral;
+    height: 30px;
+    margin-top: 0;
+  }
+
 }
 
 .pair-1 {
@@ -174,6 +183,11 @@ button, input[type='submit'] {
 .color-selector {
   padding: 10px;
   margin: 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  overflow: auto;
 }
 
 
