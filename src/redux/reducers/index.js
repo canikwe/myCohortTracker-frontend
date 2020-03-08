@@ -1,5 +1,5 @@
 import { combineReducers } from 'redux'
-import { FETCH_STUDENTS, FETCH_COHORT, CREATE_GROUP, UPDATE_GROUP, DELETE_GROUP, UPDATE_ACTIVE_STUDENT_X, UPDATE_ACTIVE_STUDENT_Y, UPDATE_FILTERS, UPDATE_MOD_FILTERS, FETCH_ACTIVITIES, OPEN_GROUP_FORM, SHOW_ACTIVITY_SEARCH, SHOW_ACTIVITY_CREATE, RESET_SELECTED_ACTIVITY, SELECT_ACTIVITY, SEARCH_ACTIVITY, CANCEL_ACTIVITY_SEARCH, CLOSE_CREATE_ACTIVITY_FORM, CREATE_ACTIVITY, SELECT_GROUP, CLOSE_GROUP_FORM, FETCH_COHORTS, CREATE_COHORT, UPDATE_COHORT, LOGIN_INSTRUCTOR } from '../actions/constants'
+import { FETCH_STUDENTS, FETCH_COHORT, CREATE_GROUP, UPDATE_GROUP, DELETE_GROUP, UPDATE_ACTIVE_STUDENT_X, UPDATE_ACTIVE_STUDENT_Y, UPDATE_FILTERS, UPDATE_MOD_FILTERS, FETCH_ACTIVITIES, OPEN_GROUP_FORM, SHOW_ACTIVITY_SEARCH, SHOW_ACTIVITY_CREATE, RESET_SELECTED_ACTIVITY, SELECT_ACTIVITY, SEARCH_ACTIVITY, CANCEL_ACTIVITY_SEARCH, CLOSE_CREATE_ACTIVITY_FORM, CREATE_ACTIVITY, SELECT_GROUP, CLOSE_GROUP_FORM, FETCH_COHORTS, CREATE_COHORT, UPDATE_COHORT, LOGIN_INSTRUCTOR, UPDATE_LOADING } from '../actions/constants'
 
 const testReducer = (state=[], action) => {
   return state
@@ -201,6 +201,15 @@ const loggedInReducer = (state=false, action) => {
   }
 }
 
+const loadingReducer = (state=true, action) => {
+  switch (action.type) {
+    case UPDATE_LOADING:
+      return action.payload  
+    default:
+      return state
+  }
+}
+
 
 
 const rootReducer = combineReducers({
@@ -218,7 +227,8 @@ const rootReducer = combineReducers({
   selectedActivity: selectedActivityReducer,
   selectedGroup: selectedGroupReducer,
   activityOptions: activityOptionsReducer,
-  loggedIn: loggedInReducer
+  loggedIn: loggedInReducer,
+  loading: loadingReducer
 })
 
 export default rootReducer

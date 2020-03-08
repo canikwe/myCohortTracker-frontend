@@ -1,4 +1,4 @@
-import { BASE_URL, CREATE_GROUP, HEADERS, UPDATE_GROUP, DELETE_GROUP, SELECT_GROUP } from './constants'
+import { BASE_URL, CREATE_GROUP, UPDATE_GROUP, DELETE_GROUP, SELECT_GROUP, TOKEN_HEADERS } from './constants'
 
 // async actions
 const createGroup = group => ({type: CREATE_GROUP, payload: group})
@@ -7,7 +7,7 @@ export const creatingGroup = data => {
   return dispatch => {
     fetch(BASE_URL + 'groups', {
       method: 'POST',
-      headers: HEADERS,
+      headers: TOKEN_HEADERS,
       body: JSON.stringify(data)
     })
     .then(res => res.json())
@@ -21,7 +21,7 @@ export const updatingGroup = data => {
   return dispatch => {
     fetch(BASE_URL + 'groups/' + data.group.id, {
       method: 'PATCH',
-      headers: HEADERS,
+      headers: TOKEN_HEADERS,
       body: JSON.stringify(data)
     })
     .then(res => res.json())
@@ -34,7 +34,8 @@ const deleteGroup = group => ({type: DELETE_GROUP, payload: group})
 export const deletingGroup = group => {
   return dispatch => {
   fetch(BASE_URL + 'groups/' + group.id, {
-    method: 'DELETE'
+    method: 'DELETE',
+    headers: TOKEN_HEADERS
   })
   .then(res => res.json())
   .then(group => dispatch(deleteGroup(group)))

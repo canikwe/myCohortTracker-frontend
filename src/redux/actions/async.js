@@ -1,6 +1,7 @@
 import { FETCH_STUDENTS, BASE_URL, FETCH_COHORT, LOGIN_INSTRUCTOR, HEADERS, TOKEN_HEADERS } from './constants'
 import { fetchingActivities } from './activities'
 import { fetchingCohorts } from './cohorts'
+import { updateLoading } from '.'
 
 const fetchStudents = students => ({type: FETCH_STUDENTS, payload: students})
 
@@ -16,7 +17,7 @@ export const loginInstructor = bool => ({type: LOGIN_INSTRUCTOR, payload: bool})
 
 export const loggingIn = data => {
   return dispatch => {
-    fetch(BASE_URL + '/login', {
+    fetch(BASE_URL + 'login', {
       method: 'POST',
       headers: HEADERS,
       body: JSON.stringify({instructor: data})
@@ -30,6 +31,7 @@ export const loggingIn = data => {
         dispatch(fetchingActivities())
       } else {
         dispatch(loginInstructor(false))
+        dispatch(updateLoading(false))
         localStorage.removeItem('token')
         alert(loginData.message)
       }
@@ -40,7 +42,7 @@ export const loggingIn = data => {
 export const authorizingInstructor = () => {
   return dispatch => {
     if (localStorage.getItem('token')) {
-      fetch(BASE_URL + '/token_login', {
+      fetch(BASE_URL + 'token_login', {
         method: 'POST',
         headers: TOKEN_HEADERS
       })

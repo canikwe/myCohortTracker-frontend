@@ -14,8 +14,9 @@ import { authorizingInstructor } from './redux/actions/async'
 
 
 function App() {
-  const { loggedIn } = useSelector(state => ({
-    loggedIn: state.loggedIn
+  const { loggedIn, loading } = useSelector(state => ({
+    loggedIn: state.loggedIn,
+    loading: state.loading
   }))
   const dispatch = useDispatch()
 
@@ -24,6 +25,9 @@ function App() {
     dispatch(authorizingInstructor())
   }, [])
 
+  if (loading) {
+    return <h1>Loading...</h1>
+  }
   return (
     <main className='App'>
       <Header />
