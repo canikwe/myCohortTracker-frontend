@@ -26,12 +26,10 @@
 ✅ create roster from CSV
 - add hide attribute on students table
 ❌ add sort by most recent pairing
-- update cohort page
-- update student (page?)
+✅ update cohort page
+  ✅ update student (page?)
+  ✅ create student modal
 - Add Update for activity(?)
-- update cohort modal
-  - create student modal
-  - update student (modal)
 - reset all onClick outside of cells
 - reset all onClick of Flatiron logo //
 - add test suite

@@ -50,6 +50,11 @@ const CohortForm = ({ title }) => {
     updateStudents(updatedStudents)
   }
 
+  const removeStudent = e => {
+    const updatedStudents = students.filter((s, i) =>  i !== parseInt(e.target.id))
+    updateStudents(updatedStudents)
+  }
+
   return (
     <>
       <h1>{title} Cohort</h1>
@@ -73,9 +78,10 @@ const CohortForm = ({ title }) => {
           return (
             <div key={i}>
               <label htmlFor='first_name'>First Name</label>
-              <input type='text' name='first_name' id={i} value={s.first_name} onChange={handleStudentChange} />
+              <input type='text' name='first_name' id={`${i}-first`} value={s.first_name} onChange={handleStudentChange} />
               <label htmlFor='last_name'>Last Name</label>
-              <input type='text' name='last_name' id={i} value={s.last_name} onChange={handleStudentChange} />
+              <input type='text' name='last_name' id={`${i}-last`} value={s.last_name} onChange={handleStudentChange} />
+              <span id={`${i}-remove`} onClick={removeStudent}>❌</span>
             </div>
           )
         }
