@@ -73,7 +73,7 @@ const CohortForm = ({ title }) => {
         </div>
 
         <hr />
-
+        {title === 'Create' ? <h3>Manual Student Entry</h3> : <h3>Edit Students</h3>}
         {students.map((s, i) => {
           return (
             <div key={i}>
@@ -82,22 +82,26 @@ const CohortForm = ({ title }) => {
               <label htmlFor='last_name'>Last Name</label>
               <input type='text' name='last_name' id={`${i}-last`} value={s.last_name} onChange={handleStudentChange} />
               <span id={`${i}-remove`} onClick={removeStudent}>❌</span>
+              {i === students.length - 1 ? <button onClick={() => updateStudents([...students, newStudent()])}>Add New Student</button> : null}
             </div>
           )
         }
         )}
 
-        <p />
-        <p />
-        <p />
-        <p />
-        { title === 'Create' ?
-          <input type='file' name='csv' />
+        
+        { title === 'Create' ? (
+          <>
+          <p>---------- OR -----------</p>
+          <h3>Upload CSV</h3>
+            <input type='file' name='csv' />
+          </>
+        )
           : null
         }
-        <input type='submit' value={title + ' Cohort'} />
+        <div>
+          <input type='submit' value={title + ' Cohort'} />
+        </div>
       </form>
-      <button onClick={() => updateStudents([...students, newStudent()])}>Add New Student</button>
     </>
   )
 }
