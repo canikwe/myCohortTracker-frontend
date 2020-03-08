@@ -1,14 +1,6 @@
-import { FETCH_STUDENTS, BASE_URL, FETCH_COHORT, LOGIN_INSTRUCTOR, HEADERS } from './constants'
-
-// const fetchCohort = cohort => ({ type: FETCH_COHORT, payload: cohort })
-
-// export const fetchingCohort = batch_id => {
-//   return dispatch => {
-//     return fetch(BASE_URL + 'cohorts/' + batch_id)
-//       .then(res => res.json())
-//       .then(cohort => dispatch(fetchCohort(cohort)))
-//   }
-// }
+import { FETCH_STUDENTS, BASE_URL, FETCH_COHORT, LOGIN_INSTRUCTOR, HEADERS, TOKEN_HEADERS } from './constants'
+import { fetchingActivities } from './activities'
+import { fetchingCohorts } from './cohorts'
 
 const fetchStudents = students => ({type: FETCH_STUDENTS, payload: students})
 
@@ -20,7 +12,7 @@ export const fetchingStudents = () => {
   }
 }
 
-const loginInstructor = data => ({type: LOGIN_INSTRUCTOR, payload: data})
+const loginInstructor = bool => ({type: LOGIN_INSTRUCTOR, payload: bool})
 
 export const loggingIn = data => {
   return dispatch => {
@@ -33,11 +25,40 @@ export const loggingIn = data => {
     .then(loginData => {
       if (!loggingIn.message) {
         localStorage.setItem('token', loginData.jwt)
-        dispatch(loginInstructor(loginData))
+        dispatch(loginInstructor(true))
+        dispatch(fetchingCohorts())
+        dispatch(fetchingActivities())
       } else {
+        dispatch(loginInstructor(false))
+        localStorage.removeItem('token')
         alert(loginData.message)
       }
     })
+  }
+}
+
+export const authorizingInstructor = () => {
+  return dispatch => {
+    if (localStorage.getItem('token')) {
+      fetch(BASE_URL + '/token_login', {
+        method: 'POST',
+        headers: TOKEN_HEADERS
+      })
+      .then(res => res.json())
+      .then(data => {
+        if (!data.message) {
+          dispatch(loginInstructor(true))
+          dispatch(fetchingCohorts())
+          dispatch(fetchingActivities())
+        } else {
+          dispatch(loginInstructor(false))
+          localStorage.removeItem('token')
+          alert(data.message)
+        }
+      })
+    } else {
+      dispatch(loginInstructor(false))
+    }
   }
 }
 

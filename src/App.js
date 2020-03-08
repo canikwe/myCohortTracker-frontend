@@ -1,28 +1,28 @@
 import React, { useEffect } from 'react'
 
-import { useDispatch } from 'react-redux'
-import { Switch, Route } from 'react-router-dom'
-import { fetchingActivities } from './redux/actions/activities'
+import { Switch, Route, Redirect } from 'react-router-dom'
 
 import Header from './components/Header'
 import PairsView from './pages/PairsView'
 import DashboardView from './pages/DashboardView'
 import './scss/main.scss'
-import { fetchingCohorts } from './redux/actions/cohorts'
 import CreateCohortView from './pages/CreateCohortView'
 import EditCohortView from './pages/EditCohortView'
 import HomeView from './pages/HomeView'
+import { useSelector, useDispatch } from 'react-redux'
+import { authorizingInstructor } from './redux/actions/async'
 
 
 function App() {
-
+  const { loggedIn } = useSelector(state => ({
+    loggedIn: state.loggedIn
+  }))
   const dispatch = useDispatch()
 
   useEffect(() => {
-    // dispatch(fetchingActivities())
-    // dispatch(fetchingCohorts())
-    
-  }, [dispatch])
+    // dispatch(authorizingInstructor())
+    dispatch(authorizingInstructor())
+  }, [])
 
   return (
     <main className='App'>
@@ -30,19 +30,43 @@ function App() {
 
       <Switch>
         <Route exact path='/'>
-          <HomeView />
+          {
+            loggedIn ? 
+            <Redirect to='/dashboard' /> : 
+            <HomeView />
+          }
         </Route>
         <Route exact path='/dashboard'>
-          <DashboardView />
+          {
+            loggedIn ? 
+            <DashboardView />
+            :
+            <Redirect to='/' />
+          }
         </Route>
         <Route exact path='/:batch_id/pairs'>
-          <PairsView />
+          {
+            loggedIn ?
+            <PairsView />
+            :
+            <Redirect to='/' />
+          }
         </Route>
         <Route exact path='/:batch_id/edit'>
-          <EditCohortView />
+          {
+            loggedIn ?
+            <EditCohortView />
+            :
+            <Redirect to='/' />
+          }
         </Route>
         <Route exact path='/cohorts/new'>
-          <CreateCohortView />
+          {
+            loggedIn ?
+            <CreateCohortView />
+          :
+            <Redirect to='/' />
+          }
         </Route>
 
       </Switch>
