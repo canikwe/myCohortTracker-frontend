@@ -6,11 +6,12 @@ import { fetchingActivities } from './redux/actions/activities'
 
 import Header from './components/Header'
 import PairsView from './pages/PairsView'
-import HomeView from './pages/HomeView'
+import DashboardView from './pages/DashboardView'
 import './scss/main.scss'
 import { fetchingCohorts } from './redux/actions/cohorts'
 import CreateCohortView from './pages/CreateCohortView'
 import EditCohortView from './pages/EditCohortView'
+import HomeView from './pages/HomeView'
 
 
 function App() {
@@ -18,8 +19,8 @@ function App() {
   const dispatch = useDispatch()
 
   useEffect(() => {
-    dispatch(fetchingActivities())
-    dispatch(fetchingCohorts())
+    // dispatch(fetchingActivities())
+    // dispatch(fetchingCohorts())
     
   }, [dispatch])
 
@@ -28,8 +29,11 @@ function App() {
       <Header />
 
       <Switch>
-        <Route exact path='/home'>
+        <Route exact path='/'>
           <HomeView />
+        </Route>
+        <Route exact path='/dashboard'>
+          <DashboardView />
         </Route>
         <Route exact path='/:batch_id/pairs'>
           <PairsView />
@@ -40,6 +44,7 @@ function App() {
         <Route exact path='/cohorts/new'>
           <CreateCohortView />
         </Route>
+
       </Switch>
     </main>
   );

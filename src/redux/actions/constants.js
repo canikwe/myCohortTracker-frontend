@@ -1,5 +1,13 @@
 export const BASE_URL = 'http://localhost:3000/'
-export const HEADERS = { 'Content-Type': 'application/json', 'Accepted': 'application/json' }
+export const HEADERS = {
+  'Content-Type': 'application/json',
+  'Accepted': 'application/json'
+ }
+export const TOKEN_HEADERS = {
+  'Content-Type': 'application/json',
+  'Accepted': 'application/json',
+  'Authorization': `Bearer ${localStorage.getItem('token')}`
+}
 
 // cohort
 export const FETCH_COHORT = 'FETCH_COHORT'
@@ -38,6 +46,7 @@ export const CREATE_ACTIVITY = 'CREATE_ACTIVITY'
 // misc
 export const UPDATE_ACTIVE_STUDENT_X = 'UPDATE_ACTIVE_STUDENT_X'
 export const UPDATE_ACTIVE_STUDENT_Y = 'UPDATE_ACTIVE_STUDENT_Y'
+export const LOGIN_INSTRUCTOR = 'LOGIN_INSTRUCTOR'
 
 export const UPDATE_FILTERS = 'UPDATE_FILTERS'
 export const UPDATE_MOD_FILTERS = 'UPDATE_MOD_FILTERS'
