@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { useParams } from 'react-router-dom'
 import { creatingCohort, uploadingCsv, fetchingCohort, updatingCohort } from '../redux/actions/cohorts'
 
-const CohortForm = ({ edit }) => {
+const CohortForm = ({ title }) => {
   const newCohort = () => ({ batch: '', name: '', batch_id: '' })
   const newStudent = () => ({ first_name: '', last_name: '' })
 
@@ -18,10 +18,10 @@ const CohortForm = ({ edit }) => {
   const dispatch = useDispatch()
 
   useEffect(() => {
-    if (edit && cohort.batch_id !== parseInt(batch_id)) {
+    if (title === 'Edit' && cohort.batch_id !== parseInt(batch_id)) {
       dispatch(fetchingCohort(batch_id))
     }
-    if (selectedCohort.id) {
+    if (title === 'Edit' && selectedCohort.id) {
       updateCohort(selectedCohort)
       updateStudents(selectedStudents)
     }
@@ -29,8 +29,7 @@ const CohortForm = ({ edit }) => {
 
   const handleSubmit = e => {
     e.preventDefault()
-    if (edit) {
-      console.log('update cohort')
+    if (title === 'Edit') {
       dispatch(updatingCohort({...cohort, students}))
     } else if (e.target.csv.files.length) {
       dispatch(uploadingCsv({ ...cohort, csv: e.target.csv.files[0] }))
@@ -53,7 +52,7 @@ const CohortForm = ({ edit }) => {
 
   return (
     <>
-      <h1>Create Cohort</h1>
+      <h1>{title} Cohort</h1>
       <form onSubmit={handleSubmit}>
         <div>
           <label htmlFor='batch'>Batch</label>
@@ -86,11 +85,11 @@ const CohortForm = ({ edit }) => {
         <p />
         <p />
         <p />
-        { !edit ?
+        { title === 'Create' ?
           <input type='file' name='csv' />
           : null
         }
-        <input type='submit' value={edit ? 'Update Cohort' : 'Create Cohort'} />
+        <input type='submit' value={title + ' Cohort'} />
       </form>
       <button onClick={() => updateStudents([...students, newStudent()])}>Add New Student</button>
     </>

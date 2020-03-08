@@ -15,6 +15,8 @@ const HomeView = () => {
             <Link to={`/${c.batch_id}/pairs`}>
               {c.name} - {c.batch}
             </Link>
+            ---------
+            <Link to={`/${c.batch_id}/edit`}>Edit</Link>
           </li>
         ))}
       </ul>
