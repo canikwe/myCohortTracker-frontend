@@ -12,7 +12,7 @@ export const fetchingStudents = () => {
   }
 }
 
-const loginInstructor = bool => ({type: LOGIN_INSTRUCTOR, payload: bool})
+export const loginInstructor = bool => ({type: LOGIN_INSTRUCTOR, payload: bool})
 
 export const loggingIn = data => {
   return dispatch => {
