@@ -9,7 +9,7 @@ import './scss/main.scss'
 import CreateCohortView from './pages/CreateCohortView'
 import EditCohortView from './pages/EditCohortView'
 import HomeView from './pages/HomeView'
-import { useSelector, useDispatch } from 'react-redux'
+import { useSelector, useDispatch, shallowEqual } from 'react-redux'
 import { authorizingInstructor } from './redux/actions/async'
 
 
@@ -17,13 +17,12 @@ function App() {
   const { loggedIn, loading } = useSelector(state => ({
     loggedIn: state.loggedIn,
     loading: state.loading
-  }))
+  }), shallowEqual)
   const dispatch = useDispatch()
 
   useEffect(() => {
-    // dispatch(authorizingInstructor())
     dispatch(authorizingInstructor())
-  }, [])
+  }, [dispatch])
 
   if (loading) {
     return <h1>Loading...</h1>

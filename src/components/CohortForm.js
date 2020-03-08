@@ -1,7 +1,9 @@
 import React, { useState, useEffect } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
+import { useDispatch, useSelector, shallowEqual } from 'react-redux'
 import { useParams } from 'react-router-dom'
 import { creatingCohort, uploadingCsv, fetchingCohort, updatingCohort } from '../redux/actions/cohorts'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faUserTimes } from '@fortawesome/free-solid-svg-icons'
 
 const CohortForm = ({ title }) => {
   const newCohort = () => ({ batch: '', name: '', batch_id: '' })
@@ -13,7 +15,7 @@ const CohortForm = ({ title }) => {
   const {selectedCohort, selectedStudents} = useSelector(state => ({
     selectedCohort: state.cohort,
     selectedStudents: state.students
-  }))
+  }), shallowEqual)
   const { batch_id } = useParams()
   const dispatch = useDispatch()
 
@@ -25,7 +27,7 @@ const CohortForm = ({ title }) => {
       updateCohort(selectedCohort)
       updateStudents(selectedStudents)
     }
-  }, [selectedCohort, selectedStudents])
+  }, [selectedCohort, selectedStudents, title, cohort, batch_id, dispatch])
 
   const handleSubmit = e => {
     e.preventDefault()
@@ -81,7 +83,7 @@ const CohortForm = ({ title }) => {
               <input type='text' name='first_name' id={`${i}-first`} value={s.first_name} onChange={handleStudentChange} />
               <label htmlFor='last_name'>Last Name</label>
               <input type='text' name='last_name' id={`${i}-last`} value={s.last_name} onChange={handleStudentChange} />
-              <span id={`${i}-remove`} onClick={removeStudent}>❌</span>
+              <FontAwesomeIcon icon={faUserTimes} id={`${i}-remove`} onClick={removeStudent} />
               {i === students.length - 1 ? <button onClick={() => updateStudents([...students, newStudent()])}>Add New Student</button> : null}
             </div>
           )

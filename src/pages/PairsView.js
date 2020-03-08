@@ -3,7 +3,6 @@ import { useParams } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import { fetchingCohort } from '../redux/actions/cohorts'
 
-import Header from '../components/Header'
 import Filters from '../components/Filters'
 import PairsContainer from '../containers/PairsContainer'
 import SideBar from '../containers/SideBar'
@@ -17,11 +16,10 @@ const PairsView = () => {
     if (cohort.batch_id !== parseInt(batch_id)) {
       dispatch(fetchingCohort(batch_id))
     }
-  }, [dispatch, batch_id])
+  }, [dispatch, batch_id, cohort])
 
   return (
     <main className="pairs-view">
-      {/* <Header /> */}
       <Filters />
       <PairsContainer />
       <SideBar />

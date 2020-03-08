@@ -28,12 +28,22 @@
   grid-column: span 2;
   text-align: left;
   padding: 5px 5px 0 5px;
-  // background-color: $base-dark;
+  display: grid;
+  grid-template-columns: 50% 50%;
 
   h1 {
     margin: 0;
     color: $base-light;
   }
+
+  .logout {
+    justify-self: right;
+  }
+}
+
+.home {
+  @include center-column;
+  
 }
 
 .filters {

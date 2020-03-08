@@ -2,12 +2,12 @@ import React from 'react'
 import { shallowEqual, useSelector, useDispatch } from 'react-redux'
 import { Link } from 'react-router-dom'
 import { loginInstructor } from '../redux/actions/async'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faSignOutAlt } from '@fortawesome/free-solid-svg-icons'
 
 const Header = () => {
 
-  const { cohorts, cohort, loggedIn } = useSelector(state => ({
-    cohorts: state.cohorts,
-    cohort: state.cohort,
+  const { loggedIn } = useSelector(state => ({
     loggedIn: state.loggedIn
   }), shallowEqual)
 
@@ -22,7 +22,12 @@ const Header = () => {
       {/* <h1>{cohorts[0].batch} - {cohorts[0].name}</h1> */}
       <Link to='/dashboard'>{'//'}</Link>
       {loggedIn ?
-        <button onClick={handleLogOut}>Log Out</button>
+        <FontAwesomeIcon 
+          icon={faSignOutAlt} 
+          className='logout' 
+          onClick={handleLogOut} 
+          size="2x"
+        />
         : null
       }
     </section>

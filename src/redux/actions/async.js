@@ -1,4 +1,4 @@
-import { FETCH_STUDENTS, BASE_URL, FETCH_COHORT, LOGIN_INSTRUCTOR, HEADERS, TOKEN_HEADERS } from './constants'
+import { FETCH_STUDENTS, BASE_URL, LOGIN_INSTRUCTOR, HEADERS, TOKEN_HEADERS } from './constants'
 import { fetchingActivities } from './activities'
 import { fetchingCohorts } from './cohorts'
 import { updateLoading } from '.'
@@ -54,12 +54,14 @@ export const authorizingInstructor = () => {
           dispatch(fetchingActivities())
         } else {
           dispatch(loginInstructor(false))
+          dispatch(updateLoading(false))
           localStorage.removeItem('token')
           alert(data.message)
         }
       })
     } else {
       dispatch(loginInstructor(false))
+      dispatch(updateLoading(false))
     }
   }
 }

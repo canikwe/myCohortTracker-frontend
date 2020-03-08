@@ -19,7 +19,7 @@ const Login = () => {
   return (
     <>
       <h2>Login Here</h2>
-      <form onSubmit={submitForm}>
+      <form className='login' onSubmit={submitForm}>
         <div>
           <label htmlFor='name'>Name</label>
           <input type='text' name='name' value={loginInfo.name} onChange={handleChange}/>
