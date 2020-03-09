@@ -6,11 +6,6 @@ export const HEADERS = {
 export const AUTH_HEADERS = {
    'Authorization': `Bearer ${localStorage.getItem('token')}`
  }
-export const TOKEN_HEADERS = {
-  'Content-Type': 'application/json',
-  'Accepted': 'application/json',
-  ...AUTH_HEADERS
-}
 
 // cohort
 export const FETCH_COHORT = 'FETCH_COHORT'
@@ -49,7 +44,7 @@ export const CREATE_ACTIVITY = 'CREATE_ACTIVITY'
 // misc
 export const UPDATE_ACTIVE_STUDENT_X = 'UPDATE_ACTIVE_STUDENT_X'
 export const UPDATE_ACTIVE_STUDENT_Y = 'UPDATE_ACTIVE_STUDENT_Y'
-export const LOGIN_INSTRUCTOR = 'LOGIN_INSTRUCTOR'
+export const LOGIN_USER = 'LOGIN_USER'
 export const UPDATE_LOADING = 'UPDATE_LOADING'
 
 export const UPDATE_FILTERS = 'UPDATE_FILTERS'

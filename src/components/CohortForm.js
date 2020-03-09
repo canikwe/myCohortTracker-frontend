@@ -11,23 +11,25 @@ const CohortForm = ({ title }) => {
 
   const [cohort, updateCohort] = useState(newCohort())
   const [students, updateStudents] = useState([newStudent(), newStudent(), newStudent()])
+  const { batch_id } = useParams()
 
   const {selectedCohort, selectedStudents} = useSelector(state => ({
     selectedCohort: state.cohort,
     selectedStudents: state.students
   }), shallowEqual)
-  const { batch_id } = useParams()
   const dispatch = useDispatch()
-
+  
   useEffect(() => {
-    if (title === 'Edit' && cohort.batch_id !== parseInt(batch_id)) {
-      dispatch(fetchingCohort(batch_id))
-    }
     if (title === 'Edit' && selectedCohort.id) {
+      // debugger
       updateCohort(selectedCohort)
       updateStudents(selectedStudents)
     }
-  }, [selectedCohort, selectedStudents, title, cohort, batch_id, dispatch])
+    if (title === 'Edit' && selectedCohort.batch_id !== parseInt(batch_id)) {
+      // debugger
+      dispatch(fetchingCohort(batch_id))
+    }
+  }, [selectedCohort, selectedStudents, title, batch_id, dispatch])
 
   const handleSubmit = e => {
     e.preventDefault()
@@ -58,33 +60,41 @@ const CohortForm = ({ title }) => {
   }
 
   return (
-    <>
+    <div className='cohort-form-container'>
       <h1>{title} Cohort</h1>
-      <form onSubmit={handleSubmit}>
-        <div>
-          <label htmlFor='batch'>Batch</label>
-          <input type='text' name='batch' value={cohort.batch} onChange={handleCohortChange} />
-        </div>
-        <div>
-          <label htmlFor='name'>Name</label>
-          <input type='text' name='name' value={cohort.name} onChange={handleCohortChange} />
-        </div>
-        <div>
-          <label htmlFor='batch_id'>Batch Id</label>
-          <input type='number' name='batch_id' value={cohort.batch_id} onChange={handleCohortChange} />
-        </div>
+      <form onSubmit={handleSubmit} className='cohort'>
+        <section>
+          <div className='form-section'>
+            <label htmlFor='batch'>Batch: </label>
+            <input type='text' name='batch' value={cohort.batch} onChange={handleCohortChange} />
+          </div>
+          <div className='form-section'>
+            <label htmlFor='name'>Name: </label>
+            <input type='text' name='name' value={cohort.name} onChange={handleCohortChange} />
+          </div>
+          <div className='form-section'>
+            <label htmlFor='batch_id'>Batch Id: </label>
+            <input type='number' name='batch_id' value={cohort.batch_id} onChange={handleCohortChange} />
+          </div>
+        </section>
 
         <hr />
         {title === 'Create' ? <h3>Manual Student Entry</h3> : <h3>Edit Students</h3>}
         {students.map((s, i) => {
           return (
-            <div key={i}>
-              <label htmlFor='first_name'>First Name</label>
-              <input type='text' name='first_name' id={`${i}-first`} value={s.first_name} onChange={handleStudentChange} />
-              <label htmlFor='last_name'>Last Name</label>
-              <input type='text' name='last_name' id={`${i}-last`} value={s.last_name} onChange={handleStudentChange} />
-              <FontAwesomeIcon icon={faUserTimes} id={`${i}-remove`} onClick={removeStudent} />
-              {i === students.length - 1 ? <button onClick={() => updateStudents([...students, newStudent()])}>Add New Student</button> : null}
+            <div className='students' key={i}>
+              <div>
+                <label htmlFor='first_name'>First Name: </label>
+                <input type='text' name='first_name' id={`${i}-first`} value={s.first_name} onChange={handleStudentChange} />
+              </div>
+
+              <div>
+                <label htmlFor='last_name'>Last Name: </label>
+                <input type='text' name='last_name' id={`${i}-last`} value={s.last_name} onChange={handleStudentChange} />
+                <FontAwesomeIcon icon={faUserTimes} id={`${i}-remove`} onClick={removeStudent} />
+                {i === students.length - 1 ? <button onClick={() => updateStudents([...students, newStudent()])}>Add New Student</button> : null}
+              </div>
+
             </div>
           )
         }
@@ -104,7 +114,7 @@ const CohortForm = ({ title }) => {
           <input type='submit' value={title + ' Cohort'} />
         </div>
       </form>
-    </>
+    </div>
   )
 }
 

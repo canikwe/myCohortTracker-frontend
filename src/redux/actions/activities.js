@@ -1,4 +1,4 @@
-import { FETCH_ACTIVITIES, BASE_URL, SHOW_ACTIVITY_SEARCH, SHOW_ACTIVITY_CREATE, SEARCH_ACTIVITY, CANCEL_ACTIVITY_SEARCH, SELECT_ACTIVITY, RESET_SELECTED_ACTIVITY, CLOSE_CREATE_ACTIVITY_FORM, CREATE_ACTIVITY, TOKEN_HEADERS} from './constants'
+import { FETCH_ACTIVITIES, BASE_URL, SHOW_ACTIVITY_SEARCH, SHOW_ACTIVITY_CREATE, SEARCH_ACTIVITY, CANCEL_ACTIVITY_SEARCH, SELECT_ACTIVITY, RESET_SELECTED_ACTIVITY, CLOSE_CREATE_ACTIVITY_FORM, CREATE_ACTIVITY, HEADERS} from './constants'
 import { updateLoading } from '.'
 
 // async actions
@@ -7,7 +7,9 @@ const fetchActivities = activities => ({type: FETCH_ACTIVITIES, payload: activit
 export const fetchingActivities = () => {
   return dispatch => {
     dispatch(updateLoading(true))
-    fetch(BASE_URL + 'activities')
+    fetch(BASE_URL + 'activities', {
+      headers: { ...HEADERS, Authorization: `Bearer ${localStorage.getItem('token')}` }
+    })
     .then(res => res.json())
     .then(activities => {
       dispatch(updateLoading(false))
@@ -22,7 +24,7 @@ export const creatingActivity = data => {
   return dispatch => {
     fetch(BASE_URL + 'activities', {
       method: 'POST',
-      headers: TOKEN_HEADERS,
+      headers: { ...HEADERS, Authorization: `Bearer ${localStorage.getItem('token')}` },
       body: JSON.stringify(data)
     })
     .then(res => res.json())

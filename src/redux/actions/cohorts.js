@@ -1,4 +1,4 @@
-import { FETCH_COHORTS, BASE_URL, CREATE_COHORT, FETCH_COHORT, UPDATE_COHORT, TOKEN_HEADERS, AUTH_HEADERS } from "./constants";
+import { FETCH_COHORTS, BASE_URL, CREATE_COHORT, FETCH_COHORT, UPDATE_COHORT, HEADERS, AUTH_HEADERS } from "./constants";
 import { updateLoading } from ".";
 
 
@@ -6,11 +6,16 @@ const fetchCohorts = cohorts => ({ type: FETCH_COHORTS, payload: cohorts })
 
 export const fetchingCohorts = () => {
   return dispatch => {
+    dispatch(updateLoading(true))
+
     fetch(BASE_URL + 'cohorts', {
-      headers: TOKEN_HEADERS
+      headers: { ...HEADERS, Authorization: `Bearer ${localStorage.getItem('token')}` }
     })
     .then(res => res.json())
-    .then(cohorts => dispatch(fetchCohorts(cohorts)))
+    .then(cohorts => {
+      dispatch(updateLoading(false))
+      dispatch(fetchCohorts(cohorts))
+    })
   }
 }
 
@@ -18,13 +23,11 @@ const fetchCohort = cohortData => ({ type: FETCH_COHORT, payload: cohortData })
 
 export const fetchingCohort = batch_id => {
   return dispatch => {
-    dispatch(updateLoading(true))
     fetch(BASE_URL + 'cohorts/' + batch_id, {
-      headers: TOKEN_HEADERS
+      headers: { ...HEADERS, Authorization: `Bearer ${localStorage.getItem('token')}` }
     })
     .then(res => res.json())
     .then(cohortData => {
-      dispatch(updateLoading(false))
       dispatch(fetchCohort(cohortData))
     })
   }
@@ -37,7 +40,7 @@ export const creatingCohort = data => {
   return dispatch => {
     fetch(BASE_URL + 'cohorts', {
       method: 'POST',
-      headers: TOKEN_HEADERS,
+      headers: { ...HEADERS, Authorization: `Bearer ${localStorage.getItem('token')}` },
       body: JSON.stringify({cohort: data})
     })
     .then(res => res.json())
@@ -68,7 +71,7 @@ export const updatingCohort = data => {
   return dispatch => {
     fetch(BASE_URL + 'cohorts/' + data.id, {
       method: 'PATCH',
-      headers: TOKEN_HEADERS,
+      headers: { ...HEADERS, Authorization: `Bearer ${localStorage.getItem('token')}` },
       body: JSON.stringify({ cohort: data })
     })
     .then(res => res.json())

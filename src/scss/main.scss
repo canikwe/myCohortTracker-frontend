@@ -219,6 +219,21 @@ button, input[type='submit'] {
   overflow: auto;
 }
 
+.cohort-index {
+  a {
+    color: black;
+    text-decoration: none;
+  }
+  .edit-icon {
+    margin: 10px;
+    color: $accent2;
+
+    &:visited {
+      color: $accent2;
+    }
+  }
+}
+
 
 // .stdnt-selections {
 //   display: grid;

@@ -1,7 +1,7 @@
 import React from 'react'
 import { shallowEqual, useSelector, useDispatch } from 'react-redux'
 import { Link } from 'react-router-dom'
-import { loginInstructor } from '../redux/actions/async'
+import { loginUser } from '../redux/actions/async'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faSignOutAlt } from '@fortawesome/free-solid-svg-icons'
 
@@ -14,7 +14,7 @@ const Header = () => {
   const dispatch = useDispatch()
   const handleLogOut = () => {
     localStorage.removeItem('token')
-    dispatch(loginInstructor(false))
+    dispatch(loginUser(false))
   }
 
   return (

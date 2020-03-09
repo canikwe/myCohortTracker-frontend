@@ -1,22 +1,26 @@
 import React from 'react'
 import { useSelector } from 'react-redux'
 import { Link } from 'react-router-dom'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faEdit } from '@fortawesome/free-solid-svg-icons'
 
 const HomeView = () => {
   const {cohorts} = useSelector(state => ({
     cohorts: state.cohorts
   }))
   return (
-    <section>
+    <section className='cohort-index'>
       <h1>Cohorts</h1>
       <ul>
         { cohorts.map(c => (
           <li key= { c.id }>
             <Link to={`/${c.batch_id}/pairs`}>
               {c.name} - {c.batch}
+            </Link> 
+            
+            <Link to={`/${c.batch_id}/edit`} className='edit-icon'>
+              <FontAwesomeIcon icon={faEdit} />
             </Link>
-            ---------
-            <Link to={`/${c.batch_id}/edit`}>Edit</Link>
           </li>
         ))}
       </ul>

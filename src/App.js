@@ -10,7 +10,7 @@ import CreateCohortView from './pages/CreateCohortView'
 import EditCohortView from './pages/EditCohortView'
 import HomeView from './pages/HomeView'
 import { useSelector, useDispatch, shallowEqual } from 'react-redux'
-import { authorizingInstructor } from './redux/actions/async'
+import { authorizingUser } from './redux/actions/async'
 
 
 function App() {
@@ -21,7 +21,7 @@ function App() {
   const dispatch = useDispatch()
 
   useEffect(() => {
-    dispatch(authorizingInstructor())
+    dispatch(authorizingUser())
   }, [dispatch])
 
   if (loading) {

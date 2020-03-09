@@ -1,4 +1,4 @@
-import { FETCH_STUDENTS, BASE_URL, LOGIN_INSTRUCTOR, HEADERS, TOKEN_HEADERS } from './constants'
+import { FETCH_STUDENTS, BASE_URL, LOGIN_USER, HEADERS } from './constants'
 import { fetchingActivities } from './activities'
 import { fetchingCohorts } from './cohorts'
 import { updateLoading } from '.'
@@ -13,24 +13,25 @@ export const fetchingStudents = () => {
   }
 }
 
-export const loginInstructor = bool => ({type: LOGIN_INSTRUCTOR, payload: bool})
+export const loginUser = bool => ({type: LOGIN_USER, payload: bool})
 
 export const loggingIn = data => {
   return dispatch => {
     fetch(BASE_URL + 'login', {
       method: 'POST',
       headers: HEADERS,
-      body: JSON.stringify({instructor: data})
+      body: JSON.stringify({user: data})
     })
     .then(res => res.json())
     .then(loginData => {
-      if (!loggingIn.message) {
+      if (!loginData.message) {
+        // debugger
         localStorage.setItem('token', loginData.jwt)
-        dispatch(loginInstructor(true))
+        dispatch(loginUser(true))
         dispatch(fetchingCohorts())
         dispatch(fetchingActivities())
       } else {
-        dispatch(loginInstructor(false))
+        dispatch(loginUser(false))
         dispatch(updateLoading(false))
         localStorage.removeItem('token')
         alert(loginData.message)
@@ -39,28 +40,29 @@ export const loggingIn = data => {
   }
 }
 
-export const authorizingInstructor = () => {
+export const authorizingUser = () => {
   return dispatch => {
     if (localStorage.getItem('token')) {
       fetch(BASE_URL + 'token_login', {
         method: 'POST',
-        headers: TOKEN_HEADERS
+        headers: { ...HEADERS, Authorization: `Bearer ${localStorage.getItem('token')}` }
       })
       .then(res => res.json())
       .then(data => {
         if (!data.message) {
-          dispatch(loginInstructor(true))
+          // debugger
+          dispatch(loginUser(true))
           dispatch(fetchingCohorts())
           dispatch(fetchingActivities())
         } else {
-          dispatch(loginInstructor(false))
+          dispatch(loginUser(false))
           dispatch(updateLoading(false))
           localStorage.removeItem('token')
           alert(data.message)
         }
       })
     } else {
-      dispatch(loginInstructor(false))
+      dispatch(loginUser(false))
       dispatch(updateLoading(false))
     }
   }

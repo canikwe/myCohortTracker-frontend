@@ -40,8 +40,39 @@ form {
   &.login {
     @include center-column;
   }
-  div {
+
+  &.login div {
     display: grid;
     margin: 10px;
   }
+
+  &.cohort {
+    div {
+      margin: 10px 10px 0 10px;
+
+      &.students {
+        display: flex;
+        align-items: center;
+      }
+    }
+
+    section {
+      width: 25%;
+    }
+
+    .form-section {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+
+      input {
+        align-self: end;
+      }
+    }
+  }
+  
+}
+
+.cohort-form-container {
+  min-height: 100vh;
 }
