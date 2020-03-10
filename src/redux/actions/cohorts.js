@@ -19,7 +19,6 @@ export const fetchingCohorts = () => {
       }
     })
     .then(cohorts => {
-      debugger
       dispatch(updateLoading(false))
       dispatch(fetchCohorts(cohorts))
     })
