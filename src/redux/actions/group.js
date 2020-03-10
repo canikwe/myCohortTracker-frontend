@@ -10,8 +10,15 @@ export const creatingGroup = data => {
       headers: { ...HEADERS, Authorization: `Bearer ${localStorage.getItem('token')}` },
       body: JSON.stringify(data)
     })
-    .then(res => res.json())
+    .then(res => {
+      if (res.ok) {
+        return res.json()
+      } else {
+        throw new Error(res.statusText)
+      }
+    })
     .then(group => dispatch(createGroup(group)))
+    .catch(alert)
   }
 }
 
@@ -24,8 +31,15 @@ export const updatingGroup = data => {
       headers: { ...HEADERS, Authorization: `Bearer ${localStorage.getItem('token')}` },
       body: JSON.stringify(data)
     })
-    .then(res => res.json())
+    .then(res => {
+      if (res.ok) {
+        return res.json()
+      } else {
+        throw new Error(res.statusText)
+      }
+    })
     .then(group => dispatch(updateGroup(group)))
+    .catch(alert)
   }
 }
 
@@ -33,12 +47,19 @@ const deleteGroup = group => ({type: DELETE_GROUP, payload: group})
 
 export const deletingGroup = group => {
   return dispatch => {
-  fetch(BASE_URL + 'groups/' + group.id, {
-    method: 'DELETE',
-    headers: { ...HEADERS, Authorization: `Bearer ${localStorage.getItem('token')}` }
-  })
-  .then(res => res.json())
-  .then(group => dispatch(deleteGroup(group)))
+    fetch(BASE_URL + 'groups/' + group.id, {
+      method: 'DELETE',
+      headers: { ...HEADERS, Authorization: `Bearer ${localStorage.getItem('token')}` }
+    })
+    .then(res => {
+      if (res.ok) {
+        return res.json()
+      } else {
+        throw new Error(res.statusText)
+      }
+    })
+    .then(group => dispatch(deleteGroup(group)))
+    .catch(alert)
   }
 }
 

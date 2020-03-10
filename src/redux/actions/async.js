@@ -8,8 +8,15 @@ const fetchStudents = students => ({type: FETCH_STUDENTS, payload: students})
 export const fetchingStudents = () => {
   return dispatch => {
     return fetch(BASE_URL + 'students')
-    .then(res => res.json())
+    .then(res => {
+      if (res.ok) {
+        return res.json()
+      } else {
+        throw new Error(res.statusText)
+      }
+    })
     .then(students => dispatch(fetchStudents(students)))
+    .catch(alert)
   }
 }
 
@@ -22,7 +29,13 @@ export const loggingIn = data => {
       headers: HEADERS,
       body: JSON.stringify({user: data})
     })
-    .then(res => res.json())
+    .then(res => {
+      if (res.ok) {
+        return res.json()
+      } else {
+        throw new Error(res.statusText)
+      }
+    })
     .then(loginData => {
       if (!loginData.message) {
         // debugger
@@ -37,6 +50,7 @@ export const loggingIn = data => {
         alert(loginData.message)
       }
     })
+    .catch(alert)
   }
 }
 
@@ -47,7 +61,13 @@ export const authorizingUser = () => {
         method: 'POST',
         headers: { ...HEADERS, Authorization: `Bearer ${localStorage.getItem('token')}` }
       })
-      .then(res => res.json())
+      .then(res => {
+        if (res.ok) {
+          return res.json()
+        } else {
+          throw new Error(res.statusText)
+        }
+      })
       .then(data => {
         if (!data.message) {
           // debugger
@@ -61,6 +81,7 @@ export const authorizingUser = () => {
           alert(data.message)
         }
       })
+      .catch(alert)
     } else {
       dispatch(loginUser(false))
       dispatch(updateLoading(false))

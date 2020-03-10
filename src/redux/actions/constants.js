@@ -3,9 +3,6 @@ export const HEADERS = {
   'Content-Type': 'application/json',
   'Accepted': 'application/json'
  }
-export const AUTH_HEADERS = {
-   'Authorization': `Bearer ${localStorage.getItem('token')}`
- }
 
 // cohort
 export const FETCH_COHORT = 'FETCH_COHORT'

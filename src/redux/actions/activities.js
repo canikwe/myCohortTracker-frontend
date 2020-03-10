@@ -10,11 +10,18 @@ export const fetchingActivities = () => {
     fetch(BASE_URL + 'activities', {
       headers: { ...HEADERS, Authorization: `Bearer ${localStorage.getItem('token')}` }
     })
-    .then(res => res.json())
+    .then(res => {
+      if (res.ok) {
+        return res.json()
+      } else {
+        throw new Error(res.statusText)
+      }
+    })
     .then(activities => {
       dispatch(updateLoading(false))
       dispatch(fetchActivities(activities))
     })
+    .catch(alert)
   }
 }
 
@@ -27,8 +34,15 @@ export const creatingActivity = data => {
       headers: { ...HEADERS, Authorization: `Bearer ${localStorage.getItem('token')}` },
       body: JSON.stringify(data)
     })
-    .then(res => res.json())
+    .then(res => {
+      if (res.ok) {
+        return res.json()
+      } else {
+        throw new Error(res.statusText)
+      }
+    })
     .then(activity => dispatch(createActivity(activity)))
+    .catch(alert)
   }
 }
 

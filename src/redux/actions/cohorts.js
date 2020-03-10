@@ -1,4 +1,4 @@
-import { FETCH_COHORTS, BASE_URL, CREATE_COHORT, FETCH_COHORT, UPDATE_COHORT, HEADERS, AUTH_HEADERS } from "./constants";
+import { FETCH_COHORTS, BASE_URL, CREATE_COHORT, FETCH_COHORT, UPDATE_COHORT, HEADERS } from "./constants";
 import { updateLoading } from ".";
 
 
@@ -11,11 +11,19 @@ export const fetchingCohorts = () => {
     fetch(BASE_URL + 'cohorts', {
       headers: { ...HEADERS, Authorization: `Bearer ${localStorage.getItem('token')}` }
     })
-    .then(res => res.json())
+    .then(res => {
+      if (res.ok) {
+        return res.json()
+      } else {
+        throw new Error(res.statusText)
+      }
+    })
     .then(cohorts => {
+      debugger
       dispatch(updateLoading(false))
       dispatch(fetchCohorts(cohorts))
     })
+    .catch(alert)
   }
 }
 
@@ -26,10 +34,17 @@ export const fetchingCohort = batch_id => {
     fetch(BASE_URL + 'cohorts/' + batch_id, {
       headers: { ...HEADERS, Authorization: `Bearer ${localStorage.getItem('token')}` }
     })
-    .then(res => res.json())
+    .then(res => {
+      if (res.ok) {
+        return res.json()
+      } else {
+        throw new Error(res.statusText)
+      }
+    })
     .then(cohortData => {
       dispatch(fetchCohort(cohortData))
     })
+    .catch(alert)
   }
 }
 
@@ -43,8 +58,15 @@ export const creatingCohort = data => {
       headers: { ...HEADERS, Authorization: `Bearer ${localStorage.getItem('token')}` },
       body: JSON.stringify({cohort: data})
     })
-    .then(res => res.json())
+    .then(res => {
+      if (res.ok) {
+        return res.json()
+      } else {
+        throw new Error(res.statusText)
+      }
+    })
     .then(cohort => dispatch(createCohort(cohort)))
+    .catch(alert)
   }
 }
 
@@ -57,11 +79,18 @@ export const uploadingCsv = data => {
   return dispatch => {
     fetch(BASE_URL + 'cohorts/csv_upload', {
       method: 'POST',
-      headers: AUTH_HEADERS,
+      headers: { Authorization: `Bearer ${localStorage.getItem('token')}` },
       body: formData
     })
-    .then(res => res.json())
+    .then(res => {
+      if (res.ok) {
+        return res.json()
+      } else {
+        throw new Error(res.statusText)
+      }
+    })
     .then(cohort => dispatch(createCohort(cohort)))
+    .catch(alert)
   }
 }
 
@@ -74,8 +103,14 @@ export const updatingCohort = data => {
       headers: { ...HEADERS, Authorization: `Bearer ${localStorage.getItem('token')}` },
       body: JSON.stringify({ cohort: data })
     })
-    .then(res => res.json())
+    .then(res => {
+      if (res.ok) {
+        return res.json()
+      } else {
+        throw new Error(res.statusText)
+      }
+    })
     .then(data => dispatch(updateCohort(data)))
-
+    .catch(alert)
   }
 }
