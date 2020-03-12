@@ -17,7 +17,10 @@ const Login = () => {
     dispatch(loggingIn(loginInfo))
   }
 
-  const responseGoogle = res => dispatch(loggingInWithGoogle(res.tokenId))
+  const responseGoogle = res => {
+    debugger
+    dispatch(loggingInWithGoogle(res.tokenId))
+  }
 
   return (
     <>
