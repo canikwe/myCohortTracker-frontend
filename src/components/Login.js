@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import { useDispatch } from 'react-redux'
-import { loggingIn } from '../redux/actions/async'
+import { loggingIn, loggingInWithGoogle } from '../redux/actions/async'
+import { GoogleLogin } from 'react-google-login'
 
 const Login = () => {
 
@@ -15,6 +16,8 @@ const Login = () => {
     e.preventDefault()
     dispatch(loggingIn(loginInfo))
   }
+
+  const responseGoogle = res => dispatch(loggingInWithGoogle(res.tokenId))
 
   return (
     <>
@@ -32,6 +35,18 @@ const Login = () => {
           <input type='submit' value='Login' />
         </div>
       </form>
+
+      <p />
+      <p />
+      <p />
+      <p />
+      
+      <GoogleLogin
+        clientId={process.env.REACT_APP_GOOGLE_CLIENT_ID}
+        buttonText='Login'
+        onSuccess={responseGoogle}
+        onFailure={responseGoogle}
+      />
     </>
   )
 }

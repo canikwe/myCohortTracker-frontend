@@ -89,3 +89,33 @@ export const authorizingUser = () => {
   }
 }
 
+export const loggingInWithGoogle = res => {
+  
+  return dispatch => {
+    fetch(BASE_URL + 'google_login', {
+      method: 'POST',
+      headers: {...HEADERS, Authorization: `Bearer ${res}`}
+    })
+    .then(res => {
+      
+      if (res.ok){
+        return res.json()
+      } else {
+        throw new Error(res.json())
+      }
+    })
+    .then(data => {
+      localStorage.setItem('token', data.token)
+      dispatch(loginUser(true))
+      dispatch(fetchingCohorts())
+      dispatch(fetchingActivities())
+    })
+    .catch(err => {
+      debugger
+      localStorage.removeItem('token')
+      dispatch(loginUser(false))
+      dispatch(updateLoading(false))
+      alert("You can't GIT with us... either your sign-in's expired, or you need to use a Flatiron email account.")
+    })
+  }
+}
