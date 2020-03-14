@@ -38,7 +38,6 @@ export const loggingIn = data => {
     })
     .then(loginData => {
       if (!loginData.message) {
-        // debugger
         localStorage.setItem('token', loginData.jwt)
         dispatch(loginUser(true))
         dispatch(fetchingCohorts())
@@ -70,7 +69,6 @@ export const authorizingUser = () => {
       })
       .then(data => {
         if (!data.message) {
-          // debugger
           dispatch(loginUser(true))
           dispatch(fetchingCohorts())
           dispatch(fetchingActivities())
@@ -112,11 +110,10 @@ export const loggingInWithGoogle = res => {
         dispatch(fetchingActivities())
       })
       .catch(err => {
-        debugger
         localStorage.removeItem('token')
         dispatch(loginUser(false))
         dispatch(updateLoading(false))
-        alert("You can't GIT with us... either your sign-in's expired, or you need to use a Flatiron email account.")
+        alert("You can't GIT with us... Please sign in again with a Flatiron email account.")
       })
     }
   }

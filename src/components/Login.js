@@ -18,7 +18,6 @@ const Login = () => {
   }
 
   const responseGoogle = res => {
-    debugger
     dispatch(loggingInWithGoogle(res.tokenId))
   }
 

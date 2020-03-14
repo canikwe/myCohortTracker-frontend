@@ -21,12 +21,10 @@ const CohortForm = ({ title }) => {
   
   useEffect(() => {
     if (title === 'Edit' && selectedCohort.id) {
-      // debugger
       updateCohort(selectedCohort)
       updateStudents(selectedStudents)
     }
     if (title === 'Edit' && selectedCohort.batch_id !== parseInt(batch_id)) {
-      // debugger
       dispatch(fetchingCohort(batch_id))
     }
   }, [selectedCohort, selectedStudents, title, batch_id, dispatch])
