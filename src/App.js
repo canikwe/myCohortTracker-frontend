@@ -11,6 +11,7 @@ import EditCohortView from './pages/EditCohortView'
 import HomeView from './pages/HomeView'
 import { useSelector, useDispatch, shallowEqual } from 'react-redux'
 import { authorizingUser } from './redux/actions/async'
+import Footer from './components/Footer'
 
 
 function App() {
@@ -73,6 +74,7 @@ function App() {
         </Route>
 
       </Switch>
+      <Footer />
     </main>
   );
 }

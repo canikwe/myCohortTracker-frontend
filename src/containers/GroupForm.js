@@ -50,7 +50,9 @@ const GroupForm = () => {
     let student_ids = []
     const studentId = parseInt(event.target.id)
 
-    if (group.student_ids.includes(studentId)) {
+    if (!event.target.id) {
+      student_ids = []
+    } else if (group.student_ids.includes(studentId)) {
       student_ids = group.student_ids.filter(i => i !== studentId)
     } else {
       student_ids = [...group.student_ids, studentId]
@@ -81,11 +83,14 @@ const GroupForm = () => {
                 value={s.first_name}
                 id={s.id}
                 className={`stdnt ${group.student_ids.includes(s.id) ? 'selected' : ''}`}
-                onClick={(handleStudentSelect)}
+                onClick={handleStudentSelect}
               />
             )
           })
         }
+
+        <input type='button' value='CLEAR' className='stdnt' onClick={handleStudentSelect} />
+
       </div>
       
       <div>

@@ -1,9 +1,11 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { useSelector, shallowEqual } from 'react-redux'
 import { getStudentGroups, getMatchedGroups, filteredGroups } from '../helper/functions'
 import Group from '../components/Group'
+import GroupDetails from '../components/GroupDetails'
 
 const GroupsContainer = () => {
+  const [selectedGroup, updateSelectedGroup] = useState(undefined)
 
   const { students, groups } = useSelector(state => {
     const { activeStudentX, activeStudentY, students } = state
@@ -41,12 +43,20 @@ const GroupsContainer = () => {
               key={g.id}
               group={g} 
               matchedStudents={matchedStudents}
+              selectGroup={updateSelectedGroup}
             />
           )})
           ) : <p>No groups yet...</p>
         }
       </section>
       <div className='hr-line'></div>
+      {selectedGroup ?
+        <GroupDetails
+          group={selectedGroup}
+          students='hello world'
+          deselectGroup={updateSelectedGroup}
+        /> : null
+      }
     </>
   )
 }

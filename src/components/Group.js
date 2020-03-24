@@ -8,7 +8,8 @@ import { useDispatch } from 'react-redux'
 import { deletingGroup, selectGroup } from '../redux/actions/group'
 
 
-const Group = ({ group, matchedStudents }) => {
+const Group = ({ group, matchedStudents, selectGroup }) => {
+
   const dispatch = useDispatch()
 
   const formatMatchedStudents = () => {
@@ -28,7 +29,9 @@ const Group = ({ group, matchedStudents }) => {
       <div className='group'>
         <span>
           {group.avoid ? <FontAwesomeIcon icon={faExclamationTriangle} /> : null}
-          {group.activity.name}
+          <div onClick={() => selectGroup(group)}>
+            { group.activity.name }
+          </div>
         </span>
 
         <FontAwesomeIcon icon={faEdit} onClick={() => dispatch(selectGroup(group))} />
@@ -38,10 +41,12 @@ const Group = ({ group, matchedStudents }) => {
         <p className='group-students'>
           {formatMatchedStudents()}
         </p>
-        <GroupDetails
-          group={group}
-          students={formatMatchedStudents()} 
-        />  
+        {/* { selectedGroup ? 
+          <GroupDetails
+            group={selectedGroup}
+            students={formatMatchedStudents()} 
+        /> : null
+        } */}
       </div>
 
 

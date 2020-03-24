@@ -1,12 +1,12 @@
 @import 'constants';
 
 .sidebar {
-  background-color: $accent1;
   height: 100%;
   display: flex;
   flex-direction: column;
   padding: 0 10px;
   text-align: start;
+  overflow: auto;
 
   input {
     margin: 10px 0;
@@ -71,26 +71,24 @@
     position: relative;
     cursor: pointer;
 
-    .group-details {
-      display: none;
-    }
+    // .group-details {
+    //   display: none;
+    // }
     
-    &:hover .group-details {
-      display: block;
-      position: absolute;
-      top: 5%;
-      right: 105%;
-      width: 300px;
-      background-color: $neutral;
-      box-shadow: 2px 2px 5px $base-dark;
-      border-radius: 10px;
-      padding: 10px;
-      color: $base-dark;
-      z-index: 3;
-    }
+    // &:hover .group-details {
+    //   display: block;
+    //   position: absolute;
+    //   top: 5%;
+    //   right: 105%;
+    //   width: 300px;
+    //   background-color: $neutral;
+    //   box-shadow: 2px 2px 5px $base-dark;
+    //   border-radius: 10px;
+    //   padding: 10px;
+    //   color: $base-dark;
+    //   z-index: 3;
+    // }
   }
-  
-
   
   p {
     margin: 0;
@@ -104,6 +102,14 @@
 
 }
 
+.color-selector {
+  padding: 10px;
+  margin: 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
 
 .hr-line {
   border-bottom: solid 1px $base-dark;
@@ -111,10 +117,10 @@
 }
 
 .wrapper {
-    position: relative;
-    width: 50px;
-    height: 50px;
-    margin: 0 5px;
+  position: relative;
+  width: 50px;
+  height: 50px;
+  margin: 0 5px;
 }
 
 .line {
@@ -145,5 +151,15 @@
     padding: 3px;
     font: bold 12px arial,sans-serif;
     background: $accent1;
+}
+
+.group-details {
+  // width: 300px;
+  background-color: $neutral;
+  // box-shadow: 2px 2px 5px $base-dark;
+  border-radius: 10px;
+  // padding: 10px;
+  // color: $base-dark;
+  // z-index: 3;
 }
 
