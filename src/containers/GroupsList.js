@@ -36,7 +36,7 @@ const GroupsContainer = () => {
       </h3>
       <section className='group-container'>
         { groups.length ? (
-          groups.sort((a,b) => b.activity.mod - a.activity.mod).map(g => {
+          groups.map(g => {
             const matchedStudents = g.student_ids.map(id => students.find(s => s.id === id).first_name)
             
             return (<Group

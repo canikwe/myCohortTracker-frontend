@@ -47,13 +47,13 @@ const studentsReducer = (state=[], action) => {
 const groupsReducer = (state=[], action) => {
   switch (action.type) {
     case FETCH_COHORT:
-      return action.payload.groups
+      return action.payload.groups.sort((a, b) => new Date(b.activity_date) - new Date(a.activity_date))
     case CREATE_COHORT:
       return []
     case UPDATE_COHORT:
-      return action.payload.groups
+      return action.payload.groups.sort((a, b) => new Date(b.activity_date) - new Date(a.activity_date))
     case CREATE_GROUP:
-      return [...state, action.payload]
+      return [...state, action.payload].sort((a, b) => new Date(b.activity_date) - new Date(a.activity_date))
     case UPDATE_GROUP:
       return state.map(g => g.id === action.payload.id ? action.payload : g)
     case DELETE_GROUP:
