@@ -43,7 +43,7 @@ const GroupsContainer = () => {
               key={g.id}
               group={g} 
               matchedStudents={matchedStudents}
-              selectGroup={updateSelectedGroup}
+              openModal={updateSelectedGroup}
             />
           )})
           ) : <p>No groups yet...</p>
@@ -54,7 +54,7 @@ const GroupsContainer = () => {
         <GroupDetails
           group={selectedGroup}
           students='hello world'
-          deselectGroup={updateSelectedGroup}
+          closeModal={updateSelectedGroup}
         /> : null
       }
     </>

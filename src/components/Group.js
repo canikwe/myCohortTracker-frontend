@@ -1,5 +1,4 @@
 import React from 'react'
-import GroupDetails from './GroupDetails'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faTrashAlt, faEdit } from '@fortawesome/free-regular-svg-icons'
 import { faExclamationTriangle } from '@fortawesome/free-solid-svg-icons'
@@ -8,7 +7,7 @@ import { useDispatch } from 'react-redux'
 import { deletingGroup, selectGroup } from '../redux/actions/group'
 
 
-const Group = ({ group, matchedStudents, selectGroup }) => {
+const Group = ({ group, matchedStudents, openModal }) => {
 
   const dispatch = useDispatch()
 
@@ -29,18 +28,21 @@ const Group = ({ group, matchedStudents, selectGroup }) => {
       <div className='group'>
         <span>
           {group.avoid ? <FontAwesomeIcon icon={faExclamationTriangle} /> : null}
-          <div onClick={() => selectGroup(group)}>
+          <div onClick={() => openModal(group)}>
             { group.activity.name }
+            <p className='group-students'>
+              {formatMatchedStudents()}
+            </p>
           </div>
         </span>
-
+        
         <FontAwesomeIcon icon={faEdit} onClick={() => dispatch(selectGroup(group))} />
 
         <FontAwesomeIcon icon={faTrashAlt} onClick={() => dispatch(deletingGroup(group))} />
 
-        <p className='group-students'>
+        {/* <p className='group-students'>
           {formatMatchedStudents()}
-        </p>
+        </p> */}
         {/* { selectedGroup ? 
           <GroupDetails
             group={selectedGroup}

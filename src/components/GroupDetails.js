@@ -2,14 +2,14 @@ import React from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faExclamationTriangle } from '@fortawesome/free-solid-svg-icons'
 
-const GroupDetails = ({ group, students, deselectGroup }) => {
-  const handleWindowClick = e => e.target.className === 'modal' ? deselectGroup(undefined) : null
+const GroupDetails = ({ group, students, closeModal }) => {
+  const handleWindowClick = e => e.target.className === 'modal' ? closeModal(undefined) : null
 
   return (
     <div className='modal' onClick={handleWindowClick}>
       <div className='group-details modal-content'>
         <div className='header'>
-          <span className="close" onClick={() => deselectGroup(undefined)}>&times;</span>
+          <span className="close" onClick={() => closeModal(undefined)}>&times;</span>
           <h3>
             <span>
               {group.avoid ? <FontAwesomeIcon icon={faExclamationTriangle} /> : null}
