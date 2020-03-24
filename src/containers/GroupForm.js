@@ -89,7 +89,7 @@ const GroupForm = () => {
           })
         }
 
-        <input type='button' value='CLEAR' className='stdnt' onClick={handleStudentSelect} />
+        <span onClick={handleStudentSelect} className='stdnt-clear'>&times;</span>
 
       </div>
       
