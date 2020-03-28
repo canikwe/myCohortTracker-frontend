@@ -67,7 +67,7 @@ const Cell = ({ studentX, studentY }) => {
       { matchedGroups.map(g => ( 
         <div key={g.id}>
           <span>
-            {g.avoid ? '❗️' : null}
+            {g.avoid ? '' : null}
             {g.activity.name}
           </span>
         </div>

@@ -8,10 +8,57 @@ const SearchActivityForm = () => {
 
   const { searchTerm, results } = useSelector(state => ({
     searchTerm: state.activitySearchTerm,
-    results: state.activitySearchTerm.length ? state.activities.filter(a => a.name.toLowerCase().includes(state.activitySearchTerm.toLowerCase())) : [] 
+    results: state.activities.filter(a => a.name.toLowerCase().includes(state.activitySearchTerm.toLowerCase()))
   }), shallowEqual)
 
   const dispatch = useDispatch()
+
+  const highlightSearchTerm = word => {
+    const start = word.toLowerCase().indexOf(searchTerm.toLowerCase())
+    
+    if (searchTerm === '' || start === -1) {
+      return <span>{word}</span>
+    } else if (start === 0) {
+      
+      return (
+        <>
+          <span className='highlight'>
+            {word.substring(start, searchTerm.length)}
+          </span>
+          <span>
+            {word.substring(searchTerm.length)}
+          </span>
+        </>
+      )
+
+    } else if (start + searchTerm.length === word.length) {
+      return (
+        <>
+          <span>
+            {word.substring(0, start)}
+          </span>
+          <span className='highlight'>
+            {word.substring(start)}
+          </span>
+        </>
+      )
+    } else {
+      // debugger
+      return (
+        <>
+          <span>
+            {word.substring(0, start)}
+          </span>
+          <span className='highlight'>
+            {word.substring(start, start + searchTerm.length)}
+          </span>
+          <span>
+            {word.substring(start + searchTerm.length)}
+          </span>
+        </>
+      )
+    }
+  }
 
   return (
     <>
@@ -34,7 +81,11 @@ const SearchActivityForm = () => {
                 key={a.id} 
                 onClick={() => dispatch(selectActivity(a))}
               >
-                {`${a.name} (${a.mod})`}
+                {highlightSearchTerm(a.name)}
+                <span>
+                  {` (${a.mod})`}
+                </span>
+                  {/* {`${a.name} (${a.mod})`} */}
               </li>
             ))
           }
