@@ -1,14 +1,14 @@
 import React from 'react'
 import { useSelector, shallowEqual, useDispatch } from 'react-redux'
 import { searchActivity, selectActivity, cancelActivitySearch } from '../redux/actions/activities'
-// import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-// import { faSearch, faPlus } from '@fortawesome/free-solid-svg-icons'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faPlus } from '@fortawesome/free-solid-svg-icons'
 
 const SearchActivityForm = () => {
 
   const { searchTerm, results } = useSelector(state => ({
     searchTerm: state.activitySearchTerm,
-    results: state.activities.filter(a => a.name.toLowerCase().includes(state.activitySearchTerm.toLowerCase()))
+    results: state.activitySearchTerm !== '' ? state.activities.filter(a => a.name.toLowerCase().includes(state.activitySearchTerm.toLowerCase())) : []
   }), shallowEqual)
 
   const dispatch = useDispatch()
@@ -64,33 +64,37 @@ const SearchActivityForm = () => {
     <>
       <h3>Search Activity</h3>
       <label htmlFor='searchTerm'>Search  </label>
-      <input 
-        type='text' 
-        value={searchTerm} 
-        placeholder='E.g. Mod 2 Final Project' 
-        onChange={(e) => dispatch(searchActivity(e))}
-      />
+      <div className='autocomplete'>
+        <input 
+          type='search' 
+          value={searchTerm} 
+          placeholder='E.g. Mod 2 Final Project' 
+          onChange={(e) => dispatch(searchActivity(e))}
+        />
+        <FontAwesomeIcon icon={faPlus} />
 
-      {searchTerm.length && !results.length ? (
-        <h4>No activity found...</h4>
-      ) : (
-        <ul>
-          {
-            results.map(a => (
-              <li 
-                key={a.id} 
-                onClick={() => dispatch(selectActivity(a))}
-              >
-                {highlightSearchTerm(a.name)}
-                <span>
-                  {` (${a.mod})`}
-                </span>
-                  {/* {`${a.name} (${a.mod})`} */}
-              </li>
-            ))
-          }
-        </ul>
-      )}
+        {searchTerm.length && !results.length ? (
+          <h4>No activity found...</h4>
+        ) : (
+          <div className='autocomplete-items'>
+            {
+              results.map(a => (
+                <div 
+                  key={a.id} 
+                  onClick={() => dispatch(selectActivity(a))}
+                >
+                  {highlightSearchTerm(a.name)}
+                  <span>
+                    {` (${a.mod})`}
+                  </span>
+                    {/* {`${a.name} (${a.mod})`} */}
+                </div>
+              ))
+            }
+          </div>
+        )}
+
+      </div>
       <button className='cancel' onClick={() => dispatch(cancelActivitySearch())}>Cancel</button>
     </>
   )
