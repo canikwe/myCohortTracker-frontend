@@ -112,8 +112,8 @@ const GroupForm = () => {
       </div>
 
       <div>
-        <input type='button' className='cancel' value='Cancel' onClick={() => dispatch(closeGroupForm())} />
-        <input type='submit' value={group.id ? "Update" : "Add"} />
+        <button className='cancel' onClick={() => dispatch(closeGroupForm())}>Cancel</button>
+        <input className='add' type='submit' value={group.id ? "Update" : "Add"} />
       </div>
     </form>
   )

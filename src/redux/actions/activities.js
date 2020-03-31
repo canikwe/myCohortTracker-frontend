@@ -1,4 +1,4 @@
-import { FETCH_ACTIVITIES, BASE_URL, SHOW_ACTIVITY_SEARCH, SHOW_ACTIVITY_CREATE, SEARCH_ACTIVITY, CANCEL_ACTIVITY_SEARCH, SELECT_ACTIVITY, RESET_SELECTED_ACTIVITY, CLOSE_CREATE_ACTIVITY_FORM, CREATE_ACTIVITY, HEADERS} from './constants'
+import { FETCH_ACTIVITIES, BASE_URL, SHOW_ACTIVITY_CREATE, SEARCH_ACTIVITY, SELECT_ACTIVITY, RESET_SELECTED_ACTIVITY, CLOSE_CREATE_ACTIVITY_FORM, CREATE_ACTIVITY, HEADERS} from './constants'
 import { updateLoading } from '.'
 
 // async actions
@@ -50,9 +50,8 @@ export const creatingActivity = data => {
 export const showActivityCreate = activitySearchTerm => ({ type: SHOW_ACTIVITY_CREATE, payload: activitySearchTerm })
 
 // activity search actions
-export const showActivitySearch = () => ({ type: SHOW_ACTIVITY_SEARCH })
+// export const showActivitySearch = () => ({ type: SHOW_ACTIVITY_SEARCH })
 export const searchActivity = event => ({ type: SEARCH_ACTIVITY, payload: event.target.value })
-export const cancelActivitySearch = () => ({ type: CANCEL_ACTIVITY_SEARCH })
 export const selectActivity = activity => ({ type: SELECT_ACTIVITY, payload: activity })
 export const resetSelectedActivity = () => ({ type: RESET_SELECTED_ACTIVITY })
 

@@ -87,7 +87,18 @@ button, input[type='submit'] {
   box-shadow: 1px 1px 3px $base-dark;
   padding: 7px;
   font-size: .75em;
+  margin-left: 5px;
+  
+  &.add {
+    width: 60%;
+    background-color: yellowgreen;
+    margin-left: 10px;
+  }
 
+  &.cancel {
+    background-color: #88888885;
+    color: white;
+  }
 }
 
 .primary {
@@ -98,10 +109,6 @@ button, input[type='submit'] {
   background-color: $base-light;
 }
 
-.cancel {
-  background-color: #88888885;
-  color: white;
-}
 
 .pairs-container {
   grid-column: 1/2;

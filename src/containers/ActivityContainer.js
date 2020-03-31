@@ -1,21 +1,21 @@
 import React from 'react'
 import { useSelector, shallowEqual } from 'react-redux'
-import ActivityOptions from '../components/ActivityOptions'
+import SelectedActivity from '../components/SelectedActivity'
 import SearchActivityForm from '../components/SearchActivityForm'
 import CreateActivityForm from '../components/CreateActivityForm'
 
 const ActivityContainer = () => {
-  const {activityOptions} = useSelector(state => ({
-    activityOptions: state.activityOptions
+  const { showNewActivityForm, selectedActivity} = useSelector(state => ({
+    showNewActivityForm: state.newActivityToggle,
+    selectedActivity: state.selectedActivity
   }), shallowEqual)
 
-  switch (activityOptions) {
-    case 2:
-      return <SearchActivityForm />
-    case 3:
-      return <CreateActivityForm />
-    default:
-      return <ActivityOptions />
+  if (selectedActivity.id) {
+    return <SelectedActivity />
+  } else if (showNewActivityForm) {
+    return <CreateActivityForm />    
+  } else {
+    return <SearchActivityForm />
   }
 }
 

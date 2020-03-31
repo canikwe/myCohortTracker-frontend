@@ -1,5 +1,29 @@
 import { combineReducers } from 'redux'
-import { FETCH_STUDENTS, FETCH_COHORT, CREATE_GROUP, UPDATE_GROUP, DELETE_GROUP, UPDATE_ACTIVE_STUDENT_X, UPDATE_ACTIVE_STUDENT_Y, UPDATE_FILTERS, UPDATE_MOD_FILTERS, FETCH_ACTIVITIES, OPEN_GROUP_FORM, SHOW_ACTIVITY_SEARCH, SHOW_ACTIVITY_CREATE, RESET_SELECTED_ACTIVITY, SELECT_ACTIVITY, SEARCH_ACTIVITY, CANCEL_ACTIVITY_SEARCH, CLOSE_CREATE_ACTIVITY_FORM, CREATE_ACTIVITY, SELECT_GROUP, CLOSE_GROUP_FORM, FETCH_COHORTS, CREATE_COHORT, UPDATE_COHORT, LOGIN_USER, UPDATE_LOADING } from '../actions/constants'
+import { 
+  FETCH_STUDENTS, 
+  FETCH_COHORT, 
+  CREATE_GROUP, 
+  UPDATE_GROUP, 
+  DELETE_GROUP, 
+  UPDATE_ACTIVE_STUDENT_X, 
+  UPDATE_ACTIVE_STUDENT_Y, 
+  UPDATE_FILTERS, 
+  UPDATE_MOD_FILTERS, 
+  FETCH_ACTIVITIES, 
+  OPEN_GROUP_FORM, 
+  SHOW_ACTIVITY_CREATE, 
+  RESET_SELECTED_ACTIVITY, 
+  SELECT_ACTIVITY, 
+  SEARCH_ACTIVITY, 
+  CLOSE_CREATE_ACTIVITY_FORM, 
+  CREATE_ACTIVITY, 
+  SELECT_GROUP, 
+  CLOSE_GROUP_FORM, 
+  FETCH_COHORTS, 
+  CREATE_COHORT, 
+  UPDATE_COHORT, 
+  LOGIN_USER, 
+  UPDATE_LOADING } from '../actions/constants'
 
 const testReducer = (state=[], action) => {
   return state
@@ -125,6 +149,8 @@ const activitySearchTermReducer = (state='', action) => {
       return action.payload
     case SELECT_ACTIVITY:
       return action.payload.name
+    case CLOSE_GROUP_FORM:
+      return ''
     default:
       return state
   }
@@ -132,8 +158,8 @@ const activitySearchTermReducer = (state='', action) => {
 
 const selectedActivityReducer = (state = {}, action) => {
   switch (action.type) {
-    case SHOW_ACTIVITY_SEARCH:
-      return {}
+    // case SHOW_ACTIVITY_SEARCH:
+    //   return {}
     case SELECT_ACTIVITY:
       return action.payload
     case RESET_SELECTED_ACTIVITY:
@@ -170,23 +196,18 @@ const selectedGroupReducer = (state = initialGroupState(), action) => {
   }
 }
 
-const activityOptionsReducer = (state = 1, action) => {
-  // key { 1: activityOptions, 2: createActivityForm, 3: searchActivityForm }
+const newActivityToggleReducer = (state = false, action) => {
   switch (action.type) {
-    case SHOW_ACTIVITY_SEARCH:
-      return 2
     case SHOW_ACTIVITY_CREATE:
-      return 3
+      return true
     case SELECT_ACTIVITY:
-      return 1
-    case CANCEL_ACTIVITY_SEARCH:
-      return 1
+      return false
     case CLOSE_CREATE_ACTIVITY_FORM:
-      return 1
+      return false
     case CREATE_ACTIVITY:
-      return 1
+      return false
     case CLOSE_GROUP_FORM:
-      return 1
+      return false
     default:
       return state
   }
@@ -226,7 +247,7 @@ const rootReducer = combineReducers({
   activitySearchTerm: activitySearchTermReducer,
   selectedActivity: selectedActivityReducer,
   selectedGroup: selectedGroupReducer,
-  activityOptions: activityOptionsReducer,
+  newActivityToggle: newActivityToggleReducer,
   loggedIn: loggedInReducer,
   loading: loadingReducer
 })

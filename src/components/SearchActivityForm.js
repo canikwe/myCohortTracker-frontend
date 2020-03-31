@@ -1,8 +1,9 @@
 import React from 'react'
 import { useSelector, shallowEqual, useDispatch } from 'react-redux'
-import { searchActivity, selectActivity, cancelActivitySearch } from '../redux/actions/activities'
+import { searchActivity, selectActivity } from '../redux/actions/activities'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faPlus } from '@fortawesome/free-solid-svg-icons'
+import { showActivityCreate } from '../redux/actions/activities'
 
 const SearchActivityForm = () => {
 
@@ -71,7 +72,7 @@ const SearchActivityForm = () => {
           placeholder='E.g. Mod 2 Final Project' 
           onChange={(e) => dispatch(searchActivity(e))}
         />
-        <FontAwesomeIcon icon={faPlus} />
+        <FontAwesomeIcon icon={faPlus} onClick={() => dispatch(showActivityCreate())}/>
 
         {searchTerm.length && !results.length ? (
           <h4>No activity found...</h4>
@@ -95,7 +96,6 @@ const SearchActivityForm = () => {
         )}
 
       </div>
-      <button className='cancel' onClick={() => dispatch(cancelActivitySearch())}>Cancel</button>
     </>
   )
 }
