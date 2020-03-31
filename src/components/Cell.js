@@ -2,6 +2,8 @@ import React from 'react'
 import { useDispatch, shallowEqual, useSelector } from 'react-redux'
 import { updateActiveStudentX, updateActiveStudentY } from '../redux/actions/index'
 import { filteredGroups, getMatchedGroups, getStudentGroups } from '../helper/functions'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faExclamationTriangle } from '@fortawesome/free-solid-svg-icons'
 
 const Cell = ({ studentX, studentY }) => {
   
@@ -67,7 +69,7 @@ const Cell = ({ studentX, studentY }) => {
       { matchedGroups.map(g => ( 
         <div key={g.id}>
           <span>
-            {g.avoid ? '❗' : null}
+            {g.avoid ? <FontAwesomeIcon icon={faExclamationTriangle} /> : null}
             {g.activity.name}
           </span>
         </div>

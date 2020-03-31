@@ -29,6 +29,10 @@ const GroupsContainer = () => {
     })
   }, shallowEqual)
 
+  const matchedStudents = studentIds => {
+    return studentIds.map(id => students.find(s => s.id === id).first_name)
+  }
+
   return (
     <>
       <h3 className='header'>
@@ -53,7 +57,7 @@ const GroupsContainer = () => {
       {selectedGroup ?
         <GroupDetails
           group={selectedGroup}
-          students='hello world'
+          students={matchedStudents(selectedGroup.student_ids)}
           closeModal={updateSelectedGroup}
         /> : null
       }

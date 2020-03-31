@@ -5,23 +5,12 @@ import { faExclamationTriangle } from '@fortawesome/free-solid-svg-icons'
 
 import { useDispatch } from 'react-redux'
 import { deletingGroup, selectGroup } from '../redux/actions/group'
+import { formatMatchedStudents } from '../helper/functions'
 
 
 const Group = ({ group, matchedStudents, openModal }) => {
 
   const dispatch = useDispatch()
-
-  const formatMatchedStudents = () => {
-    switch (matchedStudents.length) {
-      case 1:
-        return 'Solo'
-      case 2:
-        return matchedStudents.join(' & ')
-      default:
-        const last = matchedStudents.pop()
-        return `${matchedStudents.join(', ')}, & ${last}`
-    }
-  }
 
   return (
     <>
@@ -31,7 +20,7 @@ const Group = ({ group, matchedStudents, openModal }) => {
           <div onClick={() => openModal(group)}>
             { group.activity.name }
             <p className='group-students'>
-              {formatMatchedStudents()}
+              {formatMatchedStudents(matchedStudents)}
             </p>
           </div>
         </span>
@@ -39,16 +28,6 @@ const Group = ({ group, matchedStudents, openModal }) => {
         <FontAwesomeIcon icon={faEdit} onClick={() => dispatch(selectGroup(group))} />
 
         <FontAwesomeIcon icon={faTrashAlt} onClick={() => dispatch(deletingGroup(group))} />
-
-        {/* <p className='group-students'>
-          {formatMatchedStudents()}
-        </p> */}
-        {/* { selectedGroup ? 
-          <GroupDetails
-            group={selectedGroup}
-            students={formatMatchedStudents()} 
-        /> : null
-        } */}
       </div>
 
 

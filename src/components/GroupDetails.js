@@ -1,10 +1,11 @@
 import React from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faExclamationTriangle } from '@fortawesome/free-solid-svg-icons'
+import { formatMatchedStudents } from '../helper/functions'
 
 const GroupDetails = ({ group, students, closeModal }) => {
   const handleWindowClick = e => e.target.className === 'modal' ? closeModal(undefined) : null
-
+  console.log(students)
   return (
     <div className='modal' onClick={handleWindowClick}>
       <div className='group-details modal-content'>
@@ -19,7 +20,7 @@ const GroupDetails = ({ group, students, closeModal }) => {
 
         </div>
         <div className='body'>
-          <p>With: {students}</p>
+          <p>{formatMatchedStudents(students)}</p>
           
           <div>{new Date(group.activity_date).toDateString()}</div>
           {

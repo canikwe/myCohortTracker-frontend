@@ -22,3 +22,15 @@ export const filteredGroups = state => {
   }
   return groups.filter(g => g.activity.name.includes(state.filters.term))
 }
+
+export const formatMatchedStudents = students => {
+  switch (students.length) {
+    case 1:
+      return 'Solo'
+    case 2:
+      return students.join(' & ')
+    default:
+      const last = students.pop()
+      return `${students.join(', ')}, & ${last}`
+  }
+}

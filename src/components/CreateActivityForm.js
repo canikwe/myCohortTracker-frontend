@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import { useSelector, shallowEqual, useDispatch } from 'react-redux'
 import { closeActivityCreateForm, creatingActivity } from '../redux/actions/activities'
 
+
 const ActivityForm = () => {
 
   
@@ -12,6 +13,8 @@ const ActivityForm = () => {
   const [activity, updateActivity] = useState({ name: activitySearchTerm, mod: 1, category: 'lab' })
   const dispatch = useDispatch()
 
+  const handleWindowClick = e => e.target.className === 'modal' ? dispatch(closeActivityCreateForm()) : null
+
   const handleActivityChange = e => updateActivity({...activity, [e.target.name]: e.target.value})
   const handleActivityCreate = e => {
     e.preventDefault()
@@ -19,7 +22,8 @@ const ActivityForm = () => {
   }
 
   return (
-    <>
+    <div className='modal' onClick={handleWindowClick}>
+      <div className='create-activity modal-content'>
       <h3>Create Activity</h3>
       <form className='activity-form' onSubmit={handleActivityCreate}>
         <div>
@@ -49,7 +53,8 @@ const ActivityForm = () => {
           <input className='primary' type='submit' value='Create Activity' />
         </div>
       </form>
-    </>
+      </div>
+    </div>
   )
 }
 
