@@ -2,8 +2,10 @@ import React, { useState, useEffect } from 'react'
 import { useDispatch, useSelector, shallowEqual } from 'react-redux'
 import { useParams, Redirect } from 'react-router-dom'
 import { creatingCohort, uploadingCsv, fetchingCohort, updatingCohort } from '../redux/actions/cohorts'
+import { formatErrors } from '../helper/functions'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faUserTimes } from '@fortawesome/free-solid-svg-icons'
+import Swal from 'sweetalert2'
 
 const CohortForm = ({ title }) => {
   const newCohort = () => ({ batch: '', name: '', batch_id: '' })
@@ -32,13 +34,38 @@ const CohortForm = ({ title }) => {
 
   const handleSubmit = e => {
     e.preventDefault()
-    if (title === 'Edit') {
-      dispatch(updatingCohort({...cohort, students}))
-    } else if (e.target.csv.files.length) {
-      dispatch(uploadingCsv({ ...cohort, csv: e.target.csv.files[0] }))
-    } else {
-      dispatch(creatingCohort({ ...cohort, students }))
+
+    if (validateForm()) {
+      const filteredStudents = students.filter(s => s.last_name !== '' || s.first_name !== '')
+      if (title === 'Edit') {
+        dispatch(updatingCohort({...cohort, students: filteredStudents}))
+      } else if (e.target.csv.files.length) {
+        dispatch(uploadingCsv({ ...cohort, csv: e.target.csv.files[0] }))
+      } else {
+        dispatch(creatingCohort({ ...cohort, students: filteredStudents }))
+      }
     }
+  }
+
+  const validateForm = () => {
+    const errors = []
+
+    if (cohort.batch === '') {
+      errors.push('Please specify the batch')
+    }
+    if (cohort.batch_id === '') {
+      errors.push('Please enter the UNIQUE batch id')
+    }
+
+    if (errors.length) {
+      Swal.fire({
+        icon: 'error',
+        title: 'Error creating cohort',
+        html: formatErrors(errors)
+      })
+      return false
+    }
+    return true
   }
 
   // helper functions
@@ -69,11 +96,11 @@ const CohortForm = ({ title }) => {
         <section>
           <div className='form-section'>
             <label htmlFor='batch'>Batch: </label>
-            <input type='text' name='batch' value={cohort.batch} onChange={handleCohortChange} />
+            <input type='text' name='batch' value={cohort.batch} placeholder='e.g.DC-web-010719' onChange={handleCohortChange} />
           </div>
           <div className='form-section'>
             <label htmlFor='name'>Name: </label>
-            <input type='text' name='name' value={cohort.name} onChange={handleCohortChange} />
+            <input type='text' name='name' value={cohort.name} placeholer='e.g. JSON Derulo Fanclub' onChange={handleCohortChange} />
           </div>
           <div className='form-section'>
             <label htmlFor='batch_id'>Batch Id: </label>

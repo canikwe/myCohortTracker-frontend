@@ -34,3 +34,13 @@ export const formatMatchedStudents = students => {
       return `${students.join(', ')}, & ${last}`
   }
 }
+
+export const formatErrors = (errors) => {
+  const formattedErrors = errors.map((e, i) => {
+    return (
+      `<div> ${i + 1}. ${e} </div>`
+    )
+  })
+
+  return formattedErrors.join('')
+}

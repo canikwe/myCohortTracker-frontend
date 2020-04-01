@@ -1,6 +1,7 @@
 import { FETCH_COHORTS, BASE_URL, CREATE_COHORT, FETCH_COHORT, UPDATE_COHORT, HEADERS, HANDLE_REDIRECT } from "./constants";
 import { updateLoading } from ".";
 import Swal from 'sweetalert2'
+import { formatErrors } from "../../helper/functions";
 
 const fetchCohorts = cohorts => ({ type: FETCH_COHORTS, payload: cohorts })
 
@@ -58,17 +59,24 @@ export const creatingCohort = data => {
       body: JSON.stringify({cohort: data})
     })
     .then(res => {
-      if (res.ok) {
+      if (res.ok || res.status === 406) {
         return res.json()
       } else {
         throw new Error(res.statusText)
       }
     })
     .then(data => {
-      dispatch(createCohort(data))
-      Swal.fire({ icon: 'success', text: data.compliment })
+      if (data.message) {
+        console.log(formatErrors(data.message))
+        Swal.fire({ icon: 'error', html: formatErrors(data.message) })
+      } else {
+        dispatch(createCohort(data))
+        Swal.fire({ icon: 'success', text: data.compliment })
+      }
     })
-    .catch(alert => Swal.fire({ icon: 'error', text: alert }))
+    .catch(alert => { 
+      Swal.fire({ icon: 'error', text: alert })
+    })
   }
 }
 
