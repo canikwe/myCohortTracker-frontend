@@ -16,9 +16,21 @@ const ActivityForm = () => {
   const handleWindowClick = e => e.target.className === 'modal' ? dispatch(closeActivityCreateForm()) : null
 
   const handleActivityChange = e => updateActivity({...activity, [e.target.name]: e.target.value})
+  
   const handleActivityCreate = e => {
     e.preventDefault()
-    dispatch(creatingActivity(activity))
+
+    if (validateForm()) {
+      dispatch(creatingActivity(activity))
+    }
+  }
+
+  const validateForm = () => {
+    if (activity.name === '') {
+      alert('Please include a name for this new activity')
+      return false
+    }
+    return true
   }
 
   return (
