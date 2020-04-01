@@ -24,6 +24,11 @@
     &[type='button']:hover, &[type='submit']:hover {
       background-color: rgba(92, 92, 92, 0.616);
     }
+
+    &[type='date'] {
+      font-weight: bold;
+      margin: 5px 0 0 0;
+    }
   }
 
   .stdnt-clear {
@@ -37,6 +42,10 @@
 
   svg {
     margin: 0 5px 0 0;
+
+    &.new-activity-icon {
+      margin: 0 0 0 5px;
+    }
   }
 
   h3, h4 {
@@ -207,3 +216,42 @@
     color: #ffffff;
   }
 }
+
+h3.header {
+  text-align: center;
+  font-weight: 600;
+}
+
+h4.subheader {
+  margin: 0;
+  font-weight: 500;
+}
+
+.student-selection-label {
+  display: block;
+}
+
+.group-form-section {
+  margin-top: 15px;
+}
+
+.group-form-sub-section {
+  display: flex;
+  align-items: center;
+
+  .group-notes {
+    width: 80%;
+
+    &::placeholder {
+      font-style: italic;
+    }
+  }
+  
+  label {
+    font-size: 14px;
+  }
+}
+
+// .header, .main-header {
+//   font-family: 'Comfortaa', cursive;
+// }

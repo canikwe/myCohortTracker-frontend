@@ -63,8 +63,7 @@ const SearchActivityForm = () => {
 
   return (
     <>
-      <h3>Search Activity</h3>
-      <label htmlFor='searchTerm'>Search  </label>
+      <h4 className='subheader'>Search Activity</h4>
       <div className='autocomplete'>
         <input 
           type='search' 
@@ -72,7 +71,13 @@ const SearchActivityForm = () => {
           placeholder='E.g. Mod 2 Final Project' 
           onChange={(e) => dispatch(searchActivity(e))}
         />
-        <FontAwesomeIcon icon={faPlus} onClick={() => dispatch(showActivityCreate())}/>
+        <FontAwesomeIcon 
+          color='yellowgreen'
+          className='new-activity-icon'
+          icon={faPlus} 
+          size='lg'
+          onClick={() => dispatch(showActivityCreate())}
+        />
 
         {searchTerm.length && !results.length ? (
           <h4>No activity found...</h4>
@@ -96,6 +101,8 @@ const SearchActivityForm = () => {
         )}
 
       </div>
+
+      <div className='hr-line'></div>
     </>
   )
 }

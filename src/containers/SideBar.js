@@ -35,7 +35,7 @@ const SideBar = () => {
 
   return (
     <aside className='sidebar'>
-      {createGroupToggle ? <div className='header'>
+      {/* {createGroupToggle ? <div className='header'>
         <span>
           <FontAwesomeIcon 
             icon={faArrowLeft}
@@ -43,12 +43,18 @@ const SideBar = () => {
           /> 
           Go back
         </span> 
-      </div> : null }
+      </div> : null } */}
          
       {
         activeStudentX || activeStudentY ?
         <GroupsList />
-        : <h3 className='header'>Choose a Group</h3>
+        : null
+      }
+
+      {
+        createGroupToggle || activeStudentX || activeStudentY ?
+          null
+          : <h3 className='header'>👈 Choose a Pair</h3>
       }
 
       { createGroupToggle 
@@ -58,7 +64,7 @@ const SideBar = () => {
           className='secondary' 
           onClick={() => dispatch(openGroupForm())}
         >
-          New Pair
+          Create a New Pair
         </button> }
 
       <div className='color-selector'>

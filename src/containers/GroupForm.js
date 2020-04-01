@@ -63,7 +63,8 @@ const GroupForm = () => {
   return (
     <form onSubmit={submitForm}>
       <div>
-        <label htmlFor='activity_date'>Date: </label>
+        {/* <label htmlFor='activity_date'>Activity Date: </label> */}
+        <h4 className='subheader'>Activity Date:</h4>
         <input 
           type='date' 
           name='activity_date' 
@@ -72,8 +73,8 @@ const GroupForm = () => {
         />
       </div>
 
-      <div>
-        <p>Students: </p>
+      <div className='group-form-section'>
+        <h4 className='subheader'>Students:</h4>
         {
           students.map(s => {
             return (
@@ -93,21 +94,25 @@ const GroupForm = () => {
 
       </div>
       
-      <div>
-        {
-          group.id ? 
-          <h4>{group.activity.name} Group Details</h4> :
-          <h4>Group Details</h4>
-        }
+      <div className='group-form-section'>
+       
+        <h4 className='subheader'>{group.id ? group.activity.name : ''} Group Details:</h4>
 
-        <div>
-          <label htmlFor='avoid'>Bad Pairing?</label>
+        <div className='group-form-sub-section'>
+          <label htmlFor='avoid'>Bad Pairing? </label>
           <input type='checkbox' name='avoid' checked={group.avoid} onChange={() => updateGroup({...group, avoid: !group.avoid})}/>
         </div>
 
-        <div>
-          <label htmlFor='notes'>Notes:</label>
-          <textarea name='notes' value={group.notes} onChange={e => updateGroup({...group, notes: e.target.value})} />
+        <div className='group-form-sub-section'>
+          <label htmlFor='notes'>Notes: </label>
+          <textarea 
+            placeholder='Anything significant to keep in mind for future pairings?'
+            className='group-notes' 
+            rows="5"
+            name='notes' 
+            value={group.notes} 
+            onChange={e => updateGroup({...group, notes: e.target.value})} 
+          />
         </div>
       </div>
 

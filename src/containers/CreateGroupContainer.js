@@ -5,7 +5,7 @@ import GroupForm from './GroupForm'
 const CreateGroupContainer = () => {
   return (
     <>
-      <h1>Group Container </h1>
+      <h3 className='header'>New Pair</h3>
       <ActivityContainer />
       <GroupForm />
     </>

@@ -23,12 +23,16 @@ input {
   padding: 10px;
   // margin: 0 10px;
   font-size: 1em;
-  font-weight: bold;
+  // font-weight: bold;
   color: white;
 
   &::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
     color: white;
     opacity: 1; /* Firefox */
+  }
+
+  &[type='button'] {
+    font-weight: bold;
   }
 }
 

@@ -3,6 +3,11 @@
 @import 'form';
 @import 'sidebar';
 
+
+// body {
+//   font-family: 'Open Sans', sans-serif;
+// }
+
 :root {
   --hue: 230.84745762711864;
 }
@@ -93,6 +98,7 @@ button, input[type='submit'] {
     width: 60%;
     background-color: yellowgreen;
     margin-left: 10px;
+    font-weight: bold;
   }
 
   &.cancel {
@@ -109,6 +115,9 @@ button, input[type='submit'] {
   background-color: $base-light;
 }
 
+button {
+  font-weight: bold;
+}
 
 .pairs-container {
   grid-column: 1/2;
