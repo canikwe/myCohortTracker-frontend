@@ -1,4 +1,4 @@
-import { FETCH_COHORTS, BASE_URL, CREATE_COHORT, FETCH_COHORT, UPDATE_COHORT, HEADERS } from "./constants";
+import { FETCH_COHORTS, BASE_URL, CREATE_COHORT, FETCH_COHORT, UPDATE_COHORT, HEADERS, HANDLE_REDIRECT } from "./constants";
 import { updateLoading } from ".";
 import Swal from 'sweetalert2'
 
@@ -64,7 +64,10 @@ export const creatingCohort = data => {
         throw new Error(res.statusText)
       }
     })
-    .then(cohort => dispatch(createCohort(cohort)))
+    .then(data => {
+      dispatch(createCohort(data))
+      Swal.fire({ icon: 'success', text: data.compliment })
+    })
     .catch(alert => Swal.fire({ icon: 'error', text: alert }))
   }
 }
@@ -88,7 +91,10 @@ export const uploadingCsv = data => {
         throw new Error(res.statusText)
       }
     })
-    .then(cohort => dispatch(createCohort(cohort)))
+    .then(cohort => {
+      dispatch(createCohort(cohort))
+      Swal.fire({ icon: 'success', text: data.compliment })
+    })
     .catch(alert => Swal.fire({ icon: 'error', text: alert }))
   }
 }
@@ -109,7 +115,12 @@ export const updatingCohort = data => {
         throw new Error(res.statusText)
       }
     })
-    .then(data => dispatch(updateCohort(data)))
+    .then(data => { 
+      dispatch(updateCohort(data))
+      Swal.fire({ icon: 'success', text: data.compliment })
+    })
     .catch(alert => Swal.fire({ icon: 'error', text: alert }))
   }
 }
+
+export const handleRedirect = bool => ({ type: HANDLE_REDIRECT, payload: bool })

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { useDispatch, useSelector, shallowEqual } from 'react-redux'
-import { useParams } from 'react-router-dom'
+import { useParams, Redirect } from 'react-router-dom'
 import { creatingCohort, uploadingCsv, fetchingCohort, updatingCohort } from '../redux/actions/cohorts'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faUserTimes } from '@fortawesome/free-solid-svg-icons'
@@ -13,9 +13,10 @@ const CohortForm = ({ title }) => {
   const [students, updateStudents] = useState([newStudent(), newStudent(), newStudent()])
   const { batch_id } = useParams()
 
-  const {selectedCohort, selectedStudents} = useSelector(state => ({
+  const {selectedCohort, selectedStudents, redirect} = useSelector(state => ({
     selectedCohort: state.cohort,
-    selectedStudents: state.students
+    selectedStudents: state.students,
+    redirect: state.redirect
   }), shallowEqual)
   const dispatch = useDispatch()
   
@@ -55,6 +56,10 @@ const CohortForm = ({ title }) => {
   const removeStudent = e => {
     const updatedStudents = students.filter((s, i) =>  i !== parseInt(e.target.id))
     updateStudents(updatedStudents)
+  }
+
+  if (redirect) {
+    return <Redirect to={`/cohorts/${selectedCohort.batch_id}/pairs`} />
   }
 
   return (

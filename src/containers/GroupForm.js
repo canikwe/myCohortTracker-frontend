@@ -68,7 +68,7 @@ const GroupForm = () => {
 
     if (errors.length) {
       Swal.fire({
-        title: 'Error processing form',
+        title: 'Error creating activity',
         html: formatErrors(errors),
         icon: 'error'
       })

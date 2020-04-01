@@ -43,6 +43,7 @@ export const loggingIn = data => {
         dispatch(loginUser(true))
         dispatch(fetchingCohorts())
         dispatch(fetchingActivities())
+        Swal.fire({ icon: 'success', text: 'Welcome!' })
       } else {
         dispatch(loginUser(false))
         dispatch(updateLoading(false))
@@ -109,6 +110,8 @@ export const loggingInWithGoogle = res => {
         dispatch(loginUser(true))
         dispatch(fetchingCohorts())
         dispatch(fetchingActivities())
+        console.log(data)
+        Swal.fire({ icon: 'success', text: `Welcome, ${data.user.name}!` })
       })
       .catch(err => {
         localStorage.removeItem('token')
@@ -122,3 +125,4 @@ export const loggingInWithGoogle = res => {
     }
   }
 }
+

@@ -23,7 +23,8 @@ import {
   CREATE_COHORT, 
   UPDATE_COHORT, 
   LOGIN_USER, 
-  UPDATE_LOADING } from '../actions/constants'
+  UPDATE_LOADING, 
+  HANDLE_REDIRECT} from '../actions/constants'
 
 const testReducer = (state=[], action) => {
   return state
@@ -231,7 +232,18 @@ const loadingReducer = (state=true, action) => {
   }
 }
 
-
+const redirectReducer = (state = false, action) => {
+  switch (action.type) {
+    case UPDATE_COHORT:
+      return true
+    case CREATE_COHORT:
+      return true
+    case HANDLE_REDIRECT:
+      return action.payload
+    default:
+      return state
+  }
+}
 
 const rootReducer = combineReducers({
   test: testReducer,
@@ -249,7 +261,8 @@ const rootReducer = combineReducers({
   selectedGroup: selectedGroupReducer,
   newActivityToggle: newActivityToggleReducer,
   loggedIn: loggedInReducer,
-  loading: loadingReducer
+  loading: loadingReducer,
+  redirect: redirectReducer
 })
 
 export default rootReducer
