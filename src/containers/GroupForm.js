@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react'
 import { useSelector, shallowEqual, useDispatch } from 'react-redux'
 import { creatingGroup, updatingGroup } from '../redux/actions/group'
 import { closeGroupForm } from '../redux/actions'
+import Swal from 'sweetalert2'
 
 const GroupForm = () => {
   
@@ -56,7 +57,7 @@ const GroupForm = () => {
       errors.push('Please select at least one student')
     }
     if (!date.getDate()) {
-      errors.push('Please select a valid date')
+      errors.push('Please enter a valid date')
     }
     if (date.getFullYear() > new Date().getFullYear() + 1) {
       errors.push('Please enter a date less than a year in advance')
@@ -66,10 +67,26 @@ const GroupForm = () => {
     }
 
     if (errors.length) {
-      alert(errors.join(', '))
+      Swal.fire({
+        title: 'Error processing form',
+        html: formatErrors(errors),
+        icon: 'error'
+      })
       return false
     }
     return true
+  }
+
+  const formatErrors = (errors) => {
+    const formattedErrors = errors.map((e, i) => {
+      return (
+        `<div> ${i + 1}. ${e} </div>`
+      )
+    })
+    
+    return (
+      formattedErrors.join('')
+    )
   }
 
   const handleStudentSelect = event => {

@@ -15,6 +15,9 @@
 .App {
   background-color: $accent1;
   min-height: 100vh;
+  // display: grid;
+  // grid-template-columns: 100%;
+  // grid-template-rows: auto minmax(1fr, auto) auto;
 }
 
 .pairs-view {
@@ -280,6 +283,8 @@ button {
 .footer {
   padding: 10px 0;
   text-align: center;
+  // margin-top: -500px;
+
   p {
     margin: 0;
   }

@@ -1,10 +1,8 @@
 import React, { useEffect } from 'react'
 
 import { shallowEqual, useSelector, useDispatch } from 'react-redux'
-import { openGroupForm, closeGroupForm } from '../redux/actions'
+import { openGroupForm } from '../redux/actions'
 
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faArrowLeft } from '@fortawesome/free-solid-svg-icons'
 import { CirclePicker } from 'react-color'
 
 import GroupsList from './GroupsList'
@@ -35,15 +33,6 @@ const SideBar = () => {
 
   return (
     <aside className='sidebar'>
-      {/* {createGroupToggle ? <div className='header'>
-        <span>
-          <FontAwesomeIcon 
-            icon={faArrowLeft}
-            onClick={() => dispatch(closeGroupForm())}
-          /> 
-          Go back
-        </span> 
-      </div> : null } */}
          
       {
         activeStudentX || activeStudentY ?
@@ -54,7 +43,7 @@ const SideBar = () => {
       {
         createGroupToggle || activeStudentX || activeStudentY ?
           null
-          : <h3 className='header'>👈 Choose a Pair</h3>
+          : <h3 className='header'>{'<< Choose a Pair'}</h3>
       }
 
       { createGroupToggle 
