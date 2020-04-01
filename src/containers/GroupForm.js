@@ -37,13 +37,39 @@ const GroupForm = () => {
 
   const submitForm = e => {
     e.preventDefault()
-    if (activity.id) {
+
+    if (validateForm()) {
       const data = { group: { ...group, activity_id: activity.id } }
 
       group.id ? dispatch(updatingGroup(data)) : dispatch(creatingGroup(data)) 
-    } else {
-      alert('Please choose or create a new activity')
     }
+  }
+
+  const validateForm = () => {
+    const date = new Date(group.activity_date)
+    const errors = []
+    
+    if (!activity.id) {
+      errors.push('Please choose or create a new activity')
+    }
+    if (!group.student_ids.length) {
+      errors.push('Please select at least one student')
+    }
+    if (!date.getDate()) {
+      errors.push('Please select a valid date')
+    }
+    if (date.getFullYear() > new Date().getFullYear() + 1) {
+      errors.push('Please enter a date less than a year in advance')
+    } 
+    if (date.getFullYear() < new Date().getFullYear() - 1){
+      errors.push('You cannot retroactively add activities more than a year before today')
+    }
+
+    if (errors.length) {
+      alert(errors.join(', '))
+      return false
+    }
+    return true
   }
 
   const handleStudentSelect = event => {
