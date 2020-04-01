@@ -48,7 +48,7 @@ function App() {
             <Redirect to='/' />
           }
         </Route>
-        <Route exact path='/:batch_id/pairs'>
+        <Route exact path='/cohorts/:batch_id/pairs'>
           {
             loggedIn ?
             <PairsView />
@@ -56,7 +56,7 @@ function App() {
             <Redirect to='/' />
           }
         </Route>
-        <Route exact path='/:batch_id/edit'>
+        <Route exact path='/cohorts/:batch_id/edit'>
           {
             loggedIn ?
             <EditCohortView />
@@ -71,6 +71,10 @@ function App() {
           :
             <Redirect to='/' />
           }
+        </Route>
+
+        <Route path='*'>
+          <h1>Idk my bff, Jill.</h1>
         </Route>
 
       </Switch>

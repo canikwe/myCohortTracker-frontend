@@ -14,11 +14,11 @@ const HomeView = () => {
       <ul>
         { cohorts.map(c => (
           <li key= { c.id }>
-            <Link to={`/${c.batch_id}/pairs`}>
+            <Link to={`/cohorts/${c.batch_id}/pairs`}>
               {c.name} - {c.batch}
             </Link> 
             
-            <Link to={`/${c.batch_id}/edit`} className='edit-icon'>
+            <Link to={`/cohorts/${c.batch_id}/edit`} className='edit-icon'>
               <FontAwesomeIcon icon={faEdit} />
             </Link>
           </li>

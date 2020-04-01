@@ -9,6 +9,7 @@
 - finish sidebar styles
 - finish cell styles
 - finish filters styles
+- add 404 frontend route
 
 ## Backlog
 
