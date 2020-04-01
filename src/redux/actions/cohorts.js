@@ -1,6 +1,6 @@
 import { FETCH_COHORTS, BASE_URL, CREATE_COHORT, FETCH_COHORT, UPDATE_COHORT, HEADERS } from "./constants";
 import { updateLoading } from ".";
-
+import Swal from 'sweetalert2'
 
 const fetchCohorts = cohorts => ({ type: FETCH_COHORTS, payload: cohorts })
 
@@ -22,7 +22,7 @@ export const fetchingCohorts = () => {
       dispatch(updateLoading(false))
       dispatch(fetchCohorts(cohorts))
     })
-    .catch(alert)
+    .catch(alert => Swal.fire({ icon: 'error', text: alert }))
   }
 }
 
@@ -43,7 +43,7 @@ export const fetchingCohort = batch_id => {
     .then(cohortData => {
       dispatch(fetchCohort(cohortData))
     })
-    .catch(alert)
+    .catch(alert => Swal.fire({ icon: 'error', text: alert }))
   }
 }
 
@@ -65,7 +65,7 @@ export const creatingCohort = data => {
       }
     })
     .then(cohort => dispatch(createCohort(cohort)))
-    .catch(alert)
+    .catch(alert => Swal.fire({ icon: 'error', text: alert }))
   }
 }
 
@@ -89,7 +89,7 @@ export const uploadingCsv = data => {
       }
     })
     .then(cohort => dispatch(createCohort(cohort)))
-    .catch(alert)
+    .catch(alert => Swal.fire({ icon: 'error', text: alert }))
   }
 }
 
@@ -110,6 +110,6 @@ export const updatingCohort = data => {
       }
     })
     .then(data => dispatch(updateCohort(data)))
-    .catch(alert)
+    .catch(alert => Swal.fire({ icon: 'error', text: alert }))
   }
 }

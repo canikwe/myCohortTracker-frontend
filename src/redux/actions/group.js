@@ -1,4 +1,5 @@
 import { BASE_URL, CREATE_GROUP, UPDATE_GROUP, DELETE_GROUP, SELECT_GROUP, HEADERS } from './constants'
+import Swal from 'sweetalert2'
 
 // async actions
 const createGroup = group => ({type: CREATE_GROUP, payload: group})
@@ -18,7 +19,7 @@ export const creatingGroup = data => {
       }
     })
     .then(group => dispatch(createGroup(group)))
-    .catch(alert)
+    .catch(alert => Swal.fire({ icon: 'error', text: alert }))
   }
 }
 
@@ -39,7 +40,7 @@ export const updatingGroup = data => {
       }
     })
     .then(group => dispatch(updateGroup(group)))
-    .catch(alert)
+    .catch(alert => Swal.fire({ icon: 'error', text: alert }))
   }
 }
 
@@ -59,7 +60,7 @@ export const deletingGroup = group => {
       }
     })
     .then(group => dispatch(deleteGroup(group)))
-    .catch(alert)
+    .catch(alert => Swal.fire({ icon: 'error', text: alert }))
   }
 }
 

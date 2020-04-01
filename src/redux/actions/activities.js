@@ -1,5 +1,6 @@
 import { FETCH_ACTIVITIES, BASE_URL, SHOW_ACTIVITY_CREATE, SEARCH_ACTIVITY, SELECT_ACTIVITY, RESET_SELECTED_ACTIVITY, CLOSE_CREATE_ACTIVITY_FORM, CREATE_ACTIVITY, HEADERS} from './constants'
 import { updateLoading } from '.'
+import Swal from 'sweetalert2'
 
 // async actions
 const fetchActivities = activities => ({type: FETCH_ACTIVITIES, payload: activities})
@@ -21,7 +22,7 @@ export const fetchingActivities = () => {
       dispatch(updateLoading(false))
       dispatch(fetchActivities(activities))
     })
-    .catch(alert)
+    .catch(alert => Swal.fire({icon: 'error', text: alert}))
   }
 }
 
@@ -42,7 +43,7 @@ export const creatingActivity = data => {
       }
     })
     .then(activity => dispatch(createActivity(activity)))
-    .catch(alert)
+    .catch(alert => Swal.fire({ icon: 'error', text: alert }))
   }
 }
 

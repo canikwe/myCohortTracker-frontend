@@ -2,6 +2,7 @@ import { FETCH_STUDENTS, BASE_URL, LOGIN_USER, HEADERS } from './constants'
 import { fetchingActivities } from './activities'
 import { fetchingCohorts } from './cohorts'
 import { updateLoading } from '.'
+import Swal from 'sweetalert2'
 
 const fetchStudents = students => ({type: FETCH_STUDENTS, payload: students})
 
@@ -16,7 +17,7 @@ export const fetchingStudents = () => {
       }
     })
     .then(students => dispatch(fetchStudents(students)))
-    .catch(alert)
+    .catch(alert => Swal.fire({ icon: 'error', text: alert }))
   }
 }
 
@@ -46,10 +47,10 @@ export const loggingIn = data => {
         dispatch(loginUser(false))
         dispatch(updateLoading(false))
         localStorage.removeItem('token')
-        alert(loginData.message)
+        Swal.fire({ icon: 'error', text: loginData.message })
       }
     })
-    .catch(alert)
+    .catch(alert => Swal.fire({ icon: 'error', text: alert }))
   }
 }
 
@@ -76,10 +77,10 @@ export const authorizingUser = () => {
           dispatch(loginUser(false))
           dispatch(updateLoading(false))
           localStorage.removeItem('token')
-          alert(data.message)
+          Swal.fire({icon: 'error', text: data.message})
         }
       })
-      .catch(alert)
+      .catch(alert => Swal.fire({icon: 'error', text: alert}))
     } else {
       dispatch(loginUser(false))
       dispatch(updateLoading(false))
@@ -113,7 +114,10 @@ export const loggingInWithGoogle = res => {
         localStorage.removeItem('token')
         dispatch(loginUser(false))
         dispatch(updateLoading(false))
-        alert("You can't GIT with us... Please sign in again with a Flatiron email account.")
+        Swal.fire({
+          icon: 'error', 
+          text: "You can't GIT with us... Please sign in again with a Flatiron email account." 
+        })
       })
     }
   }

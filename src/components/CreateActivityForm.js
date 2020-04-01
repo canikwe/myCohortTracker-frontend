@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { useSelector, shallowEqual, useDispatch } from 'react-redux'
 import { closeActivityCreateForm, creatingActivity } from '../redux/actions/activities'
-
+import Swal from 'sweetalert2'
 
 const ActivityForm = () => {
 
@@ -27,7 +27,11 @@ const ActivityForm = () => {
 
   const validateForm = () => {
     if (activity.name === '') {
-      alert('Please include a name for this new activity')
+      Swal.fire({
+        icon: 'error',
+        title: 'Error processing form',
+        text: 'Please include a name for this new activity'
+      })
       return false
     }
     return true
