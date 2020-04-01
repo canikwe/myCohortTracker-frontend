@@ -57,7 +57,7 @@ const Cell = ({ studentX, studentY }) => {
       if (projectGroup) {
         return ' project'
       }
-      return ` pair-${matchedGroups.length}`
+      return ` pair-${matchedGroups.length > 5 ? 5 : matchedGroups.length}`
     }
   }
 
