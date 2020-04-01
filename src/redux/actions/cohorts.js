@@ -31,6 +31,7 @@ const fetchCohort = cohortData => ({ type: FETCH_COHORT, payload: cohortData })
 
 export const fetchingCohort = batch_id => {
   return dispatch => {
+    dispatch(updateLoading(true))
     fetch(BASE_URL + 'cohorts/' + batch_id, {
       headers: { ...HEADERS, Authorization: `Bearer ${localStorage.getItem('token')}` }
     })

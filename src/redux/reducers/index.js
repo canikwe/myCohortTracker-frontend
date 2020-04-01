@@ -226,7 +226,9 @@ const loggedInReducer = (state=false, action) => {
 const loadingReducer = (state=true, action) => {
   switch (action.type) {
     case UPDATE_LOADING:
-      return action.payload  
+      return action.payload 
+    case FETCH_COHORT:
+      return false
     default:
       return state
   }

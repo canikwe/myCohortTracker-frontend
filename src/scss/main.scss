@@ -15,9 +15,14 @@
 .App {
   background-color: $accent1;
   min-height: 100vh;
-  // display: grid;
-  // grid-template-columns: 100%;
-  // grid-template-rows: auto minmax(1fr, auto) auto;
+}
+
+.loading {
+  background-color: $accent1;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .pairs-view {
@@ -183,6 +188,7 @@ button {
   height: 60px;
   font-size: .75em;
   word-wrap: break-word;
+  align-self: center;
   
   &.anchorY {
     grid-column: span 1;

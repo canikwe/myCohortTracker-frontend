@@ -12,6 +12,9 @@ import HomeView from './pages/HomeView'
 import { useSelector, useDispatch, shallowEqual } from 'react-redux'
 import { authorizingUser } from './redux/actions/async'
 import Footer from './components/Footer'
+import Loading from './components/Loading'
+// import 'animate.css/animate.css'
+import 'animate.css'
 
 
 function App() {
@@ -26,7 +29,7 @@ function App() {
   }, [dispatch])
 
   if (loading) {
-    return <h1>Loading...</h1>
+    return <Loading />
   }
   return (
     <main className='App'>
