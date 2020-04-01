@@ -93,15 +93,19 @@ export const uploadingCsv = data => {
       body: formData
     })
     .then(res => {
-      if (res.ok) {
+      if (res.ok || res.status === 406) {
         return res.json()
       } else {
         throw new Error(res.statusText)
       }
     })
     .then(cohort => {
-      dispatch(createCohort(cohort))
-      Swal.fire({ icon: 'success', text: data.compliment })
+      if (data.message) {
+        Swal.fire({ icon: 'error', html: formatErrors(data.message) })
+      } else {
+        dispatch(createCohort(cohort))
+        Swal.fire({ icon: 'success', text: data.compliment })
+      }
     })
     .catch(alert => Swal.fire({ icon: 'error', text: alert }))
   }
@@ -117,15 +121,19 @@ export const updatingCohort = data => {
       body: JSON.stringify({ cohort: data })
     })
     .then(res => {
-      if (res.ok) {
+      if (res.ok || res.status === 406) {
         return res.json()
       } else {
         throw new Error(res.statusText)
       }
     })
     .then(data => { 
-      dispatch(updateCohort(data))
-      Swal.fire({ icon: 'success', text: data.compliment })
+      if (data.message) {
+        Swal.fire({ icon: 'error', html: formatErrors(data.message) })
+      } else {
+        dispatch(updateCohort(data))
+        Swal.fire({ icon: 'success', text: data.compliment })
+      }
     })
     .catch(alert => Swal.fire({ icon: 'error', text: alert }))
   }
