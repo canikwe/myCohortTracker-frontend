@@ -32,57 +32,59 @@ function App() {
     return <Loading />
   }
   return (
-    <main className='App'>
-      <Header />
+    <>
+      <main className='App'>
+        <Header />
 
-      <Switch>
-        <Route exact path='/'>
-          {
-            loggedIn ? 
-            <Redirect to='/dashboard' /> : 
-            <HomeView />
-          }
-        </Route>
-        <Route exact path='/dashboard'>
-          {
-            loggedIn ? 
-            <DashboardView />
+        <Switch>
+          <Route exact path='/'>
+            {
+              loggedIn ? 
+              <Redirect to='/dashboard' /> : 
+              <HomeView />
+            }
+          </Route>
+          <Route exact path='/dashboard'>
+            {
+              loggedIn ? 
+              <DashboardView />
+              :
+              <Redirect to='/' />
+            }
+          </Route>
+          <Route exact path='/cohorts/:batch_id/pairs'>
+            {
+              loggedIn ?
+              <PairsView />
+              :
+              <Redirect to='/' />
+            }
+          </Route>
+          <Route exact path='/cohorts/:batch_id/edit'>
+            {
+              loggedIn ?
+              <EditCohortView />
+              :
+              <Redirect to='/' />
+            }
+          </Route>
+          <Route exact path='/cohorts/new'>
+            {
+              loggedIn ?
+              <CreateCohortView />
             :
-            <Redirect to='/' />
-          }
-        </Route>
-        <Route exact path='/cohorts/:batch_id/pairs'>
-          {
-            loggedIn ?
-            <PairsView />
-            :
-            <Redirect to='/' />
-          }
-        </Route>
-        <Route exact path='/cohorts/:batch_id/edit'>
-          {
-            loggedIn ?
-            <EditCohortView />
-            :
-            <Redirect to='/' />
-          }
-        </Route>
-        <Route exact path='/cohorts/new'>
-          {
-            loggedIn ?
-            <CreateCohortView />
-          :
-            <Redirect to='/' />
-          }
-        </Route>
+              <Redirect to='/' />
+            }
+          </Route>
 
-        <Route path='*'>
-          <h1>Idk my bff, Jill.</h1>
-        </Route>
+          <Route path='*'>
+            <h1>Idk my bff, Jill.</h1>
+          </Route>
 
-      </Switch>
+        </Switch>
+      </main>
       <Footer />
-    </main>
+    </>
   );
 }
 

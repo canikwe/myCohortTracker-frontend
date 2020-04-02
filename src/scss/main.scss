@@ -14,7 +14,7 @@
 
 .App {
   background-color: $accent1;
-  min-height: 100vh;
+  min-height: 95vh;
 }
 
 .loading {
@@ -336,9 +336,9 @@ button {
 
 
 .footer {
+  background-color: $accent1;
   padding: 10px 0;
   text-align: center;
-  // margin-top: -500px;
 
   p {
     margin: 0;

@@ -9,7 +9,8 @@
 - finish sidebar styles
 - finish cell styles
 - finish filters styles
-- add 404 frontend route
+- style 404 frontend route
+- Bug: cohort name on index page doesn't change after update
 
 ## Backlog
 
