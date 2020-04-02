@@ -36,6 +36,8 @@ const cohortReducer = (state = {}, action) => {
       return action.payload.cohort
     case UPDATE_COHORT:
       return action.payload.cohort
+    case CREATE_COHORT:
+      return action.payload.cohort
     default:
       return state
   }

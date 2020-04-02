@@ -100,11 +100,11 @@ export const uploadingCsv = data => {
         throw new Error(res.statusText)
       }
     })
-    .then(cohort => {
+    .then(data => {
       if (data.message) {
         Swal.fire({ icon: 'error', html: formatErrors(data.message) })
       } else {
-        dispatch(createCohort(cohort))
+        dispatch(createCohort(data))
         Swal.fire({ icon: 'success', text: data.compliment })
       }
     })
