@@ -18,7 +18,15 @@ export const creatingGroup = data => {
         throw new Error(res.statusText)
       }
     })
-    .then(group => dispatch(createGroup(group)))
+    .then(group => {
+      dispatch(createGroup(group))
+      Swal.fire({
+        icon: 'success',
+        title: 'New group created 🎉',
+        showConfirmButton: false,
+        timer: 1500
+      })
+    })
     .catch(alert => Swal.fire({ icon: 'error', text: alert }))
   }
 }

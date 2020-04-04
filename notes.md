@@ -6,11 +6,15 @@
 ✅ main page showing all cohorts
   - cohort create/edit modal
 - add login/splash page
-- finish sidebar styles
-- finish cell styles
+✅ finish sidebar styles
+✅ finish cell styles
 - finish filters styles
 - style 404 frontend route
 - Bug: cohort name on index page doesn't change after update
+- add sort for batch_id and filter for campus
+- add campus column on cohort --> string or foreign key?
+- add hide attribute on students table
+- add cancel button on cohort new/edit form
 
 ## Backlog
 
@@ -25,7 +29,6 @@
     - establish global weights
 ✅ ceate cohort (page)
 ✅ create roster from CSV
-- add hide attribute on students table
 ❌ add sort by most recent pairing
 ✅ update cohort page
   ✅ update student (page?)
@@ -35,7 +38,7 @@
 - reset all onClick of Flatiron logo //
 - add test suite
 - refactor to Node/Express backend?
-- add auth
+✅ add auth
 
 ## DONE
 
@@ -44,7 +47,7 @@
 ✅ refactor component heirarchy
 ✅ add header
 ✅ add dates to activities (pairs?)
-❌ add sort by most recent pairing
+✅ add sort by most recent pairing
 ✅ style sidebar
 ✅ style filters
 ✅ if it's a three person pair, put below the pairing "with... so and so"
