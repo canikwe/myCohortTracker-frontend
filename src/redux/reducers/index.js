@@ -50,7 +50,7 @@ const cohortsReducer = (state = [], action) => {
     case CREATE_COHORT:
       return [...state, action.payload.cohort]
     case UPDATE_COHORT:
-      return state.filter(c => c.id === action.payload.cohort.id ? action.payload.cohort : c)
+      return state.map(c => c.id === action.payload.cohort.id ? action.payload.cohort : c)
     default:
       return state
   }

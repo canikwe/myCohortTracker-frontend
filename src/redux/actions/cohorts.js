@@ -72,7 +72,7 @@ export const creatingCohort = data => {
         Swal.fire({ icon: 'error', html: formatErrors(data.message) })
       } else {
         dispatch(createCohort(data))
-        Swal.fire({ icon: 'success', text: data.compliment })
+        Swal.fire({ icon: 'success', title: 'New Cohort Created 🎉', text: data.compliment })
       }
     })
     .catch(alert => { 
@@ -105,7 +105,7 @@ export const uploadingCsv = data => {
         Swal.fire({ icon: 'error', html: formatErrors(data.message) })
       } else {
         dispatch(createCohort(data))
-        Swal.fire({ icon: 'success', text: data.compliment })
+        Swal.fire({ icon: 'success', title: 'New Cohort Created 🎉', text: data.compliment })
       }
     })
     .catch(alert => Swal.fire({ icon: 'error', text: alert }))
@@ -133,7 +133,7 @@ export const updatingCohort = data => {
         Swal.fire({ icon: 'error', html: formatErrors(data.message) })
       } else {
         dispatch(updateCohort(data))
-        Swal.fire({ icon: 'success', text: data.compliment })
+        Swal.fire({ icon: 'success', title: 'Updated 🎉', text: data.compliment })
       }
     })
     .catch(alert => Swal.fire({ icon: 'error', text: alert }))

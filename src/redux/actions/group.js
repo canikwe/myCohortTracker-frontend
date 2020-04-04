@@ -47,7 +47,16 @@ export const updatingGroup = data => {
         throw new Error(res.statusText)
       }
     })
-    .then(group => dispatch(updateGroup(group)))
+    .then(group => {
+      dispatch(updateGroup(group))
+      Swal.fire({
+        title: 'Updated 🎉',
+        text: 'This group has been updated.',
+        icon: 'success',
+        showConfirmButton: false,
+        timer: 1500
+      })
+    })
     .catch(alert => Swal.fire({ icon: 'error', text: alert }))
   }
 }
@@ -67,7 +76,16 @@ export const deletingGroup = group => {
         throw new Error(res.statusText)
       }
     })
-    .then(group => dispatch(deleteGroup(group)))
+    .then(group => {
+      dispatch(deleteGroup(group))
+      Swal.fire({
+        title: 'Deleted!',
+        text: 'This group has been deleted.',
+        icon: 'success',
+        showConfirmButton: false,
+        timer: 1500
+      })
+    })
     .catch(alert => Swal.fire({ icon: 'error', text: alert }))
   }
 }

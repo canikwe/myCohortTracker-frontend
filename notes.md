@@ -10,11 +10,14 @@
 ✅ finish cell styles
 - finish filters styles
 - style 404 frontend route
-- Bug: cohort name on index page doesn't change after update
+✅ Bug: cohort name on index page doesn't change after update
 - add sort for batch_id and filter for campus
 - add campus column on cohort --> string or foreign key?
+- add discipline
 - add hide attribute on students table
 - add cancel button on cohort new/edit form
+- option to stop making groups and reset sidebae on success modal after new group is created
+- add delete confirmation modal for group
 
 ## Backlog
 
