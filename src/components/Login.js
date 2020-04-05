@@ -27,11 +27,14 @@ const Login = () => {
 
       <div className='login-form'>
 
-        <h3>
-          <img alt='logo' className='logo' src={require('../helper/computer.png')} />
-          my awesome cohort tracker
-        </h3>
-        <h1>Welcome Back 🎉</h1>
+        <div className='login-header'>
+          <img alt='logo' className='logo' src={require('../helper/mact.png')} /> 
+          <h2>
+            my awesome cohort tracker
+          </h2>
+        </div>
+
+        <h1>Welcome Back <span role='img' aria-label='confetti'>🎉</span></h1>
 
         <GoogleLogin
           clientId={process.env.REACT_APP_GOOGLE_CLIENT_ID}
@@ -43,15 +46,15 @@ const Login = () => {
 
         <div className='separator'>
           <div className='hr-line'></div>
-          <span className='hr-text'>Or login with email</span>
+          <span className='hr-text'>Or with login name</span>
         </div>
 
         <form className='login' onSubmit={submitForm}>
           <div>
-            <label htmlFor='login-name'>Login Name</label>
+            <label htmlFor='name'>Login Name</label>
             <input 
               type='text' 
-              name='login-name' 
+              name='name' 
               value={loginInfo.name}
               onChange={handleChange}
               placeholder='Login Name'
@@ -65,6 +68,7 @@ const Login = () => {
               value={loginInfo.password} 
               onChange={handleChange}
               placeholder='Password'
+              autoComplete='on'
             />
           </div>
           <div>

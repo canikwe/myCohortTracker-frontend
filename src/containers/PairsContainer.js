@@ -19,7 +19,7 @@ const PairsContainer = () => {
     if (redirect) {
       dispatch(handleRedirect(false))
     }
-  }, [])
+  }, [dispatch, redirect])
 
   return (
     <section className='pairs-container' dir='ltr'>

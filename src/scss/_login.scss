@@ -1,0 +1,98 @@
+@import 'constants';
+
+
+div.login-container {
+  display: grid;
+  grid-template-columns: 50% 50%;
+  justify-items: center;
+  min-height: 100vh;
+
+  .login-splash {
+    background-color: $base-light;
+    width: 100%;
+    
+    svg {
+      margin: 5%;
+      width: 60%;
+    }
+    
+    p {
+      text-align: right;
+      margin: 5%;
+    }
+
+  }
+
+  .login-form {
+    width: 50%;
+    margin: 10% 0 20% 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-content: center;
+    text-align: center;
+
+    .login-header {
+      display: grid;
+      grid-template-columns: 20% 1fr;
+      align-items: center;
+
+      h2 {
+        margin: 0;
+        line-height: 1em;
+      }
+
+      img {
+        width: 100%;
+      }
+    }
+
+    form {
+      text-align: left;
+
+      &.login div {
+        display: grid;
+        margin: 5% 0;
+      }
+
+      label {
+        font-weight: bold;
+      }
+
+      input {
+        width: 95%;
+        margin-top: 5px;
+
+        &[type='submit'] {
+          font-weight: bold;
+          background-color: $base-dark;
+          width: 100%;
+
+          &:hover {
+            background-color: $base-light;
+            color: $base-dark
+          }
+        }
+      }
+
+    }
+  }
+
+  @media only screen and (max-width: 650px) {
+    grid-template-columns: 100%;
+  }
+}
+
+.google-login {
+  width: 100%;
+}
+
+.hr-text {
+  margin-top: -50%;
+}
+
+.separator {
+  text-align: center;
+}
+
+
