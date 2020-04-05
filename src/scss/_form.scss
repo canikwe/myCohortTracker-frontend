@@ -41,14 +41,6 @@ select, textarea {
 }
 
 form {
-  &.login {
-    @include center-column;
-  }
-
-  &.login div {
-    display: grid;
-    margin: 10px;
-  }
 
   &.cohort {
     div {
