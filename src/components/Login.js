@@ -44,10 +44,10 @@ const Login = () => {
           className='google-login'
         />
 
-        <div className='separator'>
+        {/* <div className='separator'>
           <div className='hr-line'></div>
           <span className='hr-text'>Or with login name</span>
-        </div>
+        </div> */}
 
         <form className='login' onSubmit={submitForm}>
           <div>
