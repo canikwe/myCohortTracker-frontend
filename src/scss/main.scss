@@ -101,19 +101,22 @@ button, input[type='submit'] {
   box-shadow: 1px 1px 3px $base-dark;
   padding: 7px;
   font-size: .75em;
-  margin-left: 5px;
   
   &.add {
     width: 60%;
     background-color: yellowgreen;
     margin-left: 10px;
     font-weight: bold;
+      margin-left: 5px;
+
   }
 
   &.cancel {
     background-color: #88888885;
     color: white;
     width: 30%;
+      margin-left: 5px;
+
   }
 }
 
