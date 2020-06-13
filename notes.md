@@ -4,8 +4,8 @@
 
 ✅ routes
 ✅ main page showing all cohorts
-  - cohort create/edit modal
-- add login/splash page
+  - style cohort create/edit modal
+- style login/splash page
 ✅ finish sidebar styles
 ✅ finish cell styles
 - finish filters styles
