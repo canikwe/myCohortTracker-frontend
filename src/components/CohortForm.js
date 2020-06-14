@@ -6,6 +6,8 @@ import { formatErrors } from '../helper/functions'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faUserTimes } from '@fortawesome/free-solid-svg-icons'
 import Swal from 'sweetalert2'
+import StudentIndexTable from './StudentIndexTable'
+
 
 const CohortForm = ({ title }) => {
   const newCohort = () => ({ batch: '', name: '', batch_id: '' })
@@ -54,7 +56,7 @@ const CohortForm = ({ title }) => {
       errors.push('Please specify the batch')
     }
     if (cohort.batch_id === '') {
-      errors.push('Please enter the UNIQUE batch id')
+      errors.push('Please enter a UNIQUE batch id')
     }
 
     if (errors.length) {
@@ -89,6 +91,8 @@ const CohortForm = ({ title }) => {
     return <Redirect to={`/cohorts/${selectedCohort.batch_id}/pairs`} />
   }
 
+
+
   return (
     <div className='cohort-form-container'>
       <h1>{title} Cohort</h1>
@@ -107,6 +111,10 @@ const CohortForm = ({ title }) => {
             <input type='number' name='batch_id' value={cohort.batch_id} onChange={handleCohortChange} />
           </div>
         </section>
+      
+        <hr />
+
+        <StudentIndexTable />
 
         <hr />
         {title === 'Create' ? <h3>Manual Student Entry</h3> : <h3>Edit Students</h3>}

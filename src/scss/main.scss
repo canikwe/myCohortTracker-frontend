@@ -103,20 +103,25 @@ body {
 
 button, input[type='submit'] {
   @include defaults;
-  box-shadow: 1px 1px 3px $base-dark;
-  padding: 7px;
-  font-size: .75em;
   
   &.add {
+    box-shadow: 1px 1px 3px $base-dark;
+    padding: 7px;
+    font-size: .75em;
+
     width: 60%;
     background-color: yellowgreen;
     margin-left: 10px;
     font-weight: bold;
-      margin-left: 5px;
+    margin-left: 5px;
 
   }
 
   &.cancel {
+    box-shadow: 1px 1px 3px $base-dark;
+    padding: 7px;
+    font-size: .75em;
+
     background-color: #88888885;
     color: white;
     width: 30%;
@@ -143,8 +148,6 @@ button {
   // padding: 20px 0 0 20px;
   border-top-right-radius: 10px;
   overflow: auto;
-  scroll-snap-align: start end;
-  scroll-snap-type: y proximity;
   display: grid;
   // grid-template-rows: repeat(auto-fill, minmax(50px, 1fr));
   gap: 5px;
