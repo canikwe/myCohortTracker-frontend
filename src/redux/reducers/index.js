@@ -25,7 +25,9 @@ import {
   LOGIN_USER, 
   UPDATE_LOADING, 
   HANDLE_REDIRECT,
-  UPDATE_STUDENT} from '../actions/constants'
+  UPDATE_STUDENT,
+  CREATE_STUDENT
+} from '../actions/constants'
 
 const testReducer = (state=[], action) => {
   return state
@@ -69,6 +71,8 @@ const studentsReducer = (state=[], action) => {
       return action.payload.students.sort((a, b) => a.first_name > b.first_name ? 1 : -1)
     case UPDATE_STUDENT:
       return state.map(s => s.id === action.payload.id ? action.payload : s)
+    case CREATE_STUDENT:
+      return [...state, action.payload]
     default:
       return state
   }
