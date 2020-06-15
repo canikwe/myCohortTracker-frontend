@@ -15,6 +15,7 @@ export const UPDATE_COHORT = 'UPDATE_COHORT'
 export const FETCH_STUDENTS = 'FETCH_STUDENTS'
 export const UPDATE_STUDENT = 'UPDATE_STUDENT'
 export const CREATE_STUDENT = 'CREATE_STUDENT'
+export const DELETE_STUDENT = 'DELETE_STUDENT'
 
 // groups
 export const FETCH_GROUPS = 'FETCH_GROUPS'

@@ -4,7 +4,9 @@ import CohortForm from '../components/CohortForm'
 const CreateCohortView = () => {
 
   return (
-    <CohortForm title={'Create'}/>
+    <section className='cohort-details-container'>
+      <CohortForm title={'Create'}/>
+    </section>
   )
 }
 

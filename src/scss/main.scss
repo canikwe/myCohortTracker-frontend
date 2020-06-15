@@ -363,3 +363,10 @@ button {
 //   grid-template-rows: auto;
 //   grid-gap: 5px;
 // }
+
+section#student-form {
+  .MuiPaper-root.MuiPaper-elevation2, [class*="MTableHeader-header"]{
+    background-color: transparent;
+    box-shadow: none;
+  }
+}

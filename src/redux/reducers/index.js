@@ -26,7 +26,8 @@ import {
   UPDATE_LOADING, 
   HANDLE_REDIRECT,
   UPDATE_STUDENT,
-  CREATE_STUDENT
+  CREATE_STUDENT,
+  DELETE_STUDENT
 } from '../actions/constants'
 
 const testReducer = (state=[], action) => {
@@ -67,12 +68,12 @@ const studentsReducer = (state=[], action) => {
       return action.payload.students.sort((a, b) => a.first_name > b.first_name ? 1 : -1)
     case FETCH_COHORT:
       return action.payload.students.sort((a, b) => a.first_name > b.first_name ? 1 : -1)
-    case UPDATE_COHORT:
-      return action.payload.students.sort((a, b) => a.first_name > b.first_name ? 1 : -1)
     case UPDATE_STUDENT:
       return state.map(s => s.id === action.payload.id ? action.payload : s)
     case CREATE_STUDENT:
       return [...state, action.payload]
+    case DELETE_STUDENT:
+      return state.filter(s => s.id !== action.payload.id)
     default:
       return state
   }
@@ -84,8 +85,6 @@ const groupsReducer = (state=[], action) => {
       return action.payload.groups.sort((a, b) => new Date(b.activity_date) - new Date(a.activity_date))
     case CREATE_COHORT:
       return []
-    case UPDATE_COHORT:
-      return action.payload.groups.sort((a, b) => new Date(b.activity_date) - new Date(a.activity_date))
     case CREATE_GROUP:
       return [...state, action.payload].sort((a, b) => new Date(b.activity_date) - new Date(a.activity_date))
     case UPDATE_GROUP:

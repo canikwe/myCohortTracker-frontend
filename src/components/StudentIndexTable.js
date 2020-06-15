@@ -1,6 +1,6 @@
 import React, { forwardRef } from 'react'
 import { useDispatch, useSelector, shallowEqual } from 'react-redux'
-import { updatingStudent, creatingStudent } from '../redux/actions/students'
+import { updatingStudent, creatingStudent, deletingStudent } from '../redux/actions/students'
 
 import MaterialTable from 'material-table'
 import AddBox from '@material-ui/icons/AddBox'
@@ -61,22 +61,25 @@ const StudentIndexTable = () => {
       resolve()
     })
   }
-
+  
+  const onRowDelete = (oldData) => {
+    dispatch(deletingStudent(oldData))
+    return new Promise((resolve) => {
+      resolve()
+    })
+  }
   
   return (
-  
     <MaterialTable
       columns={[
         { title: "First Name", field: "first_name" },
         { title: "Last Name", field: "last_name" }
       ]}
       data={selectedStudents}
-      title="Student List"
+      title="Edit Students"
       icons={tableIcons}
       editable={{
-        onRowAdd,
-        onRowDelete: console.log,
-        onRowUpdate
+        onRowAdd, onRowDelete, onRowUpdate
       }}
     />
   )
